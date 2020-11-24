@@ -1,0 +1,127 @@
+Fri Jan  4 08:00:51 2019 [230588][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 08:02:14 2019 [230942][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 10.0.0.2 CLIENT IP: 192.168.0.43
+Fri Jan  4 08:07:27 2019 [230352][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 08:07:27 2019 [230942][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 08:08:54 2019 [230262][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 10.0.0.2 CLIENT IP: 192.168.0.43
+Fri Jan  4 08:18:17 2019 [230262][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 08:22:41 2019 [232001][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 10.0.0.2 CLIENT IP: 192.168.0.43
+Fri Jan  4 08:39:07 2019 [231977][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 08:46:48 2019 [231977][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] log call at: modules/Administration/index.tpl:53 - MY_FRAME is not set
+Fri Jan  4 08:47:17 2019 [233016][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] log call at: modules/Administration/index.tpl:53 - MY_FRAME is not set
+Fri Jan  4 08:49:23 2019 [233086][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 08:49:23 2019 [233086][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Accounts' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 08:52:15 2019 [233150][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 08:53:22 2019 [233096][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] log call at: modules/Administration/index.tpl:53 - MY_FRAME is not set
+Fri Jan  4 08:53:30 2019 [233253][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 08:53:30 2019 [233253][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Accounts' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 08:58:29 2019 [233047][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 08:59:54 2019 [233456][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 08:59:54 2019 [233456][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Accounts' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 09:07:11 2019 [233456][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 09:13:04 2019 [233800][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 09:13:04 2019 [233800][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Accounts' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 09:15:39 2019 [233819][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 09:15:39 2019 [233819][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Accounts' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 09:19:18 2019 [233825][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 09:19:18 2019 [233812][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 09:20:33 2019 [234036][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Exception handling in /opt/bitnami/apps/monumental/htdocs/include/MVC/Controller/SugarController.php:400
+Fri Jan  4 09:20:33 2019 [234036][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Exception in Controller: No hay ninguna acción para el nombre: get_whatsapp_body
+Fri Jan  4 09:20:33 2019 [234036][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] backtrace:
+#0 /opt/bitnami/apps/monumental/htdocs/include/MVC/Controller/SugarController.php(555): sugar_die('No hay ninguna ...')
+#1 /opt/bitnami/apps/monumental/htdocs/include/MVC/Controller/SugarController.php(1094): SugarController->no_action()
+#2 /opt/bitnami/apps/monumental/htdocs/include/MVC/Controller/SugarController.php(468): SugarController->handleActionMaps()
+#3 /opt/bitnami/apps/monumental/htdocs/include/MVC/Controller/SugarController.php(373): SugarController->process()
+#4 /opt/bitnami/apps/monumental/htdocs/include/MVC/SugarApplication.php(113): SugarController->execute()
+#5 /opt/bitnami/apps/monumental/htdocs/index.php(52): SugarApplication->execute()
+#6 {main}
+Fri Jan  4 09:21:37 2019 [234123][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 09:23:06 2019 [234326][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 09:23:06 2019 [234326][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Leads' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 09:23:58 2019 [234385][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 09:23:58 2019 [234385][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Leads' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 09:24:06 2019 [234123][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 10.0.0.2 CLIENT IP: 192.168.0.43
+Fri Jan  4 09:24:54 2019 [234326][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 09:24:54 2019 [234326][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Leads' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 09:25:53 2019 [233818][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 09:25:53 2019 [233818][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Leads' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 09:28:23 2019 [234328][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 09:28:23 2019 [234328][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Leads' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 09:28:37 2019 [234465][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 09:28:37 2019 [234465][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Leads' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 09:34:38 2019 [234616][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 09:34:38 2019 [234616][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Leads' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 09:35:44 2019 [233812][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 09:41:44 2019 [234937][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 09:41:44 2019 [234937][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Leads' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 09:51:24 2019 [234944][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 10:01:18 2019 [235781][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 10:01:18 2019 [235781][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Leads' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 10:08:35 2019 [235707][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 10:21:56 2019 [236148][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 10:21:56 2019 [236148][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Leads' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 10:23:45 2019 [236114][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 10:27:26 2019 [236674][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 10:27:26 2019 [236674][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Leads' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 10:34:34 2019 [236674][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 10:46:01 2019 [236565][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 10:46:01 2019 [236565][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Leads' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 10:55:17 2019 [236674][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 10:55:17 2019 [236674][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Leads' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 10:57:46 2019 [237259][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 10:57:46 2019 [237259][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Leads' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 10:58:12 2019 [235712][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 10:58:12 2019 [235712][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Leads' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 11:02:44 2019 [235717][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Fri Jan  4 11:02:44 2019 [235717][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: SELECT id,name FROM email_templates where type='whatsapp' and sms_module_c='Leads' and deleted=0: MySQL error 1054: Unknown column 'sms_module_c' in 'where clause'
+Fri Jan  4 11:08:05 2019 [236674][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 11:09:00 2019 [236565][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] log call at: modules/Administration/index.tpl:53 - MY_FRAME is not set
+Fri Jan  4 11:10:12 2019 [237259][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 11:23:41 2019 [236497][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] https://www.waboxapp.com/api/send/chat?token=2899dd4a73a94a27e7f3f5596f15b02d5c117b118c2c7&uid=&to=59171659732&custom_uid=85fba23a-d8f3-1076-620f-5c2f7a892c44&text=Hola
+Fri Jan  4 11:26:57 2019 [238506][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 11:29:45 2019 [238691][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] https://www.waboxapp.com/api/send/chat?token=2899dd4a73a94a27e7f3f5596f15b02d5c117b118c2c7&uid=&to=59171659732&custom_uid=5d962025-8ed1-44f4-dbd2-5c2f7b82836e&text=hola%202
+Fri Jan  4 11:30:12 2019 [238754][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] crm-dev.monumental.com.bo
+Fri Jan  4 11:30:12 2019 [238754][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] 1
+Fri Jan  4 11:30:12 2019 [238754][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Arraysitio
+Fri Jan  4 11:30:12 2019 [238754][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Arraysitio
+Fri Jan  4 11:30:12 2019 [238754][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] https://www.waboxapp.com/api/send/chat?token=2899dd4a73a94a27e7f3f5596f15b02d5c117b118c2c7&uid=&to=59171659732&custom_uid=ebcfe689-251b-e46f-3252-5c2f7cd88991&text=hola3
+Fri Jan  4 11:33:15 2019 [238754][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 11:34:32 2019 [238754][c8c5b6af-a9cd-1f69-2464-5c2799e3a563][FATAL] IP Address mismatch: SESSION IP: 10.0.0.2 CLIENT IP: 192.168.120.102
+Fri Jan  4 12:06:16 2019 [239712][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] crm-dev.monumental.com.bo
+Fri Jan  4 12:06:16 2019 [239712][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] 1
+Fri Jan  4 12:06:16 2019 [239712][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] https://www.waboxapp.com/api/send/chat?token=2899dd4a73a94a27e7f3f5596f15b02d5c117b118c2c7&uid=&to=59177886714&custom_uid=944cf126-f364-a323-1fb9-5c2f84a14b0a&text=hello
+Fri Jan  4 12:09:07 2019 [239724][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] crm-dev.monumental.com.bo
+Fri Jan  4 12:09:07 2019 [239724][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] 1
+Fri Jan  4 12:09:07 2019 [239724][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] https://www.waboxapp.com/api/send/chat?token=2899dd4a73a94a27e7f3f5596f15b02d5c117b118c2c7&uid=&to=59177886714&custom_uid=7c9bd6f6-102d-3b81-ec20-5c2f855d12b2&text=hello%20world
+Fri Jan  4 12:24:07 2019 [239713][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 12:44:43 2019 [239713][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] log call at: modules/Administration/index.tpl:53 - MY_FRAME is not set
+Fri Jan  4 12:48:24 2019 [240095][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] 1
+Fri Jan  4 12:48:24 2019 [240095][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] 1
+Fri Jan  4 12:50:23 2019 [240094][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Array
+(
+    [sitio] => crm-dev.monumental.com.bo
+    [numero] => 59171346118
+)
+
+Fri Jan  4 12:50:23 2019 [240094][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Array
+(
+    [sitio] => crm-dev.nuevasantacruz.com
+    [numero] => 59172130199
+)
+
+Fri Jan  4 12:50:35 2019 [239374][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Array
+(
+    [sitio] => crm-dev.monumental.com.bo
+    [numero] => 59171346118
+)
+
+Fri Jan  4 12:50:35 2019 [239374][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Array
+(
+    [sitio] => crm-dev.nuevasantacruz.com
+    [numero] => 59172130199
+)
+
+Fri Jan  4 12:53:19 2019 [240095][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] crm-dev.monumental.com.bo
+Fri Jan  4 12:53:19 2019 [240095][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] crm-dev.nuevasantacruz.com
+Fri Jan  4 12:53:46 2019 [239724][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 192.168.0.43 CLIENT IP: 10.0.0.2
+Fri Jan  4 12:56:03 2019 [241712][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] https://www.waboxapp.com/api/send/chat?token=2899dd4a73a94a27e7f3f5596f15b02d5c117b118c2c7&uid=59171346118&to=59171659317&custom_uid=8c15cb55-23c1-6062-c827-5c2f90c977c8&text=hello
+Fri Jan  4 12:56:39 2019 [241711][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] https://www.waboxapp.com/api/send/chat?token=2899dd4a73a94a27e7f3f5596f15b02d5c117b118c2c7&uid=59171346118&to=59171659732&custom_uid=637dbdd0-3ce1-f9b9-5c03-5c2f90924d43&text=hello

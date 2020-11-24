@@ -1,0 +1,14 @@
+#main_colordiv ,#back_colordiv ,#bodyback_colordiv ,#headerback_colordiv ,#toolbarback_colordiv {
+	position: relative;
+	width: 36px;
+	height: 36px;
+	background: url(../images/select2.png);
+}
+#main_colordiv div,#back_colordiv div,#bodyback_colordiv div,#headerback_colordiv div,#toolbarback_colordiv  div{
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 30px;
+	height: 30px;
+	background: url(../images/select2.png) center;
+}

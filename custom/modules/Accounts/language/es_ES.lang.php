@@ -1,0 +1,26 @@
+<?php
+// created: 2019-02-28 11:36:10
+$mod_strings = array (
+  'LNK_NEW_ACCOUNT' => 'Crear Cliente',
+  'LNK_ACCOUNT_LIST' => 'Ver Clientes',
+  'LNK_IMPORT_ACCOUNTS' => 'Importar Clientes',
+  'MSG_SHOW_DUPLICATES' => 'El registro para la cliente que va a crear podría ser un duplicado de otro registro de cliente existente. Los registros de cliente con nombres similares se listan a continuación.Haga clic en Guardar para continuar con la creación de esta cliente, o en Cancelar para volver al módulo sin crear la cliente.',
+  'LBL_SAVE_ACCOUNT' => 'Guardar Cliente',
+  'LBL_LIST_FORM_TITLE' => 'Lista de Clientes',
+  'LBL_SEARCH_FORM_TITLE' => 'Búsqueda de Clientes',
+  'LBL_MEMBER_OF' => 'Miembro de:',
+  'LBL_MEMBERS' => 'Miembros',
+  'LBL_MEMBER_ORG_SUBPANEL_TITLE' => 'Organizaciones Miembro',
+  'LBL_HOMEPAGE_TITLE' => 'Mis Clientes',
+  'LBL_PARENT_ACCOUNT_ID' => 'ID Cliente Padre',
+  'LBL_MODULE_NAME' => 'Clientes',
+  'LBL_LEADS' => 'Prospectos',
+  'LBL_LEADS_SUBPANEL_TITLE' => 'Prospectos',
+  'LBL_NUMERO_DOCUMENTO' => 'NIT/CI',
+  'LBL_EXTENSION_DOCUMENTO' => 'Ext.',
+  'LBL_NAME' => 'Razón Social',
+  'LBL_PHONE_OFFICE' => 'Teléfono principal',
+  'LBL_SIC_CODE' => 'Código SAI/SAP/SIC:',
+  'LBL_NIT' => 'NIT',
+  'LBL_LIST_ACCOUNT_NAME' => 'Razón Social',
+);

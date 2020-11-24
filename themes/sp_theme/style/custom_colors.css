@@ -1,0 +1,226 @@
+
+/*--HEADER CUSTOM--*/
+#logo.light-version span {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  border:none;
+}
+
+
+#header {
+  background-color: #00458D;
+  border-bottom: 3px solid #CA3213;
+  display: block;
+  height: 45px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.yui-module .hd, .yui-panel .hd {
+  background-color: #00458D!important;
+ 
+}
+
+.sweet-alert button {
+  background-color: #225485;
+}
+.fc-state-active {
+  background-color: #225485;
+  border-color: #225485;
+  color: #ffffff;
+}
+.fc-event,
+.fc-agenda .fc-event-time,
+.fc-event a {
+  padding: 4px 6px;
+  background-color: #225485;
+  border-color: #225485;
+}
+
+.btn-primary.btn-outline {
+  color: #225485;
+}
+.btn-primary {
+  background-color: #225485;
+  border-color: #225485;
+  color: #FFFFFF ;
+}
+
+.color-line {
+  background: #f7f9fa;
+  height: 6px;
+  background-image: -webkit-linear-gradient(left, #225485, #225485 25%, #9b59b6 25%, #9b59b6 35%, #3498db 35%, #3498db 45%, #62cb31 45%, #62cb31 55%, #ffb606 55%, #ffb606 65%, #e67e22 65%, #e67e22 75%, #e74c3c 85%, #e74c3c 85%, #c0392b 85%, #c0392b 100%);
+  background-image: -moz-linear-gradient(left, #225485, #225485 25%, #9b59b6 25%, #9b59b6 35%, #3498db 35%, #3498db 45%, #62cb31 45%, #62cb31 55%, #ffb606 55%, #ffb606 65%, #e67e22 65%, #e67e22 75%, #e74c3c 85%, #e74c3c 85%, #c0392b 85%, #c0392b 100%);
+  background-image: -ms-linear-gradient(left, #225485, #225485 25%, #9b59b6 25%, #9b59b6 35%, #3498db 35%, #3498db 45%, #62cb31 45%, #62cb31 55%, #ffb606 55%, #ffb606 65%, #e67e22 65%, #e67e22 75%, #e74c3c 85%, #e74c3c 85%, #c0392b 85%, #c0392b 100%);
+  background-image: linear-gradient(to right, #225485, #225485 25%, #9b59b6 25%, #9b59b6 35%, #3498db 35%, #3498db 45%, #62cb31 45%, #62cb31 55%, #ffb606 55%, #ffb606 65%, #e67e22 65%, #e67e22 75%, #e74c3c 85%, #e74c3c 85%, #c0392b 85%, #c0392b 100%);
+  background-size: 100% 6px;
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+}
+.hpanel.hnavyblue .panel-body {
+  border-top: 2px solid #225485;
+}
+.hpanel.hbgnavyblue .panel-body {
+  background: #225485;
+  color: #fff;
+  border: none;
+}
+.hbreadcrumb > li + li:before {
+  padding: 0 5px;
+  color: #225485;
+}
+.tooltip-inner {
+  background-color: #225485;
+}
+.tooltip.top .tooltip-arrow {
+  border-top-color: #225485;
+}
+.tooltip.right .tooltip-arrow {
+  border-right-color: #225485;
+}
+.tooltip.bottom .tooltip-arrow {
+  border-bottom-color: #225485;
+}
+.tooltip.left .tooltip-arrow {
+  border-left-color: #225485;
+}
+.h-bg-navy-blue {
+  background: #225485;
+}
+
+.text-primary {
+  color: #225485;
+}
+
+
+.stats-box-detail {
+  background: #225485;
+  color: #fff;
+  position: relative;
+}
+#side-menu li.active a,
+#side-menu li:hover a {
+  color: #225485;
+}
+
+#side-menu li .nav-second-level li.active a {
+  color: #225485;
+  background-color: #f7f9fa;
+}
+a {
+  cursor: pointer;
+  color: #225485;
+}
+a:hover,
+a:focus {
+  color: #225485;
+  text-decoration: none;
+}
+/* LIST GROUP */
+a.list-group-item.active,
+a.list-group-item.active:hover,
+a.list-group-item.active:focus {
+  background-color: #225485;
+  border-color: #225485;
+  color: #FFFFFF !important;
+}
+/* Checkbox styles */
+.checkbox-primary input[type="checkbox"]:checked + label::before {
+  background-color: #225485;
+  border-color: #225485;
+}
+
+
+ input[type="button"]{
+  background-color: #fff;
+  border-color: #e4e5e7;
+  color: #6a6c6f;
+  cursor:pointer!important;
+}
+
+.btn-primary,.button,.button[type="submit"],#edit_button {
+    background-color: #225485;
+    border-color: #e4e5e7;
+    color: #ffffff;
+}
+.paginationActionButtons button,.paginationChangeButtons button,.pagination button{
+    background-color: transparent;
+    border-color: #ccc;
+}
+
+.radio-primary input[type="radio"] + label::after {
+  background-color: #225485;
+}
+.radio-primary input[type="radio"]:checked + label::before {
+  border-color: #225485;
+}
+.radio-primary input[type="radio"]:checked + label::after {
+  background-color: #225485;
+}
+.badge.badge-primary {
+  background-color: #225485;
+}
+
+#subpanel_hpanel .panel-header h2 {
+	color: #CA3213;
+	font-size: 150%;
+	padding-top: 15px;
+}
+.hmodal-success .color-line {
+  background: #CA3213;
+}
+.normalheader h2,.normalheader h2 a
+{
+   color: #CA3213;
+}
+.normalheader h2 a i
+{
+   color: #225485;
+}
+
+.dashletcontainer .dashletPanel{
+  border-top: 2px solid #CA3213;
+}
+
+.small-logo a{
+  color:#fff;
+}
+@media (max-width: 420px) {
+    .mobile-navbar .navbar-nav > li > a{
+        color: #6a6c6f;
+    }
+}   
+
+ul#dashletCategories > li.active a, ul#dashletCategories > li.active a:link, ul#dashletCategories > li.active a:hover, ul#dashletCategories > li.active a:visited, ul#dashletCategories > li.active a:active, ul#dashletCategories > li.active a:focus {
+    background-color: #225485;
+    color: #ffffff;
+}
+ul#dashletCategories > li a, ul#dashletCategories > li a:link, ul#dashletCategories > li a:hover, ul#dashletCategories > li a:visited, ul#dashletCategories > li a:active, ul#dashletCategories > li a:focus {
+    background-color: #fff;
+    color: inherit;
+}
+
+
+/*--Fibre CRM--*/
+#FI_BlackBG {
+	top: 0px;
+}
+
+
+
+.webix_accordionitem_header{
+background-color: #00458D!important;
+}
+
+.btn-info:hover {
+	color: #333!important; 
+	background-color: #225485!important; 
+	border-color: #225485!important; 
+}
+
+.btn-danger {
+	background-color: #CA3213!important;
+	border-color: #CA3213!important;
+}

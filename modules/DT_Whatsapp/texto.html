@@ -1,0 +1,48 @@
+<div class='modal-header' style='background:#225485;padding:5px'>
+    <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>×</span></button>
+    <h4 class='modal-title' style='color:#fff'><b>Nuevo WhatsApp</b></h4>
+</div>
+<div class='modal-body' id='whatsapp_dashboardDialog' style='display:block'>
+    <div class='panel-body panel-collapse collapse in' id='detailpanel_-1'>
+        
+            <div class='row edit-view-row modal-body' style='margin-bottom:-30px;margin-top:-10px'>
+                <font color='red' style='text-align: center;'><span id='errr_msg' style='display:none'><b>El mensaje es vacío y no se puede enviar.</b></span></font>
+                <div id='loading_whatsapp' style='display:none'>
+                    <div style='display: flex;justify-content: center;'><image src='modules/DT_Whatsapp/images/whatsapp_loading.gif'/></div>
+                </div>
+                <div class='col-xs-12 col-sm-6 edit-view-row-item'>
+                    <div class='col-xs-12 col-sm-4'>Enviar a los números:</div>
+                    <div class='col-xs-12 col-sm-8 edit-view-field ' type='varchar'>
+                        <textarea id='whatsapp_mobile_numbers' rows='1' cols='90'> 591" . $mobile</textarea>
+                    </div>
+                </div>
+            </div>
+        
+    </div>    
+    <div style='padding:1.0em 1.4em 0.3em'>Historial:</div>
+    <div class='modal-body' id='whatsapp_history' style='display:block'></div>
+   
+        <div class='row edit-view-row modal-body' style='margin-bottom:-25px'>
+            <div class='col-xs-12 col-sm-6 edit-view-row-item'>
+                <div class='col-xs-12 col-sm-4 '>Seleccione una plantilla:</div>
+                <div class='col-xs-12 col-sm-8 edit-view-field ' type='varchar'>
+                    <select style='width:90%' name='whatsapp_template_id' id='whatsapp_template_id'>$optionlist</select>
+                </div>
+            </div>
+            <div class='col-xs-12 col-sm-6 edit-view-row-item'>
+                <div class='col-xs-12 col-sm-4'>Mensaje :</div>
+                <div class='col-xs-12 col-sm-8 edit-view-field ' type='varchar'>
+                    <textarea id='whatsapp_description' rows='1' cols='90'></textarea>
+                </div>
+                <input type='hidden' name='whatsapp_sl_mod' id='whatsapp_sl_mod' value='$modulefrom'/>
+                <input type='hidden' name='whatsapp_sl_mod_id' id='whatsapp_sl_mod_id' value='$recid'/>
+            </div>
+        </div>    
+   
+</div>    
+<div class='modal-footer' style='background-color:#F5F5F5'>
+    <button type='button' class='button' id='rec_history' hidden>Historial</button> 
+    <button type='button' class='button' id='refresh_history' hidden>Actualizar</button> 
+    <button type='button' class='button' id='mod_can' data-dismiss='modal'>Cerrar</button> 
+    <button type='submit' id='submitwhatsapp' class='button'>Enviar</button>
+</div>

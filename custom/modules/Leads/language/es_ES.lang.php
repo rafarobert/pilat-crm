@@ -1,0 +1,27 @@
+<?php
+// created: 2019-02-28 11:21:42
+$mod_strings = array (
+  'LBL_ACCOUNT' => 'Cliente',
+  'LBL_ACCOUNT_DESCRIPTION' => 'Descripción de la Cliente',
+  'LBL_ACCOUNT_ID' => 'ID de Cliente',
+  'LBL_ACCOUNT_NAME' => 'Nombre de Cliente:',
+  'LBL_LIST_ACCOUNT_NAME' => 'Nombre de Cliente',
+  'LBL_CONVERTED_ACCOUNT' => 'Cliente Convertida:',
+  'LNK_SELECT_ACCOUNTS' => 'O Seleccione una Cliente',
+  'LNK_NEW_ACCOUNT' => 'Crear Cliente',
+  'LNK_NEW_LEAD' => 'Nuevo Prospecto',
+  'LNK_LEAD_LIST' => 'Ver Prospectos',
+  'LNK_IMPORT_VCARD' => 'Nuevo Prospecto desde vCard',
+  'LNK_IMPORT_LEADS' => 'Importar Prospectos',
+  'LBL_LIST_FORM_TITLE' => 'Lista de Clientes Potenciales',
+  'LBL_SEARCH_FORM_TITLE' => 'Búsqueda de Clientes Potenciales',
+  'LBL_REPORTS_TO' => 'Informa a:',
+  'LBL_LIST_MY_LEADS' => 'Mis Prospectos',
+  'LBL_MODULE_NAME' => 'Prospectos',
+  'LBL_NUMERO_DOCUMENTO' => 'CI',
+  'LBL_EXTENSION_DOCUMENTO' => 'Ext.',
+  'LBL_SUPERFICIE' => 'Superficie de la Oportunidad',
+  'LBL_GENERO' => 'Sexo',
+  'LBL_MOBILE_PHONE' => 'Móvil/Whatsapp',
+  'LBL_BIRTHDATE' => 'Fecha Nac.',
+);
