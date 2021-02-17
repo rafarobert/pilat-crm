@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   backend: {
     server: {
-      webpath: 'https://crm-middleware.pilatsrl.com'
+      webpath: 'localhost:8001'
     }
   },
   frontend: {
