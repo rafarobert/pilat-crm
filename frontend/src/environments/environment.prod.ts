@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   backend: {
     server: {
-      webpath: 'http://172.28.3.14:8000'
+      webpath: 'https://crm-middleware.pilatsrl.com'
     }
   },
   frontend: {
