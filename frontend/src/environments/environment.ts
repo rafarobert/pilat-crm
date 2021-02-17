@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   backend: {
     server: {
-      webpath: 'http://middleware.monumental.com.bo:8001'
+      webpath: 'http://172.28.3.14:8001'
     }
   },
   frontend: {
