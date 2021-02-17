@@ -1,0 +1,17 @@
+<div class="container">
+  <h3 mat-dialog-title>Esta seguro?</h3>
+  <div mat-dialog-content>
+    host: {{data.mai_host}}
+    <p></p>
+    port: {{data.mai_port}}
+    <p></p>
+    usuario: {{data.mai_user_account}}
+    <p></p>
+    <p></p>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="1" (click)="confirmDelete()">Delete</button>
+    <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+  </div>
+</div>

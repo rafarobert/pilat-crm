@@ -1,0 +1,20 @@
+/**
+ * Created by @ES Express Systems
+ * User: #userCreated
+ * Date: #dateCreated
+ * Time: #timeCreated
+ * Last User updated: #userUpdated
+ * Last date updated: #dateUpdated
+ * Last time updated: #timeUpdated
+ *
+ * Caution: es-sections will be replaced by script execution
+ */
+
+module.exports = function (app) {
+// Routes API
+    //<es-section>
+	<<<expressConfigRoutes>>>
+	app.use("/", require("../routes/local_dbTable_name.routes"));
+	>>>expressConfigRoutes<<<
+	//</es-section>
+}

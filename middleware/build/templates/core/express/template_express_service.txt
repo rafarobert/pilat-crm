@@ -1,0 +1,267 @@
+/**
+ * Created by @ES Express Systems
+ * User: #userCreated
+ * Date: #dateCreated
+ * Time: #timeCreated
+ * Last User updated: #userUpdated
+ * Last date updated: #dateUpdated
+ * Last time updated: #timeUpdated
+ *
+ * Caution: es-sections will be replaced by script execution
+ */
+
+require('../../../utils/Prototipes');
+const helpers = require('../../../utils/helpers');
+const bcrypt = require("bcrypt");
+const models = require('../index');
+const Util = require('../../../utils/Utils');
+const util = new Util();
+
+import configJson from '../../../config/config';
+const sql = configJson.sql;
+
+const { Op } = require("sequelize");
+
+//<es-section>
+
+//</es-section>
+
+class UcObjSLocalTableNameService {
+
+    //<es-section>
+
+    //</es-section>
+
+	//<es-section>
+	<<<sequelizeDefaultServiceFunctions>>>
+	static async getAllUcObjPLocalTableName(query) {
+		try {
+		    let offset = query.offset ? query.offset : query.start ? query.start : query.limit ? 0 : null;
+			if(sql) {
+			    let offset = Object.keys(query).length ? query.offset ? query.offset : query.start ? query.start : query.limit ? 0 : null : null;
+            	let where = Object.keys(query).length ? query.where ? JSON.parse(query.where) : null : null;
+
+				return await models.sequelize.lcObjPLocalTableName.findAll({
+				    attributes:query.select ? query.select.split(',') : null,
+				    where: where && !where.where ? where : null,
+                    limit: query.limit ? parseInt(query.limit) : null,
+                    offset: offset ? parseInt(offset) : 0,
+                    order: query.order ? JSON.parse(query.order) : [['local_primary_name','ASC']],
+                });
+			} else {
+				return await models.mongoose.lcObjPLocalTableName.find().select(query.select).limit(parseInt(query.limit)).skip(parseInt(offset));
+			}
+		} catch (error) {
+			throw error;
+		}
+	}
+
+	static async getSelectAllUcObjPLocalTableName(select = []) {
+		try {
+			if(sql) {
+				return await models.sequelize.lcObjPLocalTableName.findAll({
+				    attributes: select ? select : null
+				});
+			} else {
+				return await models.mongoose.lcObjPLocalTableName.find().select(select.join(' '));
+			}
+		} catch (error) {
+			throw error;
+		}
+	}
+
+	static async addUcObjSLocalTableName(newUcObjSLocalTableName) {
+		try {
+			let objUcObjSLocalTableName;
+			if(util.PrimaryKeyTypeIsString(models.sequelize.lcObjPLocalTableName.primaryKeys.local_primary_name.type.toString())) {
+			    newUcObjSLocalTableName.local_primary_name = models.sequelize.objectId().toString();
+		    }
+			<id>
+			if(!newUcObjSLocalTableName.local_second_primary_name) {
+              let max = await models.sequelize.lcObjPLocalTableName.max('local_second_primary_name');
+              newUcObjSLocalTableName.local_second_primary_name = newUcObjSLocalTableName.local_second_primary_name ? newUcObjSLocalTableName.local_second_primary_name : max+1;
+			}
+			</id>
+			<user-hash>
+			newUcObjSLocalTableName.user_hash = await bcrypt.hash(newUcObjSLocalTableName.user_hash, bcrypt.genSaltSync(8)).then(encripted => {return encripted});
+			</user-hash>
+			<usr-id>
+            newUcObjSLocalTableName.usr_id = newUcObjSLocalTableName.usr_id ? newUcObjSLocalTableName.usr_id : await Math.floor(Math.random() * 10000000000);
+			</usr-id>
+			if(sql) {
+				objUcObjSLocalTableName = await models.sequelize.lcObjPLocalTableName.create(newUcObjSLocalTableName);
+			} else {
+				objUcObjSLocalTableName = new models.mongoose.lcObjPLocalTableName(newUcObjSLocalTableName);
+				await objUcObjSLocalTableName.save();
+			}
+			return objUcObjSLocalTableName;
+		} catch (error) {
+			throw error;
+		}
+	}
+
+	static async updateUcObjSLocalTableName(local_primary_name, updateUcObjSLocalTableName) {
+		try {
+			let objUcObjSLocalTableName;
+			if(sql) {
+				objUcObjSLocalTableName = await models.sequelize.lcObjPLocalTableName.findOne({where: { local_primary_name: util.UcObjLocalPrimaryType(local_primary_name) }});
+				if (objUcObjSLocalTableName) {
+					await models.sequelize.lcObjPLocalTableName.update(updateUcObjSLocalTableName, { where: { local_primary_name: util.UcObjLocalPrimaryType(local_primary_name) } });
+					objUcObjSLocalTableName = await models.sequelize.lcObjPLocalTableName.findOne({where: { local_primary_name: util.UcObjLocalPrimaryType(local_primary_name) }});
+				}
+			} else {
+				delete updateUcObjSLocalTableName._id;
+				objUcObjSLocalTableName = await models.mongoose.lcObjPLocalTableName.findOneAndUpdate({local_primary_name:local_primary_name}, {$set: updateUcObjSLocalTableName}, {new: true});
+			}
+			return objUcObjSLocalTableName;
+		} catch (error) {
+			throw error;
+		}
+	}
+
+	static async getAUcObjSLocalTableName(local_primary_name, query) {
+		try {
+			let objUcObjSLocalTableName;
+			if(sql) {
+			        let where = Object.keys(query).length ? query.where ? JSON.parse(query.where) : null : null;
+					objUcObjSLocalTableName = await models.sequelize.lcObjPLocalTableName.findOne({
+					    where: where && !where.where ? where : { local_primary_name: util.UcObjLocalPrimaryType(local_primary_name) },
+					    attributes:query.select ? query.select.split(',') : null,
+                    });
+			} else {
+					objUcObjSLocalTableName = await models.mongoose.lcObjPLocalTableName.find({local_primary_name:util.UcObjLocalPrimaryType(local_primary_name)}).select(query.select);
+			}
+			return objUcObjSLocalTableName;
+		} catch (error) {
+			throw error;
+		}
+	}
+
+	static async deleteUcObjSLocalTableName(local_primary_name) {
+		try {
+			let objUcObjSLocalTableName;
+			if(sql) {
+				objUcObjSLocalTableName = await models.sequelize.lcObjPLocalTableName.findOne({ where: { local_primary_name: util.UcObjLocalPrimaryType(local_primary_name) } });
+				if (objUcObjSLocalTableName) {
+					await models.sequelize.lcObjPLocalTableName.destroy({where: { local_primary_name: util.UcObjLocalPrimaryType(local_primary_name) }});
+				}
+			} else {
+				objUcObjSLocalTableName = await models.mongoose.lcObjPLocalTableName.deleteOne({local_primary_name:util.UcObjLocalPrimaryType(local_primary_name)});
+			}
+			return objUcObjSLocalTableName;
+		} catch (error) {
+			throw error;
+		}
+	}
+	>>>sequelizeDefaultServiceFunctions<<<
+	<<<sequelizeFindOneByFieldsServiceFunctions>>>
+	static async findOneByUcObjLocalCommonFieldName(lcObjLocalFieldName, query = {}) {
+    	try {
+    		let objUcObjSLocalTableName;
+    		if(sql) {
+    			objUcObjSLocalTableName = await models.sequelize.lcObjPLocalTableName.findOne({
+    				attributes:query.select ? query.select.split(',') : null,
+    			    where: { local_field_name: lcObjLocalFieldName },
+    			});
+    		} else {
+    			objUcObjSLocalTableName = await models.mongoose.lcObjPLocalTableName.findOne({local_field_name: lcObjLocalFieldName});
+    		}
+    		return objUcObjSLocalTableName;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	>>>sequelizeFindOneByFieldsServiceFunctions<<<
+	<<<sequelizeUpdateByFieldsServiceFunctions>>>
+	static async updateUcObjSLocalTableNameByUcObjLocalCommonFieldName(lcObjLocalFieldName, updateUcObjSLocalTableName) {
+    	try {
+    		let objUcObjSLocalTableName;
+    		if(sql) {
+    			objUcObjSLocalTableName = await models.sequelize.lcObjPLocalTableName.findOne({where: { local_field_name: lcObjLocalFieldName }});
+    			if (objUcObjSLocalTableName) {
+    				objUcObjSLocalTableName = await models.sequelize.lcObjPLocalTableName.update(updateUcObjSLocalTableName, { where: { local_field_name: lcObjLocalFieldName } });
+    			}
+    		} else {
+    			objUcObjSLocalTableName = await models.mongoose.lcObjPLocalTableName.findOneAndUpdate({local_field_name: lcObjLocalFieldName}, {$set: updateUcObjSLocalTableName}, {new: true});
+    		}
+    		return objUcObjSLocalTableName;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	>>>sequelizeUpdateByFieldsServiceFunctions<<<
+	<<<sequelizeStoreServiceFunctions>>>
+	static async findUcObjPForeignTableNameUcObjlocalStoreFieldNameWithUcObjForeignStoreFieldNameWithLabel(select = ['foreign_store_field_name_value', 'foreign_store_field_name_label'], query = {}) {
+    	try {
+    		let offset = query.offset ? query.offset : query.start ? query.start : query.limit ? '0' : null;
+    		if(sql) {
+    		    return await models.sequelize.lcObjPForeignTableName.findAll({
+                    attributes: select,
+                    where: { local_group_field_name: {[Op.like]: '%grp_local_store_index_field_name%'}},
+                    limit: query.limit ? parseInt(query.limit) : null,
+                    offset: offset ? parseInt(offset) : 0,
+                    order: query.order ? JSON.parse(query.order) : [['foreign_store_field_name_value','DESC']],
+    		    });
+    		} else {
+    			return await models.mongoose.lcObjPForeignTableName.find({local_group_field_name: {$regex : ".*grp_local_store_index_field_name.*"}}).select(select.join(' '));
+    		}
+    	} catch (error) {
+            throw error;
+    	}
+    }
+	>>>sequelizeStoreServiceFunctions<<<
+	<<<sequelizeStoreFilterServiceFunctions>>>
+	static async filterUcObjPLocalTableNameByUcObjlocalStoreFieldName(ids, query = {select:'',level:0}) {
+    	try {
+    	    let status = await this.findUcObjPForeignStatusTableNameUcObjlocalStoreIndexStatusFieldNameWithUcObjForeignStoreStatusFieldNameWithLabel(['_id', 'par_abbr']);
+        	let objUcObjSLocalTableName, project = {}, level, select;
+        	level = Object.keys(query) && query.level ? query.level : 0;
+        	select = Object.keys(query) && query.select ? query.select.split(',') : [];
+        	select.forEach(sel => project[sel] = 1);
+        	ids.forEach((id,i) => ids[i] = parseInt(id));
+        	if(sql) {
+    	        let enabled = status.find(param => param.dataValues.par_abbr == 'enabled');
+    	        let idEnabled = enabled.dataValues._id;
+        	    if ( level == 1 ) {
+                    objUcObjSLocalTableName = await models.sequelize.lcObjPLocalTableName.findAll(
+                        arraySqlLevel1Include
+                    );
+        	    } else if( level == 2 ){
+        	        objUcObjSLocalTableName = await models.sequelize.lcObjPLocalTableName.findAll(
+                        arraySqlLevel2Include
+                    );
+        	    } else {
+        	        objUcObjSLocalTableName = await models.sequelize.lcObjPLocalTableName.findAll(
+                        arraySqlLevel0Include
+                    );
+        	    }
+    		} else {
+    		    let enabled = status.find(param => param._doc.par_abbr == 'enabled');
+    		    let idEnabled = enabled._doc._id;
+    		    if ( level == 1 ) {
+                    objUcObjSLocalTableName = await models.mongoose.lcObjPLocalTableName.aggregate(
+                        arrayMongoLevel1Aggregate
+                    );
+    		    } else if( level == 2 ) {
+    		        objUcObjSLocalTableName = await models.mongoose.lcObjPLocalTableName.aggregate(
+                        arrayMongoLevel2Aggregate
+                    );
+    		    } else {
+    		        objUcObjSLocalTableName = await models.mongoose.lcObjPLocalTableName.aggregate(
+                        arrayMongoLevel0Aggregate
+                    );
+    		    }
+    		}
+    		return objUcObjSLocalTableName;
+    	} catch (error) {
+            throw error;
+    	}
+    }
+	>>>sequelizeStoreFilterServiceFunctions<<<
+	
+	//</es-section>
+}
+
+//<es-section>
+module.exports = UcObjSLocalTableNameService;
+//</es-section>

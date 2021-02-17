@@ -8,8 +8,8 @@ module.exports = {
       "id": {
         allowNull: false,
         primaryKey: true,
-        type: 'Sequelize.STRING',
-         
+        autoIncrement: false,
+        type: 'Sequelize.STRING'
       },
       
       
@@ -21,21 +21,13 @@ module.exports = {
       
       "access_override": {
         type: 'Sequelize.INTEGER',
-        length: 4,
-      },
-      
-      "access_override": {
-        type: 'Sequelize.INTEGER',
         length: 3,
       },
       
       
       
       
-      "role_id": {
-        type: 'Sequelize.STRING',
-        length: 255
-      },
+      
       
       "role_id": {
         type: 'Sequelize.STRING',

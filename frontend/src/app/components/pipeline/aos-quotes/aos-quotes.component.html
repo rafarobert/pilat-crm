@@ -1,0 +1,123 @@
+
+<mat-toolbar color="primary">
+  <span>Cotizaciones</span>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="refresh()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="container mat-elevation-z8">
+
+
+  <!--'description',-->
+  <!--'salutation',-->
+  <!--'first_name',-->
+  <!--'last_name',-->
+  <!--'phone_mobile',-->
+  <!--'phone_other',-->
+  <!--'primary_address_street',-->
+  <!--'primary_address_city',-->
+  <!--'primary_address_state',-->
+  <!--'alt_address_country',-->
+  <!--'lead_source_description',-->
+  <!--'status',-->
+  <!--'account_name',-->
+  <!--'actions',-->
+  <!---->
+
+  <div class="form">
+    <mat-form-field [floatLabel]="'never'" color="accent">
+      <input matInput #filter placeholder="Filtrar Cotizaciones">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="aosQuoteDataSource" matSort class="mat-cell">
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="name"><mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell><mat-cell *matCellDef="let row" >{{row.name}}</mat-cell></ng-container>
+    <ng-container matColumnDef="date_entered"><mat-header-cell *matHeaderCellDef mat-sort-header>Date_entered</mat-header-cell><mat-cell *matCellDef="let row" >{{row.date_entered.toString()}}</mat-cell></ng-container>
+    <ng-container matColumnDef="date_modified"><mat-header-cell *matHeaderCellDef mat-sort-header>Date_modified</mat-header-cell><mat-cell *matCellDef="let row" >{{row.date_modified.toString()}}</mat-cell></ng-container>
+    <ng-container matColumnDef="modified_user_id"><mat-header-cell *matHeaderCellDef mat-sort-header>Modified_user_id</mat-header-cell><mat-cell *matCellDef="let row" >{{row.modified_user_id}}</mat-cell></ng-container>
+    <ng-container matColumnDef="created_by"><mat-header-cell *matHeaderCellDef mat-sort-header>Created_by</mat-header-cell><mat-cell *matCellDef="let row" >{{row.created_by}}</mat-cell></ng-container>
+    <ng-container matColumnDef="description"><mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell><mat-cell *matCellDef="let row" >{{row.description}}</mat-cell></ng-container>
+    <ng-container matColumnDef="deleted"><mat-header-cell *matHeaderCellDef mat-sort-header>Deleted</mat-header-cell><mat-cell *matCellDef="let row" >{{row.deleted}}</mat-cell></ng-container>
+    <ng-container matColumnDef="assigned_user_id"><mat-header-cell *matHeaderCellDef mat-sort-header>Assigned_user_id</mat-header-cell><mat-cell *matCellDef="let row" >{{row.assigned_user_id}}</mat-cell></ng-container>
+    <ng-container matColumnDef="approval_issue"><mat-header-cell *matHeaderCellDef mat-sort-header>Approval_issue</mat-header-cell><mat-cell *matCellDef="let row" >{{row.approval_issue}}</mat-cell></ng-container>
+    <ng-container matColumnDef="billing_account_id"><mat-header-cell *matHeaderCellDef mat-sort-header>Billing_account_id</mat-header-cell><mat-cell *matCellDef="let row" >{{row.billing_account_id}}</mat-cell></ng-container>
+    <ng-container matColumnDef="billing_contact_id"><mat-header-cell *matHeaderCellDef mat-sort-header>Billing_contact_id</mat-header-cell><mat-cell *matCellDef="let row" >{{row.billing_contact_id}}</mat-cell></ng-container>
+    <ng-container matColumnDef="billing_address_street"><mat-header-cell *matHeaderCellDef mat-sort-header>Billing_address_street</mat-header-cell><mat-cell *matCellDef="let row" >{{row.billing_address_street}}</mat-cell></ng-container>
+    <ng-container matColumnDef="billing_address_city"><mat-header-cell *matHeaderCellDef mat-sort-header>Billing_address_city</mat-header-cell><mat-cell *matCellDef="let row" >{{row.billing_address_city}}</mat-cell></ng-container>
+    <ng-container matColumnDef="billing_address_state"><mat-header-cell *matHeaderCellDef mat-sort-header>Billing_address_state</mat-header-cell><mat-cell *matCellDef="let row" >{{row.billing_address_state}}</mat-cell></ng-container>
+    <ng-container matColumnDef="billing_address_postalcode"><mat-header-cell *matHeaderCellDef mat-sort-header>Billing_address_postalcode</mat-header-cell><mat-cell *matCellDef="let row" >{{row.billing_address_postalcode}}</mat-cell></ng-container>
+    <ng-container matColumnDef="billing_address_country"><mat-header-cell *matHeaderCellDef mat-sort-header>Billing_address_country</mat-header-cell><mat-cell *matCellDef="let row" >{{row.billing_address_country}}</mat-cell></ng-container>
+    <ng-container matColumnDef="shipping_address_street"><mat-header-cell *matHeaderCellDef mat-sort-header>Shipping_address_street</mat-header-cell><mat-cell *matCellDef="let row" >{{row.shipping_address_street}}</mat-cell></ng-container>
+    <ng-container matColumnDef="shipping_address_city"><mat-header-cell *matHeaderCellDef mat-sort-header>Shipping_address_city</mat-header-cell><mat-cell *matCellDef="let row" >{{row.shipping_address_city}}</mat-cell></ng-container>
+    <ng-container matColumnDef="shipping_address_state"><mat-header-cell *matHeaderCellDef mat-sort-header>Shipping_address_state</mat-header-cell><mat-cell *matCellDef="let row" >{{row.shipping_address_state}}</mat-cell></ng-container>
+    <ng-container matColumnDef="shipping_address_postalcode"><mat-header-cell *matHeaderCellDef mat-sort-header>Shipping_address_postalcode</mat-header-cell><mat-cell *matCellDef="let row" >{{row.shipping_address_postalcode}}</mat-cell></ng-container>
+    <ng-container matColumnDef="shipping_address_country"><mat-header-cell *matHeaderCellDef mat-sort-header>Shipping_address_country</mat-header-cell><mat-cell *matCellDef="let row" >{{row.shipping_address_country}}</mat-cell></ng-container>
+    <ng-container matColumnDef="expiration"><mat-header-cell *matHeaderCellDef mat-sort-header>Expiration</mat-header-cell><mat-cell *matCellDef="let row" >{{row.expiration.toString()}}</mat-cell></ng-container>
+    <ng-container matColumnDef="number"><mat-header-cell *matHeaderCellDef mat-sort-header>Number</mat-header-cell><mat-cell *matCellDef="let row" >{{row.number}}</mat-cell></ng-container>
+    <ng-container matColumnDef="opportunity_id"><mat-header-cell *matHeaderCellDef mat-sort-header>Opportunity_id</mat-header-cell><mat-cell *matCellDef="let row" >{{row.opportunity_id}}</mat-cell></ng-container>
+    <ng-container matColumnDef="template_ddown_c"><mat-header-cell *matHeaderCellDef mat-sort-header>Template_ddown_c</mat-header-cell><mat-cell *matCellDef="let row" >{{row.template_ddown_c}}</mat-cell></ng-container>
+    <ng-container matColumnDef="total_amt"><mat-header-cell *matHeaderCellDef mat-sort-header>Total_amt</mat-header-cell><mat-cell *matCellDef="let row" >{{row.total_amt}}</mat-cell></ng-container>
+    <ng-container matColumnDef="total_amt_usdollar"><mat-header-cell *matHeaderCellDef mat-sort-header>Total_amt_usdollar</mat-header-cell><mat-cell *matCellDef="let row" >{{row.total_amt_usdollar}}</mat-cell></ng-container>
+    <ng-container matColumnDef="subtotal_amount"><mat-header-cell *matHeaderCellDef mat-sort-header>Subtotal_amount</mat-header-cell><mat-cell *matCellDef="let row" >{{row.subtotal_amount}}</mat-cell></ng-container>
+    <ng-container matColumnDef="subtotal_amount_usdollar"><mat-header-cell *matHeaderCellDef mat-sort-header>Subtotal_amount_usdollar</mat-header-cell><mat-cell *matCellDef="let row" >{{row.subtotal_amount_usdollar}}</mat-cell></ng-container>
+    <ng-container matColumnDef="discount_amount"><mat-header-cell *matHeaderCellDef mat-sort-header>Discount_amount</mat-header-cell><mat-cell *matCellDef="let row" >{{row.discount_amount}}</mat-cell></ng-container>
+    <ng-container matColumnDef="discount_amount_usdollar"><mat-header-cell *matHeaderCellDef mat-sort-header>Discount_amount_usdollar</mat-header-cell><mat-cell *matCellDef="let row" >{{row.discount_amount_usdollar}}</mat-cell></ng-container>
+    <ng-container matColumnDef="tax_amount"><mat-header-cell *matHeaderCellDef mat-sort-header>Tax_amount</mat-header-cell><mat-cell *matCellDef="let row" >{{row.tax_amount}}</mat-cell></ng-container>
+    <ng-container matColumnDef="tax_amount_usdollar"><mat-header-cell *matHeaderCellDef mat-sort-header>Tax_amount_usdollar</mat-header-cell><mat-cell *matCellDef="let row" >{{row.tax_amount_usdollar}}</mat-cell></ng-container>
+    <ng-container matColumnDef="shipping_amount"><mat-header-cell *matHeaderCellDef mat-sort-header>Shipping_amount</mat-header-cell><mat-cell *matCellDef="let row" >{{row.shipping_amount}}</mat-cell></ng-container>
+    <ng-container matColumnDef="shipping_amount_usdollar"><mat-header-cell *matHeaderCellDef mat-sort-header>Shipping_amount_usdollar</mat-header-cell><mat-cell *matCellDef="let row" >{{row.shipping_amount_usdollar}}</mat-cell></ng-container>
+    <ng-container matColumnDef="shipping_tax"><mat-header-cell *matHeaderCellDef mat-sort-header>Shipping_tax</mat-header-cell><mat-cell *matCellDef="let row" >{{row.shipping_tax}}</mat-cell></ng-container>
+    <ng-container matColumnDef="shipping_tax_amt"><mat-header-cell *matHeaderCellDef mat-sort-header>Shipping_tax_amt</mat-header-cell><mat-cell *matCellDef="let row" >{{row.shipping_tax_amt}}</mat-cell></ng-container>
+    <ng-container matColumnDef="shipping_tax_amt_usdollar"><mat-header-cell *matHeaderCellDef mat-sort-header>Shipping_tax_amt_usdollar</mat-header-cell><mat-cell *matCellDef="let row" >{{row.shipping_tax_amt_usdollar}}</mat-cell></ng-container>
+    <ng-container matColumnDef="total_amount"><mat-header-cell *matHeaderCellDef mat-sort-header>Total_amount</mat-header-cell><mat-cell *matCellDef="let row" >{{row.total_amount}}</mat-cell></ng-container>
+    <ng-container matColumnDef="total_amount_usdollar"><mat-header-cell *matHeaderCellDef mat-sort-header>Total_amount_usdollar</mat-header-cell><mat-cell *matCellDef="let row" >{{row.total_amount_usdollar}}</mat-cell></ng-container>
+    <ng-container matColumnDef="currency_id"><mat-header-cell *matHeaderCellDef mat-sort-header>Currency_id</mat-header-cell><mat-cell *matCellDef="let row" >{{row.currency_id}}</mat-cell></ng-container>
+    <ng-container matColumnDef="stage"><mat-header-cell *matHeaderCellDef mat-sort-header>Stage</mat-header-cell><mat-cell *matCellDef="let row" >{{row.stage}}</mat-cell></ng-container>
+    <ng-container matColumnDef="term"><mat-header-cell *matHeaderCellDef mat-sort-header>Term</mat-header-cell><mat-cell *matCellDef="let row" >{{row.term}}</mat-cell></ng-container>
+    <ng-container matColumnDef="terms_c"><mat-header-cell *matHeaderCellDef mat-sort-header>Terms_c</mat-header-cell><mat-cell *matCellDef="let row" >{{row.terms_c}}</mat-cell></ng-container>
+    <ng-container matColumnDef="approval_status"><mat-header-cell *matHeaderCellDef mat-sort-header>Approval_status</mat-header-cell><mat-cell *matCellDef="let row" >{{row.approval_status}}</mat-cell></ng-container>
+    <ng-container matColumnDef="invoice_status"><mat-header-cell *matHeaderCellDef mat-sort-header>Invoice_status</mat-header-cell><mat-cell *matCellDef="let row" >{{row.invoice_status}}</mat-cell></ng-container>
+    <ng-container matColumnDef="subtotal_tax_amount"><mat-header-cell *matHeaderCellDef mat-sort-header>Subtotal_tax_amount</mat-header-cell><mat-cell *matCellDef="let row" >{{row.subtotal_tax_amount}}</mat-cell></ng-container>
+    <ng-container matColumnDef="subtotal_tax_amount_usdollar"><mat-header-cell *matHeaderCellDef mat-sort-header>Subtotal_tax_amount_usdollar</mat-header-cell><mat-cell *matCellDef="let row" >{{row.subtotal_tax_amount_usdollar}}</mat-cell></ng-container>
+
+    <!-- actions -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="primary" (click)="addNew()">
+          <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        </button>
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let Lead; let i=index;">
+        <button mat-icon-button color="accent" (click)="startEdit(i, Lead)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="accent" (click)="deleteItem(i, Lead)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+  <div class="no-results" [style.display]="aosQuoteDataSource.renderedData.length == 0 ? '' : 'none'">
+    <mat-spinner diameter="50" class="mat-spinner" *ngIf="isLoading"></mat-spinner>
+  </div>
+
+  <mat-paginator #paginator
+                 [length]="aosQuoteDataSource.filteredData.length"
+                 [pageIndex]="0"
+                 [pageSize]="5"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+</div>

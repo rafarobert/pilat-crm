@@ -1,0 +1,180 @@
+/**
+ * Created by @ES Express Systems
+ * User: #userCreated
+ * Date: #dateCreated
+ * Time: #timeCreated
+ * Last User updated: #userUpdated
+ * Last date updated: #dateUpdated
+ * Last time updated: #timeUpdated
+ *
+ * Caution: es-sections will be replaced by script execution
+ */
+
+Ext.define('es.view.local-table-name.Add', {
+	extend: 'Ext.window.Window',
+	alias: 'widget.lcObjPLocalTableNameAdd',
+	id: 'local-table-name-add',
+	height: 300,
+	width: 369,
+	resizable: true,
+	autoScroll: true,
+	title: 'Add UcObjSLocalTableName',
+	modal: true,
+
+	initComponent: function () {
+		var me = this;
+
+		setTimeout(()=> {
+			Ext.getCmp('createdAt').setValue(new Date());
+			Ext.getCmp('updatedAt').setValue(new Date());
+			Ext.getCmp('dueAt').setValue(new Date());
+		}, 50);
+
+		//<es-section>
+		<<<extjsFieldNotRelated>>>
+		var storeUcObjPForeignTableNameUcObjlocalStoreFieldNameWithUcObjForeignStoreFieldNameWithLabel = new Ext.data.JsonStore({
+			proxy: {
+				type: 'ajax',
+				url : '/api-#systemName/local-table-name/findUcObjPForeignTableNameUcObjlocalStoreFieldNameWithUcObjForeignStoreFieldNameWithLabel',
+				reader: {
+					type: 'json',
+					root: 'data'
+				},
+			},
+			fields: ['foreign_store_field_name_value', 'foreign_store_field_name_label'],
+			root: 'data',
+			autoLoad: true
+		});
+		>>>extjsFieldNotRelated<<<
+		//</es-section>
+		Ext.applyIf(me, {
+			items: [
+				{
+					xtype: 'form',
+					id:'local-table-name-form',
+					bodyPadding: 20,
+					title: '',
+					defaults: { // defaults are applied to items, not the container
+						allowBlank: false,
+						allowOnlyWhitespace: false,
+						msgTarget: 'side',
+						xtype: 'textfield',
+						anchor: '100%'
+					},
+					items: [
+						//<es-section>
+						<<<extjsFieldString>>>
+						{
+							fieldLabel: 'local_primary_field_name',
+							name: 'local_primary_field_name',
+						},
+						>>>extjsFieldString<<<
+						<<<extjsFieldBigint>>>
+          				{
+     		        		fieldLabel: 'local_bigint_field_name',
+    						name: 'local_bigint_field_name',
+     					},
+                        >>>extjsFieldBigint<<<
+						<<<extjsFieldBool>>>
+						{
+							fieldLabel: 'local_boolean_field_name',
+							name: 'local_boolean_field_name',
+						},
+						>>>extjsFieldBool<<<
+						<<<extjsFieldInteger>>>
+						{
+							fieldLabel: 'local_integer_field_name',
+							name: 'local_integer_field_name',
+						},
+						>>>extjsFieldInteger<<<
+						<<<extjsFieldVarchar>>>
+						{
+							fieldLabel: 'local_varchar_field_name',
+							name: 'local_varchar_field_name',
+						},
+						>>>extjsFieldVarchar<<<
+						<<<extjsFieldText>>>
+						{
+							fieldLabel: 'local_text_field_name',
+							name: 'local_text_field_name',
+						},
+						>>>extjsFieldText<<<
+						<<<extjsFieldBlob>>>
+						{
+							fieldLabel: 'local_blob_field_name',
+							name: 'local_blob_field_name',
+						},
+						>>>extjsFieldBlob<<<
+						<<<extjsFieldChar>>>
+						{
+							fieldLabel: 'local_char_field_name',
+							name: 'local_char_field_name',
+						},
+						>>>extjsFieldChar<<<
+						<<<extjsFieldFloat>>>
+						{
+							fieldLabel: 'local_float_field_name',
+							name: 'local_float_field_name',
+						},
+						>>>extjsFieldFloat<<<
+						<<<extjsFieldDecimal>>>
+						{
+							fieldLabel: 'local_decimal_field_name',
+							name: 'local_decimal_field_name',
+						},
+						>>>extjsFieldDecimal<<<
+						<<<extjsFieldDouble>>>
+						{
+							fieldLabel: 'local_double_field_name',
+							name: 'local_double_field_name',
+						},
+						>>>extjsFieldDouble<<<
+						<<<extjsFieldTinyint>>>
+						{
+							fieldLabel: 'local_tinyint_field_name',
+							name: 'local_tinyint_field_name',
+						},
+						>>>extjsFieldTinyint<<<
+						<<<extjsFieldIndex>>>
+						{
+							xtype: new Ext.form.field.ComboBox({
+								name: 'local_index_field_name',
+								id: 'local_index_field_name',
+								fieldLabel: 'local_index_field_name',
+								store: storeUcObjPForeignTableNameUcObjlocalStoreFieldNameWithUcObjForeignStoreFieldNameWithLabel,
+								valueField: "foreign_store_field_name_value",
+								displayField: "foreign_store_field_name_label",
+							})
+						},
+						>>>extjsFieldIndex<<<
+						<<<extjsFieldDate>>>
+						{
+							fieldLabel: 'local_date_field_name',
+							name: 'local_date_field_name',
+							id:'local_date_field_name',
+							xtype: 'datefield',
+							format: 'yy/m/d H:i:s',
+							minValue: new Date(),
+						},
+						>>>extjsFieldDate<<<
+						//</es-section>
+						{
+							xtype: 'button',
+							anchor: 0,
+							itemId: 'save',
+							text: 'Save'
+						},
+						{
+							xtype: 'button',
+							anchor: 0,
+							itemId: 'cancel',
+							text: 'Cancel'
+						}
+					]
+				}
+			]
+		});
+
+		me.callParent(arguments);
+	},
+});

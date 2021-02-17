@@ -8,8 +8,8 @@ module.exports = {
       "id": {
         allowNull: false,
         primaryKey: true,
-        type: 'Sequelize.CHAR',
-         
+        autoIncrement: false,
+        type: 'Sequelize.CHAR'
       },
       
       
@@ -18,10 +18,7 @@ module.exports = {
       
       
       
-      "created_by": {
-        type: 'Sequelize.STRING',
-        length: 255
-      },
+      
       
       "created_by": {
         type: 'Sequelize.STRING',
@@ -67,14 +64,7 @@ module.exports = {
       
       "parent_id": {
         type: 'Sequelize.CHAR',
-        length: 255,
-        binary: false
-      },
-      
-      "parent_id": {
-        type: 'Sequelize.CHAR',
-        length: 36,
-        binary: false
+        length: 36
       },
       
 

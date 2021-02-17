@@ -8,8 +8,8 @@ module.exports = {
       "id": {
         allowNull: false,
         primaryKey: true,
-        type: 'Sequelize.STRING',
-         
+        autoIncrement: false,
+        type: 'Sequelize.STRING'
       },
       
       
@@ -22,10 +22,7 @@ module.exports = {
       
       
       
-      "opportunity_id": {
-        type: 'Sequelize.STRING',
-        length: 255
-      },
+      
       
       "opportunity_id": {
         type: 'Sequelize.STRING',

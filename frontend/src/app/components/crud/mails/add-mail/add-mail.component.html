@@ -1,0 +1,25 @@
+
+<h1 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>Correos</h1>
+
+<div mat-dialog-content >
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+    <mat-grid-list [cols]="pilatService.isSmallScreen ? '1' : '2'" rowHeight="6:2">
+      <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>mai_description</mat-label><input matInput #input class="form-control" placeholder="mai_description" [(ngModel)]="data.mai_description" name="mai_description" required ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
+      <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>mai_user_account</mat-label><input matInput #input class="form-control" placeholder="mai_user_account" [(ngModel)]="data.mai_user_account" name="mai_user_account" required ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
+      <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>mai_user_password</mat-label><input matInput #input class="form-control" placeholder="mai_user_password" [(ngModel)]="data.mai_user_password" name="mai_user_password" required ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
+      <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>mai_host</mat-label><input matInput #input class="form-control" placeholder="mai_host" [(ngModel)]="data.mai_host" name="mai_host" required ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
+      <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>mai_port</mat-label><input matInput #input class="form-control" placeholder="mai_port" [(ngModel)]="data.mai_port" name="mai_port" required ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
+      <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>mai_protocol</mat-label><input matInput #input class="form-control" placeholder="mai_protocol" [(ngModel)]="data.mai_protocol" name="mai_protocol" required ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
+      <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>mai_group</mat-label><input matInput #input class="form-control" placeholder="mai_group" [(ngModel)]="data.mai_group" name="mai_group" required ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
+    </mat-grid-list>
+    <div mat-dialog-actions>
+      <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Guardar</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancelar</button>
+    </div>
+
+  </form>
+
+</div>
+

@@ -1,1 +1,0 @@
-{"message":"::1 - - [27/Dec/2020:20:00:14 +0000] \"GET /api-pilatsrl/pilat-dictionaries/? HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36\"\n","level":"info","service":"user-service"}

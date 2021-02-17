@@ -1,0 +1,116 @@
+
+<mat-toolbar color="primary">
+  <span>Contactos</span>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="refresh()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="container mat-elevation-z8">
+
+
+  <!--'description',-->
+  <!--'salutation',-->
+  <!--'first_name',-->
+  <!--'last_name',-->
+  <!--'phone_mobile',-->
+  <!--'phone_other',-->
+  <!--'primary_address_street',-->
+  <!--'primary_address_city',-->
+  <!--'primary_address_state',-->
+  <!--'alt_address_country',-->
+  <!--'lead_source_description',-->
+  <!--'status',-->
+  <!--'account_name',-->
+  <!--'actions',-->
+  <!---->
+
+  <div class="form">
+    <mat-form-field [floatLabel]="'never'" color="accent">
+      <input matInput #filter placeholder="Filtrar Contactos">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="contactDataSource" matSort class="mat-cell">
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="date_entered"><mat-header-cell *matHeaderCellDef mat-sort-header>date_entered</mat-header-cell><mat-cell *matCellDef="let row" >{{row.date_entered}}</mat-cell></ng-container>
+    <ng-container matColumnDef="date_modified"><mat-header-cell *matHeaderCellDef mat-sort-header>date_modified</mat-header-cell><mat-cell *matCellDef="let row" >{{row.date_modified}}</mat-cell></ng-container>
+    <ng-container matColumnDef="modified_user_id"><mat-header-cell *matHeaderCellDef mat-sort-header>modified_user_id</mat-header-cell><mat-cell *matCellDef="let row" >{{row.modified_user_id}}</mat-cell></ng-container>
+    <ng-container matColumnDef="created_by"><mat-header-cell *matHeaderCellDef mat-sort-header>created_by</mat-header-cell><mat-cell *matCellDef="let row" >{{row.created_by}}</mat-cell></ng-container>
+    <ng-container matColumnDef="description"><mat-header-cell *matHeaderCellDef mat-sort-header>description</mat-header-cell><mat-cell *matCellDef="let row" >{{row.description}}</mat-cell></ng-container>
+    <ng-container matColumnDef="deleted"><mat-header-cell *matHeaderCellDef mat-sort-header>deleted</mat-header-cell><mat-cell *matCellDef="let row" >{{row.deleted}}</mat-cell></ng-container>
+    <ng-container matColumnDef="assigned_user_id"><mat-header-cell *matHeaderCellDef mat-sort-header>assigned_user_id</mat-header-cell><mat-cell *matCellDef="let row" >{{row.assigned_user_id}}</mat-cell></ng-container>
+    <ng-container matColumnDef="salutation"><mat-header-cell *matHeaderCellDef mat-sort-header>salutation</mat-header-cell><mat-cell *matCellDef="let row" >{{row.salutation}}</mat-cell></ng-container>
+    <ng-container matColumnDef="first_name"><mat-header-cell *matHeaderCellDef mat-sort-header>first_name</mat-header-cell><mat-cell *matCellDef="let row" >{{row.first_name}}</mat-cell></ng-container>
+    <ng-container matColumnDef="last_name"><mat-header-cell *matHeaderCellDef mat-sort-header>last_name</mat-header-cell><mat-cell *matCellDef="let row" >{{row.last_name}}</mat-cell></ng-container>
+    <ng-container matColumnDef="title"><mat-header-cell *matHeaderCellDef mat-sort-header>title</mat-header-cell><mat-cell *matCellDef="let row" >{{row.title}}</mat-cell></ng-container>
+    <ng-container matColumnDef="photo"><mat-header-cell *matHeaderCellDef mat-sort-header>photo</mat-header-cell><mat-cell *matCellDef="let row" >{{row.photo}}</mat-cell></ng-container>
+    <ng-container matColumnDef="department"><mat-header-cell *matHeaderCellDef mat-sort-header>department</mat-header-cell><mat-cell *matCellDef="let row" >{{row.department}}</mat-cell></ng-container>
+    <ng-container matColumnDef="do_not_call"><mat-header-cell *matHeaderCellDef mat-sort-header>do_not_call</mat-header-cell><mat-cell *matCellDef="let row" >{{row.do_not_call}}</mat-cell></ng-container>
+    <ng-container matColumnDef="phone_home"><mat-header-cell *matHeaderCellDef mat-sort-header>phone_home</mat-header-cell><mat-cell *matCellDef="let row" >{{row.phone_home}}</mat-cell></ng-container>
+    <ng-container matColumnDef="phone_mobile"><mat-header-cell *matHeaderCellDef mat-sort-header>phone_mobile</mat-header-cell><mat-cell *matCellDef="let row" >{{row.phone_mobile}}</mat-cell></ng-container>
+    <ng-container matColumnDef="phone_work"><mat-header-cell *matHeaderCellDef mat-sort-header>phone_work</mat-header-cell><mat-cell *matCellDef="let row" >{{row.phone_work}}</mat-cell></ng-container>
+    <ng-container matColumnDef="phone_other"><mat-header-cell *matHeaderCellDef mat-sort-header>phone_other</mat-header-cell><mat-cell *matCellDef="let row" >{{row.phone_other}}</mat-cell></ng-container>
+    <ng-container matColumnDef="phone_fax"><mat-header-cell *matHeaderCellDef mat-sort-header>phone_fax</mat-header-cell><mat-cell *matCellDef="let row" >{{row.phone_fax}}</mat-cell></ng-container>
+    <ng-container matColumnDef="lawful_basis"><mat-header-cell *matHeaderCellDef mat-sort-header>lawful_basis</mat-header-cell><mat-cell *matCellDef="let row" >{{row.lawful_basis}}</mat-cell></ng-container>
+    <ng-container matColumnDef="date_reviewed"><mat-header-cell *matHeaderCellDef mat-sort-header>date_reviewed</mat-header-cell><mat-cell *matCellDef="let row" >{{row.date_reviewed}}</mat-cell></ng-container>
+    <ng-container matColumnDef="lawful_basis_source"><mat-header-cell *matHeaderCellDef mat-sort-header>lawful_basis_source</mat-header-cell><mat-cell *matCellDef="let row" >{{row.lawful_basis_source}}</mat-cell></ng-container>
+    <ng-container matColumnDef="primary_address_street"><mat-header-cell *matHeaderCellDef mat-sort-header>primary_address_street</mat-header-cell><mat-cell *matCellDef="let row" >{{row.primary_address_street}}</mat-cell></ng-container>
+    <ng-container matColumnDef="primary_address_city"><mat-header-cell *matHeaderCellDef mat-sort-header>primary_address_city</mat-header-cell><mat-cell *matCellDef="let row" >{{row.primary_address_city}}</mat-cell></ng-container>
+    <ng-container matColumnDef="primary_address_state"><mat-header-cell *matHeaderCellDef mat-sort-header>primary_address_state</mat-header-cell><mat-cell *matCellDef="let row" >{{row.primary_address_state}}</mat-cell></ng-container>
+    <ng-container matColumnDef="primary_address_postalcode"><mat-header-cell *matHeaderCellDef mat-sort-header>primary_address_postalcode</mat-header-cell><mat-cell *matCellDef="let row" >{{row.primary_address_postalcode}}</mat-cell></ng-container>
+    <ng-container matColumnDef="primary_address_country"><mat-header-cell *matHeaderCellDef mat-sort-header>primary_address_country</mat-header-cell><mat-cell *matCellDef="let row" >{{row.primary_address_country}}</mat-cell></ng-container>
+    <ng-container matColumnDef="alt_address_street"><mat-header-cell *matHeaderCellDef mat-sort-header>alt_address_street</mat-header-cell><mat-cell *matCellDef="let row" >{{row.alt_address_street}}</mat-cell></ng-container>
+    <ng-container matColumnDef="alt_address_city"><mat-header-cell *matHeaderCellDef mat-sort-header>alt_address_city</mat-header-cell><mat-cell *matCellDef="let row" >{{row.alt_address_city}}</mat-cell></ng-container>
+    <ng-container matColumnDef="alt_address_state"><mat-header-cell *matHeaderCellDef mat-sort-header>alt_address_state</mat-header-cell><mat-cell *matCellDef="let row" >{{row.alt_address_state}}</mat-cell></ng-container>
+    <ng-container matColumnDef="alt_address_postalcode"><mat-header-cell *matHeaderCellDef mat-sort-header>alt_address_postalcode</mat-header-cell><mat-cell *matCellDef="let row" >{{row.alt_address_postalcode}}</mat-cell></ng-container>
+    <ng-container matColumnDef="alt_address_country"><mat-header-cell *matHeaderCellDef mat-sort-header>alt_address_country</mat-header-cell><mat-cell *matCellDef="let row" >{{row.alt_address_country}}</mat-cell></ng-container>
+    <ng-container matColumnDef="assistant"><mat-header-cell *matHeaderCellDef mat-sort-header>assistant</mat-header-cell><mat-cell *matCellDef="let row" >{{row.assistant}}</mat-cell></ng-container>
+    <ng-container matColumnDef="assistant_phone"><mat-header-cell *matHeaderCellDef mat-sort-header>assistant_phone</mat-header-cell><mat-cell *matCellDef="let row" >{{row.assistant_phone}}</mat-cell></ng-container>
+    <ng-container matColumnDef="lead_source"><mat-header-cell *matHeaderCellDef mat-sort-header>lead_source</mat-header-cell><mat-cell *matCellDef="let row" >{{row.lead_source}}</mat-cell></ng-container>
+    <ng-container matColumnDef="reports_to_id"><mat-header-cell *matHeaderCellDef mat-sort-header>reports_to_id</mat-header-cell><mat-cell *matCellDef="let row" >{{row.reports_to_id}}</mat-cell></ng-container>
+    <ng-container matColumnDef="birthdate"><mat-header-cell *matHeaderCellDef mat-sort-header>birthdate</mat-header-cell><mat-cell *matCellDef="let row" >{{row.birthdate}}</mat-cell></ng-container>
+    <ng-container matColumnDef="campaign_id"><mat-header-cell *matHeaderCellDef mat-sort-header>campaign_id</mat-header-cell><mat-cell *matCellDef="let row" >{{row.campaign_id}}</mat-cell></ng-container>
+    <ng-container matColumnDef="joomla_account_id"><mat-header-cell *matHeaderCellDef mat-sort-header>joomla_account_id</mat-header-cell><mat-cell *matCellDef="let row" >{{row.joomla_account_id}}</mat-cell></ng-container>
+    <ng-container matColumnDef="portal_account_disabled"><mat-header-cell *matHeaderCellDef mat-sort-header>portal_account_disabled</mat-header-cell><mat-cell *matCellDef="let row" >{{row.portal_account_disabled}}</mat-cell></ng-container>
+    <ng-container matColumnDef="portal_user_type"><mat-header-cell *matHeaderCellDef mat-sort-header>portal_user_type</mat-header-cell><mat-cell *matCellDef="let row" >{{row.portal_user_type}}</mat-cell></ng-container>
+
+    <!-- actions -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="primary" (click)="addNew()">
+          <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        </button>
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let Lead; let i=index;">
+        <button mat-icon-button color="accent" (click)="startEdit(i, Lead)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="accent" (click)="deleteItem(i, Lead)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+  <div class="no-results" [style.display]="contactDataSource.renderedData.length == 0 ? '' : 'none'">
+    <mat-spinner diameter="50" class="mat-spinner" *ngIf="isLoading"></mat-spinner>
+  </div>
+
+  <mat-paginator #paginator
+                 [length]="contactDataSource.filteredData.length"
+                 [pageIndex]="0"
+                 [pageSize]="5"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+</div>

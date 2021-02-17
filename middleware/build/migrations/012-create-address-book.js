@@ -11,10 +11,7 @@ module.exports = {
       
       
       
-      "bean": {
-        type: 'Sequelize.STRING',
-        length: 255
-      },
+      
       
       "bean": {
         type: 'Sequelize.STRING',
@@ -28,20 +25,12 @@ module.exports = {
       
       "assigned_user_id": {
         type: 'Sequelize.CHAR',
-        length: 36,
-        binary: false
-      },
-      
-      "assigned_user_id": {
-        type: 'Sequelize.CHAR',
-        length: 255,
-        binary: false
+        length: 36
       },
       
       "bean_id": {
         type: 'Sequelize.CHAR',
-        length: 36,
-        binary: false
+        length: 36
       },
       
 

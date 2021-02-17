@@ -1,0 +1,63 @@
+<h2 mat-dialog-title>
+  <span>Pipeline</span>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="setPipeline()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</h2>
+<mat-dialog-content class="mat-typography">
+  <p>
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+      <input matInput #input class="form-control" placeholder="  Buscar..." [(ngModel)]="search" name="search" required >
+      <mat-button-toggle value="search" (click)="setPipeline()">Buscar</mat-button-toggle>
+      <!--<mat-button-toggle value="prospect" (click)="openLeadDialog($event)">Prospectos</mat-button-toggle>-->
+      <mat-button-toggle value="Prospect" (click)="addNewProspect()"><mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon> Agregar Prospecto</mat-button-toggle>
+      <mat-button-toggle value="Call" (click)="openCallDialog($event)">Llamadas</mat-button-toggle>
+      <mat-button-toggle value="Contact" (click)="openContactDialog($event)">Contactos</mat-button-toggle>
+      <mat-button-toggle value="Account" (click)="openAccountDialog($event)">Cuentas</mat-button-toggle>
+      <mat-button-toggle value="opportunity" (click)="openOpportunityDialog($event)">Opportunidades</mat-button-toggle>
+      <mat-button-toggle value="Quote" (click)="openAosQuoteDialog($event)">Cotizaciones</mat-button-toggle>
+      <mat-button-toggle value="leadUpward" (click)="setPipeline('asc')"><mat-icon>arrow_upward</mat-icon></mat-button-toggle>
+      <mat-button-toggle value="leadFalling" (click)="setPipeline('desc')"><mat-icon>arrow_downward</mat-icon></mat-button-toggle>
+    </mat-button-toggle-group>
+  </p>
+
+
+  <!--<div class="example-button-row">-->
+    <!--<button mat-raised-button color="primary" class="btn-lead-trigger" (click)="openLeadDialog($event)">Ver Leads</button>-->
+  <!--</div>-->
+
+  <!--<div class="example-button-row">-->
+    <!--<button mat-raised-button color="primary" class="btn-lead-trigger" (click)="openOpportunityDialog($event)">Ver Oportunidades</button>-->
+  <!--</div>-->
+
+  <mat-spinner diameter="50" class="mat-spinner" *ngIf="isLoading"></mat-spinner>
+
+  <div cdkDropListGroup *ngIf="pipeline.columns">
+    <div class="example-container" *ngFor="let column of pipeline.columns; let i = index">
+      <h2 *ngIf="column">{{column.props.par_description}} <br>({{column.currencyTo ? column.currencyTo : pilatService.parMonedaDolar.par_cod}}. {{column.totalTo ? column.totalTo.formatNumber() : '0'}})</h2><br>
+      <div class="title" *ngIf="column && column.totalLeads"><b>{{column.totalLeads}}</b></div>
+      <div class="title" *ngIf="column && column.totalFrom && column.totalTo">{{column.currencyFrom}} {{column.totalFrom.formatNumber()}} / {{column.currencyTo}} {{column.totalTo.formatNumber()}}</div>
+      <div class="title" *ngIf="column && column.totalSuperficies">Total superficie: {{column.totalSuperficies.formatNumber()}} </div>
+      <div (dblclick)="column.isInStageProspect ? openEditProspect($event) : column.isInStageOpportunity ? openEditOpportunity($event) : ''"
+        *ngIf="column"
+        cdkDropList
+        #list="cdkDropList"
+        [cdkDropListData]="column.tickets"
+        [cdkDropListConnectedTo]="i == pipeline.columns.length ? 0+'' : i+1+''"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div [classList]="'box-column-'+i" *ngFor="let item of column.tickets" cdkDrag [innerHTML]="item"></div>
+      </div>
+    </div>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <!--<button mat-stroked-button [mat-dialog-close]="true" cdkFocusInitial>Aceptar</button>-->
+</mat-dialog-actions>
+
+
+<!-- Copyright 2020 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->

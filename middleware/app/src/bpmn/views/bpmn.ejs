@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="/img/favicon.png">
+
+    <title>Blank | Creative - Bootstrap 3 Responsive Admin Template</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <script src="/js/lte-ie7.js"></script>
+    <![endif]-->
+
+    <script src="/js/bpmn-viewer.development.js"></script>
+
+    <!-- necessary stylesheets -->
+    <link rel="stylesheet" href="/css/diagram-js.css" />
+    <link rel="stylesheet" href="/css/bpmn.css" />
+
+
+    <script src="/js/bpmn-modeler.development.js"></script>
+
+</head>
+
+<body><!-- BPMN diagram container -->
+<div id="canvas"></div>
+
+<!-- replace CDN url with local bpmn-js path -->
+<script src="https://unpkg.com/bpmn-js/dist/bpmn-viewer.development.js"></script>
+
+<script>
+	// the diagram you are going to display
+	var bpmnXML;
+
+	// BpmnJS is the BPMN viewer instance
+	var viewer = new BpmnJS({ container: '#canvas' });
+
+	// import a BPMN 2.0 diagram
+	viewer.importXML(bpmnXML, function(err) {
+		if (err) {
+			// import failed :-(
+		} else {
+			// we did well!
+
+			var canvas = viewer.get('canvas');
+			canvas.zoom('fit-viewport');
+		}
+	});
+</script>
+
+<script>
+	var xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4) {
+			viewer.importXML(xhr.response, function(err) {
+				// ...
+			});
+		}
+	};
+
+	xhr.open('GET', 'path-to-diagram.bpmn', true);
+	xhr.send(null);
+</script>
+
+</body>
+
+</html>

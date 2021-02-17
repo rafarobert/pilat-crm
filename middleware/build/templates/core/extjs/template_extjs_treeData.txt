@@ -1,0 +1,17 @@
+
+{
+    "text": ".",
+    "children": [{
+        "text":"Tables",
+        "expanded": true,
+        "children":[
+        <<<extjsTableNames>>>
+        {
+            "text":"UcObjLocalDbTableName",
+            "id":"local-dbTable-name",
+            "leaf":true
+        },
+        >>>extjsTableNames<<<
+        ]
+    }]
+}

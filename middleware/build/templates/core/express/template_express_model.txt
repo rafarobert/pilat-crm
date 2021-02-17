@@ -1,0 +1,120 @@
+/**
+ * Created by @ES Express Systems
+ * User: #userCreated
+ * Date: #dateCreated
+ * Time: #timeCreated
+ * Last User updated: #userUpdated
+ * Last date updated: #dateUpdated
+ * Last time updated: #timeUpdated
+ *
+ * Caution: es-sections will be replaced by script execution
+ */
+
+const mongoose = require("mongoose");
+const {Schema} = mongoose;
+
+'use strict';
+
+    //<es-section>
+
+  module.exports.sequelize = (sequelize, DataTypes) => {
+    const lcObjPLocalTableName = sequelize.define('lcObjPLocalTableName', {
+      <<<sequelizePrimaryFields>>>
+      local_primary_field_name: { type: DataTypes.local_primary_type, primaryKey: true },
+      >>>sequelizePrimaryFields<<<
+      <<<sequelizeBigintFields>>>
+      local_bigint_field_name: DataTypes.INTEGER,
+      >>>sequelizeBigintFields<<<
+      <<<sequelizeIntegerFields>>>
+      local_integer_field_name: DataTypes.INTEGER,
+      >>>sequelizeIntegerFields<<<
+      <<<sequelizeBoolFields>>>
+      local_boolean_field_name: DataTypes.BOOLEAN,
+      >>>sequelizeBoolFields<<<
+      <<<sequelizeVarcharFields>>>
+      local_varchar_field_name: DataTypes.STRING,
+      >>>sequelizeVarcharFields<<<
+      <<<sequelizeTextFields>>>
+      local_text_field_name: DataTypes.TEXT,
+      >>>sequelizeTextFields<<<
+      <<<sequelizeIndexFields>>>
+      local_index_field_name: DataTypes.STRING,
+      >>>sequelizeIndexFields<<<
+      <<<sequelizeDateFields>>>
+      local_date_field_name: DataTypes.DATE,
+      >>>sequelizeDateFields<<<
+      <<<sequelizeBlobFields>>>
+      local_blob_field_name: DataTypes.BLOB,
+      >>>sequelizeBlobFields<<<
+      <<<sequelizeCharFields>>>
+      local_char_field_name: DataTypes.CHAR,
+      >>>sequelizeCharFields<<<
+      <<<sequelizeFloatFields>>>
+      local_float_field_name: DataTypes.FLOAT,
+      >>>sequelizeFloatFields<<<
+      <<<sequelizeDecimalFields>>>
+      local_decimal_field_name: DataTypes.DECIMAL,
+      >>>sequelizeDecimalFields<<<
+      <<<sequelizeTinyintFields>>>
+      local_tinyint_field_name: DataTypes.TINYINT,
+      >>>sequelizeTinyintFields<<<
+      <<<sequelizeDoubleFields>>>
+      local_double_field_name: DataTypes.DOUBLE,
+      >>>sequelizeDoubleFields<<<
+    }, {
+      tableName:'local_table_name',
+      timestamps: false,
+    });
+    lcObjPLocalTableName.associate = (models) => {
+      <<<sequelizeRelations>>>
+      models.lcObjPLocalTableName.belongsTo(models.lcObjPForeignTableName,{foreignKey:'local_index_field_name', targetKey: 'foreign_index_field_name',  as:'lcObjSLocalTableNameUcObjRefLocalFieldName'});
+      models.lcObjPForeignTableName.hasMany(models.lcObjPLocalTableName,{foreignKey:'local_index_field_name', sourceKey: 'foreign_index_field_name', as:'lcObjSLocalTableNameUcObjRefLocalFieldName'});
+      >>>sequelizeRelations<<<
+    };
+    return lcObjPLocalTableName;
+    //</es-section>
+  };
+
+  //<es-section>
+  module.exports.mongoose = mongoose.model("lcObjPLocalTableName", new Schema({
+    <<<sequelizeIntegerFields>>>
+    local_integer_field_name: {type: Number},
+    >>>sequelizeIntegerFields<<<
+    <<<sequelizeBigintFields>>>
+    local_bigint_field_name: {type: Number},
+    >>>sequelizeBigintFields<<<
+    <<<sequelizeVarcharFields>>>
+    local_varchar_field_name: {type: String},
+    >>>sequelizeVarcharFields<<<
+    <<<sequelizeTextFields>>>
+    local_text_field_name: {type: String},
+    >>>sequelizeTextFields<<<
+    <<<sequelizeBoolFields>>>
+    local_boolean_field_name: {type: Boolean},
+    >>>sequelizeBoolFields<<<
+    <<<sequelizeIndexFields>>>
+    local_index_field_name: {type: mongoose.Types.ObjectId},
+    >>>sequelizeIndexFields<<<
+    <<<sequelizeDateFields>>>
+    local_date_field_name: {type: Date},
+    >>>sequelizeDateFields<<<
+    <<<sequelizeBlobFields>>>
+    local_blob_field_name: {type: String},
+    >>>sequelizeBlobFields<<<
+    <<<sequelizeCharFields>>>
+    local_char_field_name: {type: String},
+    >>>sequelizeCharFields<<<
+    <<<sequelizeFloatFields>>>
+    local_float_field_name: {type: mongoose.Types.Decimal128},
+    >>>sequelizeFloatFields<<<
+    <<<sequelizeDecimalFields>>>
+    local_decimal_field_name: {type: mongoose.Types.Decimal128},
+    >>>sequelizeDecimalFields<<<
+    <<<sequelizeTinyintFields>>>
+    local_tinyint_field_name: {type: Number},
+    >>>sequelizeTinyintFields<<<
+    <<<sequelizeDoubleFields>>>
+    local_double_field_name: {type: mongoose.Types.Decimal128},
+    >>>sequelizeDoubleFields<<<
+  }),'local_table_name');
+  //</es-section>

@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Lead existente</h1>
+<div mat-dialog-content>La informacion del lead introducido, ya se encuentra registrado en un anterior lead
+  <ul>
+    <li *ngFor="let lead of data">
+      <span><b>Nombre</b>: {{lead.first_name}}</span><br>
+      <span><b>Apellido</b>: {{lead.last_name}}</span><br>
+      <span><b>Celular</b>: {{lead.phone_mobile}}</span><br>
+    </li>
+  </ul>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Aceptar</button>
+</div>

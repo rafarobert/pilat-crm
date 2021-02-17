@@ -8,19 +8,13 @@ module.exports = {
       "id_c": {
         allowNull: false,
         primaryKey: true,
-        type: 'Sequelize.CHAR',
-         
+        autoIncrement: false,
+        type: 'Sequelize.CHAR'
       },
       
       
       
       
-      
-      "jjwg_maps_lng_c": {
-        type: 'Sequelize.FLOAT',
-        length: 4,
-        decimals: 5
-      },
       
       "jjwg_maps_lng_c": {
         type: 'Sequelize.FLOAT',
@@ -33,6 +27,8 @@ module.exports = {
         length: 10,
         decimals: 8
       },
+      
+      
       
       
       
@@ -54,11 +50,6 @@ module.exports = {
       "extension_documento_c": {
         type: 'Sequelize.STRING',
         length: 100
-      },
-      
-      "nit_c": {
-        type: 'Sequelize.STRING',
-        length: 25
       },
       
       

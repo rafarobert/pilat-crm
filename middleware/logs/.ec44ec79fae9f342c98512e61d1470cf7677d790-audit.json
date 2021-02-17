@@ -1,0 +1,469 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/.ec44ec79fae9f342c98512e61d1470cf7677d790-audit.json",
+    "files": [
+        {
+            "date": 1612363105261,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-03-10.log",
+            "hash": "e98d1977bc5a69b525a466fc9f8d7a06"
+        },
+        {
+            "date": 1612364431349,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-03-11.log",
+            "hash": "55bf186d24daec4cad39766903b386c2"
+        },
+        {
+            "date": 1612372672042,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-03-13.log",
+            "hash": "589a7e683e921939a70d7b1096f6a103"
+        },
+        {
+            "date": 1612375467803,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-03-14.log",
+            "hash": "f8a87860b811d052b2c262f73cd562d9"
+        },
+        {
+            "date": 1612379660838,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-03-15.log",
+            "hash": "f81f265463afd31f42bfeaf3a3135765"
+        },
+        {
+            "date": 1612382510260,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-03-16.log",
+            "hash": "d19e071d1d41b54b4d72f43d64732a9d"
+        },
+        {
+            "date": 1612407305890,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-03-22.log",
+            "hash": "d60dd8c1063081a6bcea1faf0a7013cf"
+        },
+        {
+            "date": 1612407889620,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-03-23.log",
+            "hash": "f91135349e43813f7de9d832c752f0ac"
+        },
+        {
+            "date": 1612411226181,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-04-00.log",
+            "hash": "5872710099863e46c482bd7f0fbc5f56"
+        },
+        {
+            "date": 1612414826264,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-04-01.log",
+            "hash": "91e407eb46ad256958a496fbe66d9540"
+        },
+        {
+            "date": 1612418407551,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-04-02.log",
+            "hash": "b4909a55cd374bb54b0d8604ff3bd3e8"
+        },
+        {
+            "date": 1612422192624,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-04-03.log",
+            "hash": "4ffc728743d36a0e2ea86e0c5572b1a1"
+        },
+        {
+            "date": 1612425986757,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-04-04.log",
+            "hash": "9f459c9d42df2ce20a9d265ae0bb7ae0"
+        },
+        {
+            "date": 1612432396412,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-04-05.log",
+            "hash": "709524fb79560df79380a21d7979618a"
+        },
+        {
+            "date": 1612446129808,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-04-09.log",
+            "hash": "92069a7266eb3b5dfd8c313963f81e7b"
+        },
+        {
+            "date": 1612447382861,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-04-10.log",
+            "hash": "3009776cad10ec213c368024c1ad1773"
+        },
+        {
+            "date": 1612454434403,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-04-12.log",
+            "hash": "418624ab37523192b3e24b567d471b94"
+        },
+        {
+            "date": 1612458090727,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-04-13.log",
+            "hash": "e188f51c45c837d5b25e241fb98ef388"
+        },
+        {
+            "date": 1612461637229,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-04-14.log",
+            "hash": "9edddf35beacc46103e64e8611565799"
+        },
+        {
+            "date": 1612470785946,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-04-16.log",
+            "hash": "b87777a3187e3555fd04b44c223b7571"
+        },
+        {
+            "date": 1612472695400,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-04-17.log",
+            "hash": "0971026cfb3c15a91cb7b158abeaba1f"
+        },
+        {
+            "date": 1612491069609,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-04-22.log",
+            "hash": "cdd537a7b1044b1767a59179f81fca95"
+        },
+        {
+            "date": 1612495102113,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-04-23.log",
+            "hash": "baa458fb52cac9e3eec874bd07ea5c34"
+        },
+        {
+            "date": 1612498332965,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-05-00.log",
+            "hash": "6f1c0593f31ccd0cee5baf62c6151dae"
+        },
+        {
+            "date": 1612501226348,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-05-01.log",
+            "hash": "29274db65a8653997401303f3a38cf2d"
+        },
+        {
+            "date": 1612530482149,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-05-09.log",
+            "hash": "d632c34356878511011fa8505fe1e450"
+        },
+        {
+            "date": 1612536154621,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-05-10.log",
+            "hash": "55cbb23eafdaa2093ff31a39e7c60775"
+        },
+        {
+            "date": 1612543345893,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-05-12.log",
+            "hash": "67c6a211e73db7c11d8451fae5361baa"
+        },
+        {
+            "date": 1612573664228,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-05-21.log",
+            "hash": "488a412951c9a37eb5a2695dd4a6b386"
+        },
+        {
+            "date": 1612616215216,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-06-08.log",
+            "hash": "ac7dacf0187fa7a913edfc96420a84c0"
+        },
+        {
+            "date": 1612616500805,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-06-09.log",
+            "hash": "20eede2aaf576c12846dfa98e16fa129"
+        },
+        {
+            "date": 1612620008298,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-06-10.log",
+            "hash": "80fc0599c615d17670d805083ce8e1e1"
+        },
+        {
+            "date": 1612675946437,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-07-01.log",
+            "hash": "c390d456afec363ff49ede94da250e6a"
+        },
+        {
+            "date": 1612746645438,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-07-21.log",
+            "hash": "27c44f523bc93f30a0895f6f095a62b8"
+        },
+        {
+            "date": 1612798603636,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-08-11.log",
+            "hash": "08816705b99cfe21a6891bbfaed3fa63"
+        },
+        {
+            "date": 1612800096705,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-08-12.log",
+            "hash": "0d62707ab9a5f9ed949935f2e983cc10"
+        },
+        {
+            "date": 1612805955383,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-08-13.log",
+            "hash": "1455ebbee09115d050957d30f975126c"
+        },
+        {
+            "date": 1612808607710,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-08-14.log",
+            "hash": "bf7259c95405e18c6eb92e594df28792"
+        },
+        {
+            "date": 1612846440347,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-09-00.log",
+            "hash": "8847de7cf919c62a960b938cefb63a67"
+        },
+        {
+            "date": 1612853447952,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-09-02.log",
+            "hash": "20663347c2b805e87e98c1c556e28905"
+        },
+        {
+            "date": 1612854337568,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-09-03.log",
+            "hash": "36fd82b40a5af7560d66dde49f591c59"
+        },
+        {
+            "date": 1612889229087,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-09-12.log",
+            "hash": "f2fe4408c3e685f17a9dd5ada34f0a8d"
+        },
+        {
+            "date": 1612892269944,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-09-13.log",
+            "hash": "efe2f430540391ee1e8b7bb8041a2562"
+        },
+        {
+            "date": 1612901640398,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-09-16.log",
+            "hash": "5a97d8fb38b7d26688c3e10a13d7a918"
+        },
+        {
+            "date": 1612916932053,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-09-20.log",
+            "hash": "0b1032f02fc6bef5d1caefac398d252b"
+        },
+        {
+            "date": 1612919273915,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-09-21.log",
+            "hash": "db1d9362b5fde674dbf555d20253da3a"
+        },
+        {
+            "date": 1612922825891,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-09-22.log",
+            "hash": "9e50ec73300c6c112ee7d33418b0bfab"
+        },
+        {
+            "date": 1612926020527,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-09-23.log",
+            "hash": "a7b6d5ecce0cb46061736ec2e1fc1078"
+        },
+        {
+            "date": 1612933603250,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-10-01.log",
+            "hash": "b231b15cc67bc5cfef4fc9feb0b8b325"
+        },
+        {
+            "date": 1612937262127,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-10-02.log",
+            "hash": "9df10b7095b774d406bc2aae72be8e62"
+        },
+        {
+            "date": 1612961583243,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-10-08.log",
+            "hash": "98fafc76edc20903c5821fe1d0ed9487"
+        },
+        {
+            "date": 1612962012993,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-10-09.log",
+            "hash": "219dd49cf8c797042d6c60731d031060"
+        },
+        {
+            "date": 1612967056599,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-10-10.log",
+            "hash": "2c8f0b4adf0fdfd10210187ae39ca1de"
+        },
+        {
+            "date": 1612971856227,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-10-11.log",
+            "hash": "a49d023287d01fdca192d5411d39a5e0"
+        },
+        {
+            "date": 1612975729578,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-10-12.log",
+            "hash": "4cf209817d140d65a311866f38c1c073"
+        },
+        {
+            "date": 1612976530262,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-10-13.log",
+            "hash": "845deea5973068b72370e614f49d2023"
+        },
+        {
+            "date": 1612980002464,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-10-14.log",
+            "hash": "9b53b190ece0a90df27d52e4b5b3d31a"
+        },
+        {
+            "date": 1612987638171,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-10-16.log",
+            "hash": "45315ad967403fcb991d65831559cf3b"
+        },
+        {
+            "date": 1613003569958,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-10-20.log",
+            "hash": "098ef56c54e7fff2308cc02680b7036e"
+        },
+        {
+            "date": 1613006392297,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-10-21.log",
+            "hash": "239e086806ac92985c2f94c04a18c312"
+        },
+        {
+            "date": 1613012283434,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-10-22.log",
+            "hash": "3ce53918737b06d42e100bcf21da68a1"
+        },
+        {
+            "date": 1613012717785,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-10-23.log",
+            "hash": "7f72ec4e1fbf8103b7af8acc474b776f"
+        },
+        {
+            "date": 1613025430682,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-11-02.log",
+            "hash": "aa74f1a7618dfb734bc023152c66095b"
+        },
+        {
+            "date": 1613026845456,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-11-03.log",
+            "hash": "1fd0fb9df89ba5bda3891c39d660eea6"
+        },
+        {
+            "date": 1613051895718,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-11-09.log",
+            "hash": "f04124639bea11000ed511bf5fadf449"
+        },
+        {
+            "date": 1613052005796,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-11-10.log",
+            "hash": "a55470d3c19e00db3698f75df64f8a73"
+        },
+        {
+            "date": 1613067566164,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-11-14.log",
+            "hash": "945215b3b1193caa77234c14c2d1174e"
+        },
+        {
+            "date": 1613070850349,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-11-15.log",
+            "hash": "536f685088af912c1b30f0abdb6778ef"
+        },
+        {
+            "date": 1613098708749,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-11-22.log",
+            "hash": "8414e4f11c8ee09fd386cbdbd42f4f01"
+        },
+        {
+            "date": 1613098925904,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-11-23.log",
+            "hash": "37475d942eb19b0606749fbcd9c8886d"
+        },
+        {
+            "date": 1613103400550,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-12-00.log",
+            "hash": "1bf8c2f42f59c5333c79d88c4bb41401"
+        },
+        {
+            "date": 1613111073717,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-12-02.log",
+            "hash": "4801e4a2caca72d57bee81ccbae0717c"
+        },
+        {
+            "date": 1613113444668,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-12-03.log",
+            "hash": "f9291e8d30dd70fb32380b97168b527a"
+        },
+        {
+            "date": 1613135023199,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-12-09.log",
+            "hash": "be13fb27a4846fc4fede4739b93bc791"
+        },
+        {
+            "date": 1613148058599,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-12-12.log",
+            "hash": "d20fc2b8ba7da5a56b6b579174672839"
+        },
+        {
+            "date": 1613154264529,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-12-14.log",
+            "hash": "0caf281249443aa51f8781e92adef798"
+        },
+        {
+            "date": 1613157108473,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-12-15.log",
+            "hash": "fd8dc19e4e16347696db9760e5eb5d87"
+        },
+        {
+            "date": 1613164511151,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-12-17.log",
+            "hash": "37aa6c9ac62568636d24cbe502cc8cb8"
+        },
+        {
+            "date": 1613167387918,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-12-18.log",
+            "hash": "47ec8379c623a642aaf5f1c2df4167be"
+        },
+        {
+            "date": 1613171488558,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-12-19.log",
+            "hash": "bc320591f0af61f187a30f1e05661b1e"
+        },
+        {
+            "date": 1613452610680,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-16-01.log",
+            "hash": "ded61ff51911d4b0fdcec0cc94efc2c2"
+        },
+        {
+            "date": 1613455382781,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-16-02.log",
+            "hash": "4e8602fe13f71bed0c23d8a10c47d13d"
+        },
+        {
+            "date": 1613484987890,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-16-10.log",
+            "hash": "edd3c980c9d00f53a437f6b1dcbbbf44"
+        },
+        {
+            "date": 1613534362383,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-16-23.log",
+            "hash": "fc86e2b55e70f93018650778492502c3"
+        },
+        {
+            "date": 1613534642015,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-17-00.log",
+            "hash": "61fe743e11eac1d11177e300643273e1"
+        },
+        {
+            "date": 1613538131836,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-17-01.log",
+            "hash": "84b803375ad8e9dde39d49f48268cf18"
+        },
+        {
+            "date": 1613541611696,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-17-02.log",
+            "hash": "221435e7e2f27bc24f80c2a2d389c8ab"
+        },
+        {
+            "date": 1613545264908,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-17-03.log",
+            "hash": "1b6e789fda3cffd126c0752bc289c3f0"
+        },
+        {
+            "date": 1613551716127,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-17-04.log",
+            "hash": "8444e37bfb80010dfad88f97f2308139"
+        },
+        {
+            "date": 1613552511024,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-17-05.log",
+            "hash": "bed58440c19756c5d7ee821dd17191f3"
+        },
+        {
+            "date": 1613556002083,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-17-06.log",
+            "hash": "23441457687136670b9307401138ddcc"
+        },
+        {
+            "date": 1613559603450,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_monumental_dev/middleware/logs/app-2021-02-17-07.log",
+            "hash": "912455ba3c2a72808262ec6e9313a775"
+        }
+    ]
+}

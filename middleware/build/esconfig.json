@@ -1,0 +1,165 @@
+{
+  "cores": [
+    {
+      "express": {
+        "using": "../build/templates/core/express/",
+        "toExtract": "../build/migrations/",
+        "toRewrite": {
+          "directories": [
+            {
+              "allIn": "../build/migrations/",
+              "ext": ".js",
+              "with": "template_express_migration.txt",
+              "as": "file",
+              "like": "###-create-local-table-name"
+            },
+            {
+              "allIn": "../core/express/controllers/",
+              "ext": ".controller.js",
+              "with": "template_express_controller.txt",
+              "as": "file",
+              "like": "local_table_name"
+            },
+            {
+              "allIn": "../core/express/models/",
+              "ext": ".js",
+              "with": "template_express_model.txt",
+              "as": "file",
+              "like": "local_table_name"
+            },
+            {
+              "allIn": "../core/express/routes/",
+              "ext": ".routes.js",
+              "with": "template_express_route.txt",
+              "as": "file",
+              "like": "local_table_name"
+            },
+            {
+              "allIn": "../core/express/services/",
+              "ext": ".service.js",
+              "with": "template_express_service.txt",
+              "as": "file",
+              "like": "local_table_name"
+            }
+          ],
+          "files": [
+            {
+              "into": "../core/express/routes/",
+              "name": "routes",
+              "ext": ".js",
+              "with": "template_express_config_routes.txt",
+              "as": "file"
+            },
+            {
+              "into": "../core/express/",
+              "name": "related",
+              "ext": ".js",
+              "with": "template_express_related.txt",
+              "as": "file"
+            }
+          ]
+        }
+      }
+    }, {
+      "ext-js": {
+        "using": "../build/templates/core/extjs/",
+        "toExtract": "../build/migrations/",
+        "toRewrite": {
+          "directories": [
+            {
+              "allIn": "../public/pilatsrl/extjs/app/controller/",
+              "ext": ".js",
+              "with": "template_extjs_controller.txt",
+              "as": "file",
+              "like": "local_table_name"
+            },
+            {
+              "allIn": "../public/pilatsrl/extjs/app/model/",
+              "ext": ".js",
+              "with": "template_extjs_model.txt",
+              "as": "file",
+              "like": "local_table_name"
+            },
+            {
+              "allIn": "../public/pilatsrl/extjs/app/store/",
+              "ext": ".js",
+              "with": "template_extjs_store.txt",
+              "as": "file",
+              "like": "local_table_name"
+            },
+            {
+              "allIn": "../public/pilatsrl/extjs/app/view/",
+              "ext": ".js",
+              "with": "template_extjs_view_Add.txt",
+              "as": "folder/Add",
+              "like": "local-table-name"
+            },
+            {
+              "allIn": "../public/pilatsrl/extjs/app/view/",
+              "ext": ".js",
+              "with": "template_extjs_view_List.txt",
+              "as": "folder/List",
+              "like": "local-table-name"
+            }
+          ],
+          "files": [
+            {
+              "into": "../public/pilatsrl/extjs/",
+              "name": "es",
+              "ext": ".js",
+              "with": "template_extjs_es.txt",
+              "as": "file"
+            },
+            {
+              "into": "../public/pilatsrl/extjs/",
+              "name": "treeData",
+              "ext": ".json",
+              "with": "template_extjs_treeData.txt",
+              "as": "file"
+            },
+            {
+              "into": "../public/pilatsrl/extjs/",
+              "name": "app",
+              "ext": ".js",
+              "with": "template_extjs_app.txt",
+              "as": "file"
+            }
+          ]
+        }
+      }
+    } , {
+      "angular": {
+        "using": "../build/templates/core/angular/",
+        "toExtract": "../build/migrations/",
+        "toRewrite": {
+          "directories": [
+            {
+              "allIn": "../../frontend/src/core/models/",
+              "ext": ".ts",
+              "with": "template_angular_model.txt",
+              "as": "file",
+              "like": "lcObjLocalTableName"
+            },
+            {
+              "allIn": "../../frontend/src/core/services/",
+              "ext": ".service.ts",
+              "with": "template_angular_service.txt",
+              "as": "file",
+              "like": "local-s-table-name"
+            },
+            {
+              "allIn": "../../frontend/src/core/services/",
+              "ext": ".service.spec.ts",
+              "with": "template_angular_service.spec.txt",
+              "as": "file",
+              "like": "local-s-table-name"
+            }
+          ],
+          "files": [
+
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+    text: '.',
+    children: [{
+        text:'Tables',
+        expanded: true,
+        children:[{
+            text:'ES Dictionaries',
+            id:'es-dictionaries',
+            leaf:true
+        },{
+            text:'ES Params',
+            id:'es-params',
+            leaf:true
+        }]
+    }]
+}

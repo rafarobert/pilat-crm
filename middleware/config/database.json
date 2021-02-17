@@ -1,0 +1,1542 @@
+[
+  {
+    "accounts": [
+      {"id":  1},
+      {"name":  1},
+      {"date_entered":  1},
+      {"date_modified":  1},
+      {"modified_user_id":  1},
+      {"created_by":  1},
+      {"description":  1},
+      {"deleted":  1},
+      {"assigned_user_id":  1},
+      {"account_type":  1},
+      {"industry":  1},
+      {"annual_revenue":  1},
+      {"phone_fax":  1},
+      {"billing_address_street":  1},
+      {"billing_address_city":  1},
+      {"billing_address_state":  1},
+      {"billing_address_postalcode":  1},
+      {"billing_address_country":  1},
+      {"rating":  1},
+      {"phone_office":  1},
+      {"phone_alternate":  1},
+      {"website":  1},
+      {"ownership":  1},
+      {"employees":  1},
+      {"ticker_symbol":  1},
+      {"shipping_address_street":  1},
+      {"shipping_address_city":  1},
+      {"shipping_address_state":  1},
+      {"shipping_address_postalcode":  1},
+      {"shipping_address_country":  1},
+      {"parent_id":  1},
+      {"sic_code":  1},
+      {"campaign_id":  1},
+    ]
+  },
+  {
+    "accounts_audit": [
+      {"id": 1},
+      {"parent_id": 1},
+      {"date_created": 1},
+      {"created_by": 1},
+      {"field_name": 1},
+      {"data_type": 1},
+      {"before_value_string": 1},
+      {"after_value_string": 1},
+      {"before_value_text": 1},
+      {"after_value_text": 1},
+    ]
+  },
+  {
+    "accounts_bugs": [
+      {"id": 1},
+      {"account_id": 1},
+      {"bug_id": 1},
+      {"date_modified": 1},
+      {"deleted": 1},
+    ]
+  },
+  {
+    "accounts_cases": [
+      {"id": 1},
+      {"account_id": 1},
+      {"case_id": 1},
+      {"date_modified": 1},
+      {"deleted": 1},
+    ]
+  },
+  {
+    "accounts_contacts": [
+      {"id": 1},
+      {"contact_id": 1},
+      {"account_id": 1},
+      {"date_modified": 1},
+      {"deleted": 1},
+    ]
+  },
+  {
+    "accounts_cstm": [
+      {"id_c": 1},
+      {"jjwg_maps_lng_c": 1},
+      {"jjwg_maps_lat_c": 1},
+      {"jjwg_maps_geocode_status_c": 1},
+      {"jjwg_maps_address_c": 1},
+      {"numero_documento_c": 1},
+      {"extension_documento_c": 1},
+      {"nit_c": 1},
+    ]
+  },
+  {
+    "accounts_opportunities": [
+      {"id": 1},
+      {"opportunity_id": 1},
+      {"account_id": 1},
+      {"date_modified": 1},
+      {"deleted": 1},
+    ]
+  },
+  {
+    "acl_actions": [
+      {"id": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"name": 1},
+      {"category": 1},
+      {"acltype": 1},
+      {"aclaccess": 1},
+      {"deleted": 1},
+    ]
+  },
+  {
+    "acl_roles": [
+      {"id": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"name": 1},
+      {"description": 1},
+      {"deleted": 1},
+    ]
+  },
+  {
+    "acl_roles_actions": [
+      {"id": 1},
+      {"role_id": 1},
+      {"action_id": 1},
+      {"access_override": 1},
+      {"date_modified": 1},
+      {"deleted": 1},
+    ]
+  },
+  {
+    "acl_roles_users": [
+      {"id": 1},
+      {"role_id": 1},
+      {"user_id": 1},
+      {"date_modified": 1},
+      {"deleted": 1},
+    ]
+  },
+  {
+    "address_book": [
+      {"assigned_user_id": 1},
+      {"bean": 1},
+      {"bean_id": 1},
+    ]
+  },
+  {
+    "advancedreports": [
+      {"id": 1},
+      {"category_id": 1},
+      {"sequence": 1},
+      {"module": 1},
+      {"related_data": 1},
+      {"fields": 1},
+      {"filters": 1},
+      {"grouping": 1},
+      {"aggregates": 1},
+      {"totalAggregates": 1},
+      {"title": 1},
+      {"description": 1},
+      {"options": 1},
+      {"labels": 1},
+      {"chart": 1},
+      {"owner": 1},
+      {"shared": 1},
+      {"sharedlevel": 1},
+      {"iscombined": 1},
+      {"combinedfields": 1},
+      {"visible": 1},
+      {"calcFields": 1},
+      {"assigned_user_id": 1},
+      {"modified_user_id": 1},
+      {"deleted": 1},
+      {"columnstate": 1},
+    ]
+  },
+  {
+    "advancedreports_categories": [
+      {"id": 1},
+      {"parent_id": 1},
+      {"sequence": 1},
+      {"title": 1},
+      {"description": 1},
+      {"visible": 1},
+    ]
+  },
+  {
+    "advancedreports_config": [
+      {"key": 1},
+      {"value": 1},
+    ]
+  },
+  {
+    "advancedreports_schedule": [
+      {"id": 1},
+      {"interval": 1},
+      {"interval_options": 1},
+      {"time": 1},
+      {"nexttime": 1},
+      {"formats": 1},
+      {"emails": 1},
+    ]
+  },
+  {
+    "advancedreports_schedule_g": [
+      {"id": 1},
+      {"group": 1},
+    ]
+  },
+  {
+    "advancedreports_schedule_r": [
+      {"id": 1},
+      {"role": 1},
+    ]
+  },
+  {
+    "advancedreports_schedule_u": [
+      {"id": 1},
+      {"user": 1},
+    ]
+  },
+  {
+    "advancedreports_sharedgroups": [
+      {"report_id": 1},
+      {"group_id": 1},
+      {"level": 1},
+    ]
+  },
+  {
+    "advancedreports_sharedusers": [
+      {"report_id": 1},
+      {"user_id": 1},
+      {"level": 1},
+    ]
+  },
+  {
+    "alerts": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"assigned_user_id": 1},
+      {"is_read": 1},
+      {"target_module": 1},
+      {"type": 1},
+      {"url_redirect": 1},
+      {"reminder_id": 1},
+    ]
+  },
+  {
+    "am_projecttemplates": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"assigned_user_id": 1},
+      {"status": 1},
+      {"priority": 1},
+      {"override_business_hours": 1},
+    ]
+  },
+  {
+    "am_projecttemplates_audit": [
+      {"id": 1},
+      {"parent_id": 1},
+      {"date_created": 1},
+      {"created_by": 1},
+      {"field_name": 1},
+      {"data_type": 1},
+      {"before_value_string": 1},
+      {"after_value_string": 1},
+      {"before_value_text": 1},
+      {"after_value_text": 1},
+    ]
+  },
+  {
+    "am_projecttemplates_contacts_1_c": [
+      {"id": 1},
+      {"date_modified": 1},
+      {"deleted": 1},
+      {"am_projecttemplates_ida": 1},
+      {"contacts_idb": 1},
+    ]
+  },
+  {
+    "am_projecttemplates_project_1_c": [
+      {"id": 1},
+      {"date_modified": 1},
+      {"deleted": 1},
+      {"am_projecttemplates_project_1am_projecttemplates_ida": 1},
+      {"am_projecttemplates_project_1project_idb": 1},
+    ]
+  },
+  {
+    "am_projecttemplates_users_1_c": [
+      {"id": 1},
+      {"date_modified": 1},
+      {"deleted": 1},
+      {"am_projecttemplates_ida": 1},
+      {"users_idb": 1},
+    ]
+  },
+  {
+    "am_tasktemplates": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"assigned_user_id": 1},
+      {"status": 1},
+      {"priority": 1},
+      {"percent_complete": 1},
+      {"predecessors": 1},
+      {"milestone_flag": 1},
+      {"relationship_type": 1},
+      {"task_number": 1},
+      {"order_number": 1},
+      {"estimated_effort": 1},
+      {"utilization": 1},
+      {"duration": 1},
+    ]
+  },
+  {
+    "am_tasktemplates_am_projecttemplates_c": [
+      {"id": 1},
+      {"date_modified": 1},
+      {"deleted": 1},
+      {"am_tasktemplates_am_projecttemplatesam_projecttemplates_ida": 1},
+      {"am_tasktemplates_am_projecttemplatesam_tasktemplates_idb": 1},
+    ]
+  },
+  {
+    "am_tasktemplates_audit": [
+      {"id": 1},
+      {"parent_id": 1},
+      {"date_created": 1},
+      {"created_by": 1},
+      {"field_name": 1},
+      {"data_type": 1},
+      {"before_value_string": 1},
+      {"after_value_string": 1},
+      {"before_value_text": 1},
+      {"after_value_text": 1},
+    ]
+  },
+  {
+    "analytic_reporting": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"assigned_user_id": 1},
+    ]
+  },
+  {
+    "aobh_businesshours": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"opening_hours": 1},
+      {"closing_hours": 1},
+      {"open": 1},
+      {"day": 1},
+      {"open_status": 1},
+    ]
+  },
+  {
+    "aod_index": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"assigned_user_id": 1},
+      {"last_optimised": 1},
+      {"location": 1},
+    ]
+  },
+  {
+    "aod_index_audit": [
+      {"id": 1},
+      {"parent_id": 1},
+      {"date_created": 1},
+      {"created_by": 1},
+      {"field_name": 1},
+      {"data_type": 1},
+      {"before_value_string": 1},
+      {"after_value_string": 1},
+      {"before_value_text": 1},
+      {"after_value_text": 1},
+    ]
+  },
+  {
+    "aod_indexevent": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"assigned_user_id": 1},
+      {"error": 1},
+      {"success": 1},
+      {"record_id": 1},
+      {"record_module": 1},
+    ]
+  },
+  {
+    "aod_indexevent_audit": [
+      {"id": 1},
+      {"parent_id": 1},
+      {"date_created": 1},
+      {"created_by": 1},
+      {"field_name": 1},
+      {"data_type": 1},
+      {"before_value_string": 1},
+      {"after_value_string": 1},
+      {"before_value_text": 1},
+      {"after_value_text": 1},
+    ]
+  },
+  {
+    "aok_knowledge_base_categories": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"assigned_user_id": 1},
+    ]
+  },
+  {
+    "aok_knowledge_base_categories_audit": [
+      {"id": 1},
+      {"parent_id": 1},
+      {"date_created": 1},
+      {"created_by": 1},
+      {"field_name": 1},
+      {"data_type": 1},
+      {"before_value_string": 1},
+      {"after_value_string": 1},
+      {"before_value_text": 1},
+      {"after_value_text": 1},
+    ]
+  },
+  {
+    "aok_knowledgebase": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"assigned_user_id": 1},
+      {"status": 1},
+      {"revision": 1},
+      {"additional_info": 1},
+      {"user_id_c": 1},
+      {"user_id1_c": 1},
+    ]
+  },
+  {
+    "aok_knowledgebase_audit": [
+      {"id": 1},
+      {"parent_id": 1},
+      {"date_created": 1},
+      {"created_by": 1},
+      {"field_name": 1},
+      {"data_type": 1},
+      {"before_value_string": 1},
+      {"after_value_string": 1},
+      {"before_value_text": 1},
+      {"after_value_text": 1},
+    ]
+  },
+  {
+    "aok_knowledgebase_categories": [
+      {"id": 1},
+      {"date_modified": 1},
+      {"deleted": 1},
+      {"aok_knowledgebase_id": 1},
+      {"aok_knowledge_base_categories_id": 1},
+    ]
+  },
+  {
+    "aop_case_events": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"assigned_user_id": 1},
+      {"case_id": 1},
+    ]
+  },
+  {
+    "aop_case_events_audit": [
+      {"id" : 1},
+      {"parent_id" : 1},
+      {"date_created" : 1},
+      {"created_by" : 1},
+      {"field_name" : 1},
+      {"data_type" : 1},
+      {"before_value_string" : 1},
+      {"after_value_string" : 1},
+      {"before_value_text" : 1},
+      {"after_value_text" : 1},
+    ]
+  },
+  {
+    "aop_case_updates": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"assigned_user_id": 1},
+      {"case_id": 1},
+      {"contact_id": 1},
+      {"internal": 1},
+    ]
+  },
+  {
+    "aop_case_updates_audit": [
+      {"id": 1},
+      {"parent_id": 1},
+      {"date_created": 1},
+      {"created_by": 1},
+      {"field_name": 1},
+      {"data_type": 1},
+      {"before_value_string": 1},
+      {"after_value_string": 1},
+      {"before_value_text": 1},
+      {"after_value_text": 1},
+    ]
+  },
+  {
+    "aor_charts": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"aor_report_id": 1},
+      {"type": 1},
+      {"x_field": 1},
+      {"y_field": 1},
+    ]
+  },
+  {
+    "aor_conditions": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"aor_report_id": 1},
+      {"condition_order": 1},
+      {"logic_op": 1},
+      {"parenthesis": 1},
+      {"module_path": 1},
+      {"field": 1},
+      {"operator": 1},
+      {"value_type": 1},
+      {"value": 1},
+      {"parameter": 1},
+    ]
+  },
+  {
+    "aor_fields": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"aor_report_id": 1},
+      {"field_order": 1},
+      {"module_path": 1},
+      {"field": 1},
+      {"display": 1},
+      {"link": 1},
+      {"label": 1},
+      {"field_function": 1},
+      {"sort_by": 1},
+      {"format": 1},
+      {"total": 1},
+      {"sort_order": 1},
+      {"group_by": 1},
+      {"group_order": 1},
+      {"group_display": 1},
+    ]
+  },
+  {
+    "aor_reports": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"assigned_user_id": 1},
+      {"report_module": 1},
+      {"graphs_per_row": 1},
+    ]
+  },
+  {
+    "aor_reports_audit": [
+      {"id": 1},
+      {"parent_id": 1},
+      {"date_created": 1},
+      {"created_by": 1},
+      {"field_name": 1},
+      {"data_type": 1},
+      {"before_value_string": 1},
+      {"after_value_string": 1},
+      {"before_value_text": 1},
+      {"after_value_text": 1},
+    ]
+  },
+  {
+    "aor_scheduled_reports": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"schedule": 1},
+      {"last_run": 1},
+      {"status": 1},
+      {"email_recipients": 1},
+      {"aor_report_id": 1},
+    ]
+  },
+  {
+    "aos_contracts": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"assigned_user_id": 1},
+      {"reference_code": 1},
+      {"start_date": 1},
+      {"end_date": 1},
+      {"total_contract_value": 1},
+      {"total_contract_value_usdollar": 1},
+      {"currency_id": 1},
+      {"status": 1},
+      {"customer_signed_date": 1},
+      {"company_signed_date": 1},
+      {"renewal_reminder_date": 1},
+      {"contract_type": 1},
+      {"contract_account_id": 1},
+      {"opportunity_id": 1},
+      {"contact_id": 1},
+      {"call_id": 1},
+      {"total_amt": 1},
+      {"total_amt_usdollar": 1},
+      {"subtotal_amount": 1},
+      {"subtotal_amount_usdollar": 1},
+      {"discount_amount": 1},
+      {"discount_amount_usdollar": 1},
+      {"tax_amount": 1},
+      {"tax_amount_usdollar": 1},
+      {"shipping_amount": 1},
+      {"shipping_amount_usdollar": 1},
+      {"shipping_tax": 1},
+      {"shipping_tax_amt": 1},
+      {"shipping_tax_amt_usdollar": 1},
+      {"total_amount": 1},
+      {"total_amount_usdollar": 1},
+    ]
+  },
+  {
+    "aos_contracts_audit": [
+      {"id": 1},
+      {"parent_id": 1},
+      {"date_created": 1},
+      {"created_by": 1},
+      {"field_name": 1},
+      {"data_type": 1},
+      {"before_value_string": 1},
+      {"after_value_string": 1},
+      {"before_value_text": 1},
+      {"after_value_text": 1},
+    ]
+  },
+  {
+    "aos_contracts_documents": [
+      {"id": 1},
+      {"date_modified": 1},
+      {"deleted": 1},
+      {"aos_contracts_id": 1},
+      {"documents_id": 1},
+      {"document_revision_id": 1},
+    ]
+  },
+  {
+    "aos_invoices": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"assigned_user_id": 1},
+      {"billing_account_id": 1},
+      {"billing_contact_id": 1},
+      {"billing_address_street": 1},
+      {"billing_address_city": 1},
+      {"billing_address_state": 1},
+      {"billing_address_postalcode": 1},
+      {"billing_address_country": 1},
+      {"shipping_address_street": 1},
+      {"shipping_address_city": 1},
+      {"shipping_address_state": 1},
+      {"shipping_address_postalcode": 1},
+      {"shipping_address_country": 1},
+      {"number": 1},
+      {"total_amt": 1},
+      {"total_amt_usdollar": 1},
+      {"subtotal_amount": 1},
+      {"subtotal_amount_usdollar": 1},
+      {"discount_amount": 1},
+      {"discount_amount_usdollar": 1},
+      {"tax_amount": 1},
+      {"tax_amount_usdollar": 1},
+      {"shipping_amount": 1},
+      {"shipping_amount_usdollar": 1},
+      {"shipping_tax": 1},
+      {"shipping_tax_amt": 1},
+      {"shipping_tax_amt_usdollar": 1},
+      {"total_amount": 1},
+      {"total_amount_usdollar": 1},
+      {"currency_id": 1},
+      {"quote_number": 1},
+      {"quote_date": 1},
+      {"invoice_date": 1},
+      {"due_date": 1},
+      {"status": 1},
+      {"template_ddown_c": 1},
+      {"subtotal_tax_amount": 1},
+      {"subtotal_tax_amount_usdollar": 1},
+    ]
+  },
+  {
+    "aos_invoices_audit": [
+      {"id": 1},
+      {"parent_id": 1},
+      {"date_created": 1},
+      {"created_by": 1},
+      {"field_name": 1},
+      {"data_type": 1},
+      {"before_value_string": 1},
+      {"after_value_string": 1},
+      {"before_value_text": 1},
+      {"after_value_text": 1},
+    ]
+  },
+  {
+    "aos_line_item_groups": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"assigned_user_id": 1},
+      {"total_amt": 1},
+      {"total_amt_usdollar": 1},
+      {"discount_amount": 1},
+      {"discount_amount_usdollar": 1},
+      {"subtotal_amount": 1},
+      {"subtotal_amount_usdollar": 1},
+      {"tax_amount": 1},
+      {"tax_amount_usdollar": 1},
+      {"subtotal_tax_amount": 1},
+      {"subtotal_tax_amount_usdollar": 1},
+      {"total_amount": 1},
+      {"total_amount_usdollar": 1},
+      {"parent_type": 1},
+      {"parent_id": 1},
+      {"number": 1},
+      {"currency_id": 1},
+    ]
+  },
+  {
+    "aos_line_item_groups_audit": [
+      {"id": 1},
+      {"parent_id": 1},
+      {"date_created": 1},
+      {"created_by": 1},
+      {"field_name": 1},
+      {"data_type": 1},
+      {"before_value_string": 1},
+      {"after_value_string": 1},
+      {"before_value_text": 1},
+      {"after_value_text": 1},
+    ]
+  },
+  {
+    "aos_pdf_templates": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"assigned_user_id": 1},
+      {"active": 1},
+      {"type": 1},
+      {"pdfheader": 1},
+      {"pdffooter": 1},
+      {"margin_left": 1},
+      {"margin_right": 1},
+      {"margin_top": 1},
+      {"margin_bottom": 1},
+      {"margin_header": 1},
+      {"margin_footer": 1},
+      {"page_size": 1},
+      {"orientation": 1},
+    ]
+  },
+  {
+    "aos_pdf_templates_audit": [
+      {"id": 1},
+      {"parent_id": 1},
+      {"date_created": 1},
+      {"created_by": 1},
+      {"field_name": 1},
+      {"data_type": 1},
+      {"before_value_string": 1},
+      {"after_value_string": 1},
+      {"before_value_text": 1},
+      {"after_value_text": 1},
+    ]
+  },
+  {
+    "aos_product_categories": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"assigned_user_id": 1},
+      {"is_parent": 1},
+      {"parent_category_id": 1},
+    ]
+  },
+  {
+    "aos_product_categories_audit": [
+      {"id": 1},
+      {"parent_id": 1},
+      {"date_created": 1},
+      {"created_by": 1},
+      {"field_name": 1},
+      {"data_type": 1},
+      {"before_value_string": 1},
+      {"after_value_string": 1},
+      {"before_value_text": 1},
+      {"after_value_text": 1},
+    ]
+  },
+  {
+    "aos_products": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"assigned_user_id": 1},
+      {"maincode": 1},
+      {"part_number": 1},
+      {"category": 1},
+      {"type": 1},
+      {"cost": 1},
+      {"cost_usdollar": 1},
+      {"currency_id": 1},
+      {"price": 1},
+      {"price_usdollar": 1},
+      {"url": 1},
+      {"contact_id": 1},
+      {"product_image": 1},
+      {"aos_product_category_id": 1},
+    ]
+  },
+  {
+    "aos_products_audit": [
+      {"id": 1},
+      {"parent_id": 1},
+      {"date_created": 1},
+      {"created_by": 1},
+      {"field_name": 1},
+      {"data_type": 1},
+      {"before_value_string": 1},
+      {"after_value_string": 1},
+      {"before_value_text": 1},
+      {"after_value_text": 1},
+    ]
+  },
+  {
+    "aos_products_quotes": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"assigned_user_id": 1},
+      {"currency_id": 1},
+      {"part_number": 1},
+      {"item_description": 1},
+      {"number": 1},
+      {"product_qty": 1},
+      {"product_cost_price": 1},
+      {"product_cost_price_usdollar": 1},
+      {"product_list_price": 1},
+      {"product_list_price_usdollar": 1},
+      {"product_discount": 1},
+      {"product_discount_usdollar": 1},
+      {"product_discount_amount": 1},
+      {"product_discount_amount_usdollar": 1},
+      {"discount": 1},
+      {"product_unit_price": 1},
+      {"product_unit_price_usdollar": 1},
+      {"vat_amt": 1},
+      {"vat_amt_usdollar": 1},
+      {"product_total_price": 1},
+      {"product_total_price_usdollar": 1},
+      {"vat": 1},
+      {"parent_type": 1},
+      {"parent_id": 1},
+      {"product_id": 1},
+      {"group_id": 1},
+    ]
+  },
+  {
+    "aos_products_quotes_audit": [
+      {"id": 1},
+      {"parent_id": 1},
+      {"date_created": 1},
+      {"created_by": 1},
+      {"field_name": 1},
+      {"data_type": 1},
+      {"before_value_string": 1},
+      {"after_value_string": 1},
+      {"before_value_text": 1},
+      {"after_value_text": 1},
+    ]
+  },
+  {
+    "aos_quotes": [
+      {"id": 1},
+      {"name": 1},
+      {"date_entered": 1},
+      {"date_modified": 1},
+      {"modified_user_id": 1},
+      {"created_by": 1},
+      {"description": 1},
+      {"deleted": 1},
+      {"assigned_user_id": 1},
+      {"approval_issue": 1},
+      {"billing_account_id": 1},
+      {"billing_contact_id": 1},
+      {"billing_address_street": 1},
+      {"billing_address_city": 1},
+      {"billing_address_state": 1},
+      {"billing_address_postalcode": 1},
+      {"billing_address_country": 1},
+      {"shipping_address_street": 1},
+      {"shipping_address_city": 1},
+      {"shipping_address_state": 1},
+      {"shipping_address_postalcode": 1},
+      {"shipping_address_country": 1},
+      {"expiration": 1},
+      {"number": 1},
+      {"opportunity_id": 1},
+      {"template_ddown_c": 1},
+      {"total_amt": 1},
+      {"total_amt_usdollar": 1},
+      {"subtotal_amount": 1},
+      {"subtotal_amount_usdollar": 1},
+      {"discount_amount": 1},
+      {"discount_amount_usdollar": 1},
+      {"tax_amount": 1},
+      {"tax_amount_usdollar": 1},
+      {"shipping_amount": 1},
+      {"shipping_amount_usdollar": 1},
+      {"shipping_tax": 1},
+      {"shipping_tax_amt": 1},
+      {"shipping_tax_amt_usdollar": 1},
+      {"total_amount": 1},
+      {"total_amount_usdollar": 1},
+      {"currency_id": 1},
+      {"stage": 1},
+      {"term": 1},
+      {"terms_c": 1},
+      {"approval_status": 1},
+      {"invoice_status": 1},
+      {"subtotal_tax_amount": 1},
+      {"subtotal_tax_amount_usdollar": 1},
+    ]
+  },
+  {
+    "aos_quotes_aos_invoices_c": [
+      {"id": 1},
+      {"date_modified": 1},
+      {"deleted": 1},
+      {"aos_quotes77d9_quotes_ida": 1},
+      {"aos_quotes6b83nvoices_idb": 1},
+    ]
+  },
+  {
+    "aos_quotes_audit": [
+      {},
+    ]
+  },
+  {
+    "aos_quotes_os_contracts_c": [
+      {},
+    ]
+  },
+  {
+    "aos_quotes_project_c": [
+      {},
+    ]
+  },
+  {
+    "aow_actions": [
+      {},
+    ]
+  },
+  {
+    "aow_conditions": [
+      {},
+    ]
+  },
+  {
+    "aow_processed": [
+      {},
+    ]
+  },
+  {
+    "aow_processed_aow_actions": [
+      {},
+    ]
+  },
+  {
+    "aow_workflow": [
+      {},
+    ]
+  },
+  {
+    "aow_workflow_audit": [
+      {},
+    ]
+  },
+  {
+    "bugs": [
+      {},
+    ]
+  },
+  {
+    "bugs_audit": [
+      {},
+    ]
+  },
+  {
+    "calls": [
+      {},
+    ]
+  },
+  {
+    "calls_contacts": [
+      {},
+    ]
+  },
+  {
+    "calls_cstm": [
+      {},
+    ]
+  },
+  {
+    "calls_leads": [
+      {},
+    ]
+  },
+  {
+    "calls_reschedule": [
+      {},
+    ]
+  },
+  {
+    "calls_reschedule_audit": [
+      {},
+    ]
+  },
+  {
+    "calls_users": [
+      {},
+    ]
+  },
+  {
+    "campaign_log": [
+      {},
+    ]
+  },
+  {
+    "campaign_trkrs": [
+      {},
+    ]
+  },
+  {
+    "campaigns": [
+      {},
+    ]
+  },
+  {
+    "campaigns_audit": [
+      {},
+    ]
+  },
+  {
+    "cases": [
+      {},
+    ]
+  },
+  {
+    "cases_audit": [
+      {},
+    ]
+  },
+  {
+    "cases_bugs": [
+      {},
+    ]
+  },
+  {
+    "cases_cstm": [
+      {},
+    ]
+  },
+  {
+    "config": [
+      {},
+    ]
+  },
+  {
+    "contacts": [
+      {},
+    ]
+  },
+  {
+    "contacts_audit": [
+      {},
+    ]
+  },
+  {
+    "contacts_bugs": [
+      {},
+    ]
+  },
+  {
+    "contacts_cases": [
+      {},
+    ]
+  },
+  {
+    "contacts_cstm": [
+      {},
+    ]
+  },
+  {
+    "contacts_users": [
+      {},
+    ]
+  },
+  {
+    "cron_remove_documents": [
+      {},
+    ]
+  },
+  {
+    "currencies": [
+      {},
+    ]
+  },
+  {
+    "custom_fields": [
+      {},
+    ]
+  },
+  {
+    "document_revisions": [
+      {},
+    ]
+  },
+  {
+    "documents": [
+      {},
+    ]
+  },
+  {
+    "documents_accounts": [
+      {},
+    ]
+  },
+  {
+    "documents_bugs": [
+      {},
+    ]
+  },
+  {
+    "documents_cases": [
+      {},
+    ]
+  },
+  {
+    "documents_contacts": [
+      {},
+    ]
+  },
+  {
+    "documents_opportunities": [
+      {},
+    ]
+  },
+  {
+    "eapm": [
+      {},
+    ]
+  },
+  {
+    "email_addr_bean_rel": [
+      {},
+    ]
+  },
+  {
+    "email_addresses": [
+      {},
+    ]
+  },
+  {
+    "email_addresses_audit": [
+      {},
+    ]
+  },
+  {
+    "email_cache": [
+      {},
+    ]
+  },
+  {
+    "email_marketing": [
+      {},
+    ]
+  },
+  {
+    "email_marketing_prospect_lists": [
+      {},
+    ]
+  },
+  {
+    "email_templates": [
+      {},
+    ]
+  },
+  {
+    "email_templates_cstm": [
+      {},
+    ]
+  },
+  {
+    "emailman": [
+      {},
+    ]
+  },
+  {
+    "emails": [
+      {},
+    ]
+  },
+  {
+    "emails_beans": [
+      {},
+    ]
+  },
+  {
+    "emails_email_addr_rel": [
+      {},
+    ]
+  },
+  {
+    "emails_text": [
+      {},
+    ]
+  },
+  {
+    "favorites": [
+      {},
+    ]
+  },
+  {
+    "fields_meta_data": [
+      {},
+    ]
+  },
+  {
+    "folders": [
+      {},
+    ]
+  },
+  {
+    "folders_rel": [
+      {},
+    ]
+  },
+  {
+    "folders_subscriptions": [
+      {},
+    ]
+  },
+  {
+    "fp_event_locations": [
+      {},
+    ]
+  },
+  {
+    "fp_event_locations_audit": [
+      {},
+    ]
+  },
+  {
+    "fp_event_locations_fp_events_1_c": [
+      {},
+    ]
+  },
+  {
+    "fp_events": [
+      {},
+    ]
+  },
+  {
+    "fp_events_audit": [
+      {},
+    ]
+  },
+  {
+    "fp_events_contacts_c": [
+      {},
+    ]
+  },
+  {
+    "fp_events_fp_event_delegates_1_c": [
+      {},
+    ]
+  },
+  {
+    "fp_events_fp_event_locations_1_c": [
+      {},
+    ]
+  },
+  {
+    "fp_events_leads_1_c": [
+      {},
+    ]
+  },
+  {
+    "fp_events_prospects_1_c": [
+      {},
+    ]
+  },
+  {
+    "iad_sticky_notes": [
+      {},
+    ]
+  },
+  {
+    "iad_sticky_notes_audit": [
+      {},
+    ]
+  },
+  {
+    "import_maps": [
+      {},
+    ]
+  },
+  {
+    "inbound_email": [
+      {},
+    ]
+  },
+  {
+    "inbound_email_autoreply": [
+      {},
+    ]
+  },
+  {
+    "inbound_email_cache_ts": [
+      {},
+    ]
+  },
+  {
+    "jjwg_address_cache": [
+      {},
+    ]
+  },
+  {
+    "jjwg_address_cache_audit": [
+      {},
+    ]
+  },
+  {
+    "jjwg_areas": [
+      {},
+    ]
+  },
+  {
+    "jjwg_areas_audit": [
+      {},
+    ]
+  },
+  {
+    "jjwg_maps": [
+      {},
+    ]
+  },
+  {
+    "jjwg_maps_audit": [
+      {},
+    ]
+  },
+  {
+    "jjwg_maps_jjwg_areas_c": [
+      {},
+    ]
+  },
+  {
+    "jjwg_maps_jjwg_markers_c": [
+      {},
+    ]
+  },
+  {
+    "jjwg_markers": [
+      {},
+    ]
+  },
+  {
+    "jjwg_markers_audit": [
+      {},
+    ]
+  },
+  {
+    "job_queue": [
+      {},
+    ]
+  },
+  {
+    "kreports": [
+      {},
+    ]
+  },
+  {
+    "leads": [
+      {},
+    ]
+  },
+]
