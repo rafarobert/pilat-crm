@@ -1,0 +1,4 @@
+{"message":"::1 - - [23/Dec/2020:18:36:10 +0000] \"GET /api-pilatsrl/dictionaries HTTP/1.1\" 404 164 \"-\" \"PostmanRuntime/7.26.8\"\n","level":"info","service":"user-service"}
+{"message":"::1 - - [23/Dec/2020:18:36:17 +0000] \"GET /api-pilatsrl/pilat-dictionaries HTTP/1.1\" 400 319 \"-\" \"PostmanRuntime/7.26.8\"\n","level":"info","service":"user-service"}
+{"message":"::1 - - [23/Dec/2020:18:38:22 +0000] \"GET /api-pilatsrl/pilat-dictionaries HTTP/1.1\" 400 977 \"-\" \"PostmanRuntime/7.26.8\"\n","level":"info","service":"user-service"}
+{"message":"::1 - - [23/Dec/2020:18:49:30 +0000] \"GET /api-pilatsrl/pilat-dictionaries HTTP/1.1\" 200 57 \"-\" \"PostmanRuntime/7.26.8\"\n","level":"info","service":"user-service"}

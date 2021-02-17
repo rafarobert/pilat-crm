@@ -1,0 +1,3 @@
+{"message":"::1 - - [23/Dec/2020:20:07:46 +0000] \"GET /api-pilatsrl/pilat-dictionaries HTTP/1.1\" 200 57 \"-\" \"PostmanRuntime/7.26.8\"\n","level":"info","service":"user-service"}
+{"message":"::1 - - [23/Dec/2020:20:49:50 +0000] \"GET /api-pilatsrl/crm/leads HTTP/1.1\" 200 322791 \"-\" \"PostmanRuntime/7.26.8\"\n","level":"info","service":"user-service"}
+{"message":"::1 - - [23/Dec/2020:20:56:15 +0000] \"GET /api-pilatsrl/crm/module/leads HTTP/1.1\" 200 740263 \"-\" \"PostmanRuntime/7.26.8\"\n","level":"info","service":"user-service"}

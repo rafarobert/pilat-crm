@@ -1,0 +1,39 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/middleware/logs/.a78e505e66ce96ecfa02a9a9b341c1cf53eedb45-audit.json",
+    "files": [
+        {
+            "date": 1607657190220,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/middleware/logs/app-2020-12-10-23.log",
+            "hash": "b702c7daf95beb9afc3cf13d5d02523c"
+        },
+        {
+            "date": 1607659206060,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/middleware/logs/app-2020-12-11-00.log",
+            "hash": "647201e04760c98aef068fc36958148d"
+        },
+        {
+            "date": 1607695484620,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/middleware/logs/app-2020-12-11-10.log",
+            "hash": "7905114ca553607debb7b9fcd56f8458"
+        },
+        {
+            "date": 1607700131872,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/middleware/logs/app-2020-12-11-11.log",
+            "hash": "8b477cc0443009e4a19870df9746ff29"
+        },
+        {
+            "date": 1607876847930,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/middleware/logs/app-2020-12-13-12.log",
+            "hash": "457fff528cc72cacc53f094926794315"
+        },
+        {
+            "date": 1608088389003,
+            "name": "/Applications/XAMPP/xamppfiles/htdocs/lafuente/middleware/logs/app-2020-12-15-23.log",
+            "hash": "ff5746104fa6a6d6116dce2c25effde4"
+        }
+    ]
+}
