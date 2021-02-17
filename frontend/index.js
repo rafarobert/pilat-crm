@@ -9,11 +9,7 @@ if (!window.location.href.includes('ModuleBuilder')) {
     $('body').prepend('<app-root></app-root>');
   }
 
-  $('body').append('<script src="frontend/dist/frontend/main.js" type="text/javascript"></script>');
-  $('body').append('<script src="frontend/dist/frontend/polyfills.js" type="text/javascript"></script>');
-  $('body').append('<script src="frontend/dist/frontend/runtime.js" type="text/javascript"></script>');
-  $('body').append('<script src="frontend/dist/frontend/styles.js" type="text/javascript"></script>');
-  $('body').append('<script src="frontend/dist/frontend/vendor.js" type="text/javascript"></script>');
+  $('body').append('<script src="runtime.js" type="module"></script><script src="polyfills.js" type="module"></script><script src="main.js" type="module"></script></body>');
 }
 
 //$('head').append('<style rel="stylesheet" href="frontend/dist/assets/inspinia/css/bootstrap.min.css"></style>');
