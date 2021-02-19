@@ -14171,6 +14171,39 @@
       ),
     ),
   ),
+  'analyticreporting_modified_user' => 
+  array (
+    'name' => 'analyticreporting_modified_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'AnalyticReporting',
+    'rhs_table' => 'analyticreporting',
+    'rhs_key' => 'modified_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
+  'analyticreporting_created_by' => 
+  array (
+    'name' => 'analyticreporting_created_by',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'AnalyticReporting',
+    'rhs_table' => 'analyticreporting',
+    'rhs_key' => 'created_by',
+    'relationship_type' => 'one-to-many',
+  ),
+  'analyticreporting_assigned_user' => 
+  array (
+    'name' => 'analyticreporting_assigned_user',
+    'lhs_module' => 'Users',
+    'lhs_table' => 'users',
+    'lhs_key' => 'id',
+    'rhs_module' => 'AnalyticReporting',
+    'rhs_table' => 'analyticreporting',
+    'rhs_key' => 'assigned_user_id',
+    'relationship_type' => 'one-to-many',
+  ),
   'iad_sticky_notes_modified_user' => 
   array (
     'name' => 'iad_sticky_notes_modified_user',
@@ -14273,38 +14306,5 @@
         'default' => '0',
       ),
     ),
-  ),
-  'analyticreporting_modified_user' => 
-  array (
-    'name' => 'analyticreporting_modified_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'AnalyticReporting',
-    'rhs_table' => 'analyticreporting',
-    'rhs_key' => 'modified_user_id',
-    'relationship_type' => 'one-to-many',
-  ),
-  'analyticreporting_created_by' => 
-  array (
-    'name' => 'analyticreporting_created_by',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'AnalyticReporting',
-    'rhs_table' => 'analyticreporting',
-    'rhs_key' => 'created_by',
-    'relationship_type' => 'one-to-many',
-  ),
-  'analyticreporting_assigned_user' => 
-  array (
-    'name' => 'analyticreporting_assigned_user',
-    'lhs_module' => 'Users',
-    'lhs_table' => 'users',
-    'lhs_key' => 'id',
-    'rhs_module' => 'AnalyticReporting',
-    'rhs_table' => 'analyticreporting',
-    'rhs_key' => 'assigned_user_id',
-    'relationship_type' => 'one-to-many',
   ),
 );

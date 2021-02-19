@@ -2,6 +2,33 @@
  //WARNING: The contents of this file are auto-generated
 
 
+
+$mod_strings['LBL_ANALYTICREPORTING'] = 'Analytic Reporting';
+$mod_strings['LBL_ANALYTICREPORTING_LICENSE_TITLE'] = 'License Configuration';
+$mod_strings['LBL_ANALYTICREPORTING_LICENSE'] = 'Manage and configure the license for Analytic Reporting';
+
+
+
+$mod_strings['LBL_DT_DUPLICATE_CHECKING'] = 'Duplicate Checking Configuration Panel';
+
+$mod_strings['LBL_DT_DUPLICATE_CHECKING_LICENSE_TITLE'] = 'License Configuration';
+$mod_strings['LBL_DT_DUPLICATE_CHECKING_LICENSE'] = 'Manage and configure the license for this add-on';
+
+$mod_strings['LBL_DT_DUPLICATE_CHECKING_CONFIGURATION'] = 'Duplicate Checking Configuration Settings';
+$mod_strings['LBL_DT_DUPLICATE_CHECKING_MESSAGE'] = 'Duplicate Checking on Account, Contact And Lead Module';
+
+
+
+
+$mod_strings['LBL_DTWHATSAPP'] = 'Waboxapp WhatsApp License Add-on';
+$mod_strings['LBL_DTWHATSAPP_LICENSE_TITLE'] = 'License Configuration';
+$mod_strings['LBL_DTWHATSAPP_LICENSE'] = 'Manage and configure the license for this add-on';
+
+$mod_strings['LBL_DTWHATSAPP_LICENSE_WHATSAPP_CONFIGURATION'] = 'Whatsapp API Settings';
+$mod_strings['LBL_DTWHATSAPP_LICENSE_MESSAGE'] = 'Configure Waboxapp API credentials details';
+
+
+
 $mod_strings['LBL_SP_THEME_TITLE'] = 'Sugar-Project Theme settings';
 $mod_strings['LBL_SP_THEME_CONFIG_TITLE'] = 'Settings';
 $mod_strings['LBL_SP_THEME_CONFIG_INFO'] = 'Modify settings';
@@ -77,35 +104,8 @@ $mod_strings['LBL_SP_THEME_SHOWMENULEFT_INFO'] = 'select if you want to show com
 
 
 
-$mod_strings['LBL_DTWHATSAPP'] = 'Waboxapp WhatsApp License Add-on';
-$mod_strings['LBL_DTWHATSAPP_LICENSE_TITLE'] = 'License Configuration';
-$mod_strings['LBL_DTWHATSAPP_LICENSE'] = 'Manage and configure the license for this add-on';
-
-$mod_strings['LBL_DTWHATSAPP_LICENSE_WHATSAPP_CONFIGURATION'] = 'Whatsapp API Settings';
-$mod_strings['LBL_DTWHATSAPP_LICENSE_MESSAGE'] = 'Configure Waboxapp API credentials details';
-
-
-
-
-$mod_strings['LBL_ANALYTICREPORTING'] = 'Analytic Reporting';
-$mod_strings['LBL_ANALYTICREPORTING_LICENSE_TITLE'] = 'License Configuration';
-$mod_strings['LBL_ANALYTICREPORTING_LICENSE'] = 'Manage and configure the license for Analytic Reporting';
-
-
-
 $mod_strings['LBL_PARAMETERS'] = 'Parámetros Comerciales';
 $mod_strings['LBL_PARAMETER_CONFIG_TITLE'] = 'Configuración';
 $mod_strings['LBL_PARAMETER_CONFIG_INFO'] = 'Configuración de parámetros comerciales';
-
-
-
-$mod_strings['LBL_DT_DUPLICATE_CHECKING'] = 'Duplicate Checking Configuration Panel';
-
-$mod_strings['LBL_DT_DUPLICATE_CHECKING_LICENSE_TITLE'] = 'License Configuration';
-$mod_strings['LBL_DT_DUPLICATE_CHECKING_LICENSE'] = 'Manage and configure the license for this add-on';
-
-$mod_strings['LBL_DT_DUPLICATE_CHECKING_CONFIGURATION'] = 'Duplicate Checking Configuration Settings';
-$mod_strings['LBL_DT_DUPLICATE_CHECKING_MESSAGE'] = 'Duplicate Checking on Account, Contact And Lead Module';
-
 
 ?>

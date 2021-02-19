@@ -3,10 +3,10 @@
 
 
 
-$action_view_map['license'] = 'license';
-
-
-
 $action_view_map['dcconfig'] = 'dcconfig';
+
+
+
+$action_view_map['license'] = 'license';
 
 ?>

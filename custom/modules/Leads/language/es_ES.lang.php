@@ -1,5 +1,5 @@
 <?php
-// created: 2021-02-19 13:11:49
+// created: 2021-02-19 13:19:42
 $mod_strings = array (
   'LBL_ACCOUNT' => 'Cliente',
   'LBL_ACCOUNT_DESCRIPTION' => 'Descripción de la Cliente',
@@ -33,9 +33,9 @@ $mod_strings = array (
   'LBL_SEXO_C' => 'Género',
   'LBL_LEAD_SOURCE' => 'Origen',
   'LBL_LEAD_SOURCE_DESCRIPTION' => 'Descripción del Origen',
-  'LBL_TIPO_LEAD_C' => 'Tipo Lead',
+  'LBL_TIPO_LEAD_C' => 'Tipo Prospecto',
   'LBL_ACTIVIDAD_C' => 'Actividad',
   'LBL_RUBRO_C' => 'Rubro',
   'LBL_FECHA_VALIDEX_C' => 'Fecha Validez',
-  'LBL_ETAPAS' => 'Etapas',
+  'LBL_ETAPAS' => 'Etapa del Prospecto',
 );

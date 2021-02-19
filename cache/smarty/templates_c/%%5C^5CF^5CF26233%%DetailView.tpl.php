@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.31, created on 2021-02-19 13:10:28
+<?php /* Smarty version 2.6.31, created on 2021-02-19 13:32:09
          compiled from cache/themes/sp_theme/modules/Leads/DetailView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'cat', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 7, false),array('modifier', 'strip_semicolon', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 95, false),array('modifier', 'escape', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 254, false),array('modifier', 'url2html', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 254, false),array('modifier', 'nl2br', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 254, false),array('function', 'sugar_include', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 75, false),array('function', 'counter', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 78, false),array('function', 'sugar_translate', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 80, false),array('function', 'sugar_phone', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 300, false),array('function', 'sugar_ajax_url', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 1087, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'cat', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 7, false),array('modifier', 'strip_semicolon', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 95, false),array('modifier', 'escape', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 254, false),array('modifier', 'url2html', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 254, false),array('modifier', 'nl2br', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 254, false),array('function', 'sugar_include', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 75, false),array('function', 'counter', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 78, false),array('function', 'sugar_translate', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 80, false),array('function', 'sugar_phone', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 300, false),array('function', 'sugar_ajax_url', 'cache/themes/sp_theme/modules/Leads/DetailView.tpl', 1125, false),)), $this); ?>
 
 
 <?php $this->assign('preForm', "<table width='100%' border='1' cellspacing='0' cellpadding='0' class='converted_account'><tr><td><table width='100%'><tr><td>"); ?>
@@ -1207,16 +1207,33 @@ SUGAR.util.doWhen(function(){
 <div class="col-xs-12 col-sm-4 label col-1-label">
 
 
-<?php ob_start(); ?><?php echo smarty_function_sugar_translate(array('label' => 'LBL_SUPERFICIE','module' => 'Leads'), $this);?>
+<?php ob_start(); ?><?php echo smarty_function_sugar_translate(array('label' => 'LBL_ETAPAS','module' => 'Leads'), $this);?>
 <?php $this->_smarty_vars['capture']['label'] = ob_get_contents();  $this->assign('label', ob_get_contents());ob_end_clean(); ?>
 <?php echo ((is_array($_tmp=$this->_tpl_vars['label'])) ? $this->_run_mod_handler('strip_semicolon', true, $_tmp) : smarty_modifier_strip_semicolon($_tmp)); ?>
 :
 </div>
 
 
-<div class="col-xs-12 col-sm-8 detail-view-field inlineEdit" type="" field=""  >
+<div class="col-xs-12 col-sm-8 detail-view-field inlineEdit" type="dynamicenum" field="etapas_c"  >
 
-<?php if (! $this->_tpl_vars['fields']['superficie_c']['hidden']): ?>
+<?php if (! $this->_tpl_vars['fields']['etapas_c']['hidden']): ?>
+<?php echo smarty_function_counter(array('name' => 'panelFieldCount','print' => false), $this);?>
+
+
+
+<?php if (is_string ( $this->_tpl_vars['fields']['etapas_c']['options'] )): ?>
+<input type="hidden" class="sugar_field" id="<?php echo $this->_tpl_vars['fields']['etapas_c']['name']; ?>
+" value="<?php echo $this->_tpl_vars['fields']['etapas_c']['options']; ?>
+">
+<?php echo $this->_tpl_vars['fields']['etapas_c']['options']; ?>
+
+<?php else: ?>
+<input type="hidden" class="sugar_field" id="<?php echo $this->_tpl_vars['fields']['etapas_c']['name']; ?>
+" value="<?php echo $this->_tpl_vars['fields']['etapas_c']['value']; ?>
+">
+<?php echo $this->_tpl_vars['fields']['etapas_c']['options'][$this->_tpl_vars['fields']['etapas_c']['value']]; ?>
+
+<?php endif; ?>
 <?php endif; ?>
 
 <div class="inlineEditIcon col-xs-hidden">
@@ -1235,6 +1252,36 @@ SUGAR.util.doWhen(function(){
 
 <div class="clear"></div>
 </div>
+
+
+<div class="row detail-view-row">
+
+
+
+<div class="col-xs-12 col-sm-6 detail-view-row-item">
+</div>
+
+<div class="clear"></div>
+
+
+
+<div class="col-xs-12 col-sm-6 detail-view-row-item">
+</div>
+
+<div class="clear"></div>
+</div>
+<script type="text/javascript">SUGAR.util.doWhen("typeof initPanel == 'function'", function() { initPanel(2, 'expanded'); }); </script>
+</div>  
+<?php if ($this->_tpl_vars['panelFieldCount'] == 0): ?>
+<script>document.getElementById("LBL_PANEL_ADVANCED").style.display='none';</script>
+<?php endif; ?>
+<div class="panel-body">    
+<?php echo smarty_function_counter(array('name' => 'panelFieldCount','start' => 0,'print' => false,'assign' => 'panelFieldCount'), $this);?>
+
+<h4>
+<?php echo smarty_function_sugar_translate(array('label' => 'LBL_PANEL_ASSIGNMENT','module' => 'Leads'), $this);?>
+   
+</h4>
 
 
 <div class="row detail-view-row">
@@ -1320,18 +1367,6 @@ SUGAR.util.doWhen(function(){
 </div>
 
 </div>
-<script type="text/javascript">SUGAR.util.doWhen("typeof initPanel == 'function'", function() { initPanel(2, 'expanded'); }); </script>
-</div>  
-<?php if ($this->_tpl_vars['panelFieldCount'] == 0): ?>
-<script>document.getElementById("LBL_PANEL_ADVANCED").style.display='none';</script>
-<?php endif; ?>
-<div class="panel-body">    
-<?php echo smarty_function_counter(array('name' => 'panelFieldCount','start' => 0,'print' => false,'assign' => 'panelFieldCount'), $this);?>
-
-<h4>
-<?php echo smarty_function_sugar_translate(array('label' => 'LBL_PANEL_ASSIGNMENT','module' => 'Leads'), $this);?>
-   
-</h4>
 
 
 <div class="row detail-view-row">

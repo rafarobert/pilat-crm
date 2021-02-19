@@ -52,3 +52,52 @@ $GLOBALS['app_list_strings']['asunto_reunion_list']=array (
   'FIRMA_PROTOCOLO' => 'Firma de protocolo en la Notaria',
   'ENTREGA_TESTIMONIO' => 'Entrega del testimonio',
 );
+$GLOBALS['app_list_strings']['tipo_lead_c_list']=array (
+  '' => '',
+  'NORMAL' => 'Normal',
+  'GOLDEN_TICKET' => 'Golden Ticket',
+  'NUEVO' => 'Nuevo',
+);
+$GLOBALS['app_list_strings']['pais_c_list']=array (
+  '' => '',
+  'BOLIVIA' => 'Bolivia',
+);
+$GLOBALS['app_list_strings']['departamento_c_list']=array (
+  '' => '',
+  'LA_PAZ' => 'La Paz',
+  'COCHABAMBA' => 'Cochabamba',
+  'SANTA_CRUZ' => 'Santa Cruz',
+  'ORURO' => 'Oruro',
+  'POTOSI' => 'Potosi',
+  'CHUQUISACA' => 'Chuquisaca',
+  'TARIJA' => 'Tarija',
+  'BENI' => 'Beni',
+  'PANDO' => 'Pando',
+);
+$GLOBALS['app_list_strings']['ciudad_c_list']=array (
+  '' => '',
+  'NUESTRA_SENORA_DE_LA_PAZ' => 'Nuestra Señora de La Paz',
+  'SANTA_CRUZ_DE_LA_SIERRA' => 'Santa Cruz de la Sierra',
+  'COCHABAMBA' => 'Cochabamba',
+  'TARIJA' => 'Tarija',
+  'TRINIDAD' => 'Trinidad',
+  'PANDO' => 'Pando',
+  'ORURO' => 'Oruro',
+  'POTOSI' => 'Potosi',
+  'SUCRE' => 'Sucre',
+);
+$GLOBALS['app_list_strings']['sexo_c_list']=array (
+  'MASCULINO' => 'Masculino',
+  'FEMENINO' => 'Femenino',
+);
+$GLOBALS['app_list_strings']['rubro_c_list']=array (
+  '' => '',
+  'INDUSTRIA' => 'Industria',
+  'SERVICIO' => 'Servicio',
+  'COMERCIO' => 'Comercio',
+);
+$GLOBALS['app_list_strings']['etapas_c_list']=array (
+  'CAPTADO' => '1. Captado',
+  'CALIFICADO' => '2. Calificado',
+  'VISITA_FISICA_VIRTUAL' => '3. Visita Fisica / Virtual',
+);

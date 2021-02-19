@@ -3,11 +3,14 @@
 
  
  //WARNING: The contents of this file are auto-generated
-$beanList['IAD_Sticky_Notes'] = 'IAD_Sticky_Notes';
-$beanFiles['IAD_Sticky_Notes'] = 'modules/IAD_Sticky_Notes/IAD_Sticky_Notes.php';
-$moduleList[] = 'IAD_Sticky_Notes';
+$beanList['AnalyticReporting'] = 'AnalyticReporting';
+$beanFiles['AnalyticReporting'] = 'modules/AnalyticReporting/AnalyticReporting.php';
+$moduleList[] = 'AnalyticReporting';
 
 
+
+// Set BCW mode for AnalyticReporting module
+$bwcModules[] = 'AnalyticReporting';
 
 
 /* * *******************************************************************************
@@ -32,14 +35,11 @@ if (!isset($GLOBALS['sugar_config']['addAjaxBannedModules'])
 if (!array_search('KReports', $GLOBALS['sugar_config']['addAjaxBannedModules']))
     $GLOBALS['sugar_config']['addAjaxBannedModules'][] = 'KReports';
 
-
-// Set BCW mode for AnalyticReporting module
-$bwcModules[] = 'AnalyticReporting';
  
  //WARNING: The contents of this file are auto-generated
-$beanList['AnalyticReporting'] = 'AnalyticReporting';
-$beanFiles['AnalyticReporting'] = 'modules/AnalyticReporting/AnalyticReporting.php';
-$moduleList[] = 'AnalyticReporting';
+$beanList['IAD_Sticky_Notes'] = 'IAD_Sticky_Notes';
+$beanFiles['IAD_Sticky_Notes'] = 'modules/IAD_Sticky_Notes/IAD_Sticky_Notes.php';
+$moduleList[] = 'IAD_Sticky_Notes';
 
 
 ?>

@@ -2,6 +2,9 @@
  //WARNING: The contents of this file are auto-generated
 
 
+
+$app_list_strings['moduleList']['AnalyticReporting'] = 'Analytic Reporting';
+
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
@@ -59,7 +62,4 @@ $app_list_strings['iad_sticky_notes_status_dom']['Pending'] = 'Pending';
 
  
 
-
-
-$app_list_strings['moduleList']['AnalyticReporting'] = 'Analytic Reporting';
 ?>
