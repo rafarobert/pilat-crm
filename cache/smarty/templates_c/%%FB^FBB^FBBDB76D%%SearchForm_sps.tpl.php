@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2019-08-01 10:13:42
+<?php /* Smarty version 2.6.31, created on 2021-02-19 12:36:10
          compiled from cache/themes/sp_theme/modules/Meetings/SearchForm_sps.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'counter', 'cache/themes/sp_theme/modules/Meetings/SearchForm_sps.tpl', 31, false),array('function', 'math', 'cache/themes/sp_theme/modules/Meetings/SearchForm_sps.tpl', 32, false),array('function', 'sugar_translate', 'cache/themes/sp_theme/modules/Meetings/SearchForm_sps.tpl', 41, false),array('function', 'html_options', 'cache/themes/sp_theme/modules/Meetings/SearchForm_sps.tpl', 47, false),array('function', 'sugar_getimage', 'cache/themes/sp_theme/modules/Meetings/SearchForm_sps.tpl', 140, false),array('modifier', 'default', 'cache/themes/sp_theme/modules/Meetings/SearchForm_sps.tpl', 148, false),array('modifier', 'count', 'cache/themes/sp_theme/modules/Meetings/SearchForm_sps.tpl', 279, false),)), $this); ?>

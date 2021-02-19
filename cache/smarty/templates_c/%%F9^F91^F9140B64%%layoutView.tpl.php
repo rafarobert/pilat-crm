@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2020-11-17 16:08:02
+<?php /* Smarty version 2.6.31, created on 2021-02-19 12:34:14
          compiled from modules/ModuleBuilder/tpls/layoutView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_translate', 'modules/ModuleBuilder/tpls/layoutView.tpl', 47, false),array('function', 'sugar_help', 'modules/ModuleBuilder/tpls/layoutView.tpl', 55, false),array('function', 'counter', 'modules/ModuleBuilder/tpls/layoutView.tpl', 76, false),array('function', 'sugar_getimage', 'modules/ModuleBuilder/tpls/layoutView.tpl', 82, false),array('function', 'eval', 'modules/ModuleBuilder/tpls/layoutView.tpl', 100, false),array('modifier', 'upper', 'modules/ModuleBuilder/tpls/layoutView.tpl', 133, false),array('modifier', 'escape', 'modules/ModuleBuilder/tpls/layoutView.tpl', 291, false),)), $this); ?>

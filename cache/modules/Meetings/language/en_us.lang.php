@@ -1,5 +1,5 @@
 <?php
-// created: 2019-08-01 10:13:37
+// created: 2021-02-19 12:34:00
 $mod_strings = array (
   'LBL_ACCEPT_THIS' => 'Accept?',
   'LBL_ADD_BUTTON' => 'Add',
