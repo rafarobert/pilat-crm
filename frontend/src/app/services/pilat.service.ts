@@ -59,6 +59,7 @@ export class PilatService {
   DIC_CITIES = '602b5649bc8a38062ce6826d';
   DIC_STAGES_PROSPECTS = '5ff2c4520a60a5252ddf62f6';
   DIC_STAGES_OPPORTUNITIES = '5ff4a8d9aef65440b888db40';
+  DIC_OPPORTUNITY_TIPOS = '602fcc02429ac05467f9fe47';
   
   parLeadStatuses:PilatParams[] = [];
   parProspectStages:PilatParams[] = [];
@@ -82,6 +83,7 @@ export class PilatService {
   parCountries:PilatParams[] = [];
   parStates:PilatParams[] = [];
   parCities:PilatParams[] = [];
+  parOpportunityTipos:PilatParams[] = [];
   
   parPersonaNatural:PilatParams;
   parPersonaJuridica:PilatParams;
@@ -131,6 +133,7 @@ export class PilatService {
               case this.DIC_COUNTRIES: !this.parCountries.find(par => par._id == param._id) ? this.parCountries.push(param) : false; break;
               case this.DIC_STATES: !this.parStates.find(par => par._id == param._id) ? this.parStates.push(param) : false; break;
               case this.DIC_CITIES: !this.parCities.find(par => par._id == param._id) ? this.parCities.push(param) : false; break;
+              case this.DIC_OPPORTUNITY_TIPOS: !this.parOpportunityTipos.find(par => par._id == param._id) ? this.parOpportunityTipos.push(param) : false; break;
             }
         
             switch (param.id) {

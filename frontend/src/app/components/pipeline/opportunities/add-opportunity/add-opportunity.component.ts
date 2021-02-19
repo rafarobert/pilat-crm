@@ -61,6 +61,7 @@ export class AddOpportunityComponent implements OnInit {
       this.pilatService.DIC_CITIES,
       this.pilatService.DIC_COUNTRIES,
       this.pilatService.DIC_STATES,
+      this.pilatService.DIC_OPPORTUNITY_TIPOS,
     ]).then(async () => {
       let date = new Date();
       let day = date.getDate().pad(2);
