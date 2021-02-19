@@ -9,21 +9,27 @@ $dictionary['AOS_Quotes']['fields']['stage']['merge_filter']='disabled';
 
  
 
- // created: 2021-02-18 18:28:17
+ // created: 2021-02-19 16:23:06
 $dictionary['AOS_Quotes']['fields']['tipo_pago_c']['inline_edit']='1';
 $dictionary['AOS_Quotes']['fields']['tipo_pago_c']['labelValue']='Tipo de Pago';
 
  
 
- // created: 2021-02-18 18:36:38
+ // created: 2021-02-19 16:23:00
 $dictionary['AOS_Quotes']['fields']['lbl_tipoventa_c']['inline_edit']='1';
-$dictionary['AOS_Quotes']['fields']['lbl_tipoventa_c']['labelValue']='Tipo Venta';
+$dictionary['AOS_Quotes']['fields']['lbl_tipoventa_c']['labelValue']='Tipo de Venta';
 
  
 
- // created: 2021-02-18 18:43:32
+ // created: 2021-02-19 16:25:59
 $dictionary['AOS_Quotes']['fields']['term_years_c']['inline_edit']='1';
-$dictionary['AOS_Quotes']['fields']['term_years_c']['labelValue']='Plazo en años';
+$dictionary['AOS_Quotes']['fields']['term_years_c']['labelValue']='Plazo en Años';
+
+ 
+
+ // created: 2021-02-19 16:18:39
+$dictionary['AOS_Quotes']['fields']['moneda_c']['inline_edit']='1';
+$dictionary['AOS_Quotes']['fields']['moneda_c']['labelValue']='moneda c';
 
  
 ?>

@@ -81,44 +81,6 @@ value='{$value}' title=''       accesskey='7'  >
 </div>  
 <div class="form-group col-md-6" >
 <label>
-{capture name="label" assign="label"}{sugar_translate label='LBL_OPPORTUNITY' module='AOS_Quotes'}{/capture}
-{$label|strip_semicolon}:
-</label>
-{counter name="fieldsUsed"}
-
-<label>
-</label>
-{counter name="panelFieldCount"}
-
-<input type="text" name="{$fields.opportunity.name}" class="sqsEnabled" tabindex="0" id="{$fields.opportunity.name}" size="" value="{$fields.opportunity.value}" title='' autocomplete="off"  	 >
-<input type="hidden" name="{$fields.opportunity.id_name}" 
-id="{$fields.opportunity.id_name}" 
-value="{$fields.opportunity_id.value}">
-<span class="id-ff multiple">
-<button type="button" name="btn_{$fields.opportunity.name}" id="btn_{$fields.opportunity.name}" tabindex="0" title="{sugar_translate label="LBL_SELECT_BUTTON_TITLE"}" class="button firstChild" value="{sugar_translate label="LBL_SELECT_BUTTON_LABEL"}"
-onclick='open_popup(
-"{$fields.opportunity.module}", 
-600, 
-400, 
-"", 
-true, 
-false, 
-{literal}{"call_back_function":"set_return","form_name":"EditView","field_to_name_array":{"id":"opportunity_id","name":"opportunity"}}{/literal}, 
-"single", 
-true
-);' ><span class="suitepicon suitepicon-action-select"></span></button><button type="button" name="btn_clr_{$fields.opportunity.name}" id="btn_clr_{$fields.opportunity.name}" tabindex="0" title="{sugar_translate label="LBL_ACCESSKEY_CLEAR_RELATE_TITLE"}"  class="button lastChild"
-onclick="SUGAR.clearRelateField(this.form, '{$fields.opportunity.name}', '{$fields.opportunity.id_name}');"  value="{sugar_translate label="LBL_ACCESSKEY_CLEAR_RELATE_LABEL"}" ><span class="suitepicon suitepicon-action-clear"></span></button>
-</span>
-<script type="text/javascript">
-SUGAR.util.doWhen(
-		"typeof(sqs_objects) != 'undefined' && typeof(sqs_objects['{$form_name}_{$fields.opportunity.name}']) != 'undefined'",
-		enableQS
-);
-</script>
-</div>  
-{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
-<div class="form-group col-md-6" >
-<label>
 {capture name="label" assign="label"}{sugar_translate label='LBL_QUOTE_NUMBER' module='AOS_Quotes'}{/capture}
 {$label|strip_semicolon}:
 </label>
@@ -129,6 +91,7 @@ SUGAR.util.doWhen(
 {counter name="panelFieldCount"}
 {$fields.number.value}
 </div>  
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
 <div class="form-group col-md-6" >
 <label>
 {capture name="label" assign="label"}{sugar_translate label='LBL_STAGE' module='AOS_Quotes'}{/capture}
@@ -391,7 +354,6 @@ onclick="SUGAR.clearRelateField(this.form, '{$fields.stage.name}-input', '{$fiel
 {/literal}
 {/if}
 </div>  
-{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
 <div class="form-group col-md-6" >
 <label>
 {capture name="label" assign="label"}{sugar_translate label='LBL_EXPIRATION' module='AOS_Quotes'}{/capture}
@@ -428,566 +390,6 @@ weekNumbers:false
 {rdelim}
 );
 </script>
-</div>  
-<div class="form-group col-md-6" >
-<label>
-{capture name="label" assign="label"}{sugar_translate label='LBL_INVOICE_STATUS' module='AOS_Quotes'}{/capture}
-{$label|strip_semicolon}:
-</label>
-{counter name="fieldsUsed"}
-
-<label>
-</label>
-{counter name="panelFieldCount"}
-
-{if !isset($config.enable_autocomplete) || $config.enable_autocomplete==false}
-<select name="{$fields.invoice_status.name}" 
-id="{$fields.invoice_status.name}" 
-title=''       
->
-{if isset($fields.invoice_status.value) && $fields.invoice_status.value != ''}
-{html_options options=$fields.invoice_status.options selected=$fields.invoice_status.value}
-{else}
-{html_options options=$fields.invoice_status.options selected=$fields.invoice_status.default}
-{/if}
-</select>
-{else}
-{assign var="field_options" value=$fields.invoice_status.options }
-{capture name="field_val"}{$fields.invoice_status.value}{/capture}
-{assign var="field_val" value=$smarty.capture.field_val}
-{capture name="ac_key"}{$fields.invoice_status.name}{/capture}
-{assign var="ac_key" value=$smarty.capture.ac_key}
-<select style='display:none' name="{$fields.invoice_status.name}" 
-id="{$fields.invoice_status.name}" 
-title=''          
->
-{if isset($fields.invoice_status.value) && $fields.invoice_status.value != ''}
-{html_options options=$fields.invoice_status.options selected=$fields.invoice_status.value}
-{else}
-{html_options options=$fields.invoice_status.options selected=$fields.invoice_status.default}
-{/if}
-</select>
-<input
-id="{$fields.invoice_status.name}-input"
-name="{$fields.invoice_status.name}-input"
-size="30"
-value="{$field_val|lookup:$field_options}"
-type="text" style="vertical-align: top;">
-<span class="id-ff multiple">
-<button type="button"><img src="{sugar_getimagepath file="id-ff-down.png"}" id="{$fields.invoice_status.name}-image"></button><button type="button"
-id="btn-clear-{$fields.invoice_status.name}-input"
-title="Clear"
-onclick="SUGAR.clearRelateField(this.form, '{$fields.invoice_status.name}-input', '{$fields.invoice_status.name}');sync_{$fields.invoice_status.name}()"><span class="suitepicon suitepicon-action-clear"></span></button>
-</span>
-{literal}
-<script>
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal} = [];
-	{/literal}
-
-			{literal}
-		(function (){
-			var selectElem = document.getElementById("{/literal}{$fields.invoice_status.name}{literal}");
-			
-			if (typeof select_defaults =="undefined")
-				select_defaults = [];
-			
-			select_defaults[selectElem.id] = {key:selectElem.value,text:''};
-
-			//get default
-			for (i=0;i<selectElem.options.length;i++){
-				if (selectElem.options[i].value==selectElem.value)
-					select_defaults[selectElem.id].text = selectElem.options[i].innerHTML;
-			}
-
-			//SUGAR.AutoComplete.{$ac_key}.ds = 
-			//get options array from vardefs
-			var options = SUGAR.AutoComplete.getOptionsArray("");
-
-			YUI().use('datasource', 'datasource-jsonschema',function (Y) {
-				SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.ds = new Y.DataSource.Function({
-				    source: function (request) {
-				    	var ret = [];
-				    	for (i=0;i<selectElem.options.length;i++)
-				    		if (!(selectElem.options[i].value=='' && selectElem.options[i].innerHTML==''))
-				    			ret.push({'key':selectElem.options[i].value,'text':selectElem.options[i].innerHTML});
-				    	return ret;
-				    }
-				});
-			});
-		})();
-		{/literal}
-	
-	{literal}
-		YUI().use("autocomplete", "autocomplete-filters", "autocomplete-highlighters", "node","node-event-simulate", function (Y) {
-	{/literal}
-			
-	SUGAR.AutoComplete.{$ac_key}.inputNode = Y.one('#{$fields.invoice_status.name}-input');
-	SUGAR.AutoComplete.{$ac_key}.inputImage = Y.one('#{$fields.invoice_status.name}-image');
-	SUGAR.AutoComplete.{$ac_key}.inputHidden = Y.one('#{$fields.invoice_status.name}');
-	
-			{literal}
-			function SyncToHidden(selectme){
-				var selectElem = document.getElementById("{/literal}{$fields.invoice_status.name}{literal}");
-				var doSimulateChange = false;
-				
-				if (selectElem.value!=selectme)
-					doSimulateChange=true;
-				
-				selectElem.value=selectme;
-
-				for (i=0;i<selectElem.options.length;i++){
-					selectElem.options[i].selected=false;
-					if (selectElem.options[i].value==selectme)
-						selectElem.options[i].selected=true;
-				}
-
-				if (doSimulateChange)
-					SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('change');
-			}
-
-			//global variable 
-			sync_{/literal}{$fields.invoice_status.name}{literal} = function(){
-				SyncToHidden();
-			}
-			function syncFromHiddenToWidget(){
-
-				var selectElem = document.getElementById("{/literal}{$fields.invoice_status.name}{literal}");
-
-				//if select no longer on page, kill timer
-				if (selectElem==null || selectElem.options == null)
-					return;
-
-				var currentvalue = SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.get('value');
-
-				SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.simulate('keyup');
-
-				for (i=0;i<selectElem.options.length;i++){
-
-					if (selectElem.options[i].value==selectElem.value && document.activeElement != document.getElementById('{/literal}{$fields.invoice_status.name}-input{literal}'))
-						SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.set('value',selectElem.options[i].innerHTML);
-				}
-			}
-
-            YAHOO.util.Event.onAvailable("{/literal}{$fields.invoice_status.name}{literal}", syncFromHiddenToWidget);
-		{/literal}
-
-		SUGAR.AutoComplete.{$ac_key}.minQLen = 0;
-		SUGAR.AutoComplete.{$ac_key}.queryDelay = 0;
-		SUGAR.AutoComplete.{$ac_key}.numOptions = {$field_options|@count};
-		if(SUGAR.AutoComplete.{$ac_key}.numOptions >= 300) {literal}{
-			{/literal}
-			SUGAR.AutoComplete.{$ac_key}.minQLen = 1;
-			SUGAR.AutoComplete.{$ac_key}.queryDelay = 200;
-			{literal}
-		}
-		{/literal}
-		if(SUGAR.AutoComplete.{$ac_key}.numOptions >= 3000) {literal}{
-			{/literal}
-			SUGAR.AutoComplete.{$ac_key}.minQLen = 1;
-			SUGAR.AutoComplete.{$ac_key}.queryDelay = 500;
-			{literal}
-		}
-		{/literal}
-		
-	SUGAR.AutoComplete.{$ac_key}.optionsVisible = false;
-	
-	{literal}
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.plug(Y.Plugin.AutoComplete, {
-		activateFirstItem: true,
-		{/literal}
-		minQueryLength: SUGAR.AutoComplete.{$ac_key}.minQLen,
-		queryDelay: SUGAR.AutoComplete.{$ac_key}.queryDelay,
-		zIndex: 99999,
-
-				
-		{literal}
-		source: SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.ds,
-		
-		resultTextLocator: 'text',
-		resultHighlighter: 'phraseMatch',
-		resultFilters: 'phraseMatch',
-	});
-
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.expandHover = function(ex){
-		var hover = YAHOO.util.Dom.getElementsByClassName('dccontent');
-		if(hover[0] != null){
-			if (ex) {
-				var h = '1000px';
-				hover[0].style.height = h;
-			}
-			else{
-				hover[0].style.height = '';
-			}
-		}
-	}
-		
-	if({/literal}SUGAR.AutoComplete.{$ac_key}.minQLen{literal} == 0){
-		// expand the dropdown options upon focus
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('focus', function () {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.sendRequest('');
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible = true;
-		});
-	}
-
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('click', function(e) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('click');
-		});
-		
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('dblclick', function(e) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('dblclick');
-		});
-
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('focus', function(e) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('focus');
-		});
-
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('mouseup', function(e) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('mouseup');
-		});
-
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('mousedown', function(e) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('mousedown');
-		});
-
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('blur', function(e) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('blur');
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible = false;
-			var selectElem = document.getElementById("{/literal}{$fields.invoice_status.name}{literal}");
-			//if typed value is a valid option, do nothing
-			for (i=0;i<selectElem.options.length;i++)
-				if (selectElem.options[i].innerHTML==SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.get('value'))
-					return;
-			
-			//typed value is invalid, so set the text and the hidden to blank
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.set('value', select_defaults[selectElem.id].text);
-			SyncToHidden(select_defaults[selectElem.id].key);
-		});
-	
-	// when they click on the arrow image, toggle the visibility of the options
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputImage.ancestor().on('click', function () {
-		if (SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.blur();
-		} else {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.focus();
-		}
-	});
-
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('query', function () {
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.set('value', '');
-	});
-
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('visibleChange', function (e) {
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.expandHover(e.newVal); // expand
-	});
-
-	// when they select an option, set the hidden input with the KEY, to be saved
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('select', function(e) {
-		SyncToHidden(e.result.raw.key);
-	});
- 
-});
-</script> 
-{/literal}
-{/if}
-</div>  
-{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
-<div class="form-group col-md-6" >
-<label>
-{capture name="label" assign="label"}{sugar_translate label='LBL_ASSIGNED_TO_NAME' module='AOS_Quotes'}{/capture}
-{$label|strip_semicolon}:
-</label>
-{counter name="fieldsUsed"}
-
-<label>
-</label>
-{counter name="panelFieldCount"}
-
-<input type="text" name="{$fields.assigned_user_name.name}" class="sqsEnabled" tabindex="0" id="{$fields.assigned_user_name.name}" size="" value="{$fields.assigned_user_name.value}" title='' autocomplete="off"  	 >
-<input type="hidden" name="{$fields.assigned_user_name.id_name}" 
-id="{$fields.assigned_user_name.id_name}" 
-value="{$fields.assigned_user_id.value}">
-<span class="id-ff multiple">
-<button type="button" name="btn_{$fields.assigned_user_name.name}" id="btn_{$fields.assigned_user_name.name}" tabindex="0" title="{sugar_translate label="LBL_ACCESSKEY_SELECT_USERS_TITLE"}" class="button firstChild" value="{sugar_translate label="LBL_ACCESSKEY_SELECT_USERS_LABEL"}"
-onclick='open_popup(
-"{$fields.assigned_user_name.module}", 
-600, 
-400, 
-"", 
-true, 
-false, 
-{literal}{"call_back_function":"set_return","form_name":"EditView","field_to_name_array":{"id":"assigned_user_id","user_name":"assigned_user_name"}}{/literal}, 
-"single", 
-true
-);' ><span class="suitepicon suitepicon-action-select"></span></button><button type="button" name="btn_clr_{$fields.assigned_user_name.name}" id="btn_clr_{$fields.assigned_user_name.name}" tabindex="0" title="{sugar_translate label="LBL_ACCESSKEY_CLEAR_USERS_TITLE"}"  class="button lastChild"
-onclick="SUGAR.clearRelateField(this.form, '{$fields.assigned_user_name.name}', '{$fields.assigned_user_name.id_name}');"  value="{sugar_translate label="LBL_ACCESSKEY_CLEAR_USERS_LABEL"}" ><span class="suitepicon suitepicon-action-clear"></span></button>
-</span>
-<script type="text/javascript">
-SUGAR.util.doWhen(
-		"typeof(sqs_objects) != 'undefined' && typeof(sqs_objects['{$form_name}_{$fields.assigned_user_name.name}']) != 'undefined'",
-		enableQS
-);
-</script>
-</div>  
-<div class="form-group col-md-6" >
-<label>
-{capture name="label" assign="label"}{sugar_translate label='LBL_TERM' module='AOS_Quotes'}{/capture}
-{$label|strip_semicolon}:
-</label>
-{counter name="fieldsUsed"}
-
-<label>
-</label>
-{counter name="panelFieldCount"}
-
-{if !isset($config.enable_autocomplete) || $config.enable_autocomplete==false}
-<select name="{$fields.term.name}" 
-id="{$fields.term.name}" 
-title=''       
->
-{if isset($fields.term.value) && $fields.term.value != ''}
-{html_options options=$fields.term.options selected=$fields.term.value}
-{else}
-{html_options options=$fields.term.options selected=$fields.term.default}
-{/if}
-</select>
-{else}
-{assign var="field_options" value=$fields.term.options }
-{capture name="field_val"}{$fields.term.value}{/capture}
-{assign var="field_val" value=$smarty.capture.field_val}
-{capture name="ac_key"}{$fields.term.name}{/capture}
-{assign var="ac_key" value=$smarty.capture.ac_key}
-<select style='display:none' name="{$fields.term.name}" 
-id="{$fields.term.name}" 
-title=''          
->
-{if isset($fields.term.value) && $fields.term.value != ''}
-{html_options options=$fields.term.options selected=$fields.term.value}
-{else}
-{html_options options=$fields.term.options selected=$fields.term.default}
-{/if}
-</select>
-<input
-id="{$fields.term.name}-input"
-name="{$fields.term.name}-input"
-size="30"
-value="{$field_val|lookup:$field_options}"
-type="text" style="vertical-align: top;">
-<span class="id-ff multiple">
-<button type="button"><img src="{sugar_getimagepath file="id-ff-down.png"}" id="{$fields.term.name}-image"></button><button type="button"
-id="btn-clear-{$fields.term.name}-input"
-title="Clear"
-onclick="SUGAR.clearRelateField(this.form, '{$fields.term.name}-input', '{$fields.term.name}');sync_{$fields.term.name}()"><span class="suitepicon suitepicon-action-clear"></span></button>
-</span>
-{literal}
-<script>
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal} = [];
-	{/literal}
-
-			{literal}
-		(function (){
-			var selectElem = document.getElementById("{/literal}{$fields.term.name}{literal}");
-			
-			if (typeof select_defaults =="undefined")
-				select_defaults = [];
-			
-			select_defaults[selectElem.id] = {key:selectElem.value,text:''};
-
-			//get default
-			for (i=0;i<selectElem.options.length;i++){
-				if (selectElem.options[i].value==selectElem.value)
-					select_defaults[selectElem.id].text = selectElem.options[i].innerHTML;
-			}
-
-			//SUGAR.AutoComplete.{$ac_key}.ds = 
-			//get options array from vardefs
-			var options = SUGAR.AutoComplete.getOptionsArray("");
-
-			YUI().use('datasource', 'datasource-jsonschema',function (Y) {
-				SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.ds = new Y.DataSource.Function({
-				    source: function (request) {
-				    	var ret = [];
-				    	for (i=0;i<selectElem.options.length;i++)
-				    		if (!(selectElem.options[i].value=='' && selectElem.options[i].innerHTML==''))
-				    			ret.push({'key':selectElem.options[i].value,'text':selectElem.options[i].innerHTML});
-				    	return ret;
-				    }
-				});
-			});
-		})();
-		{/literal}
-	
-	{literal}
-		YUI().use("autocomplete", "autocomplete-filters", "autocomplete-highlighters", "node","node-event-simulate", function (Y) {
-	{/literal}
-			
-	SUGAR.AutoComplete.{$ac_key}.inputNode = Y.one('#{$fields.term.name}-input');
-	SUGAR.AutoComplete.{$ac_key}.inputImage = Y.one('#{$fields.term.name}-image');
-	SUGAR.AutoComplete.{$ac_key}.inputHidden = Y.one('#{$fields.term.name}');
-	
-			{literal}
-			function SyncToHidden(selectme){
-				var selectElem = document.getElementById("{/literal}{$fields.term.name}{literal}");
-				var doSimulateChange = false;
-				
-				if (selectElem.value!=selectme)
-					doSimulateChange=true;
-				
-				selectElem.value=selectme;
-
-				for (i=0;i<selectElem.options.length;i++){
-					selectElem.options[i].selected=false;
-					if (selectElem.options[i].value==selectme)
-						selectElem.options[i].selected=true;
-				}
-
-				if (doSimulateChange)
-					SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('change');
-			}
-
-			//global variable 
-			sync_{/literal}{$fields.term.name}{literal} = function(){
-				SyncToHidden();
-			}
-			function syncFromHiddenToWidget(){
-
-				var selectElem = document.getElementById("{/literal}{$fields.term.name}{literal}");
-
-				//if select no longer on page, kill timer
-				if (selectElem==null || selectElem.options == null)
-					return;
-
-				var currentvalue = SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.get('value');
-
-				SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.simulate('keyup');
-
-				for (i=0;i<selectElem.options.length;i++){
-
-					if (selectElem.options[i].value==selectElem.value && document.activeElement != document.getElementById('{/literal}{$fields.term.name}-input{literal}'))
-						SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.set('value',selectElem.options[i].innerHTML);
-				}
-			}
-
-            YAHOO.util.Event.onAvailable("{/literal}{$fields.term.name}{literal}", syncFromHiddenToWidget);
-		{/literal}
-
-		SUGAR.AutoComplete.{$ac_key}.minQLen = 0;
-		SUGAR.AutoComplete.{$ac_key}.queryDelay = 0;
-		SUGAR.AutoComplete.{$ac_key}.numOptions = {$field_options|@count};
-		if(SUGAR.AutoComplete.{$ac_key}.numOptions >= 300) {literal}{
-			{/literal}
-			SUGAR.AutoComplete.{$ac_key}.minQLen = 1;
-			SUGAR.AutoComplete.{$ac_key}.queryDelay = 200;
-			{literal}
-		}
-		{/literal}
-		if(SUGAR.AutoComplete.{$ac_key}.numOptions >= 3000) {literal}{
-			{/literal}
-			SUGAR.AutoComplete.{$ac_key}.minQLen = 1;
-			SUGAR.AutoComplete.{$ac_key}.queryDelay = 500;
-			{literal}
-		}
-		{/literal}
-		
-	SUGAR.AutoComplete.{$ac_key}.optionsVisible = false;
-	
-	{literal}
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.plug(Y.Plugin.AutoComplete, {
-		activateFirstItem: true,
-		{/literal}
-		minQueryLength: SUGAR.AutoComplete.{$ac_key}.minQLen,
-		queryDelay: SUGAR.AutoComplete.{$ac_key}.queryDelay,
-		zIndex: 99999,
-
-				
-		{literal}
-		source: SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.ds,
-		
-		resultTextLocator: 'text',
-		resultHighlighter: 'phraseMatch',
-		resultFilters: 'phraseMatch',
-	});
-
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.expandHover = function(ex){
-		var hover = YAHOO.util.Dom.getElementsByClassName('dccontent');
-		if(hover[0] != null){
-			if (ex) {
-				var h = '1000px';
-				hover[0].style.height = h;
-			}
-			else{
-				hover[0].style.height = '';
-			}
-		}
-	}
-		
-	if({/literal}SUGAR.AutoComplete.{$ac_key}.minQLen{literal} == 0){
-		// expand the dropdown options upon focus
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('focus', function () {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.sendRequest('');
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible = true;
-		});
-	}
-
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('click', function(e) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('click');
-		});
-		
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('dblclick', function(e) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('dblclick');
-		});
-
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('focus', function(e) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('focus');
-		});
-
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('mouseup', function(e) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('mouseup');
-		});
-
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('mousedown', function(e) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('mousedown');
-		});
-
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('blur', function(e) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('blur');
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible = false;
-			var selectElem = document.getElementById("{/literal}{$fields.term.name}{literal}");
-			//if typed value is a valid option, do nothing
-			for (i=0;i<selectElem.options.length;i++)
-				if (selectElem.options[i].innerHTML==SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.get('value'))
-					return;
-			
-			//typed value is invalid, so set the text and the hidden to blank
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.set('value', select_defaults[selectElem.id].text);
-			SyncToHidden(select_defaults[selectElem.id].key);
-		});
-	
-	// when they click on the arrow image, toggle the visibility of the options
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputImage.ancestor().on('click', function () {
-		if (SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible) {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.blur();
-		} else {
-			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.focus();
-		}
-	});
-
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('query', function () {
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.set('value', '');
-	});
-
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('visibleChange', function (e) {
-		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.expandHover(e.newVal); // expand
-	});
-
-	// when they select an option, set the hidden input with the KEY, to be saved
-	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('select', function(e) {
-		SyncToHidden(e.result.raw.key);
-	});
- 
-});
-</script> 
-{/literal}
-{/if}
 </div>  
 {counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
 <div class="form-group col-md-6" >
@@ -1273,6 +675,25 @@ cols="60"
 title='' class='form-control' tabindex="0" 
  >{$value}</textarea>
 </div>  
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+<div class="form-group col-md-6" >
+<label>
+&nbsp;
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+</div>  
+<div class="form-group col-md-6" >
+<label>
+&nbsp;
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+</div>  
 </div>   
 <script type="text/javascript">SUGAR.util.doWhen("typeof initPanel == 'function'", function() {ldelim} initPanel(1, ''); {rdelim}); </script>
 {if $panelFieldCount == 0}
@@ -1283,10 +704,1776 @@ title='' class='form-control' tabindex="0"
 {counter name="panelFieldCount" start=0 print=false assign="panelFieldCount"}
 <div style="clear:both;">
 <h4>
+{sugar_translate label='LBL_EDITVIEW_PANEL1' module='AOS_Quotes'}
+</h4>
+</div>
+<div class="row">
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+<div class="form-group col-md-6" >
+<label>
+{capture name="label" assign="label"}{sugar_translate label='LBL_UNIDAD_INDUSTRIAL_C' module='AOS_Quotes'}{/capture}
+{$label|strip_semicolon}:
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+{counter name="panelFieldCount"}
+
+{if strlen($fields.unidad_industrial_c.value) <= 0}
+{assign var="value" value=$fields.unidad_industrial_c.default_value }
+{else}
+{assign var="value" value=$fields.unidad_industrial_c.value }
+{/if}  
+<input type='text' name='{$fields.unidad_industrial_c.name}' 
+id='{$fields.unidad_industrial_c.name}' style="max-width:170px;" size='30' maxlength='255' value='{sugar_number_format precision=0 var=$value}' title='Unidad Industrial' tabindex='0'    >
+</div>  
+<div class="form-group col-md-6" >
+<label>
+{capture name="label" assign="label"}{sugar_translate label='LBL_MANZANO_C' module='AOS_Quotes'}{/capture}
+{$label|strip_semicolon}:
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+{counter name="panelFieldCount"}
+
+{if strlen($fields.manzano_c.value) <= 0}
+{assign var="value" value=$fields.manzano_c.default_value }
+{else}
+{assign var="value" value=$fields.manzano_c.value }
+{/if}  
+<input type='text' name='{$fields.manzano_c.name}' 
+id='{$fields.manzano_c.name}' style="max-width:170px;" size='30' maxlength='255' value='{sugar_number_format precision=0 var=$value}' title='Manzano' tabindex='0'    >
+</div>  
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+<div class="form-group col-md-6" >
+<label>
+{capture name="label" assign="label"}{sugar_translate label='LBL_LBL_SUPERFICIE_C' module='AOS_Quotes'}{/capture}
+{$label|strip_semicolon}:
+<span class="required">*</span>
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+{counter name="panelFieldCount"}
+
+{if strlen($fields.lbl_superficie_c.value) <= 0}
+{assign var="value" value=$fields.lbl_superficie_c.default_value }
+{else}
+{assign var="value" value=$fields.lbl_superficie_c.value }
+{/if}  
+<input type='text' name='{$fields.lbl_superficie_c.name}'
+id='{$fields.lbl_superficie_c.name}'
+size='30'
+maxlength='10'value='{sugar_number_format var=$value precision=2 }'
+title=''
+tabindex='0'
+>
+</div>  
+<div class="form-group col-md-6" >
+<label>
+{capture name="label" assign="label"}{sugar_translate label='LBL_UBICACION_C' module='AOS_Quotes'}{/capture}
+{$label|strip_semicolon}:
+<span class="required">*</span>
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+{counter name="panelFieldCount"}
+
+{if strlen($fields.ubicacion_c.value) <= 0}
+{assign var="value" value=$fields.ubicacion_c.default_value }
+{else}
+{assign var="value" value=$fields.ubicacion_c.value }
+{/if}  
+<input type='text' name='{$fields.ubicacion_c.name}' 
+id='{$fields.ubicacion_c.name}' size='30' 
+maxlength='20' 
+value='{$value}' title=''       >
+</div>  
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+<div class="form-group col-md-6" >
+<label>
+{capture name="label" assign="label"}{sugar_translate label='LBL_FRENTE_METROS_C' module='AOS_Quotes'}{/capture}
+{$label|strip_semicolon}:
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+{counter name="panelFieldCount"}
+
+{if strlen($fields.frente_metros_c.value) <= 0}
+{assign var="value" value=$fields.frente_metros_c.default_value }
+{else}
+{assign var="value" value=$fields.frente_metros_c.value }
+{/if}  
+<input type='text' name='{$fields.frente_metros_c.name}' 
+id='{$fields.frente_metros_c.name}' style="max-width:170px;" size='30' maxlength='255' value='{sugar_number_format precision=0 var=$value}' title='100 m.' tabindex='0'    >
+</div>  
+<div class="form-group col-md-6" >
+<label>
+{capture name="label" assign="label"}{sugar_translate label='LBL_FONDO_METROS_C' module='AOS_Quotes'}{/capture}
+{$label|strip_semicolon}:
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+{counter name="panelFieldCount"}
+
+{if strlen($fields.fondo_metros_c.value) <= 0}
+{assign var="value" value=$fields.fondo_metros_c.default_value }
+{else}
+{assign var="value" value=$fields.fondo_metros_c.value }
+{/if}  
+<input type='text' name='{$fields.fondo_metros_c.name}' 
+id='{$fields.fondo_metros_c.name}' style="max-width:170px;" size='30' maxlength='255' value='{sugar_number_format precision=0 var=$value}' title='150 m.' tabindex='0'    >
+</div>  
+</div>   
+<script type="text/javascript">SUGAR.util.doWhen("typeof initPanel == 'function'", function() {ldelim} initPanel(2, ''); {rdelim}); </script>
+{if $panelFieldCount == 0}
+<script>document.getElementById("LBL_EDITVIEW_PANEL1").style.display='none';</script>
+{/if}
+</div>   
+<div class="panel-body">    
+{counter name="panelFieldCount" start=0 print=false assign="panelFieldCount"}
+<div style="clear:both;">
+<h4>
+{sugar_translate label='LBL_LINE_ITEMS' module='AOS_Quotes'}
+</h4>
+</div>
+<div class="row">
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+<div class="form-group col-md-6" >
+<label>
+{capture name="label" assign="label"}{sugar_translate label='LBL_LBL_TIPOVENTA_C' module='AOS_Quotes'}{/capture}
+{$label|strip_semicolon}:
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+{counter name="panelFieldCount"}
+
+<script type="text/javascript" src='{sugar_getjspath file="include/SugarFields/Fields/Dynamicenum/SugarFieldDynamicenum.js"}'></script>
+{if !isset($config.enable_autocomplete) || $config.enable_autocomplete==false}
+<select name="{$fields.lbl_tipoventa_c.name}"
+id="{$fields.lbl_tipoventa_c.name}"
+title='Tipo de Venta '           
+>
+{if isset($fields.lbl_tipoventa_c.value) && $fields.lbl_tipoventa_c.value != ''}
+{html_options options=$fields.lbl_tipoventa_c.options selected=$fields.lbl_tipoventa_c.value}
+{else}
+{html_options options=$fields.lbl_tipoventa_c.options selected=$fields.lbl_tipoventa_c.default}
+{/if}
+</select>
+{else}
+{assign var="field_options" value=$fields.lbl_tipoventa_c.options }
+{capture name="field_val"}{$fields.lbl_tipoventa_c.value}{/capture}
+{assign var="field_val" value=$smarty.capture.field_val}
+{capture name="ac_key"}{$fields.lbl_tipoventa_c.name}{/capture}
+{assign var="ac_key" value=$smarty.capture.ac_key}
+<select style='display:none' name="{$fields.lbl_tipoventa_c.name}"
+id="{$fields.lbl_tipoventa_c.name}"
+title='Tipo de Venta '          
+>
+{if isset($fields.lbl_tipoventa_c.value) && $fields.lbl_tipoventa_c.value != ''}
+{html_options options=$fields.lbl_tipoventa_c.options selected=$fields.lbl_tipoventa_c.value}
+{else}
+{html_options options=$fields.lbl_tipoventa_c.options selected=$fields.lbl_tipoventa_c.default}
+{/if}
+</select>
+<input
+id="{$fields.lbl_tipoventa_c.name}-input"
+name="{$fields.lbl_tipoventa_c.name}-input"
+size="30"
+value="{$field_val|lookup:$field_options}"
+type="text" style="vertical-align: top;">
+<span class="id-ff multiple">
+<button type="button"><img src="{sugar_getimagepath file="id-ff-down.png"}" id="{$fields.lbl_tipoventa_c.name}-image"></button><button type="button"
+id="btn-clear-{$fields.lbl_tipoventa_c.name}-input"
+title="Clear"
+onclick="SUGAR.clearRelateField(this.form, '{$fields.lbl_tipoventa_c.name}-input', '{$fields.lbl_tipoventa_c.name}');sync_{$fields.lbl_tipoventa_c.name}()"><span class="suitepicon suitepicon-action-clear"></span></button>
+</span>
+{literal}
+<script>
+SUGAR.AutoComplete.{/literal}{$ac_key}{literal} = [];
+{/literal}
+
+{literal}
+(function (){
+    var selectElem = document.getElementById("{/literal}{$fields.lbl_tipoventa_c.name}{literal}");
+
+    if (typeof select_defaults =="undefined")
+        select_defaults = [];
+
+    select_defaults[selectElem.id] = {key:selectElem.value,text:''};
+
+    //get default
+    for (i=0;i<selectElem.options.length;i++){
+        if (selectElem.options[i].value==selectElem.value)
+            select_defaults[selectElem.id].text = selectElem.options[i].innerHTML;
+    }
+
+    //SUGAR.AutoComplete.{$ac_key}.ds =
+    //get options array from vardefs
+    var options = SUGAR.AutoComplete.getOptionsArray("");
+
+    YUI().use('datasource', 'datasource-jsonschema',function (Y) {
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.ds = new Y.DataSource.Function({
+            source: function (request) {
+                var ret = [];
+                for (i=0;i<selectElem.options.length;i++)
+                    if (!(selectElem.options[i].value=='' && selectElem.options[i].innerHTML==''))
+                        ret.push({'key':selectElem.options[i].value,'text':selectElem.options[i].innerHTML});
+                return ret;
+            }
+        });
+    });
+})();
+{/literal}
+
+{literal}
+YUI().use("autocomplete", "autocomplete-filters", "autocomplete-highlighters", "node","node-event-simulate", function (Y) {
+    {/literal}
+
+    SUGAR.AutoComplete.{$ac_key}.inputNode = Y.one('#{$fields.lbl_tipoventa_c.name}-input');
+    SUGAR.AutoComplete.{$ac_key}.inputImage = Y.one('#{$fields.lbl_tipoventa_c.name}-image');
+    SUGAR.AutoComplete.{$ac_key}.inputHidden = Y.one('#{$fields.lbl_tipoventa_c.name}');
+
+        {literal}
+    function SyncToHidden(selectme){
+        var selectElem = document.getElementById("{/literal}{$fields.lbl_tipoventa_c.name}{literal}");
+        var doSimulateChange = false;
+
+        if (selectElem.value!=selectme)
+            doSimulateChange=true;
+
+        selectElem.value=selectme;
+
+        for (i=0;i<selectElem.options.length;i++){
+            selectElem.options[i].selected=false;
+            if (selectElem.options[i].value==selectme)
+                selectElem.options[i].selected=true;
+        }
+
+        if (doSimulateChange)
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('change');
+    }
+
+    //global variable
+    sync_{/literal}{$fields.lbl_tipoventa_c.name}{literal} = function(){
+        SyncToHidden();
+    }
+    function syncFromHiddenToWidget(){
+
+        var selectElem = document.getElementById("{/literal}{$fields.lbl_tipoventa_c.name}{literal}");
+
+        //if select no longer on page, kill timer
+        if (selectElem==null || selectElem.options == null)
+            return;
+
+        var currentvalue = SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.get('value');
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.simulate('keyup');
+
+        for (i=0;i<selectElem.options.length;i++){
+
+            if (selectElem.options[i].value==selectElem.value && document.activeElement != document.getElementById('{/literal}{$fields.lbl_tipoventa_c.name}-input{literal}'))
+                SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.set('value',selectElem.options[i].innerHTML);
+        }
+    }
+
+    YAHOO.util.Event.onAvailable("{/literal}{$fields.lbl_tipoventa_c.name}{literal}", syncFromHiddenToWidget);
+    {/literal}
+
+    SUGAR.AutoComplete.{$ac_key}.minQLen = 0;
+    SUGAR.AutoComplete.{$ac_key}.queryDelay = 0;
+    SUGAR.AutoComplete.{$ac_key}.numOptions = {$field_options|@count};
+    if(SUGAR.AutoComplete.{$ac_key}.numOptions >= 300) {literal}{
+        {/literal}
+        SUGAR.AutoComplete.{$ac_key}.minQLen = 1;
+        SUGAR.AutoComplete.{$ac_key}.queryDelay = 200;
+        {literal}
+    }
+    {/literal}
+    if(SUGAR.AutoComplete.{$ac_key}.numOptions >= 3000) {literal}{
+        {/literal}
+        SUGAR.AutoComplete.{$ac_key}.minQLen = 1;
+        SUGAR.AutoComplete.{$ac_key}.queryDelay = 500;
+        {literal}
+    }
+    {/literal}
+    
+    SUGAR.AutoComplete.{$ac_key}.optionsVisible = false;
+
+    {literal}
+    SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.plug(Y.Plugin.AutoComplete, {
+        activateFirstItem: true,
+        {/literal}
+        minQueryLength: SUGAR.AutoComplete.{$ac_key}.minQLen,
+        queryDelay: SUGAR.AutoComplete.{$ac_key}.queryDelay,
+        zIndex: 99999,
+
+        
+        {literal}
+        source: SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.ds,
+
+        resultTextLocator: 'text',
+        resultHighlighter: 'phraseMatch',
+        resultFilters: 'phraseMatch',
+    });
+
+    SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.expandHover = function(ex){
+        var hover = YAHOO.util.Dom.getElementsByClassName('dccontent');
+        if(hover[0] != null){
+            if (ex) {
+                var h = '1000px';
+                hover[0].style.height = h;
+            }
+            else{
+                hover[0].style.height = '';
+            }
+        }
+    }
+
+    if({/literal}SUGAR.AutoComplete.{$ac_key}.minQLen{literal} == 0){
+        // expand the dropdown options upon focus
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('focus', function () {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.sendRequest('');
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible = true;
+        });
+    }
+
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('click', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('click');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('dblclick', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('dblclick');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('focus', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('focus');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('mouseup', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('mouseup');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('mousedown', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('mousedown');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('blur', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('blur');
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible = false;
+            var selectElem = document.getElementById("{/literal}{$fields.lbl_tipoventa_c.name}{literal}");
+            //if typed value is a valid option, do nothing
+            for (i=0;i<selectElem.options.length;i++)
+                if (selectElem.options[i].innerHTML==SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.get('value'))
+                    return;
+
+            //typed value is invalid, so set the text and the hidden to blank
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.set('value', select_defaults[selectElem.id].text);
+            SyncToHidden(select_defaults[selectElem.id].key);
+        });
+        
+            // when they click on the arrow image, toggle the visibility of the options
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputImage.ancestor().on('click', function () {
+                if (SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible) {
+                    SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.blur();
+                } else {
+                    SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.focus();
+                }
+            });
+
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('query', function () {
+                SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.set('value', '');
+            });
+
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('visibleChange', function (e) {
+                SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.expandHover(e.newVal); // expand
+            });
+
+            // when they select an option, set the hidden input with the KEY, to be saved
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('select', function(e) {
+                SyncToHidden(e.result.raw.key);
+            });
+
+        });
+</script>
+{/literal}
+{/if}
+<script type="text/javascript">
+    if(typeof de_entries == 'undefined'){literal}{var de_entries = new Array;}{/literal}
+    var el = document.getElementById("");
+    addLoadEvent(function(){literal}{loadDynamicEnum({/literal}"","{$fields.lbl_tipoventa_c.name}"{literal})}{/literal});
+    if (SUGAR.ajaxUI && SUGAR.ajaxUI.hist_loaded) {literal}{loadDynamicEnum({/literal}"","{$fields.lbl_tipoventa_c.name}"{literal})}{/literal}
+</script>
+</div>  
+<div class="form-group col-md-6" >
+<label>
+{capture name="label" assign="label"}{sugar_translate label='LBL_MONEDA_C' module='AOS_Quotes'}{/capture}
+{$label|strip_semicolon}:
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+{counter name="panelFieldCount"}
+
+<script type="text/javascript" src='{sugar_getjspath file="include/SugarFields/Fields/Dynamicenum/SugarFieldDynamicenum.js"}'></script>
+{if !isset($config.enable_autocomplete) || $config.enable_autocomplete==false}
+<select name="{$fields.moneda_c.name}"
+id="{$fields.moneda_c.name}"
+title='Moneda'           
+>
+{if isset($fields.moneda_c.value) && $fields.moneda_c.value != ''}
+{html_options options=$fields.moneda_c.options selected=$fields.moneda_c.value}
+{else}
+{html_options options=$fields.moneda_c.options selected=$fields.moneda_c.default}
+{/if}
+</select>
+{else}
+{assign var="field_options" value=$fields.moneda_c.options }
+{capture name="field_val"}{$fields.moneda_c.value}{/capture}
+{assign var="field_val" value=$smarty.capture.field_val}
+{capture name="ac_key"}{$fields.moneda_c.name}{/capture}
+{assign var="ac_key" value=$smarty.capture.ac_key}
+<select style='display:none' name="{$fields.moneda_c.name}"
+id="{$fields.moneda_c.name}"
+title='Moneda'          
+>
+{if isset($fields.moneda_c.value) && $fields.moneda_c.value != ''}
+{html_options options=$fields.moneda_c.options selected=$fields.moneda_c.value}
+{else}
+{html_options options=$fields.moneda_c.options selected=$fields.moneda_c.default}
+{/if}
+</select>
+<input
+id="{$fields.moneda_c.name}-input"
+name="{$fields.moneda_c.name}-input"
+size="30"
+value="{$field_val|lookup:$field_options}"
+type="text" style="vertical-align: top;">
+<span class="id-ff multiple">
+<button type="button"><img src="{sugar_getimagepath file="id-ff-down.png"}" id="{$fields.moneda_c.name}-image"></button><button type="button"
+id="btn-clear-{$fields.moneda_c.name}-input"
+title="Clear"
+onclick="SUGAR.clearRelateField(this.form, '{$fields.moneda_c.name}-input', '{$fields.moneda_c.name}');sync_{$fields.moneda_c.name}()"><span class="suitepicon suitepicon-action-clear"></span></button>
+</span>
+{literal}
+<script>
+SUGAR.AutoComplete.{/literal}{$ac_key}{literal} = [];
+{/literal}
+
+{literal}
+(function (){
+    var selectElem = document.getElementById("{/literal}{$fields.moneda_c.name}{literal}");
+
+    if (typeof select_defaults =="undefined")
+        select_defaults = [];
+
+    select_defaults[selectElem.id] = {key:selectElem.value,text:''};
+
+    //get default
+    for (i=0;i<selectElem.options.length;i++){
+        if (selectElem.options[i].value==selectElem.value)
+            select_defaults[selectElem.id].text = selectElem.options[i].innerHTML;
+    }
+
+    //SUGAR.AutoComplete.{$ac_key}.ds =
+    //get options array from vardefs
+    var options = SUGAR.AutoComplete.getOptionsArray("");
+
+    YUI().use('datasource', 'datasource-jsonschema',function (Y) {
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.ds = new Y.DataSource.Function({
+            source: function (request) {
+                var ret = [];
+                for (i=0;i<selectElem.options.length;i++)
+                    if (!(selectElem.options[i].value=='' && selectElem.options[i].innerHTML==''))
+                        ret.push({'key':selectElem.options[i].value,'text':selectElem.options[i].innerHTML});
+                return ret;
+            }
+        });
+    });
+})();
+{/literal}
+
+{literal}
+YUI().use("autocomplete", "autocomplete-filters", "autocomplete-highlighters", "node","node-event-simulate", function (Y) {
+    {/literal}
+
+    SUGAR.AutoComplete.{$ac_key}.inputNode = Y.one('#{$fields.moneda_c.name}-input');
+    SUGAR.AutoComplete.{$ac_key}.inputImage = Y.one('#{$fields.moneda_c.name}-image');
+    SUGAR.AutoComplete.{$ac_key}.inputHidden = Y.one('#{$fields.moneda_c.name}');
+
+        {literal}
+    function SyncToHidden(selectme){
+        var selectElem = document.getElementById("{/literal}{$fields.moneda_c.name}{literal}");
+        var doSimulateChange = false;
+
+        if (selectElem.value!=selectme)
+            doSimulateChange=true;
+
+        selectElem.value=selectme;
+
+        for (i=0;i<selectElem.options.length;i++){
+            selectElem.options[i].selected=false;
+            if (selectElem.options[i].value==selectme)
+                selectElem.options[i].selected=true;
+        }
+
+        if (doSimulateChange)
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('change');
+    }
+
+    //global variable
+    sync_{/literal}{$fields.moneda_c.name}{literal} = function(){
+        SyncToHidden();
+    }
+    function syncFromHiddenToWidget(){
+
+        var selectElem = document.getElementById("{/literal}{$fields.moneda_c.name}{literal}");
+
+        //if select no longer on page, kill timer
+        if (selectElem==null || selectElem.options == null)
+            return;
+
+        var currentvalue = SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.get('value');
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.simulate('keyup');
+
+        for (i=0;i<selectElem.options.length;i++){
+
+            if (selectElem.options[i].value==selectElem.value && document.activeElement != document.getElementById('{/literal}{$fields.moneda_c.name}-input{literal}'))
+                SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.set('value',selectElem.options[i].innerHTML);
+        }
+    }
+
+    YAHOO.util.Event.onAvailable("{/literal}{$fields.moneda_c.name}{literal}", syncFromHiddenToWidget);
+    {/literal}
+
+    SUGAR.AutoComplete.{$ac_key}.minQLen = 0;
+    SUGAR.AutoComplete.{$ac_key}.queryDelay = 0;
+    SUGAR.AutoComplete.{$ac_key}.numOptions = {$field_options|@count};
+    if(SUGAR.AutoComplete.{$ac_key}.numOptions >= 300) {literal}{
+        {/literal}
+        SUGAR.AutoComplete.{$ac_key}.minQLen = 1;
+        SUGAR.AutoComplete.{$ac_key}.queryDelay = 200;
+        {literal}
+    }
+    {/literal}
+    if(SUGAR.AutoComplete.{$ac_key}.numOptions >= 3000) {literal}{
+        {/literal}
+        SUGAR.AutoComplete.{$ac_key}.minQLen = 1;
+        SUGAR.AutoComplete.{$ac_key}.queryDelay = 500;
+        {literal}
+    }
+    {/literal}
+    
+    SUGAR.AutoComplete.{$ac_key}.optionsVisible = false;
+
+    {literal}
+    SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.plug(Y.Plugin.AutoComplete, {
+        activateFirstItem: true,
+        {/literal}
+        minQueryLength: SUGAR.AutoComplete.{$ac_key}.minQLen,
+        queryDelay: SUGAR.AutoComplete.{$ac_key}.queryDelay,
+        zIndex: 99999,
+
+        
+        {literal}
+        source: SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.ds,
+
+        resultTextLocator: 'text',
+        resultHighlighter: 'phraseMatch',
+        resultFilters: 'phraseMatch',
+    });
+
+    SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.expandHover = function(ex){
+        var hover = YAHOO.util.Dom.getElementsByClassName('dccontent');
+        if(hover[0] != null){
+            if (ex) {
+                var h = '1000px';
+                hover[0].style.height = h;
+            }
+            else{
+                hover[0].style.height = '';
+            }
+        }
+    }
+
+    if({/literal}SUGAR.AutoComplete.{$ac_key}.minQLen{literal} == 0){
+        // expand the dropdown options upon focus
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('focus', function () {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.sendRequest('');
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible = true;
+        });
+    }
+
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('click', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('click');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('dblclick', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('dblclick');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('focus', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('focus');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('mouseup', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('mouseup');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('mousedown', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('mousedown');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('blur', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('blur');
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible = false;
+            var selectElem = document.getElementById("{/literal}{$fields.moneda_c.name}{literal}");
+            //if typed value is a valid option, do nothing
+            for (i=0;i<selectElem.options.length;i++)
+                if (selectElem.options[i].innerHTML==SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.get('value'))
+                    return;
+
+            //typed value is invalid, so set the text and the hidden to blank
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.set('value', select_defaults[selectElem.id].text);
+            SyncToHidden(select_defaults[selectElem.id].key);
+        });
+        
+            // when they click on the arrow image, toggle the visibility of the options
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputImage.ancestor().on('click', function () {
+                if (SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible) {
+                    SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.blur();
+                } else {
+                    SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.focus();
+                }
+            });
+
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('query', function () {
+                SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.set('value', '');
+            });
+
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('visibleChange', function (e) {
+                SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.expandHover(e.newVal); // expand
+            });
+
+            // when they select an option, set the hidden input with the KEY, to be saved
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('select', function(e) {
+                SyncToHidden(e.result.raw.key);
+            });
+
+        });
+</script>
+{/literal}
+{/if}
+<script type="text/javascript">
+    if(typeof de_entries == 'undefined'){literal}{var de_entries = new Array;}{/literal}
+    var el = document.getElementById("");
+    addLoadEvent(function(){literal}{loadDynamicEnum({/literal}"","{$fields.moneda_c.name}"{literal})}{/literal});
+    if (SUGAR.ajaxUI && SUGAR.ajaxUI.hist_loaded) {literal}{loadDynamicEnum({/literal}"","{$fields.moneda_c.name}"{literal})}{/literal}
+</script>
+</div>  
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+<div class="form-group col-md-6" >
+<label>
+{capture name="label" assign="label"}{sugar_translate label='LBL_TIPO_PAGO_C' module='AOS_Quotes'}{/capture}
+{$label|strip_semicolon}:
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+{counter name="panelFieldCount"}
+
+<script type="text/javascript" src='{sugar_getjspath file="include/SugarFields/Fields/Dynamicenum/SugarFieldDynamicenum.js"}'></script>
+{if !isset($config.enable_autocomplete) || $config.enable_autocomplete==false}
+<select name="{$fields.tipo_pago_c.name}"
+id="{$fields.tipo_pago_c.name}"
+title='Tipo de Pago'           
+>
+{if isset($fields.tipo_pago_c.value) && $fields.tipo_pago_c.value != ''}
+{html_options options=$fields.tipo_pago_c.options selected=$fields.tipo_pago_c.value}
+{else}
+{html_options options=$fields.tipo_pago_c.options selected=$fields.tipo_pago_c.default}
+{/if}
+</select>
+{else}
+{assign var="field_options" value=$fields.tipo_pago_c.options }
+{capture name="field_val"}{$fields.tipo_pago_c.value}{/capture}
+{assign var="field_val" value=$smarty.capture.field_val}
+{capture name="ac_key"}{$fields.tipo_pago_c.name}{/capture}
+{assign var="ac_key" value=$smarty.capture.ac_key}
+<select style='display:none' name="{$fields.tipo_pago_c.name}"
+id="{$fields.tipo_pago_c.name}"
+title='Tipo de Pago'          
+>
+{if isset($fields.tipo_pago_c.value) && $fields.tipo_pago_c.value != ''}
+{html_options options=$fields.tipo_pago_c.options selected=$fields.tipo_pago_c.value}
+{else}
+{html_options options=$fields.tipo_pago_c.options selected=$fields.tipo_pago_c.default}
+{/if}
+</select>
+<input
+id="{$fields.tipo_pago_c.name}-input"
+name="{$fields.tipo_pago_c.name}-input"
+size="30"
+value="{$field_val|lookup:$field_options}"
+type="text" style="vertical-align: top;">
+<span class="id-ff multiple">
+<button type="button"><img src="{sugar_getimagepath file="id-ff-down.png"}" id="{$fields.tipo_pago_c.name}-image"></button><button type="button"
+id="btn-clear-{$fields.tipo_pago_c.name}-input"
+title="Clear"
+onclick="SUGAR.clearRelateField(this.form, '{$fields.tipo_pago_c.name}-input', '{$fields.tipo_pago_c.name}');sync_{$fields.tipo_pago_c.name}()"><span class="suitepicon suitepicon-action-clear"></span></button>
+</span>
+{literal}
+<script>
+SUGAR.AutoComplete.{/literal}{$ac_key}{literal} = [];
+{/literal}
+
+{literal}
+(function (){
+    var selectElem = document.getElementById("{/literal}{$fields.tipo_pago_c.name}{literal}");
+
+    if (typeof select_defaults =="undefined")
+        select_defaults = [];
+
+    select_defaults[selectElem.id] = {key:selectElem.value,text:''};
+
+    //get default
+    for (i=0;i<selectElem.options.length;i++){
+        if (selectElem.options[i].value==selectElem.value)
+            select_defaults[selectElem.id].text = selectElem.options[i].innerHTML;
+    }
+
+    //SUGAR.AutoComplete.{$ac_key}.ds =
+    //get options array from vardefs
+    var options = SUGAR.AutoComplete.getOptionsArray("");
+
+    YUI().use('datasource', 'datasource-jsonschema',function (Y) {
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.ds = new Y.DataSource.Function({
+            source: function (request) {
+                var ret = [];
+                for (i=0;i<selectElem.options.length;i++)
+                    if (!(selectElem.options[i].value=='' && selectElem.options[i].innerHTML==''))
+                        ret.push({'key':selectElem.options[i].value,'text':selectElem.options[i].innerHTML});
+                return ret;
+            }
+        });
+    });
+})();
+{/literal}
+
+{literal}
+YUI().use("autocomplete", "autocomplete-filters", "autocomplete-highlighters", "node","node-event-simulate", function (Y) {
+    {/literal}
+
+    SUGAR.AutoComplete.{$ac_key}.inputNode = Y.one('#{$fields.tipo_pago_c.name}-input');
+    SUGAR.AutoComplete.{$ac_key}.inputImage = Y.one('#{$fields.tipo_pago_c.name}-image');
+    SUGAR.AutoComplete.{$ac_key}.inputHidden = Y.one('#{$fields.tipo_pago_c.name}');
+
+        {literal}
+    function SyncToHidden(selectme){
+        var selectElem = document.getElementById("{/literal}{$fields.tipo_pago_c.name}{literal}");
+        var doSimulateChange = false;
+
+        if (selectElem.value!=selectme)
+            doSimulateChange=true;
+
+        selectElem.value=selectme;
+
+        for (i=0;i<selectElem.options.length;i++){
+            selectElem.options[i].selected=false;
+            if (selectElem.options[i].value==selectme)
+                selectElem.options[i].selected=true;
+        }
+
+        if (doSimulateChange)
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('change');
+    }
+
+    //global variable
+    sync_{/literal}{$fields.tipo_pago_c.name}{literal} = function(){
+        SyncToHidden();
+    }
+    function syncFromHiddenToWidget(){
+
+        var selectElem = document.getElementById("{/literal}{$fields.tipo_pago_c.name}{literal}");
+
+        //if select no longer on page, kill timer
+        if (selectElem==null || selectElem.options == null)
+            return;
+
+        var currentvalue = SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.get('value');
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.simulate('keyup');
+
+        for (i=0;i<selectElem.options.length;i++){
+
+            if (selectElem.options[i].value==selectElem.value && document.activeElement != document.getElementById('{/literal}{$fields.tipo_pago_c.name}-input{literal}'))
+                SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.set('value',selectElem.options[i].innerHTML);
+        }
+    }
+
+    YAHOO.util.Event.onAvailable("{/literal}{$fields.tipo_pago_c.name}{literal}", syncFromHiddenToWidget);
+    {/literal}
+
+    SUGAR.AutoComplete.{$ac_key}.minQLen = 0;
+    SUGAR.AutoComplete.{$ac_key}.queryDelay = 0;
+    SUGAR.AutoComplete.{$ac_key}.numOptions = {$field_options|@count};
+    if(SUGAR.AutoComplete.{$ac_key}.numOptions >= 300) {literal}{
+        {/literal}
+        SUGAR.AutoComplete.{$ac_key}.minQLen = 1;
+        SUGAR.AutoComplete.{$ac_key}.queryDelay = 200;
+        {literal}
+    }
+    {/literal}
+    if(SUGAR.AutoComplete.{$ac_key}.numOptions >= 3000) {literal}{
+        {/literal}
+        SUGAR.AutoComplete.{$ac_key}.minQLen = 1;
+        SUGAR.AutoComplete.{$ac_key}.queryDelay = 500;
+        {literal}
+    }
+    {/literal}
+    
+    SUGAR.AutoComplete.{$ac_key}.optionsVisible = false;
+
+    {literal}
+    SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.plug(Y.Plugin.AutoComplete, {
+        activateFirstItem: true,
+        {/literal}
+        minQueryLength: SUGAR.AutoComplete.{$ac_key}.minQLen,
+        queryDelay: SUGAR.AutoComplete.{$ac_key}.queryDelay,
+        zIndex: 99999,
+
+        
+        {literal}
+        source: SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.ds,
+
+        resultTextLocator: 'text',
+        resultHighlighter: 'phraseMatch',
+        resultFilters: 'phraseMatch',
+    });
+
+    SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.expandHover = function(ex){
+        var hover = YAHOO.util.Dom.getElementsByClassName('dccontent');
+        if(hover[0] != null){
+            if (ex) {
+                var h = '1000px';
+                hover[0].style.height = h;
+            }
+            else{
+                hover[0].style.height = '';
+            }
+        }
+    }
+
+    if({/literal}SUGAR.AutoComplete.{$ac_key}.minQLen{literal} == 0){
+        // expand the dropdown options upon focus
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('focus', function () {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.sendRequest('');
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible = true;
+        });
+    }
+
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('click', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('click');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('dblclick', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('dblclick');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('focus', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('focus');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('mouseup', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('mouseup');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('mousedown', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('mousedown');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('blur', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('blur');
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible = false;
+            var selectElem = document.getElementById("{/literal}{$fields.tipo_pago_c.name}{literal}");
+            //if typed value is a valid option, do nothing
+            for (i=0;i<selectElem.options.length;i++)
+                if (selectElem.options[i].innerHTML==SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.get('value'))
+                    return;
+
+            //typed value is invalid, so set the text and the hidden to blank
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.set('value', select_defaults[selectElem.id].text);
+            SyncToHidden(select_defaults[selectElem.id].key);
+        });
+        
+            // when they click on the arrow image, toggle the visibility of the options
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputImage.ancestor().on('click', function () {
+                if (SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible) {
+                    SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.blur();
+                } else {
+                    SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.focus();
+                }
+            });
+
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('query', function () {
+                SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.set('value', '');
+            });
+
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('visibleChange', function (e) {
+                SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.expandHover(e.newVal); // expand
+            });
+
+            // when they select an option, set the hidden input with the KEY, to be saved
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('select', function(e) {
+                SyncToHidden(e.result.raw.key);
+            });
+
+        });
+</script>
+{/literal}
+{/if}
+<script type="text/javascript">
+    if(typeof de_entries == 'undefined'){literal}{var de_entries = new Array;}{/literal}
+    var el = document.getElementById("");
+    addLoadEvent(function(){literal}{loadDynamicEnum({/literal}"","{$fields.tipo_pago_c.name}"{literal})}{/literal});
+    if (SUGAR.ajaxUI && SUGAR.ajaxUI.hist_loaded) {literal}{loadDynamicEnum({/literal}"","{$fields.tipo_pago_c.name}"{literal})}{/literal}
+</script>
+</div>  
+<div class="form-group col-md-6" >
+<label>
+{capture name="label" assign="label"}{sugar_translate label='LBL_TERM_YEARS_C' module='AOS_Quotes'}{/capture}
+{$label|strip_semicolon}:
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+{counter name="panelFieldCount"}
+
+<script type="text/javascript" src='{sugar_getjspath file="include/SugarFields/Fields/Dynamicenum/SugarFieldDynamicenum.js"}'></script>
+{if !isset($config.enable_autocomplete) || $config.enable_autocomplete==false}
+<select name="{$fields.term_years_c.name}"
+id="{$fields.term_years_c.name}"
+title='Plazo en a&ntilde;os'           
+>
+{if isset($fields.term_years_c.value) && $fields.term_years_c.value != ''}
+{html_options options=$fields.term_years_c.options selected=$fields.term_years_c.value}
+{else}
+{html_options options=$fields.term_years_c.options selected=$fields.term_years_c.default}
+{/if}
+</select>
+{else}
+{assign var="field_options" value=$fields.term_years_c.options }
+{capture name="field_val"}{$fields.term_years_c.value}{/capture}
+{assign var="field_val" value=$smarty.capture.field_val}
+{capture name="ac_key"}{$fields.term_years_c.name}{/capture}
+{assign var="ac_key" value=$smarty.capture.ac_key}
+<select style='display:none' name="{$fields.term_years_c.name}"
+id="{$fields.term_years_c.name}"
+title='Plazo en a&ntilde;os'          
+>
+{if isset($fields.term_years_c.value) && $fields.term_years_c.value != ''}
+{html_options options=$fields.term_years_c.options selected=$fields.term_years_c.value}
+{else}
+{html_options options=$fields.term_years_c.options selected=$fields.term_years_c.default}
+{/if}
+</select>
+<input
+id="{$fields.term_years_c.name}-input"
+name="{$fields.term_years_c.name}-input"
+size="30"
+value="{$field_val|lookup:$field_options}"
+type="text" style="vertical-align: top;">
+<span class="id-ff multiple">
+<button type="button"><img src="{sugar_getimagepath file="id-ff-down.png"}" id="{$fields.term_years_c.name}-image"></button><button type="button"
+id="btn-clear-{$fields.term_years_c.name}-input"
+title="Clear"
+onclick="SUGAR.clearRelateField(this.form, '{$fields.term_years_c.name}-input', '{$fields.term_years_c.name}');sync_{$fields.term_years_c.name}()"><span class="suitepicon suitepicon-action-clear"></span></button>
+</span>
+{literal}
+<script>
+SUGAR.AutoComplete.{/literal}{$ac_key}{literal} = [];
+{/literal}
+
+{literal}
+(function (){
+    var selectElem = document.getElementById("{/literal}{$fields.term_years_c.name}{literal}");
+
+    if (typeof select_defaults =="undefined")
+        select_defaults = [];
+
+    select_defaults[selectElem.id] = {key:selectElem.value,text:''};
+
+    //get default
+    for (i=0;i<selectElem.options.length;i++){
+        if (selectElem.options[i].value==selectElem.value)
+            select_defaults[selectElem.id].text = selectElem.options[i].innerHTML;
+    }
+
+    //SUGAR.AutoComplete.{$ac_key}.ds =
+    //get options array from vardefs
+    var options = SUGAR.AutoComplete.getOptionsArray("");
+
+    YUI().use('datasource', 'datasource-jsonschema',function (Y) {
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.ds = new Y.DataSource.Function({
+            source: function (request) {
+                var ret = [];
+                for (i=0;i<selectElem.options.length;i++)
+                    if (!(selectElem.options[i].value=='' && selectElem.options[i].innerHTML==''))
+                        ret.push({'key':selectElem.options[i].value,'text':selectElem.options[i].innerHTML});
+                return ret;
+            }
+        });
+    });
+})();
+{/literal}
+
+{literal}
+YUI().use("autocomplete", "autocomplete-filters", "autocomplete-highlighters", "node","node-event-simulate", function (Y) {
+    {/literal}
+
+    SUGAR.AutoComplete.{$ac_key}.inputNode = Y.one('#{$fields.term_years_c.name}-input');
+    SUGAR.AutoComplete.{$ac_key}.inputImage = Y.one('#{$fields.term_years_c.name}-image');
+    SUGAR.AutoComplete.{$ac_key}.inputHidden = Y.one('#{$fields.term_years_c.name}');
+
+        {literal}
+    function SyncToHidden(selectme){
+        var selectElem = document.getElementById("{/literal}{$fields.term_years_c.name}{literal}");
+        var doSimulateChange = false;
+
+        if (selectElem.value!=selectme)
+            doSimulateChange=true;
+
+        selectElem.value=selectme;
+
+        for (i=0;i<selectElem.options.length;i++){
+            selectElem.options[i].selected=false;
+            if (selectElem.options[i].value==selectme)
+                selectElem.options[i].selected=true;
+        }
+
+        if (doSimulateChange)
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('change');
+    }
+
+    //global variable
+    sync_{/literal}{$fields.term_years_c.name}{literal} = function(){
+        SyncToHidden();
+    }
+    function syncFromHiddenToWidget(){
+
+        var selectElem = document.getElementById("{/literal}{$fields.term_years_c.name}{literal}");
+
+        //if select no longer on page, kill timer
+        if (selectElem==null || selectElem.options == null)
+            return;
+
+        var currentvalue = SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.get('value');
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.simulate('keyup');
+
+        for (i=0;i<selectElem.options.length;i++){
+
+            if (selectElem.options[i].value==selectElem.value && document.activeElement != document.getElementById('{/literal}{$fields.term_years_c.name}-input{literal}'))
+                SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.set('value',selectElem.options[i].innerHTML);
+        }
+    }
+
+    YAHOO.util.Event.onAvailable("{/literal}{$fields.term_years_c.name}{literal}", syncFromHiddenToWidget);
+    {/literal}
+
+    SUGAR.AutoComplete.{$ac_key}.minQLen = 0;
+    SUGAR.AutoComplete.{$ac_key}.queryDelay = 0;
+    SUGAR.AutoComplete.{$ac_key}.numOptions = {$field_options|@count};
+    if(SUGAR.AutoComplete.{$ac_key}.numOptions >= 300) {literal}{
+        {/literal}
+        SUGAR.AutoComplete.{$ac_key}.minQLen = 1;
+        SUGAR.AutoComplete.{$ac_key}.queryDelay = 200;
+        {literal}
+    }
+    {/literal}
+    if(SUGAR.AutoComplete.{$ac_key}.numOptions >= 3000) {literal}{
+        {/literal}
+        SUGAR.AutoComplete.{$ac_key}.minQLen = 1;
+        SUGAR.AutoComplete.{$ac_key}.queryDelay = 500;
+        {literal}
+    }
+    {/literal}
+    
+    SUGAR.AutoComplete.{$ac_key}.optionsVisible = false;
+
+    {literal}
+    SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.plug(Y.Plugin.AutoComplete, {
+        activateFirstItem: true,
+        {/literal}
+        minQueryLength: SUGAR.AutoComplete.{$ac_key}.minQLen,
+        queryDelay: SUGAR.AutoComplete.{$ac_key}.queryDelay,
+        zIndex: 99999,
+
+        
+        {literal}
+        source: SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.ds,
+
+        resultTextLocator: 'text',
+        resultHighlighter: 'phraseMatch',
+        resultFilters: 'phraseMatch',
+    });
+
+    SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.expandHover = function(ex){
+        var hover = YAHOO.util.Dom.getElementsByClassName('dccontent');
+        if(hover[0] != null){
+            if (ex) {
+                var h = '1000px';
+                hover[0].style.height = h;
+            }
+            else{
+                hover[0].style.height = '';
+            }
+        }
+    }
+
+    if({/literal}SUGAR.AutoComplete.{$ac_key}.minQLen{literal} == 0){
+        // expand the dropdown options upon focus
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('focus', function () {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.sendRequest('');
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible = true;
+        });
+    }
+
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('click', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('click');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('dblclick', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('dblclick');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('focus', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('focus');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('mouseup', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('mouseup');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('mousedown', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('mousedown');
+        });
+
+        SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('blur', function(e) {
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('blur');
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible = false;
+            var selectElem = document.getElementById("{/literal}{$fields.term_years_c.name}{literal}");
+            //if typed value is a valid option, do nothing
+            for (i=0;i<selectElem.options.length;i++)
+                if (selectElem.options[i].innerHTML==SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.get('value'))
+                    return;
+
+            //typed value is invalid, so set the text and the hidden to blank
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.set('value', select_defaults[selectElem.id].text);
+            SyncToHidden(select_defaults[selectElem.id].key);
+        });
+        
+            // when they click on the arrow image, toggle the visibility of the options
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputImage.ancestor().on('click', function () {
+                if (SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible) {
+                    SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.blur();
+                } else {
+                    SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.focus();
+                }
+            });
+
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('query', function () {
+                SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.set('value', '');
+            });
+
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('visibleChange', function (e) {
+                SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.expandHover(e.newVal); // expand
+            });
+
+            // when they select an option, set the hidden input with the KEY, to be saved
+            SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('select', function(e) {
+                SyncToHidden(e.result.raw.key);
+            });
+
+        });
+</script>
+{/literal}
+{/if}
+<script type="text/javascript">
+    if(typeof de_entries == 'undefined'){literal}{var de_entries = new Array;}{/literal}
+    var el = document.getElementById("");
+    addLoadEvent(function(){literal}{loadDynamicEnum({/literal}"","{$fields.term_years_c.name}"{literal})}{/literal});
+    if (SUGAR.ajaxUI && SUGAR.ajaxUI.hist_loaded) {literal}{loadDynamicEnum({/literal}"","{$fields.term_years_c.name}"{literal})}{/literal}
+</script>
+</div>  
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+<div class="form-group col-md-6" >
+<label>
+{capture name="label" assign="label"}{sugar_translate label='LBL_PRECIO_MCUADRADO_C' module='AOS_Quotes'}{/capture}
+{$label|strip_semicolon}:
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+{counter name="panelFieldCount"}
+
+{if strlen($fields.precio_mcuadrado_c.value) <= 0}
+{assign var="value" value=$fields.precio_mcuadrado_c.default_value }
+{else}
+{assign var="value" value=$fields.precio_mcuadrado_c.value }
+{/if}  
+<input type='text' name='{$fields.precio_mcuadrado_c.name}'
+id='{$fields.precio_mcuadrado_c.name}'
+size='30'
+maxlength='18'value='{sugar_number_format var=$value precision=8 }'
+title='Precio m2'
+tabindex='0'
+>
+</div>  
+<div class="form-group col-md-6" >
+<label>
+{capture name="label" assign="label"}{sugar_translate label='LBL_TOTAL_AMT' module='AOS_Quotes'}{/capture}
+{$label|strip_semicolon}:
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+{counter name="panelFieldCount"}
+
+{if strlen($fields.total_amt.value) <= 0}
+{assign var="value" value=$fields.total_amt.default_value }
+{else}
+{assign var="value" value=$fields.total_amt.value }
+{/if}  
+<input type='text' name='{$fields.total_amt.name}' 
+id='{$fields.total_amt.name}' size='30' maxlength='26,6' value='{sugar_number_format var=$value}' title='' tabindex='0'
+>
+</div>  
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+<div class="form-group col-md-6" >
+<label>
+{capture name="label" assign="label"}{sugar_translate label='LBL_LBL_CUOTAINICIAL_C' module='AOS_Quotes'}{/capture}
+{$label|strip_semicolon}:
+<span class="required">*</span>
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+{counter name="panelFieldCount"}
+
+{if strlen($fields.lbl_cuotainicial_c.value) <= 0}
+{assign var="value" value=$fields.lbl_cuotainicial_c.default_value }
+{else}
+{assign var="value" value=$fields.lbl_cuotainicial_c.value }
+{/if}  
+<input type='text' name='{$fields.lbl_cuotainicial_c.name}'
+id='{$fields.lbl_cuotainicial_c.name}'
+size='30'
+maxlength='10'value='{sugar_number_format var=$value precision=2 }'
+title=''
+tabindex='0'
+>
+</div>  
+<div class="form-group col-md-6" >
+<label>
+{capture name="label" assign="label"}{sugar_translate label='LBL_DISCOUNT_AMOUNT' module='AOS_Quotes'}{/capture}
+{$label|strip_semicolon}:
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+{counter name="panelFieldCount"}
+
+{if strlen($fields.discount_amount.value) <= 0}
+{assign var="value" value=$fields.discount_amount.default_value }
+{else}
+{assign var="value" value=$fields.discount_amount.value }
+{/if}  
+<input type='text' name='{$fields.discount_amount.name}' 
+id='{$fields.discount_amount.name}' size='30' maxlength='26,6' value='{sugar_number_format var=$value}' title='' tabindex='0'
+>
+</div>  
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+<div class="form-group col-md-6" >
+<label>
+{capture name="label" assign="label"}{sugar_translate label='LBL_SALDO_C' module='AOS_Quotes'}{/capture}
+{$label|strip_semicolon}:
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+{counter name="panelFieldCount"}
+
+{if strlen($fields.saldo_c.value) <= 0}
+{assign var="value" value=$fields.saldo_c.default_value }
+{else}
+{assign var="value" value=$fields.saldo_c.value }
+{/if}  
+<input type='text' name='{$fields.saldo_c.name}'
+id='{$fields.saldo_c.name}'
+size='30'
+maxlength='18'value='{sugar_number_format var=$value precision=8 }'
+title='Saldo'
+tabindex='0'
+>
+</div>  
+<div class="form-group col-md-6" >
+<label>
+&nbsp;
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+</div>  
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+<div class="form-group col-md-6" >
+<label>
+{capture name="label" assign="label"}{sugar_translate label='LBL_INVOICE_STATUS' module='AOS_Quotes'}{/capture}
+{$label|strip_semicolon}:
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+{counter name="panelFieldCount"}
+
+{if !isset($config.enable_autocomplete) || $config.enable_autocomplete==false}
+<select name="{$fields.invoice_status.name}" 
+id="{$fields.invoice_status.name}" 
+title=''       
+>
+{if isset($fields.invoice_status.value) && $fields.invoice_status.value != ''}
+{html_options options=$fields.invoice_status.options selected=$fields.invoice_status.value}
+{else}
+{html_options options=$fields.invoice_status.options selected=$fields.invoice_status.default}
+{/if}
+</select>
+{else}
+{assign var="field_options" value=$fields.invoice_status.options }
+{capture name="field_val"}{$fields.invoice_status.value}{/capture}
+{assign var="field_val" value=$smarty.capture.field_val}
+{capture name="ac_key"}{$fields.invoice_status.name}{/capture}
+{assign var="ac_key" value=$smarty.capture.ac_key}
+<select style='display:none' name="{$fields.invoice_status.name}" 
+id="{$fields.invoice_status.name}" 
+title=''          
+>
+{if isset($fields.invoice_status.value) && $fields.invoice_status.value != ''}
+{html_options options=$fields.invoice_status.options selected=$fields.invoice_status.value}
+{else}
+{html_options options=$fields.invoice_status.options selected=$fields.invoice_status.default}
+{/if}
+</select>
+<input
+id="{$fields.invoice_status.name}-input"
+name="{$fields.invoice_status.name}-input"
+size="30"
+value="{$field_val|lookup:$field_options}"
+type="text" style="vertical-align: top;">
+<span class="id-ff multiple">
+<button type="button"><img src="{sugar_getimagepath file="id-ff-down.png"}" id="{$fields.invoice_status.name}-image"></button><button type="button"
+id="btn-clear-{$fields.invoice_status.name}-input"
+title="Clear"
+onclick="SUGAR.clearRelateField(this.form, '{$fields.invoice_status.name}-input', '{$fields.invoice_status.name}');sync_{$fields.invoice_status.name}()"><span class="suitepicon suitepicon-action-clear"></span></button>
+</span>
+{literal}
+<script>
+	SUGAR.AutoComplete.{/literal}{$ac_key}{literal} = [];
+	{/literal}
+
+			{literal}
+		(function (){
+			var selectElem = document.getElementById("{/literal}{$fields.invoice_status.name}{literal}");
+			
+			if (typeof select_defaults =="undefined")
+				select_defaults = [];
+			
+			select_defaults[selectElem.id] = {key:selectElem.value,text:''};
+
+			//get default
+			for (i=0;i<selectElem.options.length;i++){
+				if (selectElem.options[i].value==selectElem.value)
+					select_defaults[selectElem.id].text = selectElem.options[i].innerHTML;
+			}
+
+			//SUGAR.AutoComplete.{$ac_key}.ds = 
+			//get options array from vardefs
+			var options = SUGAR.AutoComplete.getOptionsArray("");
+
+			YUI().use('datasource', 'datasource-jsonschema',function (Y) {
+				SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.ds = new Y.DataSource.Function({
+				    source: function (request) {
+				    	var ret = [];
+				    	for (i=0;i<selectElem.options.length;i++)
+				    		if (!(selectElem.options[i].value=='' && selectElem.options[i].innerHTML==''))
+				    			ret.push({'key':selectElem.options[i].value,'text':selectElem.options[i].innerHTML});
+				    	return ret;
+				    }
+				});
+			});
+		})();
+		{/literal}
+	
+	{literal}
+		YUI().use("autocomplete", "autocomplete-filters", "autocomplete-highlighters", "node","node-event-simulate", function (Y) {
+	{/literal}
+			
+	SUGAR.AutoComplete.{$ac_key}.inputNode = Y.one('#{$fields.invoice_status.name}-input');
+	SUGAR.AutoComplete.{$ac_key}.inputImage = Y.one('#{$fields.invoice_status.name}-image');
+	SUGAR.AutoComplete.{$ac_key}.inputHidden = Y.one('#{$fields.invoice_status.name}');
+	
+			{literal}
+			function SyncToHidden(selectme){
+				var selectElem = document.getElementById("{/literal}{$fields.invoice_status.name}{literal}");
+				var doSimulateChange = false;
+				
+				if (selectElem.value!=selectme)
+					doSimulateChange=true;
+				
+				selectElem.value=selectme;
+
+				for (i=0;i<selectElem.options.length;i++){
+					selectElem.options[i].selected=false;
+					if (selectElem.options[i].value==selectme)
+						selectElem.options[i].selected=true;
+				}
+
+				if (doSimulateChange)
+					SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('change');
+			}
+
+			//global variable 
+			sync_{/literal}{$fields.invoice_status.name}{literal} = function(){
+				SyncToHidden();
+			}
+			function syncFromHiddenToWidget(){
+
+				var selectElem = document.getElementById("{/literal}{$fields.invoice_status.name}{literal}");
+
+				//if select no longer on page, kill timer
+				if (selectElem==null || selectElem.options == null)
+					return;
+
+				var currentvalue = SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.get('value');
+
+				SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.simulate('keyup');
+
+				for (i=0;i<selectElem.options.length;i++){
+
+					if (selectElem.options[i].value==selectElem.value && document.activeElement != document.getElementById('{/literal}{$fields.invoice_status.name}-input{literal}'))
+						SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.set('value',selectElem.options[i].innerHTML);
+				}
+			}
+
+            YAHOO.util.Event.onAvailable("{/literal}{$fields.invoice_status.name}{literal}", syncFromHiddenToWidget);
+		{/literal}
+
+		SUGAR.AutoComplete.{$ac_key}.minQLen = 0;
+		SUGAR.AutoComplete.{$ac_key}.queryDelay = 0;
+		SUGAR.AutoComplete.{$ac_key}.numOptions = {$field_options|@count};
+		if(SUGAR.AutoComplete.{$ac_key}.numOptions >= 300) {literal}{
+			{/literal}
+			SUGAR.AutoComplete.{$ac_key}.minQLen = 1;
+			SUGAR.AutoComplete.{$ac_key}.queryDelay = 200;
+			{literal}
+		}
+		{/literal}
+		if(SUGAR.AutoComplete.{$ac_key}.numOptions >= 3000) {literal}{
+			{/literal}
+			SUGAR.AutoComplete.{$ac_key}.minQLen = 1;
+			SUGAR.AutoComplete.{$ac_key}.queryDelay = 500;
+			{literal}
+		}
+		{/literal}
+		
+	SUGAR.AutoComplete.{$ac_key}.optionsVisible = false;
+	
+	{literal}
+	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.plug(Y.Plugin.AutoComplete, {
+		activateFirstItem: true,
+		{/literal}
+		minQueryLength: SUGAR.AutoComplete.{$ac_key}.minQLen,
+		queryDelay: SUGAR.AutoComplete.{$ac_key}.queryDelay,
+		zIndex: 99999,
+
+				
+		{literal}
+		source: SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.ds,
+		
+		resultTextLocator: 'text',
+		resultHighlighter: 'phraseMatch',
+		resultFilters: 'phraseMatch',
+	});
+
+	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.expandHover = function(ex){
+		var hover = YAHOO.util.Dom.getElementsByClassName('dccontent');
+		if(hover[0] != null){
+			if (ex) {
+				var h = '1000px';
+				hover[0].style.height = h;
+			}
+			else{
+				hover[0].style.height = '';
+			}
+		}
+	}
+		
+	if({/literal}SUGAR.AutoComplete.{$ac_key}.minQLen{literal} == 0){
+		// expand the dropdown options upon focus
+		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('focus', function () {
+			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.sendRequest('');
+			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible = true;
+		});
+	}
+
+			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('click', function(e) {
+			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('click');
+		});
+		
+		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('dblclick', function(e) {
+			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('dblclick');
+		});
+
+		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('focus', function(e) {
+			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('focus');
+		});
+
+		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('mouseup', function(e) {
+			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('mouseup');
+		});
+
+		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('mousedown', function(e) {
+			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('mousedown');
+		});
+
+		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.on('blur', function(e) {
+			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.simulate('blur');
+			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible = false;
+			var selectElem = document.getElementById("{/literal}{$fields.invoice_status.name}{literal}");
+			//if typed value is a valid option, do nothing
+			for (i=0;i<selectElem.options.length;i++)
+				if (selectElem.options[i].innerHTML==SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.get('value'))
+					return;
+			
+			//typed value is invalid, so set the text and the hidden to blank
+			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.set('value', select_defaults[selectElem.id].text);
+			SyncToHidden(select_defaults[selectElem.id].key);
+		});
+	
+	// when they click on the arrow image, toggle the visibility of the options
+	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputImage.ancestor().on('click', function () {
+		if (SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.optionsVisible) {
+			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.blur();
+		} else {
+			SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.focus();
+		}
+	});
+
+	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('query', function () {
+		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputHidden.set('value', '');
+	});
+
+	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('visibleChange', function (e) {
+		SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.expandHover(e.newVal); // expand
+	});
+
+	// when they select an option, set the hidden input with the KEY, to be saved
+	SUGAR.AutoComplete.{/literal}{$ac_key}{literal}.inputNode.ac.on('select', function(e) {
+		SyncToHidden(e.result.raw.key);
+	});
+ 
+});
+</script> 
+{/literal}
+{/if}
+</div>  
+<div class="form-group col-md-6" >
+<label>
+{capture name="label" assign="label"}{sugar_translate label='LBL_FECHA_ENVIO_PROGRAMADA' module='AOS_Quotes'}{/capture}
+{$label|strip_semicolon}:
+<span class="required">*</span>
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+{counter name="panelFieldCount"}
+
+<table border="0" cellpadding="0" cellspacing="0" class="dateTime">
+<tr valign="middle">
+<td nowrap>
+<input autocomplete="off" type="text" id="{$fields.fecha_envio_programada_c.name}_date" class="datetimecombo_date" value="{$fields[$fields.fecha_envio_programada_c.name].value}" size="11" maxlength="10" title='Fecha Envi&oacute; Programada' tabindex="0" onblur="combo_{$fields.fecha_envio_programada_c.name}.update();" onchange="combo_{$fields.fecha_envio_programada_c.name}.update(); "    >
+{capture assign="other_attributes"}alt="{$APP.LBL_ENTER_DATE}"  border="0" id="{$fields.fecha_envio_programada_c.name}_trigger"{/capture}
+{sugar_getimage name="jscalendar" ext=".gif" other_attributes="$other_attributes"}&nbsp;
+</td>
+<td nowrap>
+<div id="{$fields.fecha_envio_programada_c.name}_time_section" class="datetimecombo_time_section"></div>
+</td>
+</tr>
+</table>
+<input type="hidden" class="DateTimeCombo" id="{$fields.fecha_envio_programada_c.name}" name="{$fields.fecha_envio_programada_c.name}" value="{$fields[$fields.fecha_envio_programada_c.name].value}">
+<script type="text/javascript" src="{sugar_getjspath file="include/SugarFields/Fields/Datetimecombo/Datetimecombo.js"}"></script>
+<script type="text/javascript">
+var combo_{$fields.fecha_envio_programada_c.name} = new Datetimecombo("{$fields[$fields.fecha_envio_programada_c.name].value}", "{$fields.fecha_envio_programada_c.name}", "{$TIME_FORMAT}", "0", '', false, true);
+//Render the remaining widget fields
+text = combo_{$fields.fecha_envio_programada_c.name}.html('');
+document.getElementById('{$fields.fecha_envio_programada_c.name}_time_section').innerHTML = '<span style="top:-6px;"'+text+'</span>';
+
+//Call eval on the update function to handle updates to calendar picker object
+eval(combo_{$fields.fecha_envio_programada_c.name}.jsscript(''));
+
+//bug 47718: this causes too many addToValidates to be called, resulting in the error messages being displayed multiple times
+//    removing it here to mirror the Datetime SugarField, where the validation is not added at this level
+//addToValidate('{$form_name}',"{$fields.fecha_envio_programada_c.name}_date",'date',false,"{$fields.fecha_envio_programada_c.name}");
+addToValidateBinaryDependency('{$form_name}',"{$fields.fecha_envio_programada_c.name}_hours", 'alpha', false, "{$APP.ERR_MISSING_REQUIRED_FIELDS} {$APP.LBL_HOURS}" ,"{$fields.fecha_envio_programada_c.name}_date");
+addToValidateBinaryDependency('{$form_name}', "{$fields.fecha_envio_programada_c.name}_minutes", 'alpha', false, "{$APP.ERR_MISSING_REQUIRED_FIELDS} {$APP.LBL_MINUTES}" ,"{$fields.fecha_envio_programada_c.name}_date");
+addToValidateBinaryDependency('{$form_name}', "{$fields.fecha_envio_programada_c.name}_meridiem", 'alpha', false, "{$APP.ERR_MISSING_REQUIRED_FIELDS} {$APP.LBL_MERIDIEM}","{$fields.fecha_envio_programada_c.name}_date");
+
+YAHOO.util.Event.onDOMReady(function()
+{ldelim}
+
+	Calendar.setup ({ldelim}
+	onClose : update_{$fields.fecha_envio_programada_c.name},
+	inputField : "{$fields.fecha_envio_programada_c.name}_date",
+    form : "EditView",
+	ifFormat : "{$CALENDAR_FORMAT}",
+	daFormat : "{$CALENDAR_FORMAT}",
+	button : "{$fields.fecha_envio_programada_c.name}_trigger",
+	singleClick : true,
+	step : 1,
+	weekNumbers: false,
+        startWeekday: {$CALENDAR_FDOW|default:'0'},
+	comboObject: combo_{$fields.fecha_envio_programada_c.name}
+	{rdelim});
+
+	//Call update for first time to round hours and minute values
+	combo_{$fields.fecha_envio_programada_c.name}.update(false);
+
+{rdelim}); 
+</script>
+</div>  
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+<div class="form-group col-md-12" >
+<label>
+&nbsp;
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+</div>  
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+<div class="form-group col-md-6" >
+<label>
+&nbsp;
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+</div>  
+<div class="form-group col-md-6" >
+<label>
+&nbsp;
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+</div>  
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+<div class="form-group col-md-6" >
+<label>
+&nbsp;
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+</div>  
+<div class="form-group col-md-6" >
+<label>
+&nbsp;
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+</div>  
+</div>   
+<script type="text/javascript">SUGAR.util.doWhen("typeof initPanel == 'function'", function() {ldelim} initPanel(3, ''); {rdelim}); </script>
+{if $panelFieldCount == 0}
+<script>document.getElementById("LBL_LINE_ITEMS").style.display='none';</script>
+{/if}
+</div>   
+<div class="panel-body">    
+{counter name="panelFieldCount" start=0 print=false assign="panelFieldCount"}
+<div style="clear:both;">
+<h4>
 {sugar_translate label='LBL_ADDRESS_INFORMATION' module='AOS_Quotes'}
 </h4>
 </div>
 <div class="row">
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+<div class="form-group col-md-12" >
+<label>
+{capture name="label" assign="label"}{sugar_translate label='LBL_ASSIGNED_TO_NAME' module='AOS_Quotes'}{/capture}
+{$label|strip_semicolon}:
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+{counter name="panelFieldCount"}
+
+<input type="text" name="{$fields.assigned_user_name.name}" class="sqsEnabled" tabindex="0" id="{$fields.assigned_user_name.name}" size="" value="{$fields.assigned_user_name.value}" title='' autocomplete="off"  	 >
+<input type="hidden" name="{$fields.assigned_user_name.id_name}" 
+id="{$fields.assigned_user_name.id_name}" 
+value="{$fields.assigned_user_id.value}">
+<span class="id-ff multiple">
+<button type="button" name="btn_{$fields.assigned_user_name.name}" id="btn_{$fields.assigned_user_name.name}" tabindex="0" title="{sugar_translate label="LBL_ACCESSKEY_SELECT_USERS_TITLE"}" class="button firstChild" value="{sugar_translate label="LBL_ACCESSKEY_SELECT_USERS_LABEL"}"
+onclick='open_popup(
+"{$fields.assigned_user_name.module}", 
+600, 
+400, 
+"", 
+true, 
+false, 
+{literal}{"call_back_function":"set_return","form_name":"EditView","field_to_name_array":{"id":"assigned_user_id","user_name":"assigned_user_name"}}{/literal}, 
+"single", 
+true
+);' ><span class="suitepicon suitepicon-action-select"></span></button><button type="button" name="btn_clr_{$fields.assigned_user_name.name}" id="btn_clr_{$fields.assigned_user_name.name}" tabindex="0" title="{sugar_translate label="LBL_ACCESSKEY_CLEAR_USERS_TITLE"}"  class="button lastChild"
+onclick="SUGAR.clearRelateField(this.form, '{$fields.assigned_user_name.name}', '{$fields.assigned_user_name.id_name}');"  value="{sugar_translate label="LBL_ACCESSKEY_CLEAR_USERS_LABEL"}" ><span class="suitepicon suitepicon-action-clear"></span></button>
+</span>
+<script type="text/javascript">
+SUGAR.util.doWhen(
+		"typeof(sqs_objects) != 'undefined' && typeof(sqs_objects['{$form_name}_{$fields.assigned_user_name.name}']) != 'undefined'",
+		enableQS
+);
+</script>
+</div>  
 {counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
 <div class="form-group col-md-6" >
 <label>
@@ -1327,16 +2514,6 @@ SUGAR.util.doWhen(
 </div>  
 <div class="form-group col-md-6" >
 <label>
-&nbsp;
-</label>
-{counter name="fieldsUsed"}
-
-<label>
-</label>
-</div>  
-{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
-<div class="form-group col-md-6" >
-<label>
 {capture name="label" assign="label"}{sugar_translate label='LBL_BILLING_CONTACT' module='AOS_Quotes'}{/capture}
 {$label|strip_semicolon}:
 </label>
@@ -1372,6 +2549,16 @@ SUGAR.util.doWhen(
 );
 </script>
 </div>  
+{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
+<div class="form-group col-md-6" >
+<label>
+&nbsp;
+</label>
+{counter name="fieldsUsed"}
+
+<label>
+</label>
+</div>  
 <div class="form-group col-md-6" >
 <label>
 &nbsp;
@@ -1382,397 +2569,28 @@ SUGAR.util.doWhen(
 </label>
 </div>  
 {counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
-<div class="form-group col-md-6" style="clear:both;">
+<div class="form-group col-md-6" >
+<label>
+&nbsp;
+</label>
 {counter name="fieldsUsed"}
 
 <label>
 </label>
-{counter name="panelFieldCount"}
-
-<script src='{sugar_getjspath file="include/SugarFields/Fields/Address/SugarFieldAddress.js"}'></script>
-<fieldset id='BILLING_address_fieldset'>
-<legend>{sugar_translate label='LBL_BILLING_ADDRESS' module=''}</legend>
-<table border="0" cellspacing="1" cellpadding="0" class="edit" width="100%">
-<tr>
-<td valign="top" id="billing_address_street_label" width='25%' scope='row'>
-<label for="billing_address_street">{sugar_translate label='LBL_BILLING_STREET' module=''}:</label>
-{if $fields.billing_address_street.required || false}
-<span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span>
-{/if}
-</td>
-<td width="*">
-<textarea id="billing_address_street" name="billing_address_street" title='' maxlength="150"
-                          rows="2" cols="30"
-                          tabindex="0">{$fields.billing_address_street.value}</textarea>
-</td>
-</tr>
-<tr>
-<td id="billing_address_city_label" width='%'
-scope='row'>
-<label for="billing_address_city">{sugar_translate label='LBL_CITY' module=''}:
-{if $fields.billing_address_city.required || false}
-<span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span>
-{/if}
-</td>
-<td>
-<input type="text" name="billing_address_city" id="billing_address_city" title='{$fields.billing_address_city.help}' size="30"
-maxlength='150' value='{$fields.billing_address_city.value}'
-tabindex="0">
-</td>
-</tr>
-<tr>
-<td id="billing_address_state_label" width='%'
-scope='row'>
-<label for="billing_address_state">{sugar_translate label='LBL_STATE' module=''}:</label>
-{if $fields.billing_address_state.required || false}
-<span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span>
-{/if}
-</td>
-<td>
-<input type="text" name="billing_address_state" id="billing_address_state" title='{$fields.billing_address_state.help}' size="30"
-maxlength='150' value='{$fields.billing_address_state.value}'
-tabindex="0">
-</td>
-</tr>
-<tr>
-<td id="billing_address_postalcode_label"
-width='%' scope='row'>
-<label for="billing_address_postalcode">{sugar_translate label='LBL_POSTAL_CODE' module=''}:</label>
-{if $fields.billing_address_postalcode.required || false}
-<span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span>
-{/if}
-</td>
-<td>
-<input type="text" name="billing_address_postalcode" id="billing_address_postalcode" title='{$fields.billing_address_postalcode.help}' size="30"
-maxlength='150'                       value='{$fields.billing_address_postalcode.value}' tabindex="0">
-</td>
-</tr>
-<tr>
-<td id="billing_address_country_label" width='%'
-scope='row'>
-<label for="billing_address_country">{sugar_translate label='LBL_COUNTRY' module=''}:</label>
-{if $fields.billing_address_country.required || false}
-<span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span>
-{/if}
-</td>
-<td>
-<input type="text" name="billing_address_country" id="billing_address_country" title='{$fields.billing_address_country.help}' size="30"
-maxlength='150' value='{$fields.billing_address_country.value}'
-tabindex="0">
-</td>
-</tr>
-<tr>
-<td colspan='2' NOWRAP>&nbsp;</td>
-</tr>
-</table>
-</fieldset>
-<script type="text/javascript">
-  SUGAR.util.doWhen("typeof(SUGAR.AddressField) != 'undefined'", function () {ldelim}
-      billing_address = new SUGAR.AddressField("billing_checkbox", '', 'billing');
-      {rdelim});
-</script>
 </div>  
 <div class="form-group col-md-6" >
+<label>
+&nbsp;
+</label>
 {counter name="fieldsUsed"}
 
 <label>
 </label>
-{counter name="panelFieldCount"}
-
-<script src='{sugar_getjspath file="include/SugarFields/Fields/Address/SugarFieldAddress.js"}'></script>
-<fieldset id='SHIPPING_address_fieldset'>
-<legend>{sugar_translate label='LBL_SHIPPING_ADDRESS' module=''}</legend>
-<table border="0" cellspacing="1" cellpadding="0" class="edit" width="100%">
-<tr>
-<td valign="top" id="shipping_address_street_label" width='25%' scope='row'>
-<label for="shipping_address_street">{sugar_translate label='LBL_SHIPPING_STREET' module=''}:</label>
-{if $fields.shipping_address_street.required || false}
-<span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span>
-{/if}
-</td>
-<td width="*">
-<textarea id="shipping_address_street" name="shipping_address_street" title='' maxlength="150"
-                          rows="2" cols="30"
-                          tabindex="0">{$fields.shipping_address_street.value}</textarea>
-</td>
-</tr>
-<tr>
-<td id="shipping_address_city_label" width='%'
-scope='row'>
-<label for="shipping_address_city">{sugar_translate label='LBL_CITY' module=''}:
-{if $fields.shipping_address_city.required || false}
-<span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span>
-{/if}
-</td>
-<td>
-<input type="text" name="shipping_address_city" id="shipping_address_city" title='{$fields.shipping_address_city.help}' size="30"
-maxlength='150' value='{$fields.shipping_address_city.value}'
-tabindex="0">
-</td>
-</tr>
-<tr>
-<td id="shipping_address_state_label" width='%'
-scope='row'>
-<label for="shipping_address_state">{sugar_translate label='LBL_STATE' module=''}:</label>
-{if $fields.shipping_address_state.required || false}
-<span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span>
-{/if}
-</td>
-<td>
-<input type="text" name="shipping_address_state" id="shipping_address_state" title='{$fields.shipping_address_state.help}' size="30"
-maxlength='150' value='{$fields.shipping_address_state.value}'
-tabindex="0">
-</td>
-</tr>
-<tr>
-<td id="shipping_address_postalcode_label"
-width='%' scope='row'>
-<label for="shipping_address_postalcode">{sugar_translate label='LBL_POSTAL_CODE' module=''}:</label>
-{if $fields.shipping_address_postalcode.required || false}
-<span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span>
-{/if}
-</td>
-<td>
-<input type="text" name="shipping_address_postalcode" id="shipping_address_postalcode" title='{$fields.shipping_address_postalcode.help}' size="30"
-maxlength='150'                       value='{$fields.shipping_address_postalcode.value}' tabindex="0">
-</td>
-</tr>
-<tr>
-<td id="shipping_address_country_label" width='%'
-scope='row'>
-<label for="shipping_address_country">{sugar_translate label='LBL_COUNTRY' module=''}:</label>
-{if $fields.shipping_address_country.required || false}
-<span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span>
-{/if}
-</td>
-<td>
-<input type="text" name="shipping_address_country" id="shipping_address_country" title='{$fields.shipping_address_country.help}' size="30"
-maxlength='150' value='{$fields.shipping_address_country.value}'
-tabindex="0">
-</td>
-</tr>
-<tr>
-<td scope='row' NOWRAP>
-{sugar_translate label='LBL_COPY_ADDRESS_FROM_LEFT' module=''}:
-</td>
-<td>
-<input id="shipping_checkbox" name="shipping_checkbox" type="checkbox"
-onclick="shipping_address.syncFields();">
-</td>
-</tr>
-</table>
-</fieldset>
-<script type="text/javascript">
-  SUGAR.util.doWhen("typeof(SUGAR.AddressField) != 'undefined'", function () {ldelim}
-      shipping_address = new SUGAR.AddressField("shipping_checkbox", 'billing', 'shipping');
-      {rdelim});
-</script>
 </div>  
 </div>   
-<script type="text/javascript">SUGAR.util.doWhen("typeof initPanel == 'function'", function() {ldelim} initPanel(2, ''); {rdelim}); </script>
+<script type="text/javascript">SUGAR.util.doWhen("typeof initPanel == 'function'", function() {ldelim} initPanel(4, ''); {rdelim}); </script>
 {if $panelFieldCount == 0}
 <script>document.getElementById("LBL_ADDRESS_INFORMATION").style.display='none';</script>
-{/if}
-</div>   
-<div class="panel-body">    
-{counter name="panelFieldCount" start=0 print=false assign="panelFieldCount"}
-<div style="clear:both;">
-<h4>
-{sugar_translate label='LBL_LINE_ITEMS' module='AOS_Quotes'}
-</h4>
-</div>
-<div class="row">
-{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
-<div class="form-group col-md-12" >
-<label>
-{capture name="label" assign="label"}{sugar_translate label='LBL_CURRENCY' module='AOS_Quotes'}{/capture}
-{$label|strip_semicolon}:
-</label>
-{counter name="fieldsUsed"}
-
-<label>
-</label>
-{counter name="panelFieldCount"}
-<span id='currency_id_span'>
-{$fields.currency_id.value}</span>
-</div>  
-{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
-<div class="form-group col-md-12" >
-<label>
-{capture name="label" assign="label"}{sugar_translate label='LBL_LINE_ITEMS' module='AOS_Quotes'}{/capture}
-{$label|strip_semicolon}:
-</label>
-{counter name="fieldsUsed"}
-
-<label>
-</label>
-{counter name="panelFieldCount"}
-<span id='line_items_span'>
-{$fields.line_items.value}</span>
-</div>  
-{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
-<div class="form-group col-md-12" >
-<label>
-&nbsp;
-</label>
-{counter name="fieldsUsed"}
-
-<label>
-</label>
-</div>  
-{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
-<div class="form-group col-md-12" >
-<label>
-{capture name="label" assign="label"}{sugar_translate label='LBL_TOTAL_AMT' module='AOS_Quotes'}{/capture}
-{$label|strip_semicolon}:
-</label>
-{counter name="fieldsUsed"}
-
-<label>
-</label>
-{counter name="panelFieldCount"}
-
-{if strlen($fields.total_amt.value) <= 0}
-{assign var="value" value=$fields.total_amt.default_value }
-{else}
-{assign var="value" value=$fields.total_amt.value }
-{/if}  
-<input type='text' name='{$fields.total_amt.name}' 
-id='{$fields.total_amt.name}' size='30' maxlength='26,6' value='{sugar_number_format var=$value}' title='' tabindex='0'
->
-</div>  
-{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
-<div class="form-group col-md-12" >
-<label>
-{capture name="label" assign="label"}{sugar_translate label='LBL_DISCOUNT_AMOUNT' module='AOS_Quotes'}{/capture}
-{$label|strip_semicolon}:
-</label>
-{counter name="fieldsUsed"}
-
-<label>
-</label>
-{counter name="panelFieldCount"}
-
-{if strlen($fields.discount_amount.value) <= 0}
-{assign var="value" value=$fields.discount_amount.default_value }
-{else}
-{assign var="value" value=$fields.discount_amount.value }
-{/if}  
-<input type='text' name='{$fields.discount_amount.name}' 
-id='{$fields.discount_amount.name}' size='30' maxlength='26,6' value='{sugar_number_format var=$value}' title='' tabindex='0'
->
-</div>  
-{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
-<div class="form-group col-md-12" >
-<label>
-{capture name="label" assign="label"}{sugar_translate label='LBL_SUBTOTAL_AMOUNT' module='AOS_Quotes'}{/capture}
-{$label|strip_semicolon}:
-</label>
-{counter name="fieldsUsed"}
-
-<label>
-</label>
-{counter name="panelFieldCount"}
-
-{if strlen($fields.subtotal_amount.value) <= 0}
-{assign var="value" value=$fields.subtotal_amount.default_value }
-{else}
-{assign var="value" value=$fields.subtotal_amount.value }
-{/if}  
-<input type='text' name='{$fields.subtotal_amount.name}' 
-id='{$fields.subtotal_amount.name}' size='30' maxlength='26,6' value='{sugar_number_format var=$value}' title='' tabindex='0'
->
-</div>  
-{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
-<div class="form-group col-md-12" >
-<label>
-{capture name="label" assign="label"}{sugar_translate label='LBL_SHIPPING_AMOUNT' module='AOS_Quotes'}{/capture}
-{$label|strip_semicolon}:
-</label>
-{counter name="fieldsUsed"}
-
-<label>
-</label>
-{counter name="panelFieldCount"}
-
-{if strlen($fields.shipping_amount.value) <= 0}
-{assign var="value" value=$fields.shipping_amount.default_value }
-{else}
-{assign var="value" value=$fields.shipping_amount.value }
-{/if}  
-<input type='text' name='{$fields.shipping_amount.name}' 
-id='{$fields.shipping_amount.name}' size='30' maxlength='26,6' value='{sugar_number_format var=$value}' title='' tabindex='0'
-onblur="calculateTotal('lineItems');">
-</div>  
-{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
-<div class="form-group col-md-12" >
-<label>
-{capture name="label" assign="label"}{sugar_translate label='LBL_SHIPPING_TAX_AMT' module='AOS_Quotes'}{/capture}
-{$label|strip_semicolon}:
-</label>
-{counter name="fieldsUsed"}
-
-<label>
-</label>
-{counter name="panelFieldCount"}
-<span id='shipping_tax_amt_span'>
-{$fields.shipping_tax_amt.value}</span>
-</div>  
-{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
-<div class="form-group col-md-12" >
-<label>
-{capture name="label" assign="label"}{sugar_translate label='LBL_TAX_AMOUNT' module='AOS_Quotes'}{/capture}
-{$label|strip_semicolon}:
-</label>
-{counter name="fieldsUsed"}
-
-<label>
-</label>
-{counter name="panelFieldCount"}
-
-{if strlen($fields.tax_amount.value) <= 0}
-{assign var="value" value=$fields.tax_amount.default_value }
-{else}
-{assign var="value" value=$fields.tax_amount.value }
-{/if}  
-<input type='text' name='{$fields.tax_amount.name}' 
-id='{$fields.tax_amount.name}' size='30' maxlength='26,6' value='{sugar_number_format var=$value}' title='' tabindex='0'
->
-</div>  
-{counter name="fieldsUsed" start=0 print=false assign="fieldsUsed"}
-<div class="form-group col-md-6" >
-<label>
-{capture name="label" assign="label"}{sugar_translate label='LBL_GRAND_TOTAL' module='AOS_Quotes'}{/capture}
-{$label|strip_semicolon}:
-</label>
-{counter name="fieldsUsed"}
-
-<label>
-</label>
-{counter name="panelFieldCount"}
-
-{if strlen($fields.total_amount.value) <= 0}
-{assign var="value" value=$fields.total_amount.default_value }
-{else}
-{assign var="value" value=$fields.total_amount.value }
-{/if}  
-<input type='text' name='{$fields.total_amount.name}' 
-id='{$fields.total_amount.name}' size='30' maxlength='26,6' value='{sugar_number_format var=$value}' title='' tabindex='0'
->
-</div>  
-<div class="form-group col-md-6" >
-<label>
-&nbsp;
-</label>
-{counter name="fieldsUsed"}
-
-<label>
-</label>
-</div>  
-</div>   
-<script type="text/javascript">SUGAR.util.doWhen("typeof initPanel == 'function'", function() {ldelim} initPanel(3, ''); {rdelim}); </script>
-{if $panelFieldCount == 0}
-<script>document.getElementById("LBL_LINE_ITEMS").style.display='none';</script>
 {/if}
 </div>   
 
@@ -1865,8 +2683,25 @@ addToValidate('EditView', 'approval_status', 'enum', false,'{/literal}{sugar_tra
 addToValidate('EditView', 'invoice_status', 'enum', false,'{/literal}{sugar_translate label='LBL_INVOICE_STATUS' module='AOS_Quotes' for_js=true}{literal}' );
 addToValidate('EditView', 'subtotal_tax_amount', 'currency', false,'{/literal}{sugar_translate label='LBL_SUBTOTAL_TAX_AMOUNT' module='AOS_Quotes' for_js=true}{literal}' );
 addToValidate('EditView', 'subtotal_tax_amount_usdollar', 'currency', false,'{/literal}{sugar_translate label='LBL_SUBTOTAL_TAX_AMOUNT_USDOLLAR' module='AOS_Quotes' for_js=true}{literal}' );
+addToValidate('EditView', 'tipo_pago_c', 'dynamicenum', false,'{/literal}{sugar_translate label='LBL_TIPO_PAGO_C' module='AOS_Quotes' for_js=true}{literal}' );
+addToValidate('EditView', 'lbl_tipoventa_c', 'dynamicenum', false,'{/literal}{sugar_translate label='LBL_LBL_TIPOVENTA_C' module='AOS_Quotes' for_js=true}{literal}' );
+addToValidate('EditView', 'term_years_c', 'dynamicenum', false,'{/literal}{sugar_translate label='LBL_TERM_YEARS_C' module='AOS_Quotes' for_js=true}{literal}' );
+addToValidate('EditView', 'moneda_c', 'dynamicenum', false,'{/literal}{sugar_translate label='LBL_MONEDA_C' module='AOS_Quotes' for_js=true}{literal}' );
+addToValidate('EditView', 'cuota_mensual_c', 'decimal', false,'{/literal}{sugar_translate label='LBL_CUOTA_MENSUAL_C' module='AOS_Quotes' for_js=true}{literal}' );
+addToValidate('EditView', 'fecha_envio_programada_c_date', 'date', true,'Fecha de envio Programada' );
+addToValidate('EditView', 'fondo_metros_c', 'int', false,'{/literal}{sugar_translate label='LBL_FONDO_METROS_C' module='AOS_Quotes' for_js=true}{literal}' );
+addToValidate('EditView', 'frente_metros_c', 'int', false,'{/literal}{sugar_translate label='LBL_FRENTE_METROS_C' module='AOS_Quotes' for_js=true}{literal}' );
+addToValidate('EditView', 'lbl_cuotainicial_c', 'decimal', true,'{/literal}{sugar_translate label='LBL_LBL_CUOTAINICIAL_C' module='AOS_Quotes' for_js=true}{literal}' );
+addToValidate('EditView', 'lbl_superficie_c', 'decimal', true,'{/literal}{sugar_translate label='LBL_LBL_SUPERFICIE_C' module='AOS_Quotes' for_js=true}{literal}' );
+addToValidate('EditView', 'link_terreno_c', 'url', false,'{/literal}{sugar_translate label='LBL_LINK_TERRENO_C' module='AOS_Quotes' for_js=true}{literal}' );
+addToValidate('EditView', 'manzano_c', 'int', false,'{/literal}{sugar_translate label='LBL_MANZANO_C' module='AOS_Quotes' for_js=true}{literal}' );
+addToValidate('EditView', 'metro_cuadrado_c', 'int', false,'{/literal}{sugar_translate label='LBL_METRO_CUADRADO_C' module='AOS_Quotes' for_js=true}{literal}' );
+addToValidate('EditView', 'precio_mcuadrado_c', 'decimal', false,'{/literal}{sugar_translate label='LBL_PRECIO_MCUADRADO_C' module='AOS_Quotes' for_js=true}{literal}' );
+addToValidate('EditView', 'saldo_c', 'decimal', false,'{/literal}{sugar_translate label='LBL_SALDO_C' module='AOS_Quotes' for_js=true}{literal}' );
+addToValidate('EditView', 'saldo_cuota_inical_c', 'decimal', false,'{/literal}{sugar_translate label='LBL_SALDO_CUOTA_INICAL_C' module='AOS_Quotes' for_js=true}{literal}' );
+addToValidate('EditView', 'ubicacion_c', 'varchar', true,'{/literal}{sugar_translate label='LBL_UBICACION_C' module='AOS_Quotes' for_js=true}{literal}' );
+addToValidate('EditView', 'unidad_industrial_c', 'int', false,'{/literal}{sugar_translate label='LBL_UNIDAD_INDUSTRIAL_C' module='AOS_Quotes' for_js=true}{literal}' );
 addToValidateBinaryDependency('EditView', 'assigned_user_name', 'alpha', false,'{/literal}{sugar_translate label='ERR_SQS_NO_MATCH_FIELD' module='AOS_Quotes' for_js=true}{literal}: {/literal}{sugar_translate label='LBL_ASSIGNED_TO' module='AOS_Quotes' for_js=true}{literal}', 'assigned_user_id' );
 addToValidateBinaryDependency('EditView', 'billing_account', 'alpha', false,'{/literal}{sugar_translate label='ERR_SQS_NO_MATCH_FIELD' module='AOS_Quotes' for_js=true}{literal}: {/literal}{sugar_translate label='LBL_BILLING_ACCOUNT' module='AOS_Quotes' for_js=true}{literal}', 'billing_account_id' );
 addToValidateBinaryDependency('EditView', 'billing_contact', 'alpha', false,'{/literal}{sugar_translate label='ERR_SQS_NO_MATCH_FIELD' module='AOS_Quotes' for_js=true}{literal}: {/literal}{sugar_translate label='LBL_BILLING_CONTACT' module='AOS_Quotes' for_js=true}{literal}', 'billing_contact_id' );
-addToValidateBinaryDependency('EditView', 'opportunity', 'alpha', false,'{/literal}{sugar_translate label='ERR_SQS_NO_MATCH_FIELD' module='AOS_Quotes' for_js=true}{literal}: {/literal}{sugar_translate label='LBL_OPPORTUNITY' module='AOS_Quotes' for_js=true}{literal}', 'opportunity_id' );
-</script><script language="javascript">if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}sqs_objects['EditView_opportunity']={"form":"EditView","method":"query","modules":["Opportunities"],"group":"or","field_list":["name","id"],"populate_list":["opportunity","opportunity_id"],"required_list":["parent_id"],"conditions":[{"name":"name","op":"like_custom","end":"%","value":""}],"order":"name","limit":"30","no_match_text":"Sin coincidencias"};sqs_objects['EditView_assigned_user_name']={"form":"EditView","method":"get_user_array","field_list":["user_name","id"],"populate_list":["assigned_user_name","assigned_user_id"],"required_list":["assigned_user_id"],"conditions":[{"name":"user_name","op":"like_custom","end":"%","value":""}],"limit":"30","no_match_text":"Sin coincidencias"};sqs_objects['EditView_billing_account']={"form":"EditView","method":"query","modules":["Accounts"],"group":"or","field_list":["name","id","billing_address_street","billing_address_city","billing_address_state","billing_address_postalcode","billing_address_country","shipping_address_street","shipping_address_city","shipping_address_state","shipping_address_postalcode","shipping_address_country"],"populate_list":["EditView_billing_account","billing_account_id","billing_address_street","billing_address_city","billing_address_state","billing_address_postalcode","billing_address_country","shipping_address_street","shipping_address_city","shipping_address_state","shipping_address_postalcode","shipping_address_country"],"conditions":[{"name":"name","op":"like_custom","end":"%","value":""}],"required_list":["billing_account_id"],"order":"name","limit":"30","no_match_text":"Sin coincidencias"};sqs_objects['EditView_billing_contact']={"form":"EditView","method":"get_contact_array","modules":["Contacts"],"field_list":["salutation","first_name","last_name","id"],"populate_list":["billing_contact","billing_contact_id","billing_contact_id","billing_contact_id"],"required_list":["billing_contact_id"],"group":"or","conditions":[{"name":"first_name","op":"like_custom","end":"%","value":""},{"name":"last_name","op":"like_custom","end":"%","value":""}],"order":"last_name","limit":"30","no_match_text":"Sin coincidencias"};</script>{/literal}
+</script><script language="javascript">if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}sqs_objects['EditView_assigned_user_name']={"form":"EditView","method":"get_user_array","field_list":["user_name","id"],"populate_list":["assigned_user_name","assigned_user_id"],"required_list":["assigned_user_id"],"conditions":[{"name":"user_name","op":"like_custom","end":"%","value":""}],"limit":"30","no_match_text":"Sin coincidencias"};sqs_objects['EditView_billing_account']={"form":"EditView","method":"query","modules":["Accounts"],"group":"or","field_list":["name","id","billing_address_street","billing_address_city","billing_address_state","billing_address_postalcode","billing_address_country","shipping_address_street","shipping_address_city","shipping_address_state","shipping_address_postalcode","shipping_address_country"],"populate_list":["EditView_billing_account","billing_account_id","billing_address_street","billing_address_city","billing_address_state","billing_address_postalcode","billing_address_country","shipping_address_street","shipping_address_city","shipping_address_state","shipping_address_postalcode","shipping_address_country"],"conditions":[{"name":"name","op":"like_custom","end":"%","value":""}],"required_list":["billing_account_id"],"order":"name","limit":"30","no_match_text":"Sin coincidencias"};sqs_objects['EditView_billing_contact']={"form":"EditView","method":"get_contact_array","modules":["Contacts"],"field_list":["salutation","first_name","last_name","id"],"populate_list":["billing_contact","billing_contact_id","billing_contact_id","billing_contact_id"],"required_list":["billing_contact_id"],"group":"or","conditions":[{"name":"first_name","op":"like_custom","end":"%","value":""},{"name":"last_name","op":"like_custom","end":"%","value":""}],"order":"last_name","limit":"30","no_match_text":"Sin coincidencias"};</script>{/literal}

@@ -1,6 +1,26 @@
 <?php
-// created: 2019-02-08 17:16:07
+// created: 2021-02-19 16:26:57
 $mod_strings = array (
   'LBL_BILLING_ACCOUNT' => 'Cliente',
   'LBL_ACCOUNTS' => 'Clientes',
+  'LBL_UNIDAD_INDUSTRIAL_C' => 'Unidad Industrial (UV)',
+  'LBL_MANZANO_C' => 'Manzano',
+  'LBL_EDITVIEW_PANEL1' => 'Datos del Terreno',
+  'LBL_LBL_SUPERFICIE_C' => 'Superficie (m2)',
+  'LBL_UBICACION_C' => 'Ubicación (lote)',
+  'LBL_FRENTE_METROS_C' => 'Frente (m)',
+  'LBL_FONDO_METROS_C' => 'Fondo (m)',
+  'LBL_TIPO_PAGO_C' => 'Tipo de Pago',
+  'LBL_TERM_YEARS_C' => 'Plazo en Años',
+  'LBL_LBL_TIPOVENTA_C' => 'Tipo de Venta',
+  'LBL_FECHA_ENVIO_PROGRAMADA' => 'Fecha de envio Programada',
+  'LBL_PRECIO_MCUADRADO_C' => 'Precio (m2)',
+  'LBL_LINE_ITEMS' => 'Datos sobre el precio',
+  'LBL_TOTAL_AMT' => 'Precio Total',
+  'LBL_LBL_CUOTAINICIAL_C' => 'Cuota Inicial',
+  'LBL_SALDO_C' => 'Saldo',
+  'LBL_INVOICE_STATUS' => 'Estado de la Factura',
+  'LBL_MONEDA_C' => 'Moneda',
+  'LBL_CURRENCY' => 'Currency',
+  'LBL_APPROVAL_STATUS' => 'Estado de la Aprobación',
 );

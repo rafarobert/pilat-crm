@@ -126,3 +126,24 @@ $GLOBALS['app_list_strings']['lead_source_dom']=array (
   'MARKETING_PERSONAL' => 'Marketing Personal',
   'OTRO' => 'Otro',
 );
+$GLOBALS['app_list_strings']['moneda_c_0']=array (
+  '' => '',
+  'USD' => '$us.',
+  'BOB' => 'Bs.',
+);
+$GLOBALS['app_list_strings']['lbl_tipoventa_c_list']=array (
+  '' => '',
+  'INMEDIATA' => 'Venta Inmediata',
+  'CUOTA' => 'Venta en Cuotas',
+);
+$GLOBALS['app_list_strings']['tipo_pago_c_list']=array (
+  '' => '',
+  'BANCO' => 'Pago mediante Banco',
+  'CONTADO' => 'Pago al Contado',
+  'PLAZOS' => 'Pago en Plazos',
+);
+$GLOBALS['app_list_strings']['term_years_c_list']=array (
+  '' => '',
+  5 => '5 Años Plazo',
+  10 => '10 años Plazo',
+);

@@ -162,9 +162,9 @@ array (
           ),
           1 => 
           array (
-            'name' => 'moneda_c',
+            'name' => 'currency_id',
             'studio' => 'visible',
-            'label' => 'LBL_MONEDA_C',
+            'label' => 'LBL_CURRENCY',
           ),
         ),
         1 => 

@@ -156,21 +156,6 @@ array (
         array (
           0 => 
           array (
-            'name' => 'lbl_tipoventa_c',
-            'studio' => 'visible',
-            'label' => 'LBL_LBL_TIPOVENTA_C',
-          ),
-          1 => 
-          array (
-            'name' => 'moneda_c',
-            'studio' => 'visible',
-            'label' => 'LBL_MONEDA_C',
-          ),
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
             'name' => 'tipo_pago_c',
             'studio' => 'visible',
             'label' => 'LBL_TIPO_PAGO_C',
@@ -182,7 +167,31 @@ array (
             'label' => 'LBL_TERM_YEARS_C',
           ),
         ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'lbl_tipoventa_c',
+            'studio' => 'visible',
+            'label' => 'LBL_LBL_TIPOVENTA_C',
+          ),
+          1 => '',
+        ),
         2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'fecha_envio_programada_c',
+            'label' => 'LBL_FECHA_ENVIO_PROGRAMADA',
+          ),
+          1 => 
+          array (
+            'name' => 'currency_id',
+            'studio' => 'visible',
+            'label' => 'LBL_CURRENCY',
+          ),
+        ),
+        3 => 
         array (
           0 => 
           array (
@@ -195,7 +204,7 @@ array (
             'label' => 'LBL_TOTAL_AMT',
           ),
         ),
-        3 => 
+        4 => 
         array (
           0 => 
           array (
@@ -204,35 +213,27 @@ array (
           ),
           1 => 
           array (
-            'name' => 'discount_amount',
-            'label' => 'LBL_DISCOUNT_AMOUNT',
-          ),
-        ),
-        4 => 
-        array (
-          0 => 
-          array (
             'name' => 'saldo_c',
             'label' => 'LBL_SALDO_C',
           ),
-          1 => '',
         ),
         5 => 
         array (
           0 => 
           array (
-            'name' => 'invoice_status',
-            'label' => 'LBL_INVOICE_STATUS',
+            'name' => 'discount_amount',
+            'label' => 'LBL_DISCOUNT_AMOUNT',
           ),
           1 => 
           array (
-            'name' => 'fecha_envio_programada_c',
-            'label' => 'LBL_FECHA_ENVIO_PROGRAMADA',
+            'name' => 'invoice_status',
+            'label' => 'LBL_INVOICE_STATUS',
           ),
         ),
         6 => 
         array (
           0 => '',
+          1 => '',
         ),
         7 => 
         array (
