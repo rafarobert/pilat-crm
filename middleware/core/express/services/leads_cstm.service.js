@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Wed Feb 17 2021 04:43:29 GMT-0400 (Bolivia Time)
- * Time: 4:43:29
+ * Date: Fri Feb 19 2021 18:37:45 GMT-0400 (Bolivia Time)
+ * Time: 18:37:45
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Wed Feb 17 2021 04:43:29 GMT-0400 (Bolivia Time)
- * Last time updated: 4:43:29
+ * Last date updated: Fri Feb 19 2021 18:37:45 GMT-0400 (Bolivia Time)
+ * Last time updated: 18:37:45
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -588,6 +588,74 @@ class LeadCstmService {
     	}
     }
 	
+	static async findOneByCiudadC(ciudadC, query = {}) {
+    	try {
+    		let objLeadCstm;
+    		if(sql) {
+    			objLeadCstm = await models.sequelize.leadsCstm.findOne({
+    				attributes:query.select ? query.select.split(',') : null,
+    			    where: { ciudad_c: ciudadC },
+    			});
+    		} else {
+    			objLeadCstm = await models.mongoose.leadsCstm.findOne({ciudad_c: ciudadC});
+    		}
+    		return objLeadCstm;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
+	static async findOneByDepartamentoC(departamentoC, query = {}) {
+    	try {
+    		let objLeadCstm;
+    		if(sql) {
+    			objLeadCstm = await models.sequelize.leadsCstm.findOne({
+    				attributes:query.select ? query.select.split(',') : null,
+    			    where: { departamento_c: departamentoC },
+    			});
+    		} else {
+    			objLeadCstm = await models.mongoose.leadsCstm.findOne({departamento_c: departamentoC});
+    		}
+    		return objLeadCstm;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
+	static async findOneByPaisC(paisC, query = {}) {
+    	try {
+    		let objLeadCstm;
+    		if(sql) {
+    			objLeadCstm = await models.sequelize.leadsCstm.findOne({
+    				attributes:query.select ? query.select.split(',') : null,
+    			    where: { pais_c: paisC },
+    			});
+    		} else {
+    			objLeadCstm = await models.mongoose.leadsCstm.findOne({pais_c: paisC});
+    		}
+    		return objLeadCstm;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
+	static async findOneByDireccionC(direccionC, query = {}) {
+    	try {
+    		let objLeadCstm;
+    		if(sql) {
+    			objLeadCstm = await models.sequelize.leadsCstm.findOne({
+    				attributes:query.select ? query.select.split(',') : null,
+    			    where: { direccion_c: direccionC },
+    			});
+    		} else {
+    			objLeadCstm = await models.mongoose.leadsCstm.findOne({direccion_c: direccionC});
+    		}
+    		return objLeadCstm;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
 	static async findOneByActividadC(actividadC, query = {}) {
     	try {
     		let objLeadCstm;
@@ -1075,6 +1143,74 @@ class LeadCstmService {
     			}
     		} else {
     			objLeadCstm = await models.mongoose.leadsCstm.findOneAndUpdate({sexo_c: sexoC}, {$set: updateLeadCstm}, {new: true});
+    		}
+    		return objLeadCstm;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
+	static async updateLeadCstmByCiudadC(ciudadC, updateLeadCstm) {
+    	try {
+    		let objLeadCstm;
+    		if(sql) {
+    			objLeadCstm = await models.sequelize.leadsCstm.findOne({where: { ciudad_c: ciudadC }});
+    			if (objLeadCstm) {
+    				objLeadCstm = await models.sequelize.leadsCstm.update(updateLeadCstm, { where: { ciudad_c: ciudadC } });
+    			}
+    		} else {
+    			objLeadCstm = await models.mongoose.leadsCstm.findOneAndUpdate({ciudad_c: ciudadC}, {$set: updateLeadCstm}, {new: true});
+    		}
+    		return objLeadCstm;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
+	static async updateLeadCstmByDepartamentoC(departamentoC, updateLeadCstm) {
+    	try {
+    		let objLeadCstm;
+    		if(sql) {
+    			objLeadCstm = await models.sequelize.leadsCstm.findOne({where: { departamento_c: departamentoC }});
+    			if (objLeadCstm) {
+    				objLeadCstm = await models.sequelize.leadsCstm.update(updateLeadCstm, { where: { departamento_c: departamentoC } });
+    			}
+    		} else {
+    			objLeadCstm = await models.mongoose.leadsCstm.findOneAndUpdate({departamento_c: departamentoC}, {$set: updateLeadCstm}, {new: true});
+    		}
+    		return objLeadCstm;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
+	static async updateLeadCstmByPaisC(paisC, updateLeadCstm) {
+    	try {
+    		let objLeadCstm;
+    		if(sql) {
+    			objLeadCstm = await models.sequelize.leadsCstm.findOne({where: { pais_c: paisC }});
+    			if (objLeadCstm) {
+    				objLeadCstm = await models.sequelize.leadsCstm.update(updateLeadCstm, { where: { pais_c: paisC } });
+    			}
+    		} else {
+    			objLeadCstm = await models.mongoose.leadsCstm.findOneAndUpdate({pais_c: paisC}, {$set: updateLeadCstm}, {new: true});
+    		}
+    		return objLeadCstm;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
+	static async updateLeadCstmByDireccionC(direccionC, updateLeadCstm) {
+    	try {
+    		let objLeadCstm;
+    		if(sql) {
+    			objLeadCstm = await models.sequelize.leadsCstm.findOne({where: { direccion_c: direccionC }});
+    			if (objLeadCstm) {
+    				objLeadCstm = await models.sequelize.leadsCstm.update(updateLeadCstm, { where: { direccion_c: direccionC } });
+    			}
+    		} else {
+    			objLeadCstm = await models.mongoose.leadsCstm.findOneAndUpdate({direccion_c: direccionC}, {$set: updateLeadCstm}, {new: true});
     		}
     		return objLeadCstm;
     	} catch (error) {

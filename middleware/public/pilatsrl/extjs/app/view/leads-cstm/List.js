@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Wed Feb 17 2021 14:00:15 GMT-0400 (Bolivia Time)
- * Time: 14:0:15
+ * Date: Fri Feb 19 2021 18:37:46 GMT-0400 (Bolivia Time)
+ * Time: 18:37:46
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Wed Feb 17 2021 14:00:15 GMT-0400 (Bolivia Time)
- * Last time updated: 14:0:15
+ * Last date updated: Fri Feb 19 2021 18:37:46 GMT-0400 (Bolivia Time)
+ * Last time updated: 18:37:46
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -285,6 +285,42 @@ Ext.define('es.view.leads-cstm.List', {
 			{
 				text: 'sexo_c',
 				dataIndex: 'sexo_c',
+				width: 160,
+				editor: {
+					allowBlank: false
+				}
+			},
+			
+			{
+				text: 'ciudad_c',
+				dataIndex: 'ciudad_c',
+				width: 160,
+				editor: {
+					allowBlank: false
+				}
+			},
+			
+			{
+				text: 'departamento_c',
+				dataIndex: 'departamento_c',
+				width: 160,
+				editor: {
+					allowBlank: false
+				}
+			},
+			
+			{
+				text: 'pais_c',
+				dataIndex: 'pais_c',
+				width: 160,
+				editor: {
+					allowBlank: false
+				}
+			},
+			
+			{
+				text: 'direccion_c',
+				dataIndex: 'direccion_c',
 				width: 160,
 				editor: {
 					allowBlank: false

@@ -62,6 +62,8 @@ Ext.define('es.model.aosQuotesCstm', {
 		
 		{ name: 'link_terreno_c', type: 'text', defaultValue: null },
 		
+		{ name: 'moneda_c', type: 'text', defaultValue: null },
+		
 		{ name: 'fecha_envio_programada_c', type: 'date', defaultValue: null },
 		
 		//</es-section>

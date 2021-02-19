@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Wed Feb 17 2021 04:43:42 GMT-0400 (Bolivia Time)
- * Time: 4:43:42
+ * Date: Fri Feb 19 2021 18:38:04 GMT-0400 (Bolivia Time)
+ * Time: 18:38:4
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Wed Feb 17 2021 04:43:42 GMT-0400 (Bolivia Time)
- * Last time updated: 4:43:42
+ * Last date updated: Fri Feb 19 2021 18:38:04 GMT-0400 (Bolivia Time)
+ * Last time updated: 18:38:4
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -45,6 +45,8 @@ router.get(`/api-${sys}/opportunities-cstm/findOneByUbicacionC/:ubicacionC`, (re
 
 router.get(`/api-${sys}/opportunities-cstm/findOneByTipoVentaC/:tipoVentaC`, (req, res) => opportunitiesCstmCtrl.findOneByTipoVentaC(req, res));
 
+router.get(`/api-${sys}/opportunities-cstm/findOneByMonedaC/:monedaC`, (req, res) => opportunitiesCstmCtrl.findOneByMonedaC(req, res));
+
 
 
 router.post(`/api-${sys}/opportunities-cstm/updateOpportunityCstmByIdC`, (req, res) => opportunitiesCstmCtrl.updateOpportunityCstmByIdC(req, res));
@@ -68,6 +70,8 @@ router.post(`/api-${sys}/opportunities-cstm/updateOpportunityCstmByLblTipoPagoC`
 router.post(`/api-${sys}/opportunities-cstm/updateOpportunityCstmByUbicacionC`, (req, res) => opportunitiesCstmCtrl.updateOpportunityCstmByUbicacionC(req, res));
 
 router.post(`/api-${sys}/opportunities-cstm/updateOpportunityCstmByTipoVentaC`, (req, res) => opportunitiesCstmCtrl.updateOpportunityCstmByTipoVentaC(req, res));
+
+router.post(`/api-${sys}/opportunities-cstm/updateOpportunityCstmByMonedaC`, (req, res) => opportunitiesCstmCtrl.updateOpportunityCstmByMonedaC(req, res));
 
 
 

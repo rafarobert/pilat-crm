@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Wed Feb 17 2021 04:43:29 GMT-0400 (Bolivia Time)
- * Time: 4:43:29
+ * Date: Fri Feb 19 2021 18:37:45 GMT-0400 (Bolivia Time)
+ * Time: 18:37:45
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Wed Feb 17 2021 04:43:29 GMT-0400 (Bolivia Time)
- * Last time updated: 4:43:29
+ * Last date updated: Fri Feb 19 2021 18:37:45 GMT-0400 (Bolivia Time)
+ * Last time updated: 18:37:45
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -75,6 +75,14 @@ router.get(`/api-${sys}/leads-cstm/findOneByTipoClienteC/:tipoClienteC`, (req, r
 
 router.get(`/api-${sys}/leads-cstm/findOneBySexoC/:sexoC`, (req, res) => leadsCstmCtrl.findOneBySexoC(req, res));
 
+router.get(`/api-${sys}/leads-cstm/findOneByCiudadC/:ciudadC`, (req, res) => leadsCstmCtrl.findOneByCiudadC(req, res));
+
+router.get(`/api-${sys}/leads-cstm/findOneByDepartamentoC/:departamentoC`, (req, res) => leadsCstmCtrl.findOneByDepartamentoC(req, res));
+
+router.get(`/api-${sys}/leads-cstm/findOneByPaisC/:paisC`, (req, res) => leadsCstmCtrl.findOneByPaisC(req, res));
+
+router.get(`/api-${sys}/leads-cstm/findOneByDireccionC/:direccionC`, (req, res) => leadsCstmCtrl.findOneByDireccionC(req, res));
+
 router.get(`/api-${sys}/leads-cstm/findOneByActividadC/:actividadC`, (req, res) => leadsCstmCtrl.findOneByActividadC(req, res));
 
 router.get(`/api-${sys}/leads-cstm/findOneByActividadLlamarFechaC/:actividadLlamarFechaC`, (req, res) => leadsCstmCtrl.findOneByActividadLlamarFechaC(req, res));
@@ -134,6 +142,14 @@ router.post(`/api-${sys}/leads-cstm/updateLeadCstmByRubroC`, (req, res) => leads
 router.post(`/api-${sys}/leads-cstm/updateLeadCstmByTipoClienteC`, (req, res) => leadsCstmCtrl.updateLeadCstmByTipoClienteC(req, res));
 
 router.post(`/api-${sys}/leads-cstm/updateLeadCstmBySexoC`, (req, res) => leadsCstmCtrl.updateLeadCstmBySexoC(req, res));
+
+router.post(`/api-${sys}/leads-cstm/updateLeadCstmByCiudadC`, (req, res) => leadsCstmCtrl.updateLeadCstmByCiudadC(req, res));
+
+router.post(`/api-${sys}/leads-cstm/updateLeadCstmByDepartamentoC`, (req, res) => leadsCstmCtrl.updateLeadCstmByDepartamentoC(req, res));
+
+router.post(`/api-${sys}/leads-cstm/updateLeadCstmByPaisC`, (req, res) => leadsCstmCtrl.updateLeadCstmByPaisC(req, res));
+
+router.post(`/api-${sys}/leads-cstm/updateLeadCstmByDireccionC`, (req, res) => leadsCstmCtrl.updateLeadCstmByDireccionC(req, res));
 
 router.post(`/api-${sys}/leads-cstm/updateLeadCstmByActividadC`, (req, res) => leadsCstmCtrl.updateLeadCstmByActividadC(req, res));
 

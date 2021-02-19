@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Wed Feb 17 2021 14:00:24 GMT-0400 (Bolivia Time)
- * Time: 14:0:24
+ * Date: Fri Feb 19 2021 18:38:04 GMT-0400 (Bolivia Time)
+ * Time: 18:38:4
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Wed Feb 17 2021 14:00:24 GMT-0400 (Bolivia Time)
- * Last time updated: 14:0:24
+ * Last date updated: Fri Feb 19 2021 18:38:04 GMT-0400 (Bolivia Time)
+ * Last time updated: 18:38:4
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -168,6 +168,15 @@ Ext.define('es.view.opportunities-cstm.List', {
 			{
 				text: 'tipo_venta_c',
 				dataIndex: 'tipo_venta_c',
+				width: 160,
+				editor: {
+					allowBlank: false
+				}
+			},
+			
+			{
+				text: 'moneda_c',
+				dataIndex: 'moneda_c',
 				width: 160,
 				editor: {
 					allowBlank: false

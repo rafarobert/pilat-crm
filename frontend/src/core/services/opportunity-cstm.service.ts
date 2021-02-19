@@ -170,6 +170,14 @@ export class OpportunityCstmService {
       return this.http.get(this.basePath + '/findOneByTipoVentaC/' + tipoVentaC + '?' + attributes);
   }
   
+  findOneByMonedaC(monedaC:any, select = []) {
+      let attributes = '';
+      if(select.length) {
+          attributes += 'select=' + select.toString();
+      }
+      return this.http.get(this.basePath + '/findOneByMonedaC/' + monedaC + '?' + attributes);
+  }
+  
   
   updateOpportunityCstmByIdC(idC:any, opportunityCstm:OpportunitiesCstm) {
       return this.http.post(this.basePath + '/updateOpportunityCstmByIdC?idC=' + idC, opportunityCstm);
@@ -213,6 +221,10 @@ export class OpportunityCstmService {
   
   updateOpportunityCstmByTipoVentaC(tipoVentaC:any, opportunityCstm:OpportunitiesCstm) {
       return this.http.post(this.basePath + '/updateOpportunityCstmByTipoVentaC?tipoVentaC=' + tipoVentaC, opportunityCstm);
+  }
+  
+  updateOpportunityCstmByMonedaC(monedaC:any, opportunityCstm:OpportunitiesCstm) {
+      return this.http.post(this.basePath + '/updateOpportunityCstmByMonedaC?monedaC=' + monedaC, opportunityCstm);
   }
   
   

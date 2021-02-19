@@ -60,6 +60,14 @@ export class LeadsCstm {
   
   sexo_c: string;
   
+  ciudad_c: string;
+  
+  departamento_c: string;
+  
+  pais_c: string;
+  
+  direccion_c: string;
+  
   
   actividad_c: string;
   

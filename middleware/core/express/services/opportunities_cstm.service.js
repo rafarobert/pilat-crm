@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Wed Feb 17 2021 04:43:42 GMT-0400 (Bolivia Time)
- * Time: 4:43:42
+ * Date: Fri Feb 19 2021 18:38:04 GMT-0400 (Bolivia Time)
+ * Time: 18:38:4
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Wed Feb 17 2021 04:43:42 GMT-0400 (Bolivia Time)
- * Last time updated: 4:43:42
+ * Last date updated: Fri Feb 19 2021 18:38:04 GMT-0400 (Bolivia Time)
+ * Last time updated: 18:38:4
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -333,6 +333,23 @@ class OpportunityCstmService {
     	}
     }
 	
+	static async findOneByMonedaC(monedaC, query = {}) {
+    	try {
+    		let objOpportunityCstm;
+    		if(sql) {
+    			objOpportunityCstm = await models.sequelize.opportunitiesCstm.findOne({
+    				attributes:query.select ? query.select.split(',') : null,
+    			    where: { moneda_c: monedaC },
+    			});
+    		} else {
+    			objOpportunityCstm = await models.mongoose.opportunitiesCstm.findOne({moneda_c: monedaC});
+    		}
+    		return objOpportunityCstm;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
 	
 	static async updateOpportunityCstmByIdC(idC, updateOpportunityCstm) {
     	try {
@@ -514,6 +531,23 @@ class OpportunityCstmService {
     			}
     		} else {
     			objOpportunityCstm = await models.mongoose.opportunitiesCstm.findOneAndUpdate({tipo_venta_c: tipoVentaC}, {$set: updateOpportunityCstm}, {new: true});
+    		}
+    		return objOpportunityCstm;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
+	static async updateOpportunityCstmByMonedaC(monedaC, updateOpportunityCstm) {
+    	try {
+    		let objOpportunityCstm;
+    		if(sql) {
+    			objOpportunityCstm = await models.sequelize.opportunitiesCstm.findOne({where: { moneda_c: monedaC }});
+    			if (objOpportunityCstm) {
+    				objOpportunityCstm = await models.sequelize.opportunitiesCstm.update(updateOpportunityCstm, { where: { moneda_c: monedaC } });
+    			}
+    		} else {
+    			objOpportunityCstm = await models.mongoose.opportunitiesCstm.findOneAndUpdate({moneda_c: monedaC}, {$set: updateOpportunityCstm}, {new: true});
     		}
     		return objOpportunityCstm;
     	} catch (error) {

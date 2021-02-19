@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Wed Feb 17 2021 04:42:25 GMT-0400 (Bolivia Time)
- * Time: 4:42:25
+ * Date: Fri Feb 19 2021 18:36:20 GMT-0400 (Bolivia Time)
+ * Time: 18:36:20
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Wed Feb 17 2021 04:42:25 GMT-0400 (Bolivia Time)
- * Last time updated: 4:42:25
+ * Last date updated: Fri Feb 19 2021 18:36:20 GMT-0400 (Bolivia Time)
+ * Last time updated: 18:36:20
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -435,6 +435,23 @@ class AoQuoteCstmService {
     	}
     }
 	
+	static async findOneByMonedaC(monedaC, query = {}) {
+    	try {
+    		let objAoQuoteCstm;
+    		if(sql) {
+    			objAoQuoteCstm = await models.sequelize.aosQuotesCstm.findOne({
+    				attributes:query.select ? query.select.split(',') : null,
+    			    where: { moneda_c: monedaC },
+    			});
+    		} else {
+    			objAoQuoteCstm = await models.mongoose.aosQuotesCstm.findOne({moneda_c: monedaC});
+    		}
+    		return objAoQuoteCstm;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
 	static async findOneByFechaEnvioProgramadaC(fechaEnvioProgramadaC, query = {}) {
     	try {
     		let objAoQuoteCstm;
@@ -735,6 +752,23 @@ class AoQuoteCstmService {
     			}
     		} else {
     			objAoQuoteCstm = await models.mongoose.aosQuotesCstm.findOneAndUpdate({link_terreno_c: linkTerrenoC}, {$set: updateAoQuoteCstm}, {new: true});
+    		}
+    		return objAoQuoteCstm;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
+	static async updateAoQuoteCstmByMonedaC(monedaC, updateAoQuoteCstm) {
+    	try {
+    		let objAoQuoteCstm;
+    		if(sql) {
+    			objAoQuoteCstm = await models.sequelize.aosQuotesCstm.findOne({where: { moneda_c: monedaC }});
+    			if (objAoQuoteCstm) {
+    				objAoQuoteCstm = await models.sequelize.aosQuotesCstm.update(updateAoQuoteCstm, { where: { moneda_c: monedaC } });
+    			}
+    		} else {
+    			objAoQuoteCstm = await models.mongoose.aosQuotesCstm.findOneAndUpdate({moneda_c: monedaC}, {$set: updateAoQuoteCstm}, {new: true});
     		}
     		return objAoQuoteCstm;
     	} catch (error) {

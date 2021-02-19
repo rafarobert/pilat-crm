@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Wed Feb 17 2021 14:00:15 GMT-0400 (Bolivia Time)
- * Time: 14:0:15
+ * Date: Fri Feb 19 2021 18:37:46 GMT-0400 (Bolivia Time)
+ * Time: 18:37:46
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Wed Feb 17 2021 14:00:15 GMT-0400 (Bolivia Time)
- * Last time updated: 14:0:15
+ * Last date updated: Fri Feb 19 2021 18:37:46 GMT-0400 (Bolivia Time)
+ * Last time updated: 18:37:46
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -147,6 +147,26 @@ Ext.define('es.view.leads-cstm.Add', {
 						{
 							fieldLabel: 'sexo_c',
 							name: 'sexo_c',
+						},
+						
+						{
+							fieldLabel: 'ciudad_c',
+							name: 'ciudad_c',
+						},
+						
+						{
+							fieldLabel: 'departamento_c',
+							name: 'departamento_c',
+						},
+						
+						{
+							fieldLabel: 'pais_c',
+							name: 'pais_c',
+						},
+						
+						{
+							fieldLabel: 'direccion_c',
+							name: 'direccion_c',
 						},
 						
 						

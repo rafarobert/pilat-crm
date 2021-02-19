@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Wed Feb 17 2021 04:42:24 GMT-0400 (Bolivia Time)
- * Time: 4:42:24
+ * Date: Fri Feb 19 2021 18:36:19 GMT-0400 (Bolivia Time)
+ * Time: 18:36:19
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Wed Feb 17 2021 04:42:24 GMT-0400 (Bolivia Time)
- * Last time updated: 4:42:24
+ * Last date updated: Fri Feb 19 2021 18:36:19 GMT-0400 (Bolivia Time)
+ * Last time updated: 18:36:19
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -389,6 +389,22 @@ aosQuotesCstmCtrl.findOneByLinkTerrenoC = async (req, res) => {
     }
 }
 
+aosQuotesCstmCtrl.findOneByMonedaC = async (req, res) => {
+    try {
+        const { monedaC } = req.params;
+        const objAoQuoteCstm = await aoQuoteCstmService.findOneByMonedaC(monedaC, req.query);
+        if (!objAoQuoteCstm) {
+            util.setError(404, `Cannot find aoQuoteCstm with the lcObjLocalCommonFieldName ${lcObjLocalCommonFieldName}`);
+        } else {
+            util.setSuccess(200, 'Found aoQuoteCstm', objAoQuoteCstm);
+        }
+        return util.send(res);
+    } catch(e) {
+        util.setError(400, e);
+        return util.send(res);
+    }
+}
+
 aosQuotesCstmCtrl.findOneByFechaEnvioProgramadaC = async (req, res) => {
     try {
         const { fechaEnvioProgramadaC } = req.params;
@@ -735,6 +751,26 @@ aosQuotesCstmCtrl.updateAoQuoteCstmByLinkTerrenoC = async (req, res) => {
                 return util.send(res);
             }
             const objAoQuoteCstm = await aoQuoteCstmService.updateAoQuoteCstmByLinkTerrenoC(linkTerrenoC, req.body);
+            if (!objAoQuoteCstm) {
+                util.setError(404, `Cannot find aoQuoteCstm with the id: ${idC}`);
+            } else {
+                util.setSuccess(200, 'AoQuoteCstm updated', objAoQuoteCstm);
+            }
+            return util.send(res);
+        } catch (e) {
+            util.setError(400, e);
+            return util.send(res);
+        }
+}
+
+aosQuotesCstmCtrl.updateAoQuoteCstmByMonedaC = async (req, res) => {
+     const { monedaC } = req.params;
+        try {
+            if (!util.isChar(idC)) {
+                util.setError(400, 'Please input a valid Char value');
+                return util.send(res);
+            }
+            const objAoQuoteCstm = await aoQuoteCstmService.updateAoQuoteCstmByMonedaC(monedaC, req.body);
             if (!objAoQuoteCstm) {
                 util.setError(404, `Cannot find aoQuoteCstm with the id: ${idC}`);
             } else {

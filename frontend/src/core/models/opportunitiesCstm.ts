@@ -40,6 +40,8 @@ export class OpportunitiesCstm {
   
   tipo_venta_c: string;
   
+  moneda_c: string;
+  
   
   
   

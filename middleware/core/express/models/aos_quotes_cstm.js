@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Wed Feb 17 2021 04:42:25 GMT-0400 (Bolivia Time)
- * Time: 4:42:25
+ * Date: Fri Feb 19 2021 18:36:19 GMT-0400 (Bolivia Time)
+ * Time: 18:36:19
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Wed Feb 17 2021 04:42:25 GMT-0400 (Bolivia Time)
- * Last time updated: 4:42:25
+ * Last date updated: Fri Feb 19 2021 18:36:19 GMT-0400 (Bolivia Time)
+ * Last time updated: 18:36:19
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -45,6 +45,8 @@ const {Schema} = mongoose;
       tipo_pago_c: DataTypes.STRING,
       
       link_terreno_c: DataTypes.STRING,
+      
+      moneda_c: DataTypes.STRING,
       
       
       
@@ -104,6 +106,8 @@ const {Schema} = mongoose;
     tipo_pago_c: {type: String},
     
     link_terreno_c: {type: String},
+    
+    moneda_c: {type: String},
     
     
     

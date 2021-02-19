@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Wed Feb 17 2021 04:43:29 GMT-0400 (Bolivia Time)
- * Time: 4:43:29
+ * Date: Fri Feb 19 2021 18:37:45 GMT-0400 (Bolivia Time)
+ * Time: 18:37:45
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Wed Feb 17 2021 04:43:29 GMT-0400 (Bolivia Time)
- * Last time updated: 4:43:29
+ * Last date updated: Fri Feb 19 2021 18:37:45 GMT-0400 (Bolivia Time)
+ * Last time updated: 18:37:45
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -521,6 +521,70 @@ leadsCstmCtrl.findOneBySexoC = async (req, res) => {
     try {
         const { sexoC } = req.params;
         const objLeadCstm = await leadCstmService.findOneBySexoC(sexoC, req.query);
+        if (!objLeadCstm) {
+            util.setError(404, `Cannot find leadCstm with the lcObjLocalCommonFieldName ${lcObjLocalCommonFieldName}`);
+        } else {
+            util.setSuccess(200, 'Found leadCstm', objLeadCstm);
+        }
+        return util.send(res);
+    } catch(e) {
+        util.setError(400, e);
+        return util.send(res);
+    }
+}
+
+leadsCstmCtrl.findOneByCiudadC = async (req, res) => {
+    try {
+        const { ciudadC } = req.params;
+        const objLeadCstm = await leadCstmService.findOneByCiudadC(ciudadC, req.query);
+        if (!objLeadCstm) {
+            util.setError(404, `Cannot find leadCstm with the lcObjLocalCommonFieldName ${lcObjLocalCommonFieldName}`);
+        } else {
+            util.setSuccess(200, 'Found leadCstm', objLeadCstm);
+        }
+        return util.send(res);
+    } catch(e) {
+        util.setError(400, e);
+        return util.send(res);
+    }
+}
+
+leadsCstmCtrl.findOneByDepartamentoC = async (req, res) => {
+    try {
+        const { departamentoC } = req.params;
+        const objLeadCstm = await leadCstmService.findOneByDepartamentoC(departamentoC, req.query);
+        if (!objLeadCstm) {
+            util.setError(404, `Cannot find leadCstm with the lcObjLocalCommonFieldName ${lcObjLocalCommonFieldName}`);
+        } else {
+            util.setSuccess(200, 'Found leadCstm', objLeadCstm);
+        }
+        return util.send(res);
+    } catch(e) {
+        util.setError(400, e);
+        return util.send(res);
+    }
+}
+
+leadsCstmCtrl.findOneByPaisC = async (req, res) => {
+    try {
+        const { paisC } = req.params;
+        const objLeadCstm = await leadCstmService.findOneByPaisC(paisC, req.query);
+        if (!objLeadCstm) {
+            util.setError(404, `Cannot find leadCstm with the lcObjLocalCommonFieldName ${lcObjLocalCommonFieldName}`);
+        } else {
+            util.setSuccess(200, 'Found leadCstm', objLeadCstm);
+        }
+        return util.send(res);
+    } catch(e) {
+        util.setError(400, e);
+        return util.send(res);
+    }
+}
+
+leadsCstmCtrl.findOneByDireccionC = async (req, res) => {
+    try {
+        const { direccionC } = req.params;
+        const objLeadCstm = await leadCstmService.findOneByDireccionC(direccionC, req.query);
         if (!objLeadCstm) {
             util.setError(404, `Cannot find leadCstm with the lcObjLocalCommonFieldName ${lcObjLocalCommonFieldName}`);
         } else {
@@ -1091,6 +1155,86 @@ leadsCstmCtrl.updateLeadCstmBySexoC = async (req, res) => {
                 return util.send(res);
             }
             const objLeadCstm = await leadCstmService.updateLeadCstmBySexoC(sexoC, req.body);
+            if (!objLeadCstm) {
+                util.setError(404, `Cannot find leadCstm with the id: ${idC}`);
+            } else {
+                util.setSuccess(200, 'LeadCstm updated', objLeadCstm);
+            }
+            return util.send(res);
+        } catch (e) {
+            util.setError(400, e);
+            return util.send(res);
+        }
+}
+
+leadsCstmCtrl.updateLeadCstmByCiudadC = async (req, res) => {
+     const { ciudadC } = req.params;
+        try {
+            if (!util.isChar(idC)) {
+                util.setError(400, 'Please input a valid Char value');
+                return util.send(res);
+            }
+            const objLeadCstm = await leadCstmService.updateLeadCstmByCiudadC(ciudadC, req.body);
+            if (!objLeadCstm) {
+                util.setError(404, `Cannot find leadCstm with the id: ${idC}`);
+            } else {
+                util.setSuccess(200, 'LeadCstm updated', objLeadCstm);
+            }
+            return util.send(res);
+        } catch (e) {
+            util.setError(400, e);
+            return util.send(res);
+        }
+}
+
+leadsCstmCtrl.updateLeadCstmByDepartamentoC = async (req, res) => {
+     const { departamentoC } = req.params;
+        try {
+            if (!util.isChar(idC)) {
+                util.setError(400, 'Please input a valid Char value');
+                return util.send(res);
+            }
+            const objLeadCstm = await leadCstmService.updateLeadCstmByDepartamentoC(departamentoC, req.body);
+            if (!objLeadCstm) {
+                util.setError(404, `Cannot find leadCstm with the id: ${idC}`);
+            } else {
+                util.setSuccess(200, 'LeadCstm updated', objLeadCstm);
+            }
+            return util.send(res);
+        } catch (e) {
+            util.setError(400, e);
+            return util.send(res);
+        }
+}
+
+leadsCstmCtrl.updateLeadCstmByPaisC = async (req, res) => {
+     const { paisC } = req.params;
+        try {
+            if (!util.isChar(idC)) {
+                util.setError(400, 'Please input a valid Char value');
+                return util.send(res);
+            }
+            const objLeadCstm = await leadCstmService.updateLeadCstmByPaisC(paisC, req.body);
+            if (!objLeadCstm) {
+                util.setError(404, `Cannot find leadCstm with the id: ${idC}`);
+            } else {
+                util.setSuccess(200, 'LeadCstm updated', objLeadCstm);
+            }
+            return util.send(res);
+        } catch (e) {
+            util.setError(400, e);
+            return util.send(res);
+        }
+}
+
+leadsCstmCtrl.updateLeadCstmByDireccionC = async (req, res) => {
+     const { direccionC } = req.params;
+        try {
+            if (!util.isChar(idC)) {
+                util.setError(400, 'Please input a valid Char value');
+                return util.send(res);
+            }
+            const objLeadCstm = await leadCstmService.updateLeadCstmByDireccionC(direccionC, req.body);
             if (!objLeadCstm) {
                 util.setError(404, `Cannot find leadCstm with the id: ${idC}`);
             } else {

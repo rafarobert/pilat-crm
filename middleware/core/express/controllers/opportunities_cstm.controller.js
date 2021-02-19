@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Wed Feb 17 2021 04:43:42 GMT-0400 (Bolivia Time)
- * Time: 4:43:42
+ * Date: Fri Feb 19 2021 18:38:03 GMT-0400 (Bolivia Time)
+ * Time: 18:38:3
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Wed Feb 17 2021 04:43:42 GMT-0400 (Bolivia Time)
- * Last time updated: 4:43:42
+ * Last date updated: Fri Feb 19 2021 18:38:03 GMT-0400 (Bolivia Time)
+ * Last time updated: 18:38:3
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -293,6 +293,22 @@ opportunitiesCstmCtrl.findOneByTipoVentaC = async (req, res) => {
     }
 }
 
+opportunitiesCstmCtrl.findOneByMonedaC = async (req, res) => {
+    try {
+        const { monedaC } = req.params;
+        const objOpportunityCstm = await opportunityCstmService.findOneByMonedaC(monedaC, req.query);
+        if (!objOpportunityCstm) {
+            util.setError(404, `Cannot find opportunityCstm with the lcObjLocalCommonFieldName ${lcObjLocalCommonFieldName}`);
+        } else {
+            util.setSuccess(200, 'Found opportunityCstm', objOpportunityCstm);
+        }
+        return util.send(res);
+    } catch(e) {
+        util.setError(400, e);
+        return util.send(res);
+    }
+}
+
 
 
 opportunitiesCstmCtrl.updateOpportunityCstmByIdC = async (req, res) => {
@@ -503,6 +519,26 @@ opportunitiesCstmCtrl.updateOpportunityCstmByTipoVentaC = async (req, res) => {
                 return util.send(res);
             }
             const objOpportunityCstm = await opportunityCstmService.updateOpportunityCstmByTipoVentaC(tipoVentaC, req.body);
+            if (!objOpportunityCstm) {
+                util.setError(404, `Cannot find opportunityCstm with the id: ${idC}`);
+            } else {
+                util.setSuccess(200, 'OpportunityCstm updated', objOpportunityCstm);
+            }
+            return util.send(res);
+        } catch (e) {
+            util.setError(400, e);
+            return util.send(res);
+        }
+}
+
+opportunitiesCstmCtrl.updateOpportunityCstmByMonedaC = async (req, res) => {
+     const { monedaC } = req.params;
+        try {
+            if (!util.isChar(idC)) {
+                util.setError(400, 'Please input a valid Char value');
+                return util.send(res);
+            }
+            const objOpportunityCstm = await opportunityCstmService.updateOpportunityCstmByMonedaC(monedaC, req.body);
             if (!objOpportunityCstm) {
                 util.setError(404, `Cannot find opportunityCstm with the id: ${idC}`);
             } else {

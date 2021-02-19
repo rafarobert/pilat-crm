@@ -80,6 +80,14 @@ Ext.define('es.model.leadsCstm', {
 		
 		{ name: 'sexo_c', type: 'text', defaultValue: null },
 		
+		{ name: 'ciudad_c', type: 'text', defaultValue: null },
+		
+		{ name: 'departamento_c', type: 'text', defaultValue: null },
+		
+		{ name: 'pais_c', type: 'text', defaultValue: null },
+		
+		{ name: 'direccion_c', type: 'text', defaultValue: null },
+		
 		{ name: 'actividad_c', type: 'text', defaultValue: null },
 		
 		{ name: 'actividad_llamar_fecha_c', type: 'date', defaultValue: null },

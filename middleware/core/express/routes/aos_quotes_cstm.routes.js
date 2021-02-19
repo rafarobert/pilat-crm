@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Wed Feb 17 2021 04:42:25 GMT-0400 (Bolivia Time)
- * Time: 4:42:25
+ * Date: Fri Feb 19 2021 18:36:20 GMT-0400 (Bolivia Time)
+ * Time: 18:36:20
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Wed Feb 17 2021 04:42:25 GMT-0400 (Bolivia Time)
- * Last time updated: 4:42:25
+ * Last date updated: Fri Feb 19 2021 18:36:20 GMT-0400 (Bolivia Time)
+ * Last time updated: 18:36:20
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -57,6 +57,8 @@ router.get(`/api-${sys}/aos-quotes-cstm/findOneByTipoPagoC/:tipoPagoC`, (req, re
 
 router.get(`/api-${sys}/aos-quotes-cstm/findOneByLinkTerrenoC/:linkTerrenoC`, (req, res) => aosQuotesCstmCtrl.findOneByLinkTerrenoC(req, res));
 
+router.get(`/api-${sys}/aos-quotes-cstm/findOneByMonedaC/:monedaC`, (req, res) => aosQuotesCstmCtrl.findOneByMonedaC(req, res));
+
 router.get(`/api-${sys}/aos-quotes-cstm/findOneByFechaEnvioProgramadaC/:fechaEnvioProgramadaC`, (req, res) => aosQuotesCstmCtrl.findOneByFechaEnvioProgramadaC(req, res));
 
 
@@ -94,6 +96,8 @@ router.post(`/api-${sys}/aos-quotes-cstm/updateAoQuoteCstmByTermYearsC`, (req, r
 router.post(`/api-${sys}/aos-quotes-cstm/updateAoQuoteCstmByTipoPagoC`, (req, res) => aosQuotesCstmCtrl.updateAoQuoteCstmByTipoPagoC(req, res));
 
 router.post(`/api-${sys}/aos-quotes-cstm/updateAoQuoteCstmByLinkTerrenoC`, (req, res) => aosQuotesCstmCtrl.updateAoQuoteCstmByLinkTerrenoC(req, res));
+
+router.post(`/api-${sys}/aos-quotes-cstm/updateAoQuoteCstmByMonedaC`, (req, res) => aosQuotesCstmCtrl.updateAoQuoteCstmByMonedaC(req, res));
 
 router.post(`/api-${sys}/aos-quotes-cstm/updateAoQuoteCstmByFechaEnvioProgramadaC`, (req, res) => aosQuotesCstmCtrl.updateAoQuoteCstmByFechaEnvioProgramadaC(req, res));
 

@@ -218,6 +218,14 @@ export class AoQuoteCstmService {
       return this.http.get(this.basePath + '/findOneByLinkTerrenoC/' + linkTerrenoC + '?' + attributes);
   }
   
+  findOneByMonedaC(monedaC:any, select = []) {
+      let attributes = '';
+      if(select.length) {
+          attributes += 'select=' + select.toString();
+      }
+      return this.http.get(this.basePath + '/findOneByMonedaC/' + monedaC + '?' + attributes);
+  }
+  
   findOneByFechaEnvioProgramadaC(fechaEnvioProgramadaC:any, select = []) {
       let attributes = '';
       if(select.length) {
@@ -293,6 +301,10 @@ export class AoQuoteCstmService {
   
   updateAoQuoteCstmByLinkTerrenoC(linkTerrenoC:any, aoQuoteCstm:AosQuotesCstm) {
       return this.http.post(this.basePath + '/updateAoQuoteCstmByLinkTerrenoC?linkTerrenoC=' + linkTerrenoC, aoQuoteCstm);
+  }
+  
+  updateAoQuoteCstmByMonedaC(monedaC:any, aoQuoteCstm:AosQuotesCstm) {
+      return this.http.post(this.basePath + '/updateAoQuoteCstmByMonedaC?monedaC=' + monedaC, aoQuoteCstm);
   }
   
   updateAoQuoteCstmByFechaEnvioProgramadaC(fechaEnvioProgramadaC:any, aoQuoteCstm:AosQuotesCstm) {

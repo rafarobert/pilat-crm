@@ -50,6 +50,8 @@ Ext.define('es.model.opportunitiesCstm', {
 		
 		{ name: 'tipo_venta_c', type: 'text', defaultValue: null },
 		
+		{ name: 'moneda_c', type: 'text', defaultValue: null },
+		
 		//</es-section>
 	]
 });

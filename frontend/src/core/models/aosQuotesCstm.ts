@@ -44,6 +44,8 @@ export class AosQuotesCstm {
   
   link_terreno_c: string;
   
+  moneda_c: string;
+  
   
   
   

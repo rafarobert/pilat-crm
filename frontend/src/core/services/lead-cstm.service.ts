@@ -290,6 +290,38 @@ export class LeadCstmService {
       return this.http.get(this.basePath + '/findOneBySexoC/' + sexoC + '?' + attributes);
   }
   
+  findOneByCiudadC(ciudadC:any, select = []) {
+      let attributes = '';
+      if(select.length) {
+          attributes += 'select=' + select.toString();
+      }
+      return this.http.get(this.basePath + '/findOneByCiudadC/' + ciudadC + '?' + attributes);
+  }
+  
+  findOneByDepartamentoC(departamentoC:any, select = []) {
+      let attributes = '';
+      if(select.length) {
+          attributes += 'select=' + select.toString();
+      }
+      return this.http.get(this.basePath + '/findOneByDepartamentoC/' + departamentoC + '?' + attributes);
+  }
+  
+  findOneByPaisC(paisC:any, select = []) {
+      let attributes = '';
+      if(select.length) {
+          attributes += 'select=' + select.toString();
+      }
+      return this.http.get(this.basePath + '/findOneByPaisC/' + paisC + '?' + attributes);
+  }
+  
+  findOneByDireccionC(direccionC:any, select = []) {
+      let attributes = '';
+      if(select.length) {
+          attributes += 'select=' + select.toString();
+      }
+      return this.http.get(this.basePath + '/findOneByDireccionC/' + direccionC + '?' + attributes);
+  }
+  
   findOneByActividadC(actividadC:any, select = []) {
       let attributes = '';
       if(select.length) {
@@ -417,6 +449,22 @@ export class LeadCstmService {
   
   updateLeadCstmBySexoC(sexoC:any, leadCstm:LeadsCstm) {
       return this.http.post(this.basePath + '/updateLeadCstmBySexoC?sexoC=' + sexoC, leadCstm);
+  }
+  
+  updateLeadCstmByCiudadC(ciudadC:any, leadCstm:LeadsCstm) {
+      return this.http.post(this.basePath + '/updateLeadCstmByCiudadC?ciudadC=' + ciudadC, leadCstm);
+  }
+  
+  updateLeadCstmByDepartamentoC(departamentoC:any, leadCstm:LeadsCstm) {
+      return this.http.post(this.basePath + '/updateLeadCstmByDepartamentoC?departamentoC=' + departamentoC, leadCstm);
+  }
+  
+  updateLeadCstmByPaisC(paisC:any, leadCstm:LeadsCstm) {
+      return this.http.post(this.basePath + '/updateLeadCstmByPaisC?paisC=' + paisC, leadCstm);
+  }
+  
+  updateLeadCstmByDireccionC(direccionC:any, leadCstm:LeadsCstm) {
+      return this.http.post(this.basePath + '/updateLeadCstmByDireccionC?direccionC=' + direccionC, leadCstm);
   }
   
   updateLeadCstmByActividadC(actividadC:any, leadCstm:LeadsCstm) {
