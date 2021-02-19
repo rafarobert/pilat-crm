@@ -14,13 +14,13 @@ $dictionary['Opportunity']['fields']['manzano_c']['labelValue']='Manzano';
 
  
 
- // created: 2021-02-19 10:30:33
+ // created: 2021-02-19 15:49:10
 $dictionary['Opportunity']['fields']['tipo_venta_c']['inline_edit']='1';
-$dictionary['Opportunity']['fields']['tipo_venta_c']['labelValue']='Tipo de Venta';
+$dictionary['Opportunity']['fields']['tipo_venta_c']['labelValue']='Tipo Venta';
 
  
 
- // created: 2021-02-19 10:20:07
+ // created: 2021-02-19 15:55:10
 $dictionary['Opportunity']['fields']['sales_stage']['len']=100;
 $dictionary['Opportunity']['fields']['sales_stage']['inline_edit']=true;
 $dictionary['Opportunity']['fields']['sales_stage']['comments']='Indication of progression towards closure';
@@ -55,13 +55,13 @@ $dictionary['Opportunity']['fields']['superficie_c']['labelValue']='superficie';
 
  
 
- // created: 2021-02-19 10:05:21
+ // created: 2021-02-19 15:57:37
 $dictionary['Opportunity']['fields']['moneda_c']['inline_edit']='1';
-$dictionary['Opportunity']['fields']['moneda_c']['labelValue']='moneda c';
+$dictionary['Opportunity']['fields']['moneda_c']['labelValue']='LBL_MONEDA_C';
 
  
 
- // created: 2021-02-19 10:24:46
+ // created: 2021-02-19 16:03:39
 $dictionary['Opportunity']['fields']['lead_source']['len']=100;
 $dictionary['Opportunity']['fields']['lead_source']['inline_edit']=true;
 $dictionary['Opportunity']['fields']['lead_source']['comments']='Source of the opportunity';

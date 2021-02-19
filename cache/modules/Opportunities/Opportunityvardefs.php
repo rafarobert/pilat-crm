@@ -650,7 +650,7 @@
     'tipo_venta_c' => 
     array (
       'inline_edit' => '1',
-      'labelValue' => 'Tipo de Venta',
+      'labelValue' => 'Tipo Venta',
       'required' => false,
       'source' => 'custom_fields',
       'name' => 'tipo_venta_c',
@@ -670,7 +670,7 @@
       'merge_filter' => 'disabled',
       'len' => 100,
       'size' => '20',
-      'options' => 'tipo_venta_c_0',
+      'options' => 'tipo_venta_c_list',
       'studio' => 'visible',
       'dbType' => 'enum',
       'parentenum' => '',
@@ -814,7 +814,7 @@
     'moneda_c' => 
     array (
       'inline_edit' => '1',
-      'labelValue' => 'moneda c',
+      'labelValue' => 'LBL_MONEDA_C',
       'required' => false,
       'source' => 'custom_fields',
       'name' => 'moneda_c',

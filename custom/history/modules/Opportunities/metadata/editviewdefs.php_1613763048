@@ -59,35 +59,33 @@ array (
         ),
         1 => 
         array (
-          0 => 'description',
+          0 => 'account_name',
         ),
         2 => 
         array (
-          0 => 'opportunity_type',
-          1 => 
+          0 => 
           array (
-            'name' => 'tipo_venta_c',
-            'studio' => 'visible',
-            'label' => 'LBL_TIPO_VENTA_C',
+            'name' => 'date_closed',
           ),
         ),
         3 => 
         array (
-          0 => 'probability',
+          0 => 'sales_stage',
           1 => 'lead_source',
         ),
         4 => 
         array (
-          0 => 'sales_stage',
-          1 => 
-          array (
-            'name' => 'date_closed',
-          ),
+          0 => 'probability',
+          1 => 'opportunity_type',
         ),
         5 => 
         array (
           0 => '',
           1 => '',
+        ),
+        6 => 
+        array (
+          0 => 'description',
         ),
       ),
       'lbl_editview_panel2' => 
@@ -125,28 +123,22 @@ array (
         array (
           0 => 
           array (
-            'name' => 'moneda_c',
-            'studio' => 'visible',
-            'label' => 'LBL_MONEDA_C',
+            'name' => 'currency_id',
+            'label' => 'LBL_CURRENCY',
           ),
-          1 => 
-          array (
-            'name' => 'amount',
-          ),
+          1 => '',
         ),
         1 => 
         array (
-          0 => '',
-          1 => '',
+          0 => 
+          array (
+            'name' => 'amount',
+          ),
         ),
       ),
       'LBL_PANEL_ASSIGNMENT' => 
       array (
         0 => 
-        array (
-          0 => 'account_name',
-        ),
-        1 => 
         array (
           0 => 'assigned_user_name',
         ),

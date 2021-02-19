@@ -101,3 +101,28 @@ $GLOBALS['app_list_strings']['etapas_c_list']=array (
   'CALIFICADO' => '2. Calificado',
   'VISITA_FISICA_VIRTUAL' => '3. Visita Fisica / Virtual',
 );
+$GLOBALS['app_list_strings']['tipo_venta_c_list']=array (
+  'INMEDIATA' => 'Inmediata',
+  'CUOTA' => 'Cuota',
+);
+$GLOBALS['app_list_strings']['sales_stage_list']=array (
+  'COTIZACION_PROPUESTA' => '4. Cotización Propuesta',
+  'NEGOCIACION' => '5. Negociación',
+  'RESERVA' => '6. Reserva',
+  'CUOTA_INICIAL_COMPLETA' => '7. Cuota Inicial Completa',
+  'ARMADO_CARPETA' => '8. Armado de Carpetas',
+  'CIERRE_GANADO' => '9. Cierre Ganado',
+  'CIERRE_PERDIDO' => '10. Cierre Perdido',
+);
+$GLOBALS['app_list_strings']['moneda_c_list']=array (
+  'USD' => '$us.',
+  'BOB' => 'Bs.',
+);
+
+$GLOBALS['app_list_strings']['lead_source_dom']=array (
+  '' => '',
+  'FACEBOOK' => 'Facebook',
+  'SITIO_WEB' => 'Sitio Web',
+  'MARKETING_PERSONAL' => 'Marketing Personal',
+  'OTRO' => 'Otro',
+);

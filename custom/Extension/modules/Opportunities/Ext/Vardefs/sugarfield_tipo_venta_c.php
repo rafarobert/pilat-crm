@@ -1,6 +1,6 @@
 <?php
- // created: 2021-02-19 10:30:33
+ // created: 2021-02-19 15:49:10
 $dictionary['Opportunity']['fields']['tipo_venta_c']['inline_edit']='1';
-$dictionary['Opportunity']['fields']['tipo_venta_c']['labelValue']='Tipo de Venta';
+$dictionary['Opportunity']['fields']['tipo_venta_c']['labelValue']='Tipo Venta';
 
  ?>
