@@ -866,7 +866,7 @@ export class PipelineDialogComponent implements OnInit {
     this.lead.leadCallsLeads.callLeadCalls.date_end = this.afterTomorrow;
     this.lead.leadCallsLeads.callLeadCalls.callCallsCstm = this.lead.leadCallsLeads.callLeadCalls.callCallsCstm ? this.lead.leadCallsLeads.callLeadCalls.callCallsCstm : new CallsCstm();
   
-    this.lead = await this.crmLeadService.setDataLead(this.lead,this.parModuleOpportunities,this.pilatService.currentUser,this.pilatService.currentSessId);
+    this.lead = await this.crmLeadService.setDataLead(this.lead,this.parModuleLeads,this.pilatService.currentUser,this.pilatService.currentSessId);
   
     const dialogRef = this.dialog.open(AddLeadComponent, {
       width:'600px',
