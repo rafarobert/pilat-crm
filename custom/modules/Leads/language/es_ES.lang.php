@@ -1,5 +1,5 @@
 <?php
-// created: 2021-02-19 13:19:42
+// created: 2021-02-19 16:44:40
 $mod_strings = array (
   'LBL_ACCOUNT' => 'Cliente',
   'LBL_ACCOUNT_DESCRIPTION' => 'Descripción de la Cliente',
@@ -38,4 +38,11 @@ $mod_strings = array (
   'LBL_RUBRO_C' => 'Rubro',
   'LBL_FECHA_VALIDEX_C' => 'Fecha Validez',
   'LBL_ETAPAS' => 'Etapa del Prospecto',
+  'LBL_TIPO_CLIENTE_C' => 'Tipo de Cliente',
+  'LBL_EDITVIEW_PANEL1' => 'Datos de la Empresa Cliente',
+  'LBL_NOMBRE_EMPRESA_C' => 'Nombre de la Empresa',
+  'LBL_NIT_EMPRESA_C' => 'Nit de la Empresa',
+  'LBL_EMAIL_EMPRESA_C' => 'Correo Corporativo',
+  'LBL_NOMBRE_CONTACTO_C' => 'Nombre de Contacto',
+  'LBL_DIRECCION_C' => 'Dirección de la Empresa',
 );

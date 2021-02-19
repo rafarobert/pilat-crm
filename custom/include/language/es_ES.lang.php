@@ -147,3 +147,8 @@ $GLOBALS['app_list_strings']['term_years_c_list']=array (
   5 => '5 Años Plazo',
   10 => '10 años Plazo',
 );
+$GLOBALS['app_list_strings']['tipo_cliente_c_list']=array (
+  '' => '',
+  'NATURAL' => 'Persona Natural',
+  'JURIDICA' => 'Persona Juridica',
+);

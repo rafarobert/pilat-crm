@@ -1042,9 +1042,39 @@ SUGAR.util.doWhen(function(){
 
 
 <div class="col-xs-12 col-sm-6 detail-view-row-item">
+
+
+<div class="col-xs-12 col-sm-4 label col-1-label">
+
+
+{capture name="label" assign="label"}{sugar_translate label='LBL_TIPO_CLIENTE_C' module='Leads'}{/capture}
+{$label|strip_semicolon}:
 </div>
 
-<div class="clear"></div>
+
+<div class="col-xs-12 col-sm-8 detail-view-field inlineEdit" type="dynamicenum" field="tipo_cliente_c"  >
+
+{if !$fields.tipo_cliente_c.hidden}
+{counter name="panelFieldCount" print=false}
+
+
+{if is_string($fields.tipo_cliente_c.options)}
+<input type="hidden" class="sugar_field" id="{$fields.tipo_cliente_c.name}" value="{ $fields.tipo_cliente_c.options }">
+{ $fields.tipo_cliente_c.options }
+{else}
+<input type="hidden" class="sugar_field" id="{$fields.tipo_cliente_c.name}" value="{ $fields.tipo_cliente_c.value }">
+{ $fields.tipo_cliente_c.options[$fields.tipo_cliente_c.value]}
+{/if}
+{/if}
+
+<div class="inlineEditIcon col-xs-hidden">
+<span class="suitepicon suitepicon-action-edit"></span>
+</div>
+</div>
+
+
+</div>
+
 
 
 
@@ -1057,6 +1087,239 @@ SUGAR.util.doWhen(function(){
 </div>  
 {if $panelFieldCount == 0}
 <script>document.getElementById("LBL_PANEL_ADVANCED").style.display='none';</script>
+{/if}
+<div class="panel-body">    
+{counter name="panelFieldCount" start=0 print=false assign="panelFieldCount"}
+<h4>
+{sugar_translate label='LBL_EDITVIEW_PANEL1' module='Leads'}   
+</h4>
+
+
+<div class="row detail-view-row">
+
+
+
+<div class="col-xs-12 col-sm-6 detail-view-row-item">
+
+
+<div class="col-xs-12 col-sm-4 label col-1-label">
+
+
+{capture name="label" assign="label"}{sugar_translate label='LBL_NOMBRE_EMPRESA_C' module='Leads'}{/capture}
+{$label|strip_semicolon}:
+</div>
+
+
+<div class="col-xs-12 col-sm-8 detail-view-field inlineEdit" type="varchar" field="nombre_empresa_c"  >
+
+{if !$fields.nombre_empresa_c.hidden}
+{counter name="panelFieldCount" print=false}
+
+{if strlen($fields.nombre_empresa_c.value) <= 0}
+{assign var="value" value=$fields.nombre_empresa_c.default_value }
+{else}
+{assign var="value" value=$fields.nombre_empresa_c.value }
+{/if} 
+<span class="sugar_field" id="{$fields.nombre_empresa_c.name}">{$fields.nombre_empresa_c.value}</span>
+{/if}
+
+<div class="inlineEditIcon col-xs-hidden">
+<span class="suitepicon suitepicon-action-edit"></span>
+</div>
+</div>
+
+
+</div>
+
+
+
+
+<div class="col-xs-12 col-sm-6 detail-view-row-item">
+
+
+<div class="col-xs-12 col-sm-4 label col-2-label">
+
+
+{capture name="label" assign="label"}{sugar_translate label='LBL_OFFICE_PHONE' module='Leads'}{/capture}
+{$label|strip_semicolon}:
+</div>
+
+
+<div class="col-xs-12 col-sm-8 detail-view-field inlineEdit" type="phone" field="phone_work"  class="phone">
+
+{if !$fields.phone_work.hidden}
+{counter name="panelFieldCount" print=false}
+
+{if !empty($fields.phone_work.value)}
+{assign var="phone_value" value=$fields.phone_work.value }
+{if $phone_value neq ''}
+<img style='cursor:pointer;vertical-align: sub;' src="custom/themes/default/images/dt_whatsapp_24.png" onclick="whatsapptonumber('{$phone_value}','{$module}','{$id}');">
+{/if}
+{sugar_phone value=$phone_value usa_format="0"}
+{/if}
+{/if}
+
+<div class="inlineEditIcon col-xs-hidden">
+<span class="suitepicon suitepicon-action-edit"></span>
+</div>
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="row detail-view-row">
+
+
+
+<div class="col-xs-12 col-sm-6 detail-view-row-item">
+
+
+<div class="col-xs-12 col-sm-4 label col-1-label">
+
+
+{capture name="label" assign="label"}{sugar_translate label='LBL_NIT_EMPRESA_C' module='Leads'}{/capture}
+{$label|strip_semicolon}:
+</div>
+
+
+<div class="col-xs-12 col-sm-8 detail-view-field inlineEdit" type="varchar" field="nit_empresa_c"  >
+
+{if !$fields.nit_empresa_c.hidden}
+{counter name="panelFieldCount" print=false}
+
+{if strlen($fields.nit_empresa_c.value) <= 0}
+{assign var="value" value=$fields.nit_empresa_c.default_value }
+{else}
+{assign var="value" value=$fields.nit_empresa_c.value }
+{/if} 
+<span class="sugar_field" id="{$fields.nit_empresa_c.name}">{$fields.nit_empresa_c.value}</span>
+{/if}
+
+<div class="inlineEditIcon col-xs-hidden">
+<span class="suitepicon suitepicon-action-edit"></span>
+</div>
+</div>
+
+
+</div>
+
+
+
+
+<div class="col-xs-12 col-sm-6 detail-view-row-item">
+
+
+<div class="col-xs-12 col-sm-4 label col-2-label">
+
+
+{capture name="label" assign="label"}{sugar_translate label='LBL_EMAIL_EMPRESA_C' module='Leads'}{/capture}
+{$label|strip_semicolon}:
+</div>
+
+
+<div class="col-xs-12 col-sm-8 detail-view-field inlineEdit" type="varchar" field="email_empresa_c"  >
+
+{if !$fields.email_empresa_c.hidden}
+{counter name="panelFieldCount" print=false}
+
+{if strlen($fields.email_empresa_c.value) <= 0}
+{assign var="value" value=$fields.email_empresa_c.default_value }
+{else}
+{assign var="value" value=$fields.email_empresa_c.value }
+{/if} 
+<span class="sugar_field" id="{$fields.email_empresa_c.name}">{$fields.email_empresa_c.value}</span>
+{/if}
+
+<div class="inlineEditIcon col-xs-hidden">
+<span class="suitepicon suitepicon-action-edit"></span>
+</div>
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="row detail-view-row">
+
+
+
+<div class="col-xs-12 col-sm-6 detail-view-row-item">
+
+
+<div class="col-xs-12 col-sm-4 label col-1-label">
+
+
+{capture name="label" assign="label"}{sugar_translate label='LBL_NOMBRE_CONTACTO_C' module='Leads'}{/capture}
+{$label|strip_semicolon}:
+</div>
+
+
+<div class="col-xs-12 col-sm-8 detail-view-field inlineEdit" type="varchar" field="nombre_contacto_c"  >
+
+{if !$fields.nombre_contacto_c.hidden}
+{counter name="panelFieldCount" print=false}
+
+{if strlen($fields.nombre_contacto_c.value) <= 0}
+{assign var="value" value=$fields.nombre_contacto_c.default_value }
+{else}
+{assign var="value" value=$fields.nombre_contacto_c.value }
+{/if} 
+<span class="sugar_field" id="{$fields.nombre_contacto_c.name}">{$fields.nombre_contacto_c.value}</span>
+{/if}
+
+<div class="inlineEditIcon col-xs-hidden">
+<span class="suitepicon suitepicon-action-edit"></span>
+</div>
+</div>
+
+
+</div>
+
+
+
+
+<div class="col-xs-12 col-sm-6 detail-view-row-item">
+
+
+<div class="col-xs-12 col-sm-4 label col-2-label">
+
+
+{capture name="label" assign="label"}{sugar_translate label='LBL_DIRECCION_C' module='Leads'}{/capture}
+{$label|strip_semicolon}:
+</div>
+
+
+<div class="col-xs-12 col-sm-8 detail-view-field inlineEdit" type="varchar" field="direccion_c"  >
+
+{if !$fields.direccion_c.hidden}
+{counter name="panelFieldCount" print=false}
+
+{if strlen($fields.direccion_c.value) <= 0}
+{assign var="value" value=$fields.direccion_c.default_value }
+{else}
+{assign var="value" value=$fields.direccion_c.value }
+{/if} 
+<span class="sugar_field" id="{$fields.direccion_c.name}">{$fields.direccion_c.value}</span>
+{/if}
+
+<div class="inlineEditIcon col-xs-hidden">
+<span class="suitepicon suitepicon-action-edit"></span>
+</div>
+</div>
+
+
+</div>
+
+</div>
+<script type="text/javascript">SUGAR.util.doWhen("typeof initPanel == 'function'", function() {ldelim} initPanel(3, 'expanded'); {rdelim}); </script>
+</div>  
+{if $panelFieldCount == 0}
+<script>document.getElementById("LBL_EDITVIEW_PANEL1").style.display='none';</script>
 {/if}
 <div class="panel-body">    
 {counter name="panelFieldCount" start=0 print=false assign="panelFieldCount"}
@@ -1170,7 +1433,7 @@ SUGAR.util.doWhen(function(){
 </div>
 
 </div>
-<script type="text/javascript">SUGAR.util.doWhen("typeof initPanel == 'function'", function() {ldelim} initPanel(3, 'expanded'); {rdelim}); </script>
+<script type="text/javascript">SUGAR.util.doWhen("typeof initPanel == 'function'", function() {ldelim} initPanel(4, 'expanded'); {rdelim}); </script>
 </div>  
 {if $panelFieldCount == 0}
 <script>document.getElementById("LBL_PANEL_ASSIGNMENT").style.display='none';</script>

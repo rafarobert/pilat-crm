@@ -48,6 +48,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL1' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
         'LBL_PANEL_ASSIGNMENT' => 
         array (
           'newTab' => false,
@@ -220,8 +225,51 @@ array (
         ),
         5 => 
         array (
-          0 => '',
+          0 => 
+          array (
+            'name' => 'tipo_cliente_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TIPO_CLIENTE_C',
+          ),
           1 => '',
+        ),
+      ),
+      'lbl_editview_panel1' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'nombre_empresa_c',
+            'label' => 'LBL_NOMBRE_EMPRESA_C',
+          ),
+          1 => 'phone_work',
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'nit_empresa_c',
+            'label' => 'LBL_NIT_EMPRESA_C',
+          ),
+          1 => 
+          array (
+            'name' => 'email_empresa_c',
+            'label' => 'LBL_EMAIL_EMPRESA_C',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'nombre_contacto_c',
+            'label' => 'LBL_NOMBRE_CONTACTO_C',
+          ),
+          1 => 
+          array (
+            'name' => 'direccion_c',
+            'label' => 'LBL_DIRECCION_C',
+          ),
         ),
       ),
       'LBL_PANEL_ASSIGNMENT' => 

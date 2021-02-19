@@ -1480,7 +1480,7 @@
     'tipo_cliente_c' => 
     array (
       'inline_edit' => '1',
-      'labelValue' => 'LBL_TIPO_CLIENTE_C',
+      'labelValue' => 'Tipo de Cliente',
       'required' => false,
       'source' => 'custom_fields',
       'name' => 'tipo_cliente_c',
@@ -1500,7 +1500,7 @@
       'merge_filter' => 'disabled',
       'len' => 100,
       'size' => '20',
-      'options' => 'account_type_dom',
+      'options' => 'tipo_cliente_c_list',
       'studio' => 'visible',
       'dbType' => 'enum',
       'parentenum' => '',
