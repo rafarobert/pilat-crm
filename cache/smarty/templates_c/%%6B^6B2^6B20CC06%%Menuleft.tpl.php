@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2021-02-19 12:34:00
+<?php /* Smarty version 2.6.31, created on 2021-02-20 06:21:21
          compiled from themes/sp_theme/tpls/Menuleft.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'sp_project_logo', 'themes/sp_theme/tpls/Menuleft.tpl', 6, false),array('function', 'sp_project_charts', 'themes/sp_theme/tpls/Menuleft.tpl', 24, false),array('function', 'sugar_link', 'themes/sp_theme/tpls/Menuleft.tpl', 44, false),)), $this); ?>
