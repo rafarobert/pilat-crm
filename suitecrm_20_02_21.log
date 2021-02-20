@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Sat Feb 20 00:59:18 2021 [8880][-none-][FATAL] SECURITY: User authentication for gsalinas failed
 Sat Feb 20 00:59:20 2021 [8880][-none-][FATAL] FAILED LOGIN:attempts[1], ip[127.0.0.1], username[gsalinas]
 Sat Feb 20 00:59:50 2021 [8880][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 127.0.0.1 CLIENT IP: ::1
@@ -11,3 +12,18 @@ Sat Feb 20 16:01:53 2021 [10844][-none-][FATAL] SECURITY: User authentication fo
 Sat Feb 20 16:01:53 2021 [10844][-none-][FATAL] FAILED LOGIN:attempts[1], ip[::1], username[dcaceres]
 Sat Feb 20 16:01:58 2021 [10844][-none-][FATAL] SECURITY: User authentication for dcaceres failed
 Sat Feb 20 16:01:58 2021 [10844][-none-][FATAL] FAILED LOGIN:attempts[1], ip[::1], username[dcaceres]
+=======
+Sat Feb 20 07:22:01 2021 [11532][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Exception handling in /Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_pilat_dev/include/MVC/Controller/SugarController.php:402
+Sat Feb 20 07:22:01 2021 [11532][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Exception in Controller: Error al recuperar registro.  Este registro puede haber sido eliminado o puede que no esté autorizado para verlo.
+Sat Feb 20 07:22:01 2021 [11532][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] backtrace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_pilat_dev/include/MVC/View/views/view.detail.php(102): sugar_die('Error al recupe...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_pilat_dev/modules/Leads/views/view.detail.php(58): ViewDetail->display()
+#2 /Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_pilat_dev/include/MVC/View/SugarView.php(199): LeadsViewDetail->display()
+#3 /Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_pilat_dev/include/MVC/Controller/SugarController.php(432): SugarView->process()
+#4 /Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_pilat_dev/include/MVC/Controller/SugarController.php(375): SugarController->processView()
+#5 /Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_pilat_dev/include/MVC/SugarApplication.php(109): SugarController->execute()
+#6 /Applications/XAMPP/xamppfiles/htdocs/lafuente/crm_pilat_dev/index.php(52): SugarApplication->execute()
+#7 {main}
+Sat Feb 20 07:22:49 2021 [11682][-none-][FATAL] SECURITY: User authentication for dcaceres failed
+Sat Feb 20 07:22:49 2021 [11682][-none-][FATAL] FAILED LOGIN:attempts[1], ip[127.0.0.1], username[dcaceres]
+>>>>>>> 1a0b919df407ee8bfadc6b3dc5697f8e6f9d2768

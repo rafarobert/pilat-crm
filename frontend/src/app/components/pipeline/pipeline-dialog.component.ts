@@ -659,7 +659,7 @@ export class PipelineDialogComponent implements OnInit {
     let txtItem = event.previousContainer.data[event.previousIndex];
     let leadId = txtItem.split('<span hidden="prospectId">')[1].split('</span>')[0];
     this.salesStage = this.pipeline.columns[currentColumn].props.par_cod;
-    if (this.pilatAuth.userLoggedId) {
+    if (this.pilatService.currentUser.id) {
       if (leadId) {
         let responseLead: any = await this.crmLeadService.getLead(leadId).toPromise();
         this.lead = responseLead.data;
@@ -703,10 +703,10 @@ export class PipelineDialogComponent implements OnInit {
         if (accountId) {
           responseAccounts = await this.crmAccountService.getAllAccounts([], {
             id: accountId,
-            assigned_user_id: this.pilatAuth.userLoggedId
+            assigned_user_id: this.pilatService.currentUser.id
           }).toPromise();
         } else {
-          responseAccounts = await this.crmAccountService.getAllAccounts([], {assigned_user_id: this.pilatAuth.userLoggedId}).toPromise();
+          responseAccounts = await this.crmAccountService.getAllAccounts([], {assigned_user_id: this.pilatService.currentUser.id}).toPromise();
         }
         if (!responseAccounts.data) {
           await this.createAccount(this.account, this.contact, this.lead, this.opportunity);
@@ -737,10 +737,10 @@ export class PipelineDialogComponent implements OnInit {
         if (opportunityId) {
           responseOpportunities = await this.crmOpportunityService.getAllOpportunities([], {
             id: opportunityId,
-            assigned_user_id: this.pilatAuth.userLoggedId
+            assigned_user_id: this.pilatService.currentUser.id
           }).toPromise();
         } else {
-          responseOpportunities = await this.crmOpportunityService.getAllOpportunities([], {assigned_user_id: this.pilatAuth.userLoggedId}).toPromise();
+          responseOpportunities = await this.crmOpportunityService.getAllOpportunities([], {assigned_user_id: this.pilatService.currentUser.id}).toPromise();
         }
         if (!responseOpportunities.data) {
           this.opportunity.opportunityOpportunitiesCstm = new OpportunitiesCstm();
@@ -786,9 +786,9 @@ export class PipelineDialogComponent implements OnInit {
             opportunityId = this.opportunity.id ? this.opportunity.id : null;
             let responseAosQuotes: any;
             if (opportunityId) {
-              responseAosQuotes = await this.crmAosQuoteService.getAllAosQuotes([], {opportunity_id: opportunityId, assigned_user_id: this.pilatAuth.userLoggedId}).toPromise();
+              responseAosQuotes = await this.crmAosQuoteService.getAllAosQuotes([], {opportunity_id: opportunityId, assigned_user_id: this.pilatService.currentUser.id}).toPromise();
             } else {
-              responseAosQuotes = await this.crmAosQuoteService.getAllAosQuotes([], {assigned_user_id: this.pilatAuth.userLoggedId}).toPromise();
+              responseAosQuotes = await this.crmAosQuoteService.getAllAosQuotes([], {assigned_user_id: this.pilatService.currentUser.id}).toPromise();
             }
           
             if (!responseAosQuotes.data) {
@@ -1014,7 +1014,7 @@ export class PipelineDialogComponent implements OnInit {
   async setProspectToNextStatus(event, currentColumn) {
     let txtItem = event.previousContainer.data[event.previousIndex];
     let leadId = txtItem.split('<span hidden="prospectId">')[1].split('</span>')[0];
-    if (this.pilatAuth.userLoggedId) {
+    if (this.pilatService.currentUser.id) {
       if (leadId) {
         let lead = new Leads();
         lead.leadLeadsCstm = new LeadsCstm();
@@ -1040,7 +1040,7 @@ export class PipelineDialogComponent implements OnInit {
     let txtItem = event.previousContainer.data[event.previousIndex];
     let opportunityId = txtItem.split('<span hidden="opportunityId">')[1].split('</span>')[0];
     this.crmOpportunityService.opportunityData.id = opportunityId;
-    if (this.pilatAuth.userLoggedId) {
+    if (this.pilatService.currentUser.id) {
       this.dialog.open(DialogOpportunityToLeadComponent);
     }
   }

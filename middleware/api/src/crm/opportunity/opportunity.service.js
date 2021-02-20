@@ -384,7 +384,7 @@ class OpportunityService {
 				await objOpportunity.save();
 			}
 
-			await OpportunityService.createPdfAndSend(objOpportunity);
+			await OpportunityService.createPdf(objOpportunity);
 
 			return objOpportunity;
 		} catch (error) {
@@ -773,35 +773,39 @@ class OpportunityService {
 	}
 
 	static async createPdf(objOpportunity) {
-		let id = objOpportunity.id;
-		let localDir = __dirname+'/../../../../public/pilatsrl/pdfs/quotes/';
-		let localDirTemplatesQuotes = __dirname+'/../../../../public/pilatsrl/templates/quotes/';
-		let localTemplatesQuote;
-		if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'PLAZOS') {
-			if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '5') {
-				localTemplatesQuote = 'cotizacion_plazo_cinco.html';
-			} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '10') {
-				localTemplatesQuote = 'cotizacion_plazo_diez.html';
+		try {
+			let id = objOpportunity.id;
+			let localDir = await path.join(__dirname, '../../../../public/pilatsrl/pdfs/quotes/');
+			let localDirTemplatesQuotes = await path.join(__dirname+'../../../../public/pilatsrl/templates/quotes/');
+			let localTemplatesQuote;
+			if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'PLAZOS') {
+				if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '5') {
+					localTemplatesQuote = 'cotizacion_plazo_cinco.html';
+				} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '10') {
+					localTemplatesQuote = 'cotizacion_plazo_diez.html';
+				}
+			} else {
+				localTemplatesQuote = 'cotizacion_contado.html';
 			}
-		} else {
-			localTemplatesQuote = 'cotizacion_contado.html';
-		}
-		let files = await fs.readdirSync(localDir);
-		let file = files.find(param => param == 'quote_'+id+'.pdf');
+			let files = await fs.readdirSync(localDir);
+			let file = files.find(param => param == 'quote_'+id+'.pdf');
 
-		let respHtmlPdf, content;
-		if (file) {
-			await fs.unlinkSync(localDir+file);
-			file = null;
-		}
+			let respHtmlPdf, content;
+			if (file) {
+				await fs.unlinkSync(localDir+file);
+				file = null;
+			}
 
-		if (!file) {
-			content = await fs.readFileSync(localDirTemplatesQuotes+localTemplatesQuote).toString();
-			content = this.setContent(content,objOpportunity);
-			respHtmlPdf = await htmlPdf.createPdf(content,localDir+'quote_'+id+'.pdf');
-			file = 'quote_'+id+'.pdf';
+			if (!file) {
+				content = await fs.readFileSync(localDirTemplatesQuotes+localTemplatesQuote).toString();
+				content = this.setContent(content,objOpportunity);
+				respHtmlPdf = await htmlPdf.createPdf(content,localDir+'quote_'+id+'.pdf');
+				file = 'quote_'+id+'.pdf';
+			}
+			return [localDir,file]
+		} catch (e) {
+			console.log(e)
 		}
-		return [localDir,file]
 	}
 
 	static async sendMail(objOpportunity, localDir, file) {
