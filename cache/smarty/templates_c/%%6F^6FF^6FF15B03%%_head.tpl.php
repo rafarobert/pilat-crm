@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2021-02-19 12:34:00
+<?php /* Smarty version 2.6.31, created on 2021-02-20 00:59:11
          compiled from themes/sp_theme/tpls/_head.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_getimagepath', 'themes/sp_theme/tpls/_head.tpl', 67, false),)), $this); ?>
@@ -75,4 +75,4 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_getim
 <link rel="stylesheet" type="text/css" href="themes/sp_theme/style/custom_colors.css">
 <link rel="stylesheet" type="text/css" href="themes/sp_theme/style/yui/yui.css">
     <link rel="stylesheet" type="text/css" href="themes/sp_theme/style/custom.css">      
-</head>
+</head>

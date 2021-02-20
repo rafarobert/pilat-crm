@@ -1,4 +1,10 @@
 <?php
+if(isset($_SERVER["SERVER_NAME"]) && $_SERVER["SERVER_NAME"] === "localhost") {
+	ini_set('error_reporting', E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE); 
+	ini_set('display_errors', 0);
+	ini_set('log_errors', 0);
+}
+
 /**
  *
  * SugarCRM Community Edition is a customer relationship management program developed by

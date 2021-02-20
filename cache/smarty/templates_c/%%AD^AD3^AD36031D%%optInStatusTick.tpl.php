@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2021-02-19 12:36:01
+<?php /* Smarty version 2.6.31, created on 2021-02-20 00:59:42
          compiled from include/SugarEmailAddress/templates/optInStatusTick.tpl */ ?>
 <span class="email-opt-in-container"><span class="email-opt-in <?php echo $this->_tpl_vars['optInFlagClass']; ?>
 " title="<?php echo $this->_tpl_vars['optInFlagTitle']; ?>

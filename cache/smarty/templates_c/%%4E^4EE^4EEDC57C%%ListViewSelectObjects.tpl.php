@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2021-02-19 12:36:01
+<?php /* Smarty version 2.6.31, created on 2021-02-20 00:59:39
          compiled from include/ListView/ListViewSelectObjects.tpl */ ?>
 <span style='<?php echo $this->_tpl_vars['DISPLAY_STYLE']; ?>
 ' id='selectedRecordsTop'>

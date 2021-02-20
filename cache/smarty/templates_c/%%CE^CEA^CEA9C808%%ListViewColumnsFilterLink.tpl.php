@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2021-02-19 12:36:01
+<?php /* Smarty version 2.6.31, created on 2021-02-20 03:10:05
          compiled from include/ListView/ListViewColumnsFilterLink.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_translate', 'include/ListView/ListViewColumnsFilterLink.tpl', 3, false),)), $this); ?>
@@ -8,4 +8,4 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_trans
         <a href="#" class="glyphicon glyphicon-th-list" data-toggle="modal" data-target=".modal-columns-filter" title='<?php echo smarty_function_sugar_translate(array('label' => 'LBL_COLUMN_CHOOSER'), $this);?>
 '></a>
     </li>
-</ul>
+</ul>

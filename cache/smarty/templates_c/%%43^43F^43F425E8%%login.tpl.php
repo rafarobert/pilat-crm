@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2021-02-19 13:24:26
+<?php /* Smarty version 2.6.31, created on 2021-02-20 00:59:12
          compiled from themes/sp_theme/tpls/login.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_translate', 'themes/sp_theme/tpls/login.tpl', 46, false),)), $this); ?>
@@ -231,4 +231,4 @@ function copypassword(){
 
         </div>
       </section>  
-  
+  

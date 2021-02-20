@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2021-02-19 12:36:01
+<?php /* Smarty version 2.6.31, created on 2021-02-20 03:09:51
          compiled from themes/sp_theme/include/SearchForm/tpls/footerPopup.tpl */ ?>
 
 <?php echo '
@@ -69,3 +69,4 @@
 
 </script>
 '; ?>
+
