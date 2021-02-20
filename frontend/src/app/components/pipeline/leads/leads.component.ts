@@ -10,6 +10,7 @@ import {Leads} from "../../../../core/models/leads";
 import {AddLeadComponent} from "./add-lead/add-lead.component";
 import {DeleteLeadComponent} from "./delete-lead/delete-lead.component";
 import {CrmLeadService} from "../../../services/crm-lead.service";
+import {PilatService} from "../../../services/pilat.service";
 
 @Component({
   selector: 'app-leads',
@@ -82,6 +83,7 @@ export class LeadsComponent implements OnInit {
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
+    public pilatService: PilatService,
     public crmLeadService: CrmLeadService
   ) {}
   
@@ -193,7 +195,7 @@ export class LeadsComponent implements OnInit {
   
   public loadData() {
     // this.crmLeadService = new crmLeadService(this.httpClient);
-    this.leadDataSource = new LeadDataSource(this.crmLeadService, this.paginator, this.sort);
+    this.leadDataSource = new LeadDataSource(this.crmLeadService, this.paginator, this.pilatService, this.sort);
     fromEvent(this.filter.nativeElement, 'keyup')
     // .debounceTime(150)
     // .distinctUntilChanged()
@@ -222,6 +224,7 @@ export class LeadDataSource extends DataSource<Leads> {
   
   constructor(public _crmLeadService: CrmLeadService,
               public _paginator: MatPaginator,
+              public pilatService: PilatService,
               public _sort: MatSort) {
     super();
     // Reset to the first page when the user changes the filter.
@@ -238,7 +241,7 @@ export class LeadDataSource extends DataSource<Leads> {
       this._paginator.page
     ];
     
-    this._crmLeadService.getDataLeads([],{where:{leadsCstm:{etapas_c:{$ne:null}}}});
+    this._crmLeadService.getDataLeads([],{assigned_user_id:this.pilatService.currentUser.id});
     
     return merge(...displayDataChanges).pipe(map( () => {
         // Filter data

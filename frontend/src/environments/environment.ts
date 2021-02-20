@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   backend: {
     server: {
-      webpath: 'localhost:8001'
+      webpath: 'http://127.0.0.1:8001'
     }
   },
   frontend: {

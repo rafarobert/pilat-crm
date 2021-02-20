@@ -30,7 +30,7 @@
             <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Extención</mat-label><mat-select [(ngModel)]="data.leadLeadsCstm.extension_documento_c" name="Extención">
               <mat-option *ngFor="let pilatParamCiExt of pilatService.parCiExtentions" [value]="pilatParamCiExt.par_cod"  >{{pilatParamCiExt.par_description}}</mat-option>
             </mat-select></mat-form-field></div></mat-grid-tile>
-            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Sexo</mat-label><mat-select [(ngModel)]="data.leadLeadsCstm.sexo_c" name="sexo_c">
+            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Género</mat-label><mat-select [(ngModel)]="data.leadLeadsCstm.sexo_c" name="sexo_c">
             <mat-option *ngFor="let parGender of pilatService.parGeneros" [value]="parGender.par_cod"  >{{parGender.par_description}}</mat-option>
             </mat-select></mat-form-field></div></mat-grid-tile>
             <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Cumpleaños</mat-label><input matInput #input class="form-control" placeholder="Cumpleaños" [(ngModel)]="data.birthdate" name="birthdate"  [matDatepicker]="birthdate"><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error><mat-datepicker-toggle matSuffix [for]="birthdate"></mat-datepicker-toggle><mat-datepicker #birthdate></mat-datepicker></mat-form-field></div></mat-grid-tile>
@@ -55,10 +55,21 @@
             <!--<div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>correo_alternativo_c</mat-label><input matInput #input class="form-control" placeholder="correo_alternativo_c" [(ngModel)]="data.leadLeadsCstm.correo_alternativo_c" name="correo_alternativo_c"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div>-->
 
             <!--<div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>title</mat-label><input matInput #input class="form-control" placeholder="title" [(ngModel)]="data.title" name="title"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div>-->
+            <!--<mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Ciudad</mat-label><input matInput #input class="form-control" placeholder="Ciudad" [(ngModel)]="data.primary_address_city" name="primary_address_city"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>-->
+            <!--<mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Departamento</mat-label><input matInput #input class="form-control" placeholder="Departamento" [(ngModel)]="data.primary_address_state" name="primary_address_state"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>-->
+            <!--<mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Pais</mat-label><input matInput #input class="form-control" placeholder="Pais" [(ngModel)]="data.primary_address_country" name="primary_address_country"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>-->
+
+            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Pais</mat-label><mat-select placeholder="Pais"  [(ngModel)]="data.leadLeadsCstm.pais_c" name="pais_c">
+              <mat-option *ngFor="let parCountry of pilatService.parCountries" [value]="parCountry.par_cod" required >{{parCountry.par_description}}</mat-option>
+            </mat-select></mat-form-field></div></mat-grid-tile>
+            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Departamentto</mat-label><mat-select placeholder="Departamento"  [(ngModel)]="data.leadLeadsCstm.departamento_c" name="departamento_c">
+              <mat-option *ngFor="let parState of pilatService.parStates" [value]="parState.par_cod" required >{{parState.par_description}}</mat-option>
+            </mat-select></mat-form-field></div></mat-grid-tile>
+            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Ciudad</mat-label><mat-select placeholder="Ciudad"  [(ngModel)]="data.leadLeadsCstm.ciudad_c" name="ciudad_c">
+              <mat-option *ngFor="let parCity of pilatService.parCities" [value]="parCity.par_cod" required >{{parCity.par_description}}</mat-option>
+            </mat-select></mat-form-field></div></mat-grid-tile>
+
             <mat-grid-tile colspan="2"><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Direccion</mat-label><input matInput #input class="form-control" placeholder="Direccion" [(ngModel)]="data.primary_address_street" name="primary_address_street"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
-            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Ciudad</mat-label><input matInput #input class="form-control" placeholder="Ciudad" [(ngModel)]="data.primary_address_city" name="primary_address_city"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
-            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Departamento</mat-label><input matInput #input class="form-control" placeholder="Departamento" [(ngModel)]="data.primary_address_state" name="primary_address_state"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
-            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Pais</mat-label><input matInput #input class="form-control" placeholder="Pais" [(ngModel)]="data.primary_address_country" name="primary_address_country"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
 
             <!--<div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>photo</mat-label><input matInput #input class="form-control" placeholder="photo" [(ngModel)]="data.photo" name="photo"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div>-->
 
@@ -67,7 +78,7 @@
         </mat-expansion-panel>
         <mat-expansion-panel><mat-expansion-panel-header><mat-panel-title>Datos de Ocupación</mat-panel-title><mat-panel-description></mat-panel-description></mat-expansion-panel-header>
           <mat-grid-list [cols]="pilatService.isSmallScreen ? '1' : '2'" rowHeight="6:2">
-            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Rubro</mat-label><mat-select [(ngModel)]="data.leadLeadsCstm.rubro_c" name="rubro_c">
+            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Rubro</mat-label><mat-select [(ngModel)]="data.leadLeadsCstm.rubro_c" name="rubro">
               <mat-option *ngFor="let parRubro of pilatService.parRubros" [value]="parRubro.par_cod"  >{{parRubro.par_description}}</mat-option>
             </mat-select></mat-form-field></div></mat-grid-tile>
             <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Actividad</mat-label><input matInput #input class="form-control" placeholder="Actividad" [(ngModel)]="data.leadLeadsCstm.actividad_c" name="actividad_c"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>

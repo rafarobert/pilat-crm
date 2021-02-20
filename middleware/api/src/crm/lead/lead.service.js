@@ -110,14 +110,14 @@ class LeadService {
 								respCalls = await models.sequelize.calls.create(newLead.leadCallsLeads.callLeadCalls);
 
 								if (newLead.leadCallsLeads.callLeadCalls.callCallsCstm) {
-									newLead.leadCallsLeads.callLeadCalls.callCallsCstm.id_c = respCallLeadCalls.dataValues.id;
+									newLead.leadCallsLeads.callLeadCalls.callCallsCstm.id_c = respCalls.dataValues.id;
 									respCallsCstm = await models.sequelize.callsCstm.create(newLead.leadCallsLeads.callLeadCalls.callCallsCstm);
 								}
 
 								if (newLead.leadCallsLeads) {
 									newLead.leadCallsLeads.id = models.sequelize.objectId().toString();
 									newLead.leadCallsLeads.lead_id = newLead.id;
-									newLead.leadCallsLeads.call_id = respCallLeadCalls.dataValues.id;
+									newLead.leadCallsLeads.call_id = respCalls.dataValues.id;
 									newLead.leadCallsLeads.date_modified = new Date();
 									respCallsLeads = await models.sequelize.callsLeads.create(newLead.leadCallsLeads);
 								}

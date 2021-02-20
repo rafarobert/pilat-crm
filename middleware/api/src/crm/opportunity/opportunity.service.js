@@ -384,7 +384,7 @@ class OpportunityService {
 				await objOpportunity.save();
 			}
 
-			await OpportunityService.createPdfAndSend(objOpportunity);
+			await OpportunityService.createPdf(objOpportunity);
 
 			return objOpportunity;
 		} catch (error) {
@@ -774,8 +774,8 @@ class OpportunityService {
 
 	static async createPdf(objOpportunity) {
 		let id = objOpportunity.id;
-		let localDir = __dirname+'/../../../../public/pilatsrl/pdfs/quotes/';
-		let localDirTemplatesQuotes = __dirname+'/../../../../public/pilatsrl/templates/quotes/';
+		let localDir = await path.join(__dirname, '../../../../public/pilatsrl/pdfs/quotes/');
+		let localDirTemplatesQuotes = await path.join(__dirname+'../../../../public/pilatsrl/templates/quotes/');
 		let localTemplatesQuote;
 		if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'PLAZOS') {
 			if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '5') {
