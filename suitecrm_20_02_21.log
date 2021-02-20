@@ -1,0 +1,13 @@
+Sat Feb 20 00:59:18 2021 [8880][-none-][FATAL] SECURITY: User authentication for gsalinas failed
+Sat Feb 20 00:59:20 2021 [8880][-none-][FATAL] FAILED LOGIN:attempts[1], ip[127.0.0.1], username[gsalinas]
+Sat Feb 20 00:59:50 2021 [8880][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] IP Address mismatch: SESSION IP: 127.0.0.1 CLIENT IP: ::1
+Sat Feb 20 16:00:48 2021 [10844][-none-][FATAL] SECURITY: User authentication for dcaceres failed
+Sat Feb 20 16:00:49 2021 [10844][-none-][FATAL] FAILED LOGIN:attempts[1], ip[::1], username[dcaceres]
+Sat Feb 20 16:01:41 2021 [10844][-none-][FATAL] SECURITY: User authentication for dcaceres failed
+Sat Feb 20 16:01:41 2021 [10844][-none-][FATAL] FAILED LOGIN:attempts[1], ip[::1], username[dcaceres]
+Sat Feb 20 16:01:47 2021 [10844][-none-][FATAL] SECURITY: User authentication for dcaceres failed
+Sat Feb 20 16:01:48 2021 [10844][-none-][FATAL] FAILED LOGIN:attempts[1], ip[::1], username[dcaceres]
+Sat Feb 20 16:01:53 2021 [10844][-none-][FATAL] SECURITY: User authentication for dcaceres failed
+Sat Feb 20 16:01:53 2021 [10844][-none-][FATAL] FAILED LOGIN:attempts[1], ip[::1], username[dcaceres]
+Sat Feb 20 16:01:58 2021 [10844][-none-][FATAL] SECURITY: User authentication for dcaceres failed
+Sat Feb 20 16:01:58 2021 [10844][-none-][FATAL] FAILED LOGIN:attempts[1], ip[::1], username[dcaceres]
