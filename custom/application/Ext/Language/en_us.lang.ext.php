@@ -4,6 +4,8 @@
 
 
 $app_list_strings['moduleList']['AnalyticReporting'] = 'Analytic Reporting';
+ 
+
 
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
@@ -59,7 +61,5 @@ $app_list_strings['iad_sticky_notes_status_dom']['FAQ'] = 'FAQ';
 $app_list_strings['iad_sticky_notes_status_dom']['Expired'] = 'Expired';
 $app_list_strings['iad_sticky_notes_status_dom']['Under Review'] = 'Under Review';
 $app_list_strings['iad_sticky_notes_status_dom']['Pending'] = 'Pending';
-
- 
 
 ?>

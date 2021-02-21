@@ -19,7 +19,7 @@ return CustomLoader::mergeCustomArray([
     AuthorizationServer::class => function (Container $container) {
         // base dir must exist in entryPoint.php
         $baseDir = $GLOBALS['BASE_DIR'];
-
+	
         $server = new AuthorizationServer(
             new ClientRepository(
                 new ClientEntity(),

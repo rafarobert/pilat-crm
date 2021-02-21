@@ -27,6 +27,7 @@ class AccessTokenRepository implements AccessTokenRepositoryInterface
     {
         $this->accessTokenEntity = $accessTokenEntity;
         $this->beanManager = $beanManager;
+	
     }
 
     /**

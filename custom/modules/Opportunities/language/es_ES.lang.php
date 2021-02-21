@@ -1,5 +1,5 @@
 <?php
-// created: 2021-02-19 15:58:17
+// created: 2021-02-21 20:48:12
 $mod_strings = array (
   'LBL_ACCOUNT_NAME' => 'Razón Social',
   'LBL_ACCOUNTS' => 'Clientes',
@@ -21,4 +21,6 @@ $mod_strings = array (
   'LBL_SALES_STAGE' => 'Etapa de la  venta',
   'LBL_LEAD_SOURCE' => 'Origen',
   'LBL_MONEDA_C' => 'Moneda',
+  'LBL_LBL_TIPO_PAGO_C' => 'LBL_LBL_TIPO_PAGO_C',
+  'LBL_PROBABILITY' => 'Probabilidad (%):',
 );

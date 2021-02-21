@@ -1,10 +1,10 @@
 <?php
-// created: 2021-02-19 16:44:40
+// created: 2021-02-21 21:02:36
 $mod_strings = array (
   'LBL_ACCOUNT' => 'Cliente',
   'LBL_ACCOUNT_DESCRIPTION' => 'Descripción de la Cliente',
   'LBL_ACCOUNT_ID' => 'ID de Cliente',
-  'LBL_ACCOUNT_NAME' => 'Nombre',
+  'LBL_ACCOUNT_NAME' => 'Nombre del Cliente',
   'LBL_LIST_ACCOUNT_NAME' => 'Nombre de Cliente',
   'LBL_CONVERTED_ACCOUNT' => 'Cliente Convertida:',
   'LNK_SELECT_ACCOUNTS' => 'O Seleccione una Cliente',
@@ -45,4 +45,7 @@ $mod_strings = array (
   'LBL_EMAIL_EMPRESA_C' => 'Correo Corporativo',
   'LBL_NOMBRE_CONTACTO_C' => 'Nombre de Contacto',
   'LBL_DIRECCION_C' => 'Dirección de la Empresa',
+  'LBL_NUEVO_RUBRO_C' => 'Otro Rubro',
+  'LBL_FIRST_NAME' => 'Nombre:',
+  'LBL_NAME' => 'Nombre alt',
 );

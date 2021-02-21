@@ -29,6 +29,12 @@ $mod_strings['LBL_DTWHATSAPP_LICENSE_MESSAGE'] = 'Configure Waboxapp API credent
 
 
 
+
+$mod_strings['LBL_PARAMETERS'] = 'Parámetros Comerciales';
+$mod_strings['LBL_PARAMETER_CONFIG_TITLE'] = 'Configuración';
+$mod_strings['LBL_PARAMETER_CONFIG_INFO'] = 'Configuración de parámetros comerciales';
+
+
 $mod_strings['LBL_SP_THEME_TITLE'] = 'Sugar-Project Theme settings';
 $mod_strings['LBL_SP_THEME_CONFIG_TITLE'] = 'Settings';
 $mod_strings['LBL_SP_THEME_CONFIG_INFO'] = 'Modify settings';
@@ -101,11 +107,5 @@ $mod_strings['LBL_SP_THEME_SHOWMENULEFT_INFO'] = 'select if you want to show com
 
  
 
-
-
-
-$mod_strings['LBL_PARAMETERS'] = 'Parámetros Comerciales';
-$mod_strings['LBL_PARAMETER_CONFIG_TITLE'] = 'Configuración';
-$mod_strings['LBL_PARAMETER_CONFIG_INFO'] = 'Configuración de parámetros comerciales';
 
 ?>

@@ -17,3 +17,4 @@ $app = new \Slim\App(\Api\Core\Loader\ContainerLoader::configure());
 // closure shouldn't be created in static context under PHP7
 $routeLoader = new \Api\Core\Loader\RouteLoader();
 $routeLoader->configureRoutes($app);
+//var_dump($app);

@@ -1,5 +1,5 @@
 <?php
-// created: 2021-02-19 16:47:18
+// created: 2021-02-21 21:03:32
 $mod_strings = array (
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Fecha de Creación',
@@ -9,7 +9,7 @@ $mod_strings = array (
   'LBL_CREATED' => 'Creado por',
   'LBL_DESCRIPTION' => 'Descripción:',
   'LBL_DELETED' => 'Eliminado',
-  'LBL_NAME' => 'Nombre:',
+  'LBL_NAME' => 'Nombre alt',
   'LBL_CREATED_USER' => 'Usuario Creado',
   'LBL_MODIFIED_USER' => 'Usuario Modificado',
   'LBL_LIST_NAME' => 'Nombre',
@@ -83,7 +83,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Debe especificar un número de registro para eliminar el Cliente potencial.',
   'LBL_ACCOUNT_DESCRIPTION' => 'Descripción de la Cliente',
   'LBL_ACCOUNT_ID' => 'ID de Cliente',
-  'LBL_ACCOUNT_NAME' => 'Nombre',
+  'LBL_ACCOUNT_NAME' => 'Nombre del Cliente',
   'LBL_ACTIVITIES_SUBPANEL_TITLE' => 'Actividades',
   'LBL_ADD_BUSINESSCARD' => 'Añadir Tarjeta de Visita',
   'LBL_ALTERNATE_ADDRESS' => 'Dirección alternativa:',
@@ -233,4 +233,5 @@ $mod_strings = array (
   'LBL_EMAIL_EMPRESA_C' => 'Correo Corporativo',
   'LBL_NOMBRE_CONTACTO_C' => 'Nombre de Contacto',
   'LBL_DIRECCION_C' => 'Dirección de la Empresa',
+  'LBL_NUEVO_RUBRO_C' => 'Otro Rubro',
 );

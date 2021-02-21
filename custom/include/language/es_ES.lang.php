@@ -90,12 +90,6 @@ $GLOBALS['app_list_strings']['sexo_c_list']=array (
   'MASCULINO' => 'Masculino',
   'FEMENINO' => 'Femenino',
 );
-$GLOBALS['app_list_strings']['rubro_c_list']=array (
-  '' => '',
-  'INDUSTRIA' => 'Industria',
-  'SERVICIO' => 'Servicio',
-  'COMERCIO' => 'Comercio',
-);
 $GLOBALS['app_list_strings']['etapas_c_list']=array (
   'CAPTADO' => '1. Captado',
   'CALIFICADO' => '2. Calificado',
@@ -151,4 +145,26 @@ $GLOBALS['app_list_strings']['tipo_cliente_c_list']=array (
   '' => '',
   'NATURAL' => 'Persona Natural',
   'JURIDICA' => 'Persona Juridica',
+);
+
+$GLOBALS['app_list_strings']['rubro_c_list']=array (
+  '' => '',
+  'INDUSTRIA' => 'Industria',
+  'SERVICIO' => 'Servicio',
+  'COMERCIO' => 'Comercio',
+  'INVERSION' => 'Inversión',
+  'NUEVO' => 'Nuevo',
+);
+
+$GLOBALS['app_list_strings']['lbl_tipo_pago_c_list']=array (
+  'BANCO' => 'Pago mediante Banco',
+  'CONTADO' => 'Pago al Contado',
+  'PLAZOS' => 'Pago a Plazos',
+);
+$GLOBALS['app_list_strings']['lead_source_list']=array (
+  '' => '',
+  'FACEBOOK' => 'Facebook',
+  'SITIO_WEB' => 'Sitio Web',
+  'MARKETING_PERSONAL' => 'Marketing Personal',
+  'OTRO' => 'Otro',
 );
