@@ -4,6 +4,7 @@
 node_modules/
 logs/
 build/
+.env
 
 # middleware/build
 
