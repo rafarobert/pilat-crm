@@ -150,6 +150,7 @@ export class PipelineDialogComponent implements OnInit {
     
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      this.setPipeline()
     });
   }
   
@@ -160,6 +161,7 @@ export class PipelineDialogComponent implements OnInit {
     
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      this.setPipeline()
     });
   }
   
@@ -170,6 +172,7 @@ export class PipelineDialogComponent implements OnInit {
     
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      this.setPipeline()
     });
   }
   
@@ -180,6 +183,7 @@ export class PipelineDialogComponent implements OnInit {
     
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      this.setPipeline()
     });
   }
   
@@ -190,6 +194,7 @@ export class PipelineDialogComponent implements OnInit {
     
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      this.setPipeline()
     });
   }
   

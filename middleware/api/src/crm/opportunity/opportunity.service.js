@@ -16,13 +16,14 @@ require('../../../../utils/Prototipes');
 const helpers = require('../../../../utils/helpers');
 const models = require('../../../relations');
 import configJson from '../../../../config/config';
-const {path} = require('path');
 const sql = configJson.sql;
 const Util = require('../../../../utils/Utils');
 const util = new Util();
 const htmlPdf = require('../../../../modules/html-pdf');
 const nodeMailer = require("../../../../modules/nodemailer");
+const {loggerEmail, loggerPdf} = require("../../../../modules/winston");
 
+const path = require('path');
 const { Op } = require("sequelize");
 
 class OpportunityService {
@@ -384,7 +385,7 @@ class OpportunityService {
 				await objOpportunity.save();
 			}
 
-			await OpportunityService.createPdf(objOpportunity);
+			await OpportunityService.createAndSendPdf(objOpportunity);
 
 			return objOpportunity;
 		} catch (error) {
@@ -730,53 +731,81 @@ class OpportunityService {
 				await objOpportunity.save();
 			}
 
-			let [localDir,file] = await OpportunityService.createPdf(objOpportunity);
-			let respMail = await OpportunityService.sendMail(objOpportunity, localDir, file);
+			await OpportunityService.createAndSendPdf(objOpportunity, (err,file,info) => {
+				if (err) {
+					console.log(err);
+				} else {
+					console.log(file,info)
+				}
+			});
 
 			return objOpportunity;
 		} catch (error) {
 			throw error;
 		}
 	}
-	static async setContent(content, objOpportunity) {
-		content.replaceAll('@numTerrenos','1');
-		content.replaceAll('@superficie',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_superficie_c);
-		content.replaceAll('@unidadIndustrial',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.unidad_industrial_c);
-		content.replaceAll('@manzano',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.manzano_c);
-		content.replaceAll('@lote',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.ubicacion_c);
-		content.replaceAll('@frente',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.frente_metros_c);
-		content.replaceAll('@Fondo',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.fondo_metros_c);
-		content.replaceAll('@precioMetroCuadrado',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.precio_mcuadrado_c);
-		content.replaceAll('@precioTotal',objOpportunity.opportunityAosQuotes.total_amount);
-		content.replaceAll('@cuotaInicial',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_cuotainicial_c);
-		content.replaceAll('@saldo',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.saldo_c);
 
-		if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'PLAZOS') {
-			if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '5') {
-				content.replaceAll('@precioMetroCuadradoPlazoCinco',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.precio_mcuadrado_c);
-				content.replaceAll('@cuotaInicialPlazoCinco',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_cuotainicial_c);
-				content.replaceAll('@cuotaMensualPlazoCinco',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.cuota_mensual_c);
-				content.replaceAll('@precioTotalPlazoCinco',objOpportunity.opportunityAosQuotes.total_amount);
-			} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '10') {
-				content.replaceAll('@precioMetroCuadradoPlazoDiez',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.precio_mcuadrado_c);
-				content.replaceAll('@cuotaInicialPlazoDiez',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_cuotainicial_c);
-				content.replaceAll('@cuotaMensualPlazoDiez',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.cuota_mensual_c);
-				content.replaceAll('@precioTotalPlazoDiez',objOpportunity.opportunityAosQuotes.total_amount);
+	static async createAndSendPdf(objOpportunity, callback = null) {
+		let date = new Date();
+		await this.createPdf(objOpportunity, (err, res, file) => {
+			if (res) {
+				loggerPdf.info('Archivo pdf creado: ' + date.toString(), {file:res});
+				this.sendMail(objOpportunity,file, (err, info) => {
+					if (err) {
+						loggerEmail.info('Error al enviar el correo: ' + date.toString(), {error:err, info:info});
+					} {
+						loggerEmail.info('Correo enviado: ' + date.toString(), {file:file, info:info});
+						if (typeof callback == 'function') {
+							callback(err, file, info);
+						}
+					}
+				})
+			} else {
+				loggerPdf.info('Hubo un error al crear el archivo pdf: ' + date.toString(), {error:err, respuesta:res});
 			}
-		} else {
-			content.replaceAll('@precioMetroCuadrado',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.precio_mcuadrado_c);
-			content.replaceAll('@precioTotal',objOpportunity.opportunityAosQuotes.total_amount);
-			content.replaceAll('@cuotaInicial',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_cuotainicial_c);
-		}
+		})
+	}
 
+	static async setContent(content, objOpportunity) {
+		if (content) {
+			content = content.replaceAll('@numTerrenos','1');
+			content = content.replaceAll('@superficie',parseInt(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_superficie_c+""));
+			content = content.replaceAll('@unidadIndustrial',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.unidad_industrial_c);
+			content = content.replaceAll('@manzano',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.manzano_c);
+			content = content.replaceAll('@lote',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.ubicacion_c);
+			content = content.replaceAll('@frente',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.frente_metros_c);
+			content = content.replaceAll('@fondo',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.fondo_metros_c);
+			content = content.replaceAll('@product','terreno pilat');
+			content = content.replaceAll('@ucProduct','TERRENO PILAT');
+			content = content.replaceAll('@client',objOpportunity.opportunityAosQuotes.name);
+
+			content = content.replaceAll('@precioMetroCuadrado',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.precio_mcuadrado_c));
+			content = content.replaceAll('@precioTotal',formatNumber(objOpportunity.opportunityAosQuotes.total_amount));
+			content = content.replaceAll('@cuotaInicial',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_cuotainicial_c));
+			content = content.replaceAll('@saldo',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.saldo_c));
+
+			if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'PLAZOS') {
+				if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '5') {
+					content = content.replaceAll('@precioMetroCuadradoPlazoCinco',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.precio_mcuadrado_c));
+					content = content.replaceAll('@cuotaInicialPlazoCinco',fomatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_cuotainicial_c));
+					content = content.replaceAll('@cuotaMensualPlazoCinco',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.cuota_mensual_c));
+					content = content.replaceAll('@precioTotalPlazoCinco',formatNumber(objOpportunity.opportunityAosQuotes.total_amount));
+				} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '10') {
+					content = content.replaceAll('@precioMetroCuadradoPlazoDiez',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.precio_mcuadrado_c));
+					content = content.replaceAll('@cuotaInicialPlazoDiez',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_cuotainicial_c));
+					content = content.replaceAll('@cuotaMensualPlazoDiez',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.cuota_mensual_c));
+					content = content.replaceAll('@precioTotalPlazoDiez',formatNumber(objOpportunity.opportunityAosQuotes.total_amount));
+				}
+			}
+		}
 		return content
 	}
 
-	static async createPdf(objOpportunity) {
+	static async createPdf(objOpportunity, callback = null) {
 		try {
 			let id = objOpportunity.id;
 			let localDir = await path.join(__dirname, '../../../../public/pilatsrl/pdfs/quotes/');
-			let localDirTemplatesQuotes = await path.join(__dirname+'../../../../public/pilatsrl/templates/quotes/');
+			let localDirTemplatesQuotes = await path.join(__dirname, '../../../../public/pilatsrl/templates/quotes/');
 			let localTemplatesQuote;
 			if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'PLAZOS') {
 				if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '5') {
@@ -784,8 +813,10 @@ class OpportunityService {
 				} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '10') {
 					localTemplatesQuote = 'cotizacion_plazo_diez.html';
 				}
-			} else {
+			} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'CONTADO') {
 				localTemplatesQuote = 'cotizacion_contado.html';
+			} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'BANCO') {
+				localTemplatesQuote = 'cotizacion_banco.html';
 			}
 			let files = await fs.readdirSync(localDir);
 			let file = files.find(param => param == 'quote_'+id+'.pdf');
@@ -798,8 +829,8 @@ class OpportunityService {
 
 			if (!file) {
 				content = await fs.readFileSync(localDirTemplatesQuotes+localTemplatesQuote).toString();
-				content = this.setContent(content,objOpportunity);
-				respHtmlPdf = await htmlPdf.createPdf(content,localDir+'quote_'+id+'.pdf');
+				content = await this.setContent(content,objOpportunity);
+				respHtmlPdf = await htmlPdf.createPdf(content,localDir+'quote_'+id+'.pdf', callback);
 				file = 'quote_'+id+'.pdf';
 			}
 			return [localDir,file]
@@ -808,29 +839,36 @@ class OpportunityService {
 		}
 	}
 
-	static async sendMail(objOpportunity, localDir, file) {
+	static async sendMail(objOpportunity, dirFile, callback = null) {
 		let resp;
-		if (file && objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address) {
-			let respCredential = await models.sequelize.pilatMails.findOne({where:{id:1}});
-			let credential = respCredential.dataValues;
-			if (credential) {
-				let mailOptions = {
-					from: '"' + credential.mai_user_account + '" <' + credential.mai_user_account + '>', // sender address
-					html: credential.mai_html,
-					to: objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address,
-					cc: credential.mai_cc,
-					bcc: credential.mai_bcc,
-					attachments: [
-						{
-							filename: file,
-							path: localDir+file
-						}
-					],
-					subject: credential.mai_subject,
-					text: credential.mai_text
-				};
+		let subDirs = dirFile.split('/');
+		let file = subDirs[subDirs.length-1];
+		if (objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel) {
+			if (file && objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address) {
+				let respCredential = await models.sequelize.pilatMails.findOne({where:{id:1}});
+				let credential = respCredential.dataValues;
+				credential.mai_text = await this.setContent(credential.mai_text, objOpportunity);
+				credential.mai_html = await this.setContent(credential.mai_html, objOpportunity);
+				credential.mai_subject = await this.setContent(credential.mai_subject, objOpportunity);
+				if (credential) {
+					let mailOptions = {
+						from: '"' + credential.mai_user_account + '" <' + credential.mai_user_account + '>', // sender address
+						html: credential.mai_html,
+						to: objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address,
+						cc: credential.mai_cc,
+						bcc: credential.mai_bcc,
+						attachments: [
+							{
+								filename: file,
+								path: dirFile
+							}
+						],
+						subject: credential.mai_subject,
+						text: credential.mai_text
+					};
 
-				resp = nodeMailer.sendMail(mailOptions,credential);
+					resp = nodeMailer.sendMail(mailOptions,credential, callback);
+				}
 			}
 		}
 		return resp;
@@ -878,9 +916,36 @@ class OpportunityService {
 			throw error;
 		}
 	}
+}
 
+function formatNumber (num, decimals = 2) {
+	let stringFloat = num + "";
+	let arraySplitFloat = stringFloat.split(".");
+	let decimalsValue = "0";
+	if (arraySplitFloat.length > 1) {
+		decimalsValue = arraySplitFloat[1].slice(0, decimals);
+	}
+	let integerValue = arraySplitFloat[0];
+	let arrayFullStringValue = [integerValue, decimalsValue];
+	let FullStringValue = arrayFullStringValue.join(".");
+	let floatFullValue = parseFloat(FullStringValue);
+	let formatFloatFullValue = new Intl.NumberFormat("de-DE", { minimumFractionDigits: decimals }).format(floatFullValue);
+	return solveFeatureFormatFloatNumberSpanish(formatFloatFullValue);
+}
 
-
+function solveFeatureFormatFloatNumberSpanish(num) {
+	let indexComma = num.indexOf(',');
+	let indexPoint = num.indexOf('.');
+	let aParts = num.split('.');
+	let decimal = aParts[aParts.length-1];
+	let entero = aParts[0];
+	let parts;
+	if (indexComma < indexPoint) {
+		parts = entero.split(',');
+		num = parts.join('.');
+		num = num +','+decimal;
+	}
+	return num;
 }
 
 //<es-section>
