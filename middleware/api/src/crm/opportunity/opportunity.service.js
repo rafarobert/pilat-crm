@@ -151,6 +151,7 @@ class OpportunityService {
 					}
 					objOpportunity = respOpportunity.dataValues;
 					objOpportunity.opportunityOpportunitiesCstm = respOpportunitiesCstm.dataValues;
+
 					// BEGIN CONTACTS
 
 					let respContacts, respContactsCstm, respOpportunitiesContacts;
@@ -590,6 +591,7 @@ class OpportunityService {
 				// End Accounts
 				//
 				// Begin Aos Quotes
+
 				let nextNumber = await models.sequelize.aosQuotes.max('number');
 				let respAosQuotes, respAosQuotesCstm;
 				if (updateOpportunity.opportunityAosQuotes) {

@@ -12,6 +12,8 @@ import {AodIndexevent} from "../../core/models/aodIndexevent";
 import {Tracker} from "../../core/models/tracker";
 import {Users} from "../../core/models/users";
 import {PilatAuth} from "../models/pilatAuth";
+import {addDias} from "fechas";
+import {PilatService} from "./pilat.service";
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +23,13 @@ export class CrmLeadService {
   basePath: string = `${environment.backend.server.webpath}/api-pilatsrl/crm/leads`;
   dataChange: BehaviorSubject<Leads[]> = new BehaviorSubject<Leads[]>([]);
   leadData: Leads = new Leads();
+  private afterTomorrow: Date;
+  private tomorrow: Date;
+  
+  constructor(
+    private http: HttpClient,
+    public pilatService: PilatService
+  ) { }
   
   get data(): Leads[] {
     return this.dataChange.value;
@@ -36,6 +45,22 @@ export class CrmLeadService {
   }
   
   setDataLead(lead:Leads, moduleLeads:PilatParams, user:Users, sessId:string):Leads {
+  
+    let date = new Date();
+    let currentHour = date.getHours();
+    let currentMinutes = date.getMinutes();
+    let dayPad = date.getDate().pad(2);
+    let monthPad = (date.getMonth()).pad(2);
+    let yearPad = date.getFullYear();
+    let strToday = `${dayPad}/${monthPad}/${yearPad}`;
+    let strTomorrow = addDias(strToday,1);
+    let strAfterTomorrow = addDias(strToday,2);
+    let [day, month, year] = strTomorrow.split('/');
+    let [dayT, monthT, yearT] = strTomorrow.split('/');
+    let [dayAfterA, monthAfterA, yearAfterA] = strAfterTomorrow.split('/');
+    this.tomorrow = new Date(parseInt(yearT), parseInt(monthT), parseInt(dayT),currentHour,currentMinutes);
+    this.afterTomorrow = new Date(parseInt(yearAfterA), parseInt(monthAfterA), parseInt(dayAfterA),currentHour,currentMinutes);
+    
     // before
     lead.date_entered = new Date();
     //lead.date_modified = lead.date_modified ? lead.date_modified : null;
@@ -92,6 +117,8 @@ export class CrmLeadService {
     // lead.website = lead.website ? lead.website : null;
     
     lead.leadLeadsCstm = new LeadsCstm();
+    lead.leadCallsLeads.callLeadCalls.date_start = lead.leadCallsLeads.callLeadCalls.date_start ? lead.leadCallsLeads.callLeadCalls.date_start : this.tomorrow;
+    lead.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c = lead.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c ? lead.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c : this.tomorrow;
     
     if (lead.id) {
       
@@ -131,8 +158,6 @@ export class CrmLeadService {
     }
     return lead;
   }
-  
-  constructor(private http: HttpClient) { }
   
   getLeads(select = [], where = {}, order = [], limit:number = null, offset:number = null) {
     let attributes = '';

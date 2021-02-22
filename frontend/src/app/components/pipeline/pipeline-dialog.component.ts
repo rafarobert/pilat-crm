@@ -568,7 +568,7 @@ export class PipelineDialogComponent implements OnInit {
         if (lead.leadCallsLeads) {
           if (lead.leadCallsLeads.callLeadCalls) {
             if (lead.leadCallsLeads.callLeadCalls.callCallsCstm) {
-              if (lead.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_realizada_c) {
+              if (lead.leadCallsLeads.callLeadCalls.status == this.pilatService.parCallHeld.par_cod) {
                 lead = new Leads();
                 lead.leadLeadsCstm = new LeadsCstm();
                 lead.leadLeadsCstm.id_c = leadId;
@@ -885,9 +885,10 @@ export class PipelineDialogComponent implements OnInit {
         await this.crmLeadService.createLead(this.crmLeadService.leadData).subscribe(async (res) => {
           let response = res as { status: string, message: string, data: any };
           if (response.data && response.data.length) {
+            let leads:Leads[] = response.data;
             const dialogRef = this.dialog.open(DialogAlreadyLeadComponent, {
               width:'600px',
-              data: this.lead,
+              data: leads,
             });
           } else if (response.data) {
             this.setPipeline();

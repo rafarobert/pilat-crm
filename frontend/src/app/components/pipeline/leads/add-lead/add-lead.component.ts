@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {FormControl, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Leads} from "../../../../../core/models/leads";
 import {environment} from "../../../../../environments/environment";
 import {PilatParamService} from "../../../../../core/services/pilat-param.service";
@@ -22,6 +22,7 @@ import {MatAccordion} from "@angular/material/expansion";
 export class AddLeadComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   @ViewChild('reminder_time') picker: any;
+  @ViewChild('leadForm') leadForm: FormGroup;
   
   today:Date;
   tomorrow:Date;
@@ -47,6 +48,7 @@ export class AddLeadComponent implements OnInit {
     this.pilatService.setParams([
       this.pilatService.DIC_CI_EXT,
       this.pilatService.DIC_LEAD_STATUSES,
+      this.pilatService.DIC_CALL_STATUSES,
       this.pilatService.DIC_PROSPECT_STAGES,
       this.pilatService.DIC_GENEROS,
       this.pilatService.DIC_RUBROS,
@@ -66,13 +68,19 @@ export class AddLeadComponent implements OnInit {
       this.data.date_entered = new Date();
       this.data.date_modified = new Date();
       this.data.deleted = 0;
-      this.data.leadLeadsCstm.fecha_validex_c = new Date(parseInt(yearAfter), parseInt(monthAfter), parseInt(dayAfter));
+      this.data.leadLeadsCstm.fecha_validex_c = this.data.leadLeadsCstm.fecha_validex_c ? this.data.leadLeadsCstm.fecha_validex_c : new Date(parseInt(yearAfter), parseInt(monthAfter), parseInt(dayAfter));
       let strTomorrow = addDias(todayStr,1);
       let strAfterTomorrow = addDias(todayStr,2);
       let [dayAfterT, monthAfterT, yearAfterT] = strTomorrow.split('/');
       let [dayAfterA, monthAfterA, yearAfterA] = strAfterTomorrow.split('/');
       this.tomorrow = new Date(parseInt(yearAfterT), parseInt(monthAfterT), parseInt(dayAfterT));
       this.afterTomorrow = new Date(parseInt(yearAfterA), parseInt(monthAfterA), parseInt(dayAfterA));
+      this.data.status = this.data.status ? this.data.status : this.pilatService.parLeadNewStatus.par_cod;
+      this.data.leadLeadsCstm.etapas_c = this.data.leadLeadsCstm.etapas_c ? this.data.leadLeadsCstm.etapas_c : this.pilatService.parLeadCaptadoStage.par_cod;
+      console.log(this.leadForm);
+      setTimeout(() => {
+        this.accordion.openAll();
+      },1000)
     });
   }
   

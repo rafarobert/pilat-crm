@@ -13,6 +13,7 @@ import {environment} from "../../environments/environment";
 import {addDias, setFormatoFecha} from "fechas";
 import {CodigoFormatoFecha} from "fechas/dist/src";
 import {type} from "os";
+import {AbstractControl, FormControl, FormGroup, ValidationErrors} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,7 @@ export class PilatService {
 
 
   DIC_LEAD_STATUSES = '5fe93b0e3c3708f0b489dcbd';
+  DIC_CALL_STATUSES = '603402682f52e342778cd29c';
   DIC_PROSPECT_STAGES = '5ff2c4520a60a5252ddf62f6';
   DIC_OPPORTUNITY_STAGES = '5ff4a8d9aef65440b888db40';
   DIC_CI_EXT = '60029af5e2015758ec69b743';
@@ -84,6 +86,7 @@ export class PilatService {
   parStates:PilatParams[] = [];
   parCities:PilatParams[] = [];
   parOpportunityTipos:PilatParams[] = [];
+  parCallStatuses:PilatParams[] = [];
   
   parPersonaNatural:PilatParams;
   parPersonaJuridica:PilatParams;
@@ -96,6 +99,23 @@ export class PilatService {
   parNotApproved: PilatParams;
   parInvoiced: PilatParams;
   parNotInvoiced: PilatParams;
+  parLeadAssignedStatus: PilatParams;
+  parLeadNewStatus: PilatParams;
+  parLeadInProcessStatus: PilatParams;
+  parLeadConvertedStatus: PilatParams;
+  parLeadRecycledStatus: PilatParams;
+  parLeadDeadStatus: PilatParams;
+  parLeadCaptadoStage: PilatParams;
+  parLeadCalificadoStage: PilatParams;
+  parLeadVisitaFisicaVirtualStage: PilatParams;
+  
+  parCallPlanned: PilatParams;
+  parCallHeld: PilatParams;
+  parCallNotHeld: PilatParams;
+  parCallSent: PilatParams;
+  parCallReceived: PilatParams;
+  parCallFailure: PilatParams;
+  parCallPending: PilatParams;
   
   constructor(
     breakpointObserver:BreakpointObserver,
@@ -112,6 +132,7 @@ export class PilatService {
           await response.data.forEach(async (param:PilatParams) => {
             switch (param.par_dictionary_id) {
               case this.DIC_LEAD_STATUSES: !this.parLeadStatuses.find(par => par._id == param._id) ? this.parLeadStatuses.push(param) : false; break;
+              case this.DIC_CALL_STATUSES: !this.parCallStatuses.find(par => par._id == param._id) ? this.parCallStatuses.push(param) : false; break;
               case this.DIC_PROSPECT_STAGES: !this.parProspectStages.find(par => par._id == param._id) ? this.parProspectStages.push(param) : false; break;
               case this.DIC_OPPORTUNITY_STAGES: !this.parOpportunityStages.find(par => par._id == param._id) ? this.parOpportunityStages.push(param) : false; break;
               case this.DIC_CI_EXT: !this.parCiExtentions.find(par => par._id == param._id) ? this.parCiExtentions.push(param) : false; break;
@@ -137,6 +158,15 @@ export class PilatService {
             }
         
             switch (param.id) {
+              case 2:this.parLeadAssignedStatus = param;break;
+              case 3:this.parLeadNewStatus = param;break;
+              case 4:this.parLeadInProcessStatus = param;break;
+              case 5:this.parLeadConvertedStatus = param;break;
+              case 6:this.parLeadRecycledStatus = param;break;
+              case 7:this.parLeadDeadStatus = param;break;
+              case 8:this.parLeadCaptadoStage = param;break;
+              case 9:this.parLeadCalificadoStage = param;break;
+              case 10:this.parLeadVisitaFisicaVirtualStage = param;break;
               case 54:this.parPersonaNatural = param;break;
               case 55:this.parPersonaJuridica = param;break;
               case 41:this.parMonedaBoliviano = param;break;
@@ -148,6 +178,13 @@ export class PilatService {
               case 66:this.parNotApproved = param;break;
               case 63:this.parInvoiced = param;break;
               case 64:this.parNotInvoiced = param;break;
+              case 91:this.parCallPlanned = param;break;
+              case 92:this.parCallHeld = param;break;
+              case 93:this.parCallNotHeld = param;break;
+              case 94:this.parCallSent = param;break;
+              case 95:this.parCallReceived = param;break;
+              case 96:this.parCallFailure = param;break;
+              case 97:this.parCallPending = param;break;
             }
           });
         }
@@ -171,4 +208,5 @@ export class PilatService {
     }
     return null
   }
+  
 }

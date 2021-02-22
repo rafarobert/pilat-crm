@@ -23,7 +23,8 @@ import {AosQuotes} from "../../../../../core/models/aosQuotes";
 export class AddOpportunityComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   
-  parCurrentCurrency:PilatParams = new PilatParams();
+  parCurrentOpportunityCurrency:PilatParams = new PilatParams();
+  parCurrentAoQuoteCurrency:PilatParams = new PilatParams();
   parCurrentPago: PilatParams = new PilatParams();
   parCurrentApprobalStatus: PilatParams = new PilatParams();
   parCurrentInvoiceStatus: PilatParams = new PilatParams();
@@ -81,6 +82,11 @@ export class AddOpportunityComponent implements OnInit {
       this.data.opportunityAosQuotes = this.data.opportunityAosQuotes ? this.data.opportunityAosQuotes : new AosQuotes();
       this.data.opportunityAosQuotes.currency_id = this.pilatService.parMonedaDolar.par_cod;
       this.selectPago(this.data.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c);
+      this.selectAoQuoteCurrency(this.data.opportunityAosQuotes.aoQuoteAosQuotesCstm.moneda_c);
+      this.selectOpportunityCurrency(this.data.opportunityOpportunitiesCstm.moneda_c);
+      setTimeout(() => {
+        this.accordion.openAll();
+      },1000);
     });
   }
   
@@ -90,9 +96,15 @@ export class AddOpportunityComponent implements OnInit {
         '';
   }
   
-  selectCurrency(value) {
+  selectOpportunityCurrency(value) {
     if (value) {
-      this.parCurrentCurrency = this.pilatService.parCurrencies.find(param => param.par_cod == value);
+      this.parCurrentOpportunityCurrency = this.pilatService.parCurrencies.find(param => param.par_cod == value);
+    }
+  }
+  
+  selectAoQuoteCurrency(value) {
+    if (value) {
+      this.parCurrentAoQuoteCurrency = this.pilatService.parCurrencies.find(param => param.par_cod == value);
     }
   }
   
