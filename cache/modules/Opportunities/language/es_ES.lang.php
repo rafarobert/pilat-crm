@@ -1,5 +1,5 @@
 <?php
-// created: 2021-02-19 16:03:39
+// created: 2021-02-21 21:03:34
 $mod_strings = array (
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Fecha de Creación',
@@ -89,4 +89,5 @@ $mod_strings = array (
   'LBL_UNIDAD_INDUSTRIAL_C' => 'Unidad Industrial (UV)',
   'LBL_TIPO_VENTA_C' => 'Tipo Venta',
   'LBL_MONEDA_C' => 'Moneda',
+  'LBL_LBL_TIPO_PAGO_C' => 'LBL_LBL_TIPO_PAGO_C',
 );
