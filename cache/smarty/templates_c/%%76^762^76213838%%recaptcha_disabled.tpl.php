@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2021-02-22 00:37:26
+<?php /* Smarty version 2.6.31, created on 2021-02-22 17:14:45
          compiled from /app/public/include/utils/recaptcha_disabled.tpl */ ?>
 <?php echo '
 <script>

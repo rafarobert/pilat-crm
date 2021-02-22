@@ -545,10 +545,12 @@
       'name' => 'primary_address_street',
       'vname' => 'LBL_PRIMARY_ADDRESS_STREET',
       'type' => 'varchar',
-      'len' => '150',
+      'len' => '255',
       'group' => 'primary_address',
       'comment' => 'Street address for primary address',
-      'merge_filter' => 'enabled',
+      'merge_filter' => 'disabled',
+      'inline_edit' => true,
+      'comments' => 'Street address for primary address',
     ),
     'primary_address_street_2' => 
     array (
@@ -783,7 +785,10 @@
       'options' => 'lead_status_dom',
       'audited' => true,
       'comment' => 'Status of the lead',
-      'merge_filter' => 'enabled',
+      'merge_filter' => 'disabled',
+      'required' => true,
+      'inline_edit' => true,
+      'comments' => 'Status of the lead',
     ),
     'status_description' => 
     array (
@@ -1371,7 +1376,7 @@
     array (
       'inline_edit' => '1',
       'labelValue' => 'Etapa del Prospecto',
-      'required' => false,
+      'required' => true,
       'source' => 'custom_fields',
       'name' => 'etapas_c',
       'vname' => 'LBL_ETAPAS',
