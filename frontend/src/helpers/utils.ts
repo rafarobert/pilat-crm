@@ -142,9 +142,8 @@ function removeAccents() {
   return strAccentsOut.join('');
 }
 
-function formatNumber(decimals = 0, multiplier = 1) {
-  let floatMultiplied = this * multiplier;
-  let stringFloat = floatMultiplied + "";
+function formatNumber(decimals = 2) {
+  let stringFloat = this + "";
   let arraySplitFloat = stringFloat.split(".");
   let decimalsValue = "0";
   if (arraySplitFloat.length > 1) {

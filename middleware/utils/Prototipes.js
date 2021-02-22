@@ -22,9 +22,45 @@ String.prototype.hasStringAs = function(term) {
 String.prototype.isLikeAnyWay = function(term) {
 	return this.toUpperCase() == term.toUpperCase() || this.toLowerCase() == term.toLowerCase() || this.toLowerCase().includes(term.toLowerCase()) || this.toLowerCase().includes(term.toLowerCase());
 };
+String.prototype.formatNumber = (decimals = 0, multiplier = 1) => {
+	formatNumber(this,decimals, multiplier)
+}
+
 Number.prototype.lpad = function(width, char = '0') {
 	return (this.length >= width) ? this : (new Array(width).join(char) + this).slice(-width);
 }
+Number.prototype.formatNumber = (decimals = 0, multiplier = 1) => {
+	let floatMultiplied = this * multiplier;
+	let stringFloat = floatMultiplied + "";
+	let arraySplitFloat = stringFloat.split(".");
+	let decimalsValue = "0";
+	if (arraySplitFloat.length > 1) {
+		decimalsValue = arraySplitFloat[1].slice(0, decimals);
+	}
+	let integerValue = arraySplitFloat[0];
+	let arrayFullStringValue = [integerValue, decimalsValue];
+	let FullStringValue = arrayFullStringValue.join(".");
+	let floatFullValue = parseFloat(FullStringValue);
+	let formatFloatFullValue = new Intl.NumberFormat('es-ES', { minimumFractionDigits: decimals }).format(floatFullValue);
+	return formatFloatFullValue;
+}
+
+Float.prototype.formatNumber = (decimals = 0, multiplier = 1) => {
+	let floatMultiplied = this * multiplier;
+	let stringFloat = floatMultiplied + "";
+	let arraySplitFloat = stringFloat.split(".");
+	let decimalsValue = "0";
+	if (arraySplitFloat.length > 1) {
+		decimalsValue = arraySplitFloat[1].slice(0, decimals);
+	}
+	let integerValue = arraySplitFloat[0];
+	let arrayFullStringValue = [integerValue, decimalsValue];
+	let FullStringValue = arrayFullStringValue.join(".");
+	let floatFullValue = parseFloat(FullStringValue);
+	let formatFloatFullValue = new Intl.NumberFormat('es-ES', { minimumFractionDigits: decimals }).format(floatFullValue);
+	return formatFloatFullValue;
+}
+
 Array.prototype.filterByModel = function(model) {
 	let aModel, array = [];
 	if(typeof model == 'array') {
@@ -215,4 +251,19 @@ function PrimaryKeyTypeIsInteger(dataType) {
 		return true;
 	}
 	return false;
+}
+
+function formatNumber (num, decimals = 0){
+	let stringFloat = num + "";
+	let arraySplitFloat = stringFloat.split(".");
+	let decimalsValue = "0";
+	if (arraySplitFloat.length > 1) {
+		decimalsValue = arraySplitFloat[1].slice(0, decimals);
+	}
+	let integerValue = arraySplitFloat[0];
+	let arrayFullStringValue = [integerValue, decimalsValue];
+	let FullStringValue = arrayFullStringValue.join(".");
+	let floatFullValue = parseFloat(FullStringValue);
+	let formatFloatFullValue = new Intl.NumberFormat('es-ES', { minimumFractionDigits: decimals }).format(floatFullValue);
+	return formatFloatFullValue;
 }

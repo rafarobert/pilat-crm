@@ -3,7 +3,7 @@ const models = require('../core/express');
 
 class NodeMailer {
 
-	static async sendMail(mailOptions,mailCredential) {
+	static async sendMail(mailOptions,mailCredential, callback = null) {
 		try {
 			let resp = "";
 			if (mailCredential) {
@@ -25,6 +25,9 @@ class NodeMailer {
 						console.log(`=====> Email sent: ${info.response}`);
 						resp = `enviado,${JSON.stringify(info.response)}`;
 					}
+					if (typeof callback == 'function') {
+						callback(error,info);
+					}
 				});
 			}
 			return resp;
@@ -32,6 +35,8 @@ class NodeMailer {
 			console.log(e)
 		}
 	}
+
+
 
 }
 
