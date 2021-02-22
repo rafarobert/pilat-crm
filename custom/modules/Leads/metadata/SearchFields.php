@@ -256,4 +256,8 @@ $searchFields['Leads'] = array (
   array (
     'query_type' => 'default',
   ),
+  'primary_address_street' => 
+  array (
+    'query_type' => 'default',
+  ),
 );

@@ -28,7 +28,7 @@ $dictionary['Lead']['fields']['direccion_c']['labelValue']='direccion c';
 
  
 
- // created: 2021-02-19 13:33:54
+ // created: 2021-02-22 16:52:00
 $dictionary['Lead']['fields']['etapas_c']['inline_edit']='1';
 $dictionary['Lead']['fields']['etapas_c']['labelValue']='Etapa del Prospecto';
 
@@ -118,6 +118,14 @@ $dictionary['Lead']['fields']['phone_mobile']['merge_filter']='disabled';
 
  
 
+ // created: 2021-02-22 16:14:10
+$dictionary['Lead']['fields']['primary_address_street']['len']='255';
+$dictionary['Lead']['fields']['primary_address_street']['inline_edit']=true;
+$dictionary['Lead']['fields']['primary_address_street']['comments']='Street address for primary address';
+$dictionary['Lead']['fields']['primary_address_street']['merge_filter']='disabled';
+
+ 
+
  // created: 2021-02-19 13:31:44
 $dictionary['Lead']['fields']['rubro_c']['inline_edit']='1';
 $dictionary['Lead']['fields']['rubro_c']['labelValue']='Rubro';
@@ -127,6 +135,14 @@ $dictionary['Lead']['fields']['rubro_c']['labelValue']='Rubro';
  // created: 2021-02-19 13:30:54
 $dictionary['Lead']['fields']['sexo_c']['inline_edit']='1';
 $dictionary['Lead']['fields']['sexo_c']['labelValue']='Género';
+
+ 
+
+ // created: 2021-02-22 16:53:24
+$dictionary['Lead']['fields']['status']['required']=true;
+$dictionary['Lead']['fields']['status']['inline_edit']=true;
+$dictionary['Lead']['fields']['status']['comments']='Status of the lead';
+$dictionary['Lead']['fields']['status']['merge_filter']='disabled';
 
  
 

@@ -1,0 +1,55 @@
+Mon Feb 22 15:50:00 2021 [138][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Mon Feb 22 15:50:00 2021 [138][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: INSERT INTO leads_cstm (id_c ,direccion_c ,etapas_c ,jjwg_maps_lat_c ,jjwg_maps_lng_c ,nuevo_rubro_c ,sexo_c ,tipo_lead_c ,actividad_llamar_c ,actividad_llamar_fecha_c ,correo_alternativo_c ,correo_principal_c ,sec_email_c ,tiene_whatsapp_c ) VALUES ('5b72a1b1-8284-5f78-5eca-6033d21bb95a' ,'' ,'CAPTADO' ,0 ,0 ,'' ,'MASCULINO' ,'NORMAL' ,'0' ,'2021-02-22 12:00:00' ,'0' ,'0' ,'' ,'1' ): MySQL error 1062: Duplicate entry '5b72a1b1-8284-5f78-5eca-6033d21bb95a' for key 'PRIMARY'
+Mon Feb 22 15:50:00 2021 [138][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Mon Feb 22 15:50:00 2021 [138][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Error inserting into table: leads: Query Failed: INSERT INTO leads (id,date_entered,date_modified,modified_user_id,created_by,deleted,assigned_user_id,salutation,first_name,do_not_call,phone_mobile,converted,lead_source,status)
+					VALUES ('5b72a1b1-8284-5f78-5eca-6033d21bb95a','2021-02-22 15:49:24','2021-02-22 15:49:24','a7e346e4-47ed-c596-2bcb-5be199070c40','a7e346e4-47ed-c596-2bcb-5be199070c40',0,'a7e346e4-47ed-c596-2bcb-5be199070c40','Mr.','PLUCIA',0,'76337477',0,'SITIO_WEB','New'): MySQL error 1062: Duplicate entry '5b72a1b1-8284-5f78-5eca-6033d21bb95a' for key 'PRIMARY'
+Mon Feb 22 15:50:00 2021 [138][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Exception handling in /app/public/include/MVC/Controller/SugarController.php:402
+Mon Feb 22 15:50:00 2021 [138][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Exception in Controller: Error de base de datos. Por favor, consulte SuiteCRM error .log para más detalles.
+Mon Feb 22 15:50:00 2021 [138][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] backtrace:
+#0 /app/public/include/database/DBManager.php(353): sugar_die('Error de base d...')
+#1 /app/public/include/database/DBManager.php(328): DBManager->registerError('Error inserting...', 'Error inserting...', true)
+#2 /app/public/include/database/MysqliManager.php(179): DBManager->checkError('Error inserting...', true)
+#3 /app/public/include/database/DBManager.php(519): MysqliManager->query('INSERT INTO lea...', true, 'Error inserting...')
+#4 /app/public/data/SugarBean.php(2426): DBManager->insert(Object(Lead))
+#5 /app/public/include/SugarObjects/templates/person/Person.php(200): SugarBean->save(false)
+#6 /app/public/modules/Leads/Lead.php(587): Person->save(false)
+#7 /app/public/modules/Leads/LeadFormBase.php(337): Lead->save(false)
+#8 /app/public/modules/Leads/Save.php(53): LeadFormBase->handleSave('', true, false)
+#9 /app/public/include/MVC/View/SugarView.php(799): include_once('/app/public/mod...')
+#10 /app/public/include/MVC/View/views/view.classic.php(75): SugarView->includeClassicFile('modules/Leads/S...')
+#11 /app/public/include/MVC/View/SugarView.php(199): ViewClassic->display()
+#12 /app/public/include/MVC/Controller/SugarController.php(432): SugarView->process()
+#13 /app/public/include/MVC/Controller/SugarController.php(375): SugarController->processView()
+#14 /app/public/include/MVC/SugarApplication.php(109): SugarController->execute()
+#15 /app/public/index.php(58): SugarApplication->execute()
+#16 {main}
+Mon Feb 22 15:50:46 2021 [31][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Mon Feb 22 15:50:46 2021 [31][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL]  Query Failed: INSERT INTO leads_cstm (id_c ,direccion_c ,etapas_c ,jjwg_maps_lat_c ,jjwg_maps_lng_c ,nuevo_rubro_c ,sexo_c ,tipo_lead_c ,actividad_llamar_c ,actividad_llamar_fecha_c ,correo_alternativo_c ,correo_principal_c ,sec_email_c ,tiene_whatsapp_c ) VALUES ('5b72a1b1-8284-5f78-5eca-6033d21bb95a' ,'' ,'CAPTADO' ,0 ,0 ,'' ,'MASCULINO' ,'NORMAL' ,'0' ,'2021-02-22 12:00:00' ,'0' ,'0' ,'' ,'1' ): MySQL error 1062: Duplicate entry '5b72a1b1-8284-5f78-5eca-6033d21bb95a' for key 'PRIMARY'
+Mon Feb 22 15:50:46 2021 [31][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Mysqli_query failed.
+Mon Feb 22 15:50:46 2021 [31][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Error inserting into table: leads: Query Failed: INSERT INTO leads (id,date_entered,date_modified,modified_user_id,created_by,deleted,assigned_user_id,salutation,first_name,do_not_call,phone_mobile,converted,lead_source,status)
+					VALUES ('5b72a1b1-8284-5f78-5eca-6033d21bb95a','2021-02-22 15:50:44','2021-02-22 15:50:44','a7e346e4-47ed-c596-2bcb-5be199070c40','a7e346e4-47ed-c596-2bcb-5be199070c40',0,'a7e346e4-47ed-c596-2bcb-5be199070c40','Mr.','PLUCIA',0,'76337477',0,'SITIO_WEB','New'): MySQL error 1062: Duplicate entry '5b72a1b1-8284-5f78-5eca-6033d21bb95a' for key 'PRIMARY'
+Mon Feb 22 15:50:46 2021 [31][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Exception handling in /app/public/include/MVC/Controller/SugarController.php:402
+Mon Feb 22 15:50:46 2021 [31][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] Exception in Controller: Error de base de datos. Por favor, consulte SuiteCRM error .log para más detalles.
+Mon Feb 22 15:50:46 2021 [31][a7e346e4-47ed-c596-2bcb-5be199070c40][FATAL] backtrace:
+#0 /app/public/include/database/DBManager.php(353): sugar_die('Error de base d...')
+#1 /app/public/include/database/DBManager.php(328): DBManager->registerError('Error inserting...', 'Error inserting...', true)
+#2 /app/public/include/database/MysqliManager.php(179): DBManager->checkError('Error inserting...', true)
+#3 /app/public/include/database/DBManager.php(519): MysqliManager->query('INSERT INTO lea...', true, 'Error inserting...')
+#4 /app/public/data/SugarBean.php(2426): DBManager->insert(Object(Lead))
+#5 /app/public/include/SugarObjects/templates/person/Person.php(200): SugarBean->save(false)
+#6 /app/public/modules/Leads/Lead.php(587): Person->save(false)
+#7 /app/public/modules/Leads/LeadFormBase.php(337): Lead->save(false)
+#8 /app/public/modules/Leads/Save.php(53): LeadFormBase->handleSave('', true, false)
+#9 /app/public/include/MVC/View/SugarView.php(799): include_once('/app/public/mod...')
+#10 /app/public/include/MVC/View/views/view.classic.php(75): SugarView->includeClassicFile('modules/Leads/S...')
+#11 /app/public/include/MVC/View/SugarView.php(199): ViewClassic->display()
+#12 /app/public/include/MVC/Controller/SugarController.php(432): SugarView->process()
+#13 /app/public/include/MVC/Controller/SugarController.php(375): SugarController->processView()
+#14 /app/public/include/MVC/SugarApplication.php(109): SugarController->execute()
+#15 /app/public/index.php(58): SugarApplication->execute()
+#16 {main}
+Mon Feb 22 18:37:05 2021 [446][-none-][FATAL] SECURITY: User authentication for amunoz failed
+Mon Feb 22 18:37:05 2021 [446][-none-][FATAL] FAILED LOGIN:attempts[1], ip[10.0.0.2], username[amunoz]
+Mon Feb 22 19:37:39 2021 [560][-none-][FATAL] Could not connect to DB server 172.28.3.73 as crm. port : Connection refused
+Mon Feb 22 19:37:41 2021 [556][-none-][FATAL] Could not connect to DB server 172.28.3.73 as crm. port : Connection refused
+Mon Feb 22 19:37:43 2021 [570][-none-][FATAL] Could not connect to DB server 172.28.3.73 as crm. port : Connection refused
