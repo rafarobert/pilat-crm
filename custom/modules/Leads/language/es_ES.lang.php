@@ -1,5 +1,5 @@
 <?php
-// created: 2021-02-22 16:53:24
+// created: 2021-02-23 18:22:10
 $mod_strings = array (
   'LBL_ACCOUNT' => 'Cliente',
   'LBL_ACCOUNT_DESCRIPTION' => 'Descripción de la Cliente',
@@ -50,4 +50,5 @@ $mod_strings = array (
   'LBL_NAME' => 'Nombre alt',
   'LBL_PRIMARY_ADDRESS_STREET' => 'Calle de dirección principal',
   'LBL_STATUS' => 'Estado:',
+  'LBL_ETAPAS_C' => 'Etapas',
 );

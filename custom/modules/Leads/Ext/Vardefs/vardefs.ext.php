@@ -28,9 +28,9 @@ $dictionary['Lead']['fields']['direccion_c']['labelValue']='direccion c';
 
  
 
- // created: 2021-02-22 16:52:00
+ // created: 2021-02-23 18:22:10
 $dictionary['Lead']['fields']['etapas_c']['inline_edit']='1';
-$dictionary['Lead']['fields']['etapas_c']['labelValue']='Etapa del Prospecto';
+$dictionary['Lead']['fields']['etapas_c']['labelValue']='Etapas';
 
  
 
