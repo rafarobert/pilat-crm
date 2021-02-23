@@ -1,5 +1,5 @@
 <?php
-// created: 2021-02-22 22:12:11
+// created: 2021-02-23 13:10:09
 $mod_strings = array (
   'LBL_ASSIGNED_TO_ID' => 'Id de usuario asignado',
   'LBL_ASSIGNED_TO_NAME' => 'Asignado a',
