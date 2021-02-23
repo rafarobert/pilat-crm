@@ -344,11 +344,16 @@ export class PipelineDialogComponent implements OnInit {
               let currencies:string[] = [];
               for (let j = 0 ; j < stageProspects.length ; j++) {
                 let stagelead = stageProspects[j];
+                let alreadyOpportunity;
                 totals[j] = parseInt(stagelead.opportunity_amount);
                 //currencies.push();
-                let alreadyOpportunity = opportunities.find(param => param.id == stagelead.opportunity_id);
-                if (alreadyOpportunity) {
-                  alreadyOpportunities.push(alreadyOpportunity);
+                if (opportunities && opportunities.length) {
+                  alreadyOpportunity = opportunities.find(param => param.id == stagelead.opportunity_id);
+                  if (alreadyOpportunity) {
+                    alreadyOpportunities.push(alreadyOpportunity);
+                  } else {
+                    onlyProspects.push(stagelead);
+                  }
                 } else {
                   onlyProspects.push(stagelead);
                 }
