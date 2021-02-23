@@ -1,7 +1,45 @@
-<button class="pilat-module-trigger" mat-raised-button (click)="openBottomSheet()">
-  <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_up</mat-icon>
-</button>
+<mat-nav-list>
+
+  <mat-toolbar>
+    <button mat-icon-button (click)="drawer.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span><a [href]="httpHome">{{pilatService.pageTitle}}</a></span>
+    <!--<span><p>-->
+    <!--Backend Server: {{pilatService.environment.backend.server.webpath}}-->
+    <!--Frontend Serve: {{pilatService.environment.frontend.server.webpath}}-->
+    <!--</p></span>-->
+    <span class="example-spacer"></span>
+    <!--<button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">-->
+    <!--<mat-icon>favorite</mat-icon>-->
+    <!--</button>-->
+
+    <!--<button mat-stroked-button [mat-dialog-close]="true" cdkFocusInitial>Aceptar</button>-->
+    <a [href]="httpHome+'?module=Users&action=Logout'"><mat-icon>logout</mat-icon></a>
+    <!--<button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="closeBootomSheet()">-->
+      <!--<mat-icon>logout</mat-icon>-->
+    <!--</button>-->
+  </mat-toolbar>
+
+  <mat-drawer-container class="example-container" [hasBackdrop]="false">
+    <mat-drawer #drawer [mode]="'push'" [style]="pilatService.isSmallScreen ? 'width:100%' : 'width:40%'">
+
+      <ng-material-multilevel-menu [configuration]="appConfig" [items]="appItems"></ng-material-multilevel-menu>
+
+    </mat-drawer>
+
+    <router-outlet></router-outlet>
+
+    <!--<mat-drawer-content>-->
+    <!--<button mat-button (click)="openPipelineDialog($event)" class="btn-trigger"><mat-icon>bookmark</mat-icon>-->
+    <!--Abrir CRM Pipeline</button>-->
+    <!--<button mat-button (click)="openAdminDialog($event)" class="btn-trigger"><mat-icon>bookmark</mat-icon>-->
+    <!--Abrir CRM Administrador</button>-->
+    <!--</mat-drawer-content>-->
+  </mat-drawer-container>
+
+</mat-nav-list>
+
 <!-- Copyright 2020 Google LLC. All Rights Reserved.
     Use of this source code is governed by an MIT-style license that
     can be found in the LICENSE file at http://angular.io/license -->
-<!--<mat-spinner diameter="50" class="mat-spinner"></mat-spinner>-->

@@ -5,6 +5,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build_local_test": "ng build --configuration test --watch --output-hashing none --base-href /lafuente/crm_pilat_dev/frontend/dist/frontend/ --build-optimizer",
+    "build_local_prod": "ng build --prod --watch --output-hashing none --base-href /lafuente/crm_pilat_dev/frontend/dist/frontend/ --build-optimizer",
+    "build_server_test": "ng build --configuration test --watch --output-hashing none --base-href /frontend/dist/frontend/ --build-optimizer",
+    "build_server_prod": "ng build --prod --watch --output-hashing none --base-href /frontend/dist/frontend/ --build-optimizer",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

@@ -116,21 +116,31 @@ export class PipelineDialogComponent implements OnInit {
   ) {}
   
   ngOnInit(): void {
-    this.pilatService.setParams([
-      this.pilatService.DIC_CURRENCIES,
-    ]);
-    this.pilatService.pageTitle = 'CRM';
+    this.pilatAuth = new PilatAuth();
+    this.pilatAuth.userLoggedId = this.cookieService.get('userLogguedIn');
+    this.pilatAuth.userSessId = this.cookieService.get('PHPSESSID');
+    this.pilatService.currentSessId = this.pilatAuth.userSessId;
+    this.crmUserService.getUser(this.pilatAuth.userLoggedId).subscribe(res => {
+      let response = res as { status: string, message: string, data: Users };
+      this.pilatService.currentUser = response.data;
+      this.pilatService.userLoggedIn = true;
+      if (this.pilatService.userLoggedIn) {
+        this.pilatService.setParams([
+          this.pilatService.DIC_CURRENCIES,
+        ]);
+        this.pilatService.pageTitle = 'CRM PILAT';
+        this.setPipeline();
+      } else {
+        this.dialog.closeAll();
+        this._snackBar.open('Por favor, inicia sesión para poder continuar', 'Aceptar', {
+          duration: 2000,
+          horizontalPosition:'center',
+          verticalPosition:'top'
+        });
+      }
+      
+    });
     
-    if (this.pilatService.userLoggedIn) {
-      this.setPipeline();
-    } else {
-      this.dialog.closeAll();
-      this._snackBar.open('Por favor, inicia sesión para poder continuar', 'Aceptar', {
-        duration: 2000,
-        horizontalPosition:'center',
-        verticalPosition:'top'
-      });
-    }
   }
   
   openLeadDialog($event) {

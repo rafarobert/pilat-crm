@@ -6,10 +6,12 @@ import {DictionariesComponent} from "./components/crud/dictionaries/dictionaries
 import {ParamsComponent} from "./components/crud/params/params.component";
 import {UsersComponent} from "./components/crud/users/users.component";
 import {MailsComponent} from "./components/crud/mails/mails.component";
+import {HomeComponent} from "./components/home/home.component";
 
 
 const routes: Routes = [
   { path: '', component: PipelineDialogComponent, pathMatch: 'full' },
+  { path: 'crm', component: HomeComponent, pathMatch: 'full' },
   { path: 'crm/pipeline', component: PipelineDialogComponent, pathMatch: 'full' },
   { path: 'crm/admin/dictionaries', component: DictionariesComponent, pathMatch: 'full' },
   { path: 'crm/admin/params', component: ParamsComponent, pathMatch: 'full' },

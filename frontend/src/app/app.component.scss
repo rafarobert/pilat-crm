@@ -1,5 +1,5 @@
 .pilat-background {
-  background-color: #0a6aa1;
+  background-color: #00458D;
 }
 .pilat-module-trigger{
   position: fixed;
@@ -23,8 +23,23 @@
   color: #ffffff;
   background-color: #01458d;
 }
+.mat-toolbar {
+  background: #00458D;
+  color: #ffffff
+}
+
 .mat-spinner {
   top: 50%;
   left: 46%;
 }
 
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+//mat-drawer{
+//  width: 13%;
+//}
+.mat-list-base .mat-list-item {
+  font-size: 12px!important;
+}

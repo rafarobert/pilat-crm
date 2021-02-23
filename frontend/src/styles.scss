@@ -21,9 +21,10 @@ body {
 [mat-dialog-title] {
   margin: -24px -24px 0px -24px !important;
   padding: 10px 24px;
-  background: #369;
-  color: #fff;
+  background: #ffffff;
+  color: #CA3213;
   cursor: move;
+  font-weight: lighter!important;
 }
 
 [mat-dialog-content] {
@@ -55,4 +56,11 @@ mat-form-field{
 }
 .form-control{
   top: -10px;
+}
+mat-nav-list {
+  padding-top: 0px!important;
+}
+
+.anml-link {
+  font-size: 13px;
 }
