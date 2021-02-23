@@ -30,9 +30,13 @@
     <ng-container matColumnDef="mai_par_status_id"><mat-header-cell *matHeaderCellDef mat-sort-header>mai_par_status_id</mat-header-cell><mat-cell *matCellDef="let row"> {{row.mai_par_status_id}}</mat-cell></ng-container>
     <ng-container matColumnDef="createdBy"><mat-header-cell *matHeaderCellDef mat-sort-header>createdBy</mat-header-cell><mat-cell *matCellDef="let row"> {{row.createdBy}}</mat-cell></ng-container>
     <ng-container matColumnDef="updatedBy"><mat-header-cell *matHeaderCellDef mat-sort-header>updatedBy</mat-header-cell><mat-cell *matCellDef="let row"> {{row.updatedBy}}</mat-cell></ng-container>
-    <ng-container matColumnDef="dueAt"><mat-header-cell *matHeaderCellDef mat-sort-header>dueAt</mat-header-cell><mat-cell *matCellDef="let row"> {{row.dueAt}}</mat-cell></ng-container>
-    <ng-container matColumnDef="createdAt"><mat-header-cell *matHeaderCellDef mat-sort-header>createdAt</mat-header-cell><mat-cell *matCellDef="let row"> {{row.createdAt}}</mat-cell></ng-container>
-    <ng-container matColumnDef="updatedAt"><mat-header-cell *matHeaderCellDef mat-sort-header>updatedAt</mat-header-cell><mat-cell *matCellDef="let row"> {{row.updatedAt}}</mat-cell></ng-container>
+    <ng-container matColumnDef="dueAt"><mat-header-cell *matHeaderCellDef mat-sort-header>Alta</mat-header-cell><mat-cell *matCellDef="let row"> {{row.dueAt}}</mat-cell></ng-container>
+    <ng-container matColumnDef="createdAt"><mat-header-cell *matHeaderCellDef mat-sort-header>Creado</mat-header-cell><mat-cell *matCellDef="let row"> {{row.createdAt}}</mat-cell></ng-container>
+
+    <ng-container matColumnDef="updatedAt">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Actualizado</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.updatedAt}}</mat-cell>
+    </ng-container>
 
     <!-- actions -->
     <ng-container matColumnDef="actions">
