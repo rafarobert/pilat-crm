@@ -82,8 +82,19 @@ export class AddOpportunityComponent implements OnInit {
       this.data.opportunityAosQuotes = this.data.opportunityAosQuotes ? this.data.opportunityAosQuotes : new AosQuotes();
       this.data.opportunityAosQuotes.currency_id = this.pilatService.parMonedaDolar.par_cod;
       this.selectPago(this.data.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c);
-      this.selectAoQuoteCurrency(this.data.opportunityAosQuotes.aoQuoteAosQuotesCstm.moneda_c);
-      this.selectOpportunityCurrency(this.data.opportunityOpportunitiesCstm.moneda_c);
+      if (this.data.opportunityAosQuotes.aoQuoteAosQuotesCstm.moneda_c) {
+        this.selectAoQuoteCurrency(this.data.opportunityAosQuotes.aoQuoteAosQuotesCstm.moneda_c);
+      } else {
+        this.data.opportunityAosQuotes.aoQuoteAosQuotesCstm.moneda_c = this.pilatService.parMonedaDolar.par_cod;
+        this.parCurrentAoQuoteCurrency = this.pilatService.parMonedaDolar;
+      }
+      if (this.data.opportunityOpportunitiesCstm.moneda_c) {
+        this.selectOpportunityCurrency(this.data.opportunityOpportunitiesCstm.moneda_c);
+      } else {
+        this.data.opportunityOpportunitiesCstm.moneda_c = this.pilatService.parMonedaDolar.par_cod;
+        this.parCurrentOpportunityCurrency = this.pilatService.parMonedaDolar;
+      }
+      
       setTimeout(() => {
         this.accordion.openAll();
       },1000);

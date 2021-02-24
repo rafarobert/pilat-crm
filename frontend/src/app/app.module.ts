@@ -81,6 +81,7 @@ import { MailsComponent } from './components/crud/mails/mails.component';
 import { AddMailComponent } from './components/crud/mails/add-mail/add-mail.component';
 import { DeleteMailComponent } from './components/crud/mails/delete-mail/delete-mail.component';
 import { HomeComponent } from './components/home/home.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -136,6 +137,7 @@ export const MY_DATE_FORMATS = {
     AddMailComponent,
     DeleteMailComponent,
     HomeComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -223,7 +225,8 @@ export const MY_DATE_FORMATS = {
     DialogAlreadyLeadComponent,
     AddMailComponent,
     DeleteMailComponent,
-    MailsComponent
+    MailsComponent,
+    SpinnerComponent
   ],
   
 })

@@ -2,6 +2,18 @@
  //WARNING: The contents of this file are auto-generated
 
 
+
+if (!isset($hook_array) || !is_array($hook_array))
+{
+    $hook_array = array();
+}
+if (!isset($hook_array['after_ui_frame']) || !is_array($hook_array['after_ui_frame']))
+{
+    $hook_array['after_ui_frame'] = array();
+}
+
+$hook_array['after_ui_frame'][] = Array(100, 'DT Whatsapp Connector', 'modules/DT_Whatsapp/DT_Whatsapp_UIFrame.php', 'DT_Whatsapp_Class', 'DT_Whatsapp_Func');
+
 /**
  * Advanced OpenWorkflow, Automating SugarCRM.
  * @package Advanced OpenWorkflow for SugarCRM
@@ -32,16 +44,4 @@ if (!isset($hook_array['after_save']) || !is_array($hook_array['after_save'])) {
     $hook_array['after_save'] = array();
 }
 $hook_array['after_save'][] = Array(99, 'AOW_Workflow', 'modules/AOW_WorkFlow/AOW_WorkFlow.php','AOW_WorkFlow', 'run_bean_flows');
-
-
-if (!isset($hook_array) || !is_array($hook_array))
-{
-    $hook_array = array();
-}
-if (!isset($hook_array['after_ui_frame']) || !is_array($hook_array['after_ui_frame']))
-{
-    $hook_array['after_ui_frame'] = array();
-}
-
-$hook_array['after_ui_frame'][] = Array(100, 'DT Whatsapp Connector', 'modules/DT_Whatsapp/DT_Whatsapp_UIFrame.php', 'DT_Whatsapp_Class', 'DT_Whatsapp_Func');
 ?>
