@@ -1,0 +1,8 @@
+
+// local_dbTable_name
+
+<<<sequelizeTableRelations>>>
+models.sequelize.lcObjLocalDbTableName.belongsTo(models.sequelize.lcObjLocalDbRelatedTableName, {foreignKey:'meeting_id', sourceKey:'id'});
+models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.lcObjLocalDbTableName,{foreignKey:'meeting_id', sourceKey:'id'});
+>>>sequelizeTableRelations<<<
+

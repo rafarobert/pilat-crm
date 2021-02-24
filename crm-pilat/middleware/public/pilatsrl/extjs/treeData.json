@@ -1,0 +1,1439 @@
+
+{
+    "text": ".",
+    "children": [{
+        "text":"Tables",
+        "expanded": true,
+        "children":[
+        
+        {
+            "text":"Accounts",
+            "id":"accounts",
+            "leaf":true
+        },
+        
+        {
+            "text":"AccountsAudit",
+            "id":"accounts-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"AccountsBugs",
+            "id":"accounts-bugs",
+            "leaf":true
+        },
+        
+        {
+            "text":"AccountsCases",
+            "id":"accounts-cases",
+            "leaf":true
+        },
+        
+        {
+            "text":"AccountsContacts",
+            "id":"accounts-contacts",
+            "leaf":true
+        },
+        
+        {
+            "text":"AccountsCstm",
+            "id":"accounts-cstm",
+            "leaf":true
+        },
+        
+        {
+            "text":"AccountsOpportunities",
+            "id":"accounts-opportunities",
+            "leaf":true
+        },
+        
+        {
+            "text":"AclActions",
+            "id":"acl-actions",
+            "leaf":true
+        },
+        
+        {
+            "text":"AclRoles",
+            "id":"acl-roles",
+            "leaf":true
+        },
+        
+        {
+            "text":"AclRolesActions",
+            "id":"acl-roles-actions",
+            "leaf":true
+        },
+        
+        {
+            "text":"AclRolesUsers",
+            "id":"acl-roles-users",
+            "leaf":true
+        },
+        
+        {
+            "text":"AddressBook",
+            "id":"address-book",
+            "leaf":true
+        },
+        
+        {
+            "text":"Alerts",
+            "id":"alerts",
+            "leaf":true
+        },
+        
+        {
+            "text":"AmProjecttemplates",
+            "id":"am-projecttemplates",
+            "leaf":true
+        },
+        
+        {
+            "text":"AmProjecttemplatesAudit",
+            "id":"am-projecttemplates-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"AmProjecttemplatesContacts1C",
+            "id":"am-projecttemplates-contacts-1-c",
+            "leaf":true
+        },
+        
+        {
+            "text":"AmProjecttemplatesProject1C",
+            "id":"am-projecttemplates-project-1-c",
+            "leaf":true
+        },
+        
+        {
+            "text":"AmProjecttemplatesUsers1C",
+            "id":"am-projecttemplates-users-1-c",
+            "leaf":true
+        },
+        
+        {
+            "text":"AmTasktemplates",
+            "id":"am-tasktemplates",
+            "leaf":true
+        },
+        
+        {
+            "text":"AmTasktemplatesAmProjecttemplatesC",
+            "id":"am-tasktemplates-am-projecttemplates-c",
+            "leaf":true
+        },
+        
+        {
+            "text":"AmTasktemplatesAudit",
+            "id":"am-tasktemplates-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"AnalyticReporting",
+            "id":"analytic-reporting",
+            "leaf":true
+        },
+        
+        {
+            "text":"AobhBusinesshours",
+            "id":"aobh-businesshours",
+            "leaf":true
+        },
+        
+        {
+            "text":"AodIndex",
+            "id":"aod-index",
+            "leaf":true
+        },
+        
+        {
+            "text":"AodIndexevent",
+            "id":"aod-indexevent",
+            "leaf":true
+        },
+        
+        {
+            "text":"AodIndexeventAudit",
+            "id":"aod-indexevent-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"AodIndexAudit",
+            "id":"aod-index-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"AokKnowledgebase",
+            "id":"aok-knowledgebase",
+            "leaf":true
+        },
+        
+        {
+            "text":"AokKnowledgebaseAudit",
+            "id":"aok-knowledgebase-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"AokKnowledgebaseCategories",
+            "id":"aok-knowledgebase-categories",
+            "leaf":true
+        },
+        
+        {
+            "text":"AokKnowledgeBaseCategories",
+            "id":"aok-knowledge-base-categories",
+            "leaf":true
+        },
+        
+        {
+            "text":"AokKnowledgeBaseCategoriesAudit",
+            "id":"aok-knowledge-base-categories-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"AopCaseEvents",
+            "id":"aop-case-events",
+            "leaf":true
+        },
+        
+        {
+            "text":"AopCaseEventsAudit",
+            "id":"aop-case-events-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"AopCaseUpdates",
+            "id":"aop-case-updates",
+            "leaf":true
+        },
+        
+        {
+            "text":"AopCaseUpdatesAudit",
+            "id":"aop-case-updates-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"AorCharts",
+            "id":"aor-charts",
+            "leaf":true
+        },
+        
+        {
+            "text":"AorConditions",
+            "id":"aor-conditions",
+            "leaf":true
+        },
+        
+        {
+            "text":"AorFields",
+            "id":"aor-fields",
+            "leaf":true
+        },
+        
+        {
+            "text":"AorReports",
+            "id":"aor-reports",
+            "leaf":true
+        },
+        
+        {
+            "text":"AorReportsAudit",
+            "id":"aor-reports-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"AorScheduledReports",
+            "id":"aor-scheduled-reports",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosContracts",
+            "id":"aos-contracts",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosContractsAudit",
+            "id":"aos-contracts-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosContractsDocuments",
+            "id":"aos-contracts-documents",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosInvoices",
+            "id":"aos-invoices",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosInvoicesAudit",
+            "id":"aos-invoices-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosLineItemGroups",
+            "id":"aos-line-item-groups",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosLineItemGroupsAudit",
+            "id":"aos-line-item-groups-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosPdfTemplates",
+            "id":"aos-pdf-templates",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosPdfTemplatesAudit",
+            "id":"aos-pdf-templates-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosProducts",
+            "id":"aos-products",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosProductsAudit",
+            "id":"aos-products-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosProductsQuotes",
+            "id":"aos-products-quotes",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosProductsQuotesAudit",
+            "id":"aos-products-quotes-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosProductCategories",
+            "id":"aos-product-categories",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosProductCategoriesAudit",
+            "id":"aos-product-categories-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosQuotes",
+            "id":"aos-quotes",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosQuotesAosInvoicesC",
+            "id":"aos-quotes-aos-invoices-c",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosQuotesAudit",
+            "id":"aos-quotes-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosQuotesCstm",
+            "id":"aos-quotes-cstm",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosQuotesOsContractsC",
+            "id":"aos-quotes-os-contracts-c",
+            "leaf":true
+        },
+        
+        {
+            "text":"AosQuotesProjectC",
+            "id":"aos-quotes-project-c",
+            "leaf":true
+        },
+        
+        {
+            "text":"AowActions",
+            "id":"aow-actions",
+            "leaf":true
+        },
+        
+        {
+            "text":"AowConditions",
+            "id":"aow-conditions",
+            "leaf":true
+        },
+        
+        {
+            "text":"AowProcessed",
+            "id":"aow-processed",
+            "leaf":true
+        },
+        
+        {
+            "text":"AowProcessedAowActions",
+            "id":"aow-processed-aow-actions",
+            "leaf":true
+        },
+        
+        {
+            "text":"AowWorkflow",
+            "id":"aow-workflow",
+            "leaf":true
+        },
+        
+        {
+            "text":"AowWorkflowAudit",
+            "id":"aow-workflow-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"Bugs",
+            "id":"bugs",
+            "leaf":true
+        },
+        
+        {
+            "text":"BugsAudit",
+            "id":"bugs-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"Calls",
+            "id":"calls",
+            "leaf":true
+        },
+        
+        {
+            "text":"CallsContacts",
+            "id":"calls-contacts",
+            "leaf":true
+        },
+        
+        {
+            "text":"CallsCstm",
+            "id":"calls-cstm",
+            "leaf":true
+        },
+        
+        {
+            "text":"CallsLeads",
+            "id":"calls-leads",
+            "leaf":true
+        },
+        
+        {
+            "text":"CallsReschedule",
+            "id":"calls-reschedule",
+            "leaf":true
+        },
+        
+        {
+            "text":"CallsRescheduleAudit",
+            "id":"calls-reschedule-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"CallsUsers",
+            "id":"calls-users",
+            "leaf":true
+        },
+        
+        {
+            "text":"Campaigns",
+            "id":"campaigns",
+            "leaf":true
+        },
+        
+        {
+            "text":"CampaignsAudit",
+            "id":"campaigns-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"CampaignLog",
+            "id":"campaign-log",
+            "leaf":true
+        },
+        
+        {
+            "text":"CampaignTrkrs",
+            "id":"campaign-trkrs",
+            "leaf":true
+        },
+        
+        {
+            "text":"Cases",
+            "id":"cases",
+            "leaf":true
+        },
+        
+        {
+            "text":"CasesAudit",
+            "id":"cases-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"CasesBugs",
+            "id":"cases-bugs",
+            "leaf":true
+        },
+        
+        {
+            "text":"CasesCstm",
+            "id":"cases-cstm",
+            "leaf":true
+        },
+        
+        {
+            "text":"Config",
+            "id":"config",
+            "leaf":true
+        },
+        
+        {
+            "text":"Contacts",
+            "id":"contacts",
+            "leaf":true
+        },
+        
+        {
+            "text":"ContactsAudit",
+            "id":"contacts-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"ContactsBugs",
+            "id":"contacts-bugs",
+            "leaf":true
+        },
+        
+        {
+            "text":"ContactsCases",
+            "id":"contacts-cases",
+            "leaf":true
+        },
+        
+        {
+            "text":"ContactsCstm",
+            "id":"contacts-cstm",
+            "leaf":true
+        },
+        
+        {
+            "text":"ContactsUsers",
+            "id":"contacts-users",
+            "leaf":true
+        },
+        
+        {
+            "text":"CronRemoveDocuments",
+            "id":"cron-remove-documents",
+            "leaf":true
+        },
+        
+        {
+            "text":"Currencies",
+            "id":"currencies",
+            "leaf":true
+        },
+        
+        {
+            "text":"CustomFields",
+            "id":"custom-fields",
+            "leaf":true
+        },
+        
+        {
+            "text":"Documents",
+            "id":"documents",
+            "leaf":true
+        },
+        
+        {
+            "text":"DocumentsAccounts",
+            "id":"documents-accounts",
+            "leaf":true
+        },
+        
+        {
+            "text":"DocumentsBugs",
+            "id":"documents-bugs",
+            "leaf":true
+        },
+        
+        {
+            "text":"DocumentsCases",
+            "id":"documents-cases",
+            "leaf":true
+        },
+        
+        {
+            "text":"DocumentsContacts",
+            "id":"documents-contacts",
+            "leaf":true
+        },
+        
+        {
+            "text":"DocumentsOpportunities",
+            "id":"documents-opportunities",
+            "leaf":true
+        },
+        
+        {
+            "text":"DocumentRevisions",
+            "id":"document-revisions",
+            "leaf":true
+        },
+        
+        {
+            "text":"Eapm",
+            "id":"eapm",
+            "leaf":true
+        },
+        
+        {
+            "text":"Emailman",
+            "id":"emailman",
+            "leaf":true
+        },
+        
+        {
+            "text":"Emails",
+            "id":"emails",
+            "leaf":true
+        },
+        
+        {
+            "text":"EmailsBeans",
+            "id":"emails-beans",
+            "leaf":true
+        },
+        
+        {
+            "text":"EmailsEmailAddrRel",
+            "id":"emails-email-addr-rel",
+            "leaf":true
+        },
+        
+        {
+            "text":"EmailsText",
+            "id":"emails-text",
+            "leaf":true
+        },
+        
+        {
+            "text":"EmailAddresses",
+            "id":"email-addresses",
+            "leaf":true
+        },
+        
+        {
+            "text":"EmailAddressesAudit",
+            "id":"email-addresses-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"EmailAddrBeanRel",
+            "id":"email-addr-bean-rel",
+            "leaf":true
+        },
+        
+        {
+            "text":"EmailCache",
+            "id":"email-cache",
+            "leaf":true
+        },
+        
+        {
+            "text":"EmailMarketing",
+            "id":"email-marketing",
+            "leaf":true
+        },
+        
+        {
+            "text":"EmailMarketingProspectLists",
+            "id":"email-marketing-prospect-lists",
+            "leaf":true
+        },
+        
+        {
+            "text":"EmailTemplates",
+            "id":"email-templates",
+            "leaf":true
+        },
+        
+        {
+            "text":"EmailTemplatesCstm",
+            "id":"email-templates-cstm",
+            "leaf":true
+        },
+        
+        {
+            "text":"ErpCliente",
+            "id":"erp-cliente",
+            "leaf":true
+        },
+        
+        {
+            "text":"ErpClienteAudit",
+            "id":"erp-cliente-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"Favorites",
+            "id":"favorites",
+            "leaf":true
+        },
+        
+        {
+            "text":"FieldsMetaData",
+            "id":"fields-meta-data",
+            "leaf":true
+        },
+        
+        {
+            "text":"Folders",
+            "id":"folders",
+            "leaf":true
+        },
+        
+        {
+            "text":"FoldersRel",
+            "id":"folders-rel",
+            "leaf":true
+        },
+        
+        {
+            "text":"FoldersSubscriptions",
+            "id":"folders-subscriptions",
+            "leaf":true
+        },
+        
+        {
+            "text":"FpEvents",
+            "id":"fp-events",
+            "leaf":true
+        },
+        
+        {
+            "text":"FpEventsAudit",
+            "id":"fp-events-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"FpEventsContactsC",
+            "id":"fp-events-contacts-c",
+            "leaf":true
+        },
+        
+        {
+            "text":"FpEventsFpEventDelegates1C",
+            "id":"fp-events-fp-event-delegates-1-c",
+            "leaf":true
+        },
+        
+        {
+            "text":"FpEventsFpEventLocations1C",
+            "id":"fp-events-fp-event-locations-1-c",
+            "leaf":true
+        },
+        
+        {
+            "text":"FpEventsLeads1C",
+            "id":"fp-events-leads-1-c",
+            "leaf":true
+        },
+        
+        {
+            "text":"FpEventsProspects1C",
+            "id":"fp-events-prospects-1-c",
+            "leaf":true
+        },
+        
+        {
+            "text":"FpEventLocations",
+            "id":"fp-event-locations",
+            "leaf":true
+        },
+        
+        {
+            "text":"FpEventLocationsAudit",
+            "id":"fp-event-locations-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"FpEventLocationsFpEvents1C",
+            "id":"fp-event-locations-fp-events-1-c",
+            "leaf":true
+        },
+        
+        {
+            "text":"G3lGelWhatsapp",
+            "id":"g3l-gel-whatsapp",
+            "leaf":true
+        },
+        
+        {
+            "text":"G3lGelWhatsappAudit",
+            "id":"g3l-gel-whatsapp-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"IadStickyNotes",
+            "id":"iad-sticky-notes",
+            "leaf":true
+        },
+        
+        {
+            "text":"IadStickyNotesAudit",
+            "id":"iad-sticky-notes-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"ImportMaps",
+            "id":"import-maps",
+            "leaf":true
+        },
+        
+        {
+            "text":"InboundEmail",
+            "id":"inbound-email",
+            "leaf":true
+        },
+        
+        {
+            "text":"InboundEmailAutoreply",
+            "id":"inbound-email-autoreply",
+            "leaf":true
+        },
+        
+        {
+            "text":"InboundEmailCacheTs",
+            "id":"inbound-email-cache-ts",
+            "leaf":true
+        },
+        
+        {
+            "text":"JjwgAddressCache",
+            "id":"jjwg-address-cache",
+            "leaf":true
+        },
+        
+        {
+            "text":"JjwgAddressCacheAudit",
+            "id":"jjwg-address-cache-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"JjwgAreas",
+            "id":"jjwg-areas",
+            "leaf":true
+        },
+        
+        {
+            "text":"JjwgAreasAudit",
+            "id":"jjwg-areas-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"JjwgMaps",
+            "id":"jjwg-maps",
+            "leaf":true
+        },
+        
+        {
+            "text":"JjwgMapsAudit",
+            "id":"jjwg-maps-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"JjwgMapsJjwgAreasC",
+            "id":"jjwg-maps-jjwg-areas-c",
+            "leaf":true
+        },
+        
+        {
+            "text":"JjwgMapsJjwgMarkersC",
+            "id":"jjwg-maps-jjwg-markers-c",
+            "leaf":true
+        },
+        
+        {
+            "text":"JjwgMarkers",
+            "id":"jjwg-markers",
+            "leaf":true
+        },
+        
+        {
+            "text":"JjwgMarkersAudit",
+            "id":"jjwg-markers-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"JobQueue",
+            "id":"job-queue",
+            "leaf":true
+        },
+        
+        {
+            "text":"Leads",
+            "id":"leads",
+            "leaf":true
+        },
+        
+        {
+            "text":"LeadsAudit",
+            "id":"leads-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"LeadsCstm",
+            "id":"leads-cstm",
+            "leaf":true
+        },
+        
+        {
+            "text":"LeadsImport",
+            "id":"leads-import",
+            "leaf":true
+        },
+        
+        {
+            "text":"LinkedDocuments",
+            "id":"linked-documents",
+            "leaf":true
+        },
+        
+        {
+            "text":"Meetings",
+            "id":"meetings",
+            "leaf":true
+        },
+        
+        {
+            "text":"MeetingsContacts",
+            "id":"meetings-contacts",
+            "leaf":true
+        },
+        
+        {
+            "text":"MeetingsCstm",
+            "id":"meetings-cstm",
+            "leaf":true
+        },
+        
+        {
+            "text":"MeetingsLeads",
+            "id":"meetings-leads",
+            "leaf":true
+        },
+        
+        {
+            "text":"MeetingsUsers",
+            "id":"meetings-users",
+            "leaf":true
+        },
+        
+        {
+            "text":"Notes",
+            "id":"notes",
+            "leaf":true
+        },
+        
+        {
+            "text":"Oauth2clients",
+            "id":"oauth2clients",
+            "leaf":true
+        },
+        
+        {
+            "text":"Oauth2tokens",
+            "id":"oauth2tokens",
+            "leaf":true
+        },
+        
+        {
+            "text":"OauthConsumer",
+            "id":"oauth-consumer",
+            "leaf":true
+        },
+        
+        {
+            "text":"OauthNonce",
+            "id":"oauth-nonce",
+            "leaf":true
+        },
+        
+        {
+            "text":"OauthTokens",
+            "id":"oauth-tokens",
+            "leaf":true
+        },
+        
+        {
+            "text":"Opportunities",
+            "id":"opportunities",
+            "leaf":true
+        },
+        
+        {
+            "text":"OpportunitiesAudit",
+            "id":"opportunities-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"OpportunitiesContacts",
+            "id":"opportunities-contacts",
+            "leaf":true
+        },
+        
+        {
+            "text":"OpportunitiesCstm",
+            "id":"opportunities-cstm",
+            "leaf":true
+        },
+        
+        {
+            "text":"OutboundEmail",
+            "id":"outbound-email",
+            "leaf":true
+        },
+        
+        {
+            "text":"OutboundEmailAudit",
+            "id":"outbound-email-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"PilatDictionaries",
+            "id":"pilat-dictionaries",
+            "leaf":true
+        },
+        
+        {
+            "text":"PilatMails",
+            "id":"pilat-mails",
+            "leaf":true
+        },
+        
+        {
+            "text":"PilatModules",
+            "id":"pilat-modules",
+            "leaf":true
+        },
+        
+        {
+            "text":"PilatParams",
+            "id":"pilat-params",
+            "leaf":true
+        },
+        
+        {
+            "text":"PilatViews",
+            "id":"pilat-views",
+            "leaf":true
+        },
+        
+        {
+            "text":"Project",
+            "id":"project",
+            "leaf":true
+        },
+        
+        {
+            "text":"ProjectsAccounts",
+            "id":"projects-accounts",
+            "leaf":true
+        },
+        
+        {
+            "text":"ProjectsBugs",
+            "id":"projects-bugs",
+            "leaf":true
+        },
+        
+        {
+            "text":"ProjectsCases",
+            "id":"projects-cases",
+            "leaf":true
+        },
+        
+        {
+            "text":"ProjectsContacts",
+            "id":"projects-contacts",
+            "leaf":true
+        },
+        
+        {
+            "text":"ProjectsOpportunities",
+            "id":"projects-opportunities",
+            "leaf":true
+        },
+        
+        {
+            "text":"ProjectsProducts",
+            "id":"projects-products",
+            "leaf":true
+        },
+        
+        {
+            "text":"ProjectContacts1C",
+            "id":"project-contacts-1-c",
+            "leaf":true
+        },
+        
+        {
+            "text":"ProjectCstm",
+            "id":"project-cstm",
+            "leaf":true
+        },
+        
+        {
+            "text":"ProjectTask",
+            "id":"project-task",
+            "leaf":true
+        },
+        
+        {
+            "text":"ProjectTaskAudit",
+            "id":"project-task-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"ProjectUsers1C",
+            "id":"project-users-1-c",
+            "leaf":true
+        },
+        
+        {
+            "text":"Prospects",
+            "id":"prospects",
+            "leaf":true
+        },
+        
+        {
+            "text":"ProspectsCstm",
+            "id":"prospects-cstm",
+            "leaf":true
+        },
+        
+        {
+            "text":"ProspectLists",
+            "id":"prospect-lists",
+            "leaf":true
+        },
+        
+        {
+            "text":"ProspectListsProspects",
+            "id":"prospect-lists-prospects",
+            "leaf":true
+        },
+        
+        {
+            "text":"ProspectListCampaigns",
+            "id":"prospect-list-campaigns",
+            "leaf":true
+        },
+        
+        {
+            "text":"Relationships",
+            "id":"relationships",
+            "leaf":true
+        },
+        
+        {
+            "text":"Releases",
+            "id":"releases",
+            "leaf":true
+        },
+        
+        {
+            "text":"Reminders",
+            "id":"reminders",
+            "leaf":true
+        },
+        
+        {
+            "text":"RemindersInvitees",
+            "id":"reminders-invitees",
+            "leaf":true
+        },
+        
+        {
+            "text":"Roles",
+            "id":"roles",
+            "leaf":true
+        },
+        
+        {
+            "text":"RolesModules",
+            "id":"roles-modules",
+            "leaf":true
+        },
+        
+        {
+            "text":"RolesUsers",
+            "id":"roles-users",
+            "leaf":true
+        },
+        
+        {
+            "text":"SaiClientes",
+            "id":"sai-clientes",
+            "leaf":true
+        },
+        
+        {
+            "text":"SavedSearch",
+            "id":"saved-search",
+            "leaf":true
+        },
+        
+        {
+            "text":"Schedulers",
+            "id":"schedulers",
+            "leaf":true
+        },
+        
+        {
+            "text":"Securitygroups",
+            "id":"securitygroups",
+            "leaf":true
+        },
+        
+        {
+            "text":"SecuritygroupsAclRoles",
+            "id":"securitygroups-acl-roles",
+            "leaf":true
+        },
+        
+        {
+            "text":"SecuritygroupsAudit",
+            "id":"securitygroups-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"SecuritygroupsDefault",
+            "id":"securitygroups-default",
+            "leaf":true
+        },
+        
+        {
+            "text":"SecuritygroupsRecords",
+            "id":"securitygroups-records",
+            "leaf":true
+        },
+        
+        {
+            "text":"SecuritygroupsUsers",
+            "id":"securitygroups-users",
+            "leaf":true
+        },
+        
+        {
+            "text":"Spots",
+            "id":"spots",
+            "leaf":true
+        },
+        
+        {
+            "text":"Sugarfeed",
+            "id":"sugarfeed",
+            "leaf":true
+        },
+        
+        {
+            "text":"Surveyquestionoptions",
+            "id":"surveyquestionoptions",
+            "leaf":true
+        },
+        
+        {
+            "text":"SurveyquestionoptionsAudit",
+            "id":"surveyquestionoptions-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"SurveyquestionoptionsSurveyquestionresponses",
+            "id":"surveyquestionoptions-surveyquestionresponses",
+            "leaf":true
+        },
+        
+        {
+            "text":"Surveyquestionresponses",
+            "id":"surveyquestionresponses",
+            "leaf":true
+        },
+        
+        {
+            "text":"SurveyquestionresponsesAudit",
+            "id":"surveyquestionresponses-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"Surveyquestions",
+            "id":"surveyquestions",
+            "leaf":true
+        },
+        
+        {
+            "text":"SurveyquestionsAudit",
+            "id":"surveyquestions-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"Surveyresponses",
+            "id":"surveyresponses",
+            "leaf":true
+        },
+        
+        {
+            "text":"SurveyresponsesAudit",
+            "id":"surveyresponses-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"Surveys",
+            "id":"surveys",
+            "leaf":true
+        },
+        
+        {
+            "text":"SurveysAudit",
+            "id":"surveys-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"Tasks",
+            "id":"tasks",
+            "leaf":true
+        },
+        
+        {
+            "text":"Templatesectionline",
+            "id":"templatesectionline",
+            "leaf":true
+        },
+        
+        {
+            "text":"Tracker",
+            "id":"tracker",
+            "leaf":true
+        },
+        
+        {
+            "text":"UpgradeHistory",
+            "id":"upgrade-history",
+            "leaf":true
+        },
+        
+        {
+            "text":"Users",
+            "id":"users",
+            "leaf":true
+        },
+        
+        {
+            "text":"UsersCstm",
+            "id":"users-cstm",
+            "leaf":true
+        },
+        
+        {
+            "text":"UsersFeeds",
+            "id":"users-feeds",
+            "leaf":true
+        },
+        
+        {
+            "text":"UsersLastImport",
+            "id":"users-last-import",
+            "leaf":true
+        },
+        
+        {
+            "text":"UsersPasswordLink",
+            "id":"users-password-link",
+            "leaf":true
+        },
+        
+        {
+            "text":"UsersSignatures",
+            "id":"users-signatures",
+            "leaf":true
+        },
+        
+        {
+            "text":"UserPreferences",
+            "id":"user-preferences",
+            "leaf":true
+        },
+        
+        {
+            "text":"Vcals",
+            "id":"vcals",
+            "leaf":true
+        },
+        
+        ]
+    }]
+}

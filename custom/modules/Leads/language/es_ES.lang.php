@@ -1,5 +1,5 @@
 <?php
-// created: 2021-02-23 18:22:10
+// created: 2021-02-24 03:38:29
 $mod_strings = array (
   'LBL_ACCOUNT' => 'Cliente',
   'LBL_ACCOUNT_DESCRIPTION' => 'Descripción de la Cliente',
@@ -44,11 +44,13 @@ $mod_strings = array (
   'LBL_NIT_EMPRESA_C' => 'Nit de la Empresa',
   'LBL_EMAIL_EMPRESA_C' => 'Correo Corporativo',
   'LBL_NOMBRE_CONTACTO_C' => 'Nombre de Contacto',
-  'LBL_DIRECCION_C' => 'Dirección de la Empresa',
+  'LBL_DIRECCION_C' => 'Dirección',
   'LBL_NUEVO_RUBRO_C' => 'Otro Rubro',
   'LBL_FIRST_NAME' => 'Nombre:',
   'LBL_NAME' => 'Nombre alt',
-  'LBL_PRIMARY_ADDRESS_STREET' => 'Calle de dirección principal',
+  'LBL_PRIMARY_ADDRESS_STREET' => 'Dirección Principal',
   'LBL_STATUS' => 'Estado:',
   'LBL_ETAPAS_C' => 'Etapas',
+  'LBL_JJWG_MAPS_ADDRESS' => 'Dirección Maps',
+  'LBL_DIRECCION_EMPRESA_C' => 'Direccion Empresa',
 );

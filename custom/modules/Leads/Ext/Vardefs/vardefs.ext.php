@@ -10,21 +10,27 @@ $dictionary['Lead']['fields']['account_name']['full_text_search']=NULL;
 
  
 
- // created: 2021-02-19 13:30:00
+ // created: 2021-02-24 03:46:24
 $dictionary['Lead']['fields']['ciudad_c']['inline_edit']='1';
 $dictionary['Lead']['fields']['ciudad_c']['labelValue']='Ciudad';
 
  
 
- // created: 2021-02-19 13:27:59
+ // created: 2021-02-24 03:59:53
 $dictionary['Lead']['fields']['departamento_c']['inline_edit']='1';
 $dictionary['Lead']['fields']['departamento_c']['labelValue']='Departamento';
 
  
 
- // created: 2021-02-18 13:13:10
+ // created: 2021-02-24 03:31:11
 $dictionary['Lead']['fields']['direccion_c']['inline_edit']='1';
-$dictionary['Lead']['fields']['direccion_c']['labelValue']='direccion c';
+$dictionary['Lead']['fields']['direccion_c']['labelValue']='Dirección';
+
+ 
+
+ // created: 2021-02-24 03:35:23
+$dictionary['Lead']['fields']['direccion_empresa_c']['inline_edit']='1';
+$dictionary['Lead']['fields']['direccion_empresa_c']['labelValue']='direccion empresa c';
 
  
 
@@ -104,7 +110,7 @@ $dictionary['Lead']['fields']['numero_documento_c']['labelValue']='numero docume
 
  
 
- // created: 2021-02-19 13:26:31
+ // created: 2021-02-24 03:58:57
 $dictionary['Lead']['fields']['pais_c']['inline_edit']='1';
 $dictionary['Lead']['fields']['pais_c']['labelValue']='Pais';
 
@@ -118,7 +124,7 @@ $dictionary['Lead']['fields']['phone_mobile']['merge_filter']='disabled';
 
  
 
- // created: 2021-02-22 16:14:10
+ // created: 2021-02-24 03:15:01
 $dictionary['Lead']['fields']['primary_address_street']['len']='255';
 $dictionary['Lead']['fields']['primary_address_street']['inline_edit']=true;
 $dictionary['Lead']['fields']['primary_address_street']['comments']='Street address for primary address';
@@ -126,7 +132,7 @@ $dictionary['Lead']['fields']['primary_address_street']['merge_filter']='disable
 
  
 
- // created: 2021-02-19 13:31:44
+ // created: 2021-02-24 03:57:52
 $dictionary['Lead']['fields']['rubro_c']['inline_edit']='1';
 $dictionary['Lead']['fields']['rubro_c']['labelValue']='Rubro';
 
@@ -152,13 +158,13 @@ $dictionary['Lead']['fields']['superficie_c']['labelValue']='superficie';
 
  
 
- // created: 2021-02-19 16:47:16
+ // created: 2021-02-24 03:42:48
 $dictionary['Lead']['fields']['tipo_cliente_c']['inline_edit']='1';
 $dictionary['Lead']['fields']['tipo_cliente_c']['labelValue']='Tipo de Cliente';
 
  
 
- // created: 2021-02-21 20:54:20
+ // created: 2021-02-24 03:41:58
 $dictionary['Lead']['fields']['tipo_lead_c']['inline_edit']='1';
 $dictionary['Lead']['fields']['tipo_lead_c']['labelValue']='Tipo Prospecto';
 

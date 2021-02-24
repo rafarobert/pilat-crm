@@ -57,23 +57,7 @@ $GLOBALS['app_list_strings']['tipo_lead_c_list']=array (
   'NORMAL' => 'Normal',
   'GOLDEN_TICKET' => 'Golden Ticket',
   'NUEVO' => 'Nuevo',
-);
-$GLOBALS['app_list_strings']['pais_c_list']=array (
-  '' => '',
-  'BOLIVIA' => 'Bolivia',
-);
-$GLOBALS['app_list_strings']['departamento_c_list']=array (
-  '' => '',
-  'LA_PAZ' => 'La Paz',
-  'COCHABAMBA' => 'Cochabamba',
-  'SANTA_CRUZ' => 'Santa Cruz',
-  'ORURO' => 'Oruro',
-  'POTOSI' => 'Potosi',
-  'CHUQUISACA' => 'Chuquisaca',
-  'TARIJA' => 'Tarija',
-  'BENI' => 'Beni',
-  'PANDO' => 'Pando',
-);
+);
 $GLOBALS['app_list_strings']['ciudad_c_list']=array (
   '' => '',
   'NUESTRA_SENORA_DE_LA_PAZ' => 'Nuestra Señora de La Paz',
@@ -229,4 +213,18 @@ $GLOBALS['app_list_strings']['chart_color_list']=array (
   'VISITA_FISICA_VIRTUAL' => '#884D19',
   'WEB_SITE' => '#FF2657',
   'WORD_OF_MOUTH' => '#880321',
+);
+$GLOBALS['app_list_strings']['pais_c_list']=array (
+  'BOLIVIA' => 'Bolivia',
+);
+$GLOBALS['app_list_strings']['departamento_c_list']=array (
+  'LA_PAZ' => 'La Paz',
+  'COCHABAMBA' => 'Cochabamba',
+  'SANTA_CRUZ' => 'Santa Cruz',
+  'ORURO' => 'Oruro',
+  'POTOSI' => 'Potosi',
+  'CHUQUISACA' => 'Chuquisaca',
+  'TARIJA' => 'Tarija',
+  'BENI' => 'Beni',
+  'PANDO' => 'Pando',
 );
