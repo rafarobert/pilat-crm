@@ -58,7 +58,7 @@
                 {/if}
             </td>
             <td>
-		<select>
+		<select name="{{$country}}" id="{{$country}}">
 		  <option>BOLIVIA</option>	
 		</select>
                 <!--input type="text" name="{{$country}}" id="{{$country}}" title='{$fields.{{$country}}.help}' size="{{$displayParams.size|default:30}}"
@@ -76,9 +76,13 @@
                 {/if}
             </td>
             <td>
-                <input type="text" name="{{$state}}" id="{{$state}}" title='{$fields.{{$state}}.help}' size="{{$displayParams.size|default:30}}"
+		<select name="{{$state}}" id="{{$state}}">
+		  <option>SANTA CRUZ</option>	
+		</select>
+
+                <!--input type="text" name="{{$state}}" id="{{$state}}" title='{$fields.{{$state}}.help}' size="{{$displayParams.size|default:30}}"
                        {{if !empty($vardef.len)}}maxlength='{{$vardef.len}}'{{/if}} value='{$fields.{{$state}}.value}'
-                       tabindex="{{$tabindex}}">
+                       tabindex="{{$tabindex}}"-->
             </td>
         </tr>
 
@@ -92,9 +96,13 @@
                     {/if}
             </td>
             <td>
-                <input type="text" name="{{$city}}" id="{{$city}}" title='{$fields.{{$city}}.help}' size="{{$displayParams.size|default:30}}"
+		<select name="{{$city}}" id="{{$city}}">
+		  <option>SANTA CRUZ DE LA SIERRA</option>	
+		</select>
+
+                <!--input type="text" name="{{$city}}" id="{{$city}}" title='{$fields.{{$city}}.help}' size="{{$displayParams.size|default:30}}"
                        {{if !empty($vardef.len)}}maxlength='{{$vardef.len}}'{{/if}} value='{$fields.{{$city}}.value}'
-                       tabindex="{{$tabindex}}">
+                       tabindex="{{$tabindex}}"-->
             </td>
         </tr>
 
