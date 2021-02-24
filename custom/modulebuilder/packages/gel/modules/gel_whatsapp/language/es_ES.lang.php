@@ -1,7 +1,4 @@
-<?php 
- //WARNING: The contents of this file are auto-generated
-
-
+<?php
 /**
  *
  * SugarCRM Community Edition is a customer relationship management program developed by
@@ -40,18 +37,47 @@
  * reasonably feasible for technical reasons, the Appropriate Legal Notices must
  * display the words "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  */
-
-$app_list_strings['moduleList']['G3L_gel_whatsapp'] = 'gel_whatsapp';
-
- 
-$app_list_strings['parent_type_display'] = array (
-  'Accounts' => 'Cliente',
-  'Leads' => 'Prospecto',
-);$app_list_strings['asunto_reunion_list'] = array (
-  'VISITA_PROYECTO' => 'Visita al Proyecto',
-  'ACTA_DE_ENTREGA' => 'Visita al proyecto (Acta de entrega)',
-  'FIRMA_MINUTA' => 'Firma Minuta',
-  'FIRMA_PROTOCOLO' => 'Firma de protocolo en la Notaria',
-  'ENTREGA_TESTIMONIO' => 'Entrega del testimonio',
+$mod_strings = array (
+  'LBL_ASSIGNED_TO_ID' => 'Id de usuario asignado',
+  'LBL_ASSIGNED_TO_NAME' => 'Asignado a',
+  'LBL_SECURITYGROUPS' => 'Grupos de Seguridad',
+  'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => 'Grupos de Seguridad',
+  'LBL_ID' => 'ID',
+  'LBL_DATE_ENTERED' => 'Fecha de Creación',
+  'LBL_DATE_MODIFIED' => 'Fecha de Modificación',
+  'LBL_MODIFIED' => 'Modificado Por',
+  'LBL_MODIFIED_NAME' => 'Modificado Por Nombre',
+  'LBL_CREATED' => 'Creado por',
+  'LBL_DESCRIPTION' => 'Descripción',
+  'LBL_DELETED' => 'Eliminado',
+  'LBL_NAME' => 'Asunto',
+  'LBL_CREATED_USER' => 'Creado por Usuario',
+  'LBL_MODIFIED_USER' => 'Modificado por Usuario',
+  'LBL_LIST_NAME' => 'Nombre',
+  'LBL_EDIT_BUTTON' => 'Editar',
+  'LBL_REMOVE' => 'Quitar',
+  'LBL_ASCENDING' => 'Ascendente',
+  'LBL_DESCENDING' => 'Descendente',
+  'LBL_OPT_IN' => 'Autorizar',
+  'LBL_OPT_IN_PENDING_EMAIL_NOT_SENT' => 'Confirmación de Autorización pendiente, Confirmación de Autorización no enviada',
+  'LBL_OPT_IN_PENDING_EMAIL_SENT' => 'Confirmación de Autorización pendiente, Confirmación de Autorización enviada',
+  'LBL_OPT_IN_CONFIRMED' => 'Autorizado',
+  'LBL_LIST_FORM_TITLE' => 'gel_whatsapp Lista',
+  'LBL_MODULE_NAME' => 'gel_whatsapp',
+  'LBL_MODULE_TITLE' => 'gel_whatsapp',
+  'LBL_HOMEPAGE_TITLE' => 'Mi gel_whatsapp',
+  'LNK_NEW_RECORD' => 'Crear gel_whatsapp',
+  'LNK_LIST' => 'Vista gel_whatsapp',
+  'LNK_IMPORT_G3L_GEL_WHATSAPP' => 'Importar gel_whatsapp',
+  'LBL_SEARCH_FORM_TITLE' => 'Búsqueda gel_whatsapp',
+  'LBL_HISTORY_SUBPANEL_TITLE' => 'Ver Historial',
+  'LBL_ACTIVITIES_SUBPANEL_TITLE' => 'Actividades',
+  'LBL_G3L_GEL_WHATSAPP_SUBPANEL_TITLE' => 'gel_whatsapp',
+  'LBL_NEW_FORM_TITLE' => 'Nuevo gel_whatsapp',
+  'LBL_PARENT_NAME' => 'Padre',
+  'LBL_FECHA_ENVIO' => 'Fecha envío',
+  'LBL_NUMERO_ENVIO' => 'Número envío',
+  'LBL_ESTADO_ENVIO' => 'Estado envío',
+  'LBL_MENSAJE' => 'Mensaje',
+  'LBL_EDITVIEW_PANEL1' => 'Datos generales',
 );
-?>

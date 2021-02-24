@@ -1,7 +1,4 @@
-<?php 
- //WARNING: The contents of this file are auto-generated
-
-
+<?php
 /**
  *
  * SugarCRM Community Edition is a customer relationship management program developed by
@@ -41,17 +38,28 @@
  * display the words "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  */
 
-$app_list_strings['moduleList']['G3L_gel_whatsapp'] = 'gel_whatsapp';
+if (!defined('sugarEntry') || !sugarEntry) {
+    die('Not A Valid Entry Point');
+}
 
- 
-$app_list_strings['parent_type_display'] = array (
-  'Accounts' => 'Cliente',
-  'Leads' => 'Prospecto',
-);$app_list_strings['asunto_reunion_list'] = array (
-  'VISITA_PROYECTO' => 'Visita al Proyecto',
-  'ACTA_DE_ENTREGA' => 'Visita al proyecto (Acta de entrega)',
-  'FIRMA_MINUTA' => 'Firma Minuta',
-  'FIRMA_PROTOCOLO' => 'Firma de protocolo en la Notaria',
-  'ENTREGA_TESTIMONIO' => 'Entrega del testimonio',
-);
-?>
+require_once('include/Dashlets/DashletGeneric.php');
+require_once('modules/G3L_gel_whatsapp/G3L_gel_whatsapp.php');
+
+class G3L_gel_whatsappDashlet extends DashletGeneric {
+    function __construct($id, $def = null)
+    {
+        global $current_user, $app_strings;
+        require('modules/G3L_gel_whatsapp/metadata/dashletviewdefs.php');
+
+        parent::__construct($id, $def);
+
+        if (empty($def['title'])) {
+            $this->title = translate('LBL_HOMEPAGE_TITLE', 'G3L_gel_whatsapp');
+        }
+
+        $this->searchFields = $dashletData['G3L_gel_whatsappDashlet']['searchFields'];
+        $this->columns = $dashletData['G3L_gel_whatsappDashlet']['columns'];
+
+        $this->seedBean = new G3L_gel_whatsapp();        
+    }
+}

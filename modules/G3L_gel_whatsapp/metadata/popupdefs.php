@@ -1,7 +1,4 @@
-<?php 
- //WARNING: The contents of this file are auto-generated
-
-
+<?php
 /**
  *
  * SugarCRM Community Edition is a customer relationship management program developed by
@@ -41,17 +38,20 @@
  * display the words "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  */
 
-$app_list_strings['moduleList']['G3L_gel_whatsapp'] = 'gel_whatsapp';
+if (!defined('sugarEntry') || !sugarEntry) {
+    die('Not A Valid Entry Point');
+}
 
- 
-$app_list_strings['parent_type_display'] = array (
-  'Accounts' => 'Cliente',
-  'Leads' => 'Prospecto',
-);$app_list_strings['asunto_reunion_list'] = array (
-  'VISITA_PROYECTO' => 'Visita al Proyecto',
-  'ACTA_DE_ENTREGA' => 'Visita al proyecto (Acta de entrega)',
-  'FIRMA_MINUTA' => 'Firma Minuta',
-  'FIRMA_PROTOCOLO' => 'Firma de protocolo en la Notaria',
-  'ENTREGA_TESTIMONIO' => 'Entrega del testimonio',
+$module_name = 'G3L_gel_whatsapp';
+$object_name = 'G3L_gel_whatsapp';
+$_module_name = 'g3l_gel_whatsapp';
+$popupMeta = array(
+    'moduleMain' => $module_name,
+    'varName' => $object_name,
+    'orderBy' => $_module_name . '.name',
+    'whereClauses' => array(
+        'name' => $_module_name . '.name',
+    ),
+    'searchInputs' => array($_module_name . '_number', 'name', 'priority', 'status'),
+
 );
-?>

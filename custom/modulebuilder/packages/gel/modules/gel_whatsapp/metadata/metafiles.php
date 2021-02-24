@@ -1,7 +1,4 @@
-<?php 
- //WARNING: The contents of this file are auto-generated
-
-
+<?php
 /**
  *
  * SugarCRM Community Edition is a customer relationship management program developed by
@@ -41,17 +38,12 @@
  * display the words "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  */
 
-$app_list_strings['moduleList']['G3L_gel_whatsapp'] = 'gel_whatsapp';
-
- 
-$app_list_strings['parent_type_display'] = array (
-  'Accounts' => 'Cliente',
-  'Leads' => 'Prospecto',
-);$app_list_strings['asunto_reunion_list'] = array (
-  'VISITA_PROYECTO' => 'Visita al Proyecto',
-  'ACTA_DE_ENTREGA' => 'Visita al proyecto (Acta de entrega)',
-  'FIRMA_MINUTA' => 'Firma Minuta',
-  'FIRMA_PROTOCOLO' => 'Firma de protocolo en la Notaria',
-  'ENTREGA_TESTIMONIO' => 'Entrega del testimonio',
+$module_name = 'G3L_gel_whatsapp';
+$metafiles[$module_name] = array(
+    'detailviewdefs' => 'modules/' . $module_name . '/metadata/detailviewdefs.php',
+    'editviewdefs' => 'modules/' . $module_name . '/metadata/editviewdefs.php',
+    'listviewdefs' => 'modules/' . $module_name . '/metadata/listviewdefs.php',
+    'searchdefs' => 'modules/' . $module_name . '/metadata/searchdefs.php',
+    'popupdefs' => 'modules/' . $module_name . '/metadata/popupdefs.php',
+    'searchfields' => 'modules/' . $module_name . '/metadata/SearchFields.php',
 );
-?>

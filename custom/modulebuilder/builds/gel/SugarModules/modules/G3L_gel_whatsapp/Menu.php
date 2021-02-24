@@ -1,7 +1,4 @@
-<?php 
- //WARNING: The contents of this file are auto-generated
-
-
+<?php
 /**
  *
  * SugarCRM Community Edition is a customer relationship management program developed by
@@ -41,17 +38,18 @@
  * display the words "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  */
 
-$app_list_strings['moduleList']['G3L_gel_whatsapp'] = 'gel_whatsapp';
+ if (!defined('sugarEntry') || !sugarEntry) {
+    die('Not A Valid Entry Point');
+}
 
+global $mod_strings, $app_strings, $sugar_config;
  
-$app_list_strings['parent_type_display'] = array (
-  'Accounts' => 'Cliente',
-  'Leads' => 'Prospecto',
-);$app_list_strings['asunto_reunion_list'] = array (
-  'VISITA_PROYECTO' => 'Visita al Proyecto',
-  'ACTA_DE_ENTREGA' => 'Visita al proyecto (Acta de entrega)',
-  'FIRMA_MINUTA' => 'Firma Minuta',
-  'FIRMA_PROTOCOLO' => 'Firma de protocolo en la Notaria',
-  'ENTREGA_TESTIMONIO' => 'Entrega del testimonio',
-);
-?>
+if(ACLController::checkAccess('G3L_gel_whatsapp', 'edit', true)){
+    $module_menu[]=array('index.php?module=G3L_gel_whatsapp&action=EditView&return_module=G3L_gel_whatsapp&return_action=DetailView', $mod_strings['LNK_NEW_RECORD'], 'Add', 'G3L_gel_whatsapp');
+}
+if(ACLController::checkAccess('G3L_gel_whatsapp', 'list', true)){
+    $module_menu[]=array('index.php?module=G3L_gel_whatsapp&action=index&return_module=G3L_gel_whatsapp&return_action=DetailView', $mod_strings['LNK_LIST'],'View', 'G3L_gel_whatsapp');
+}
+if(ACLController::checkAccess('G3L_gel_whatsapp', 'import', true)){
+    $module_menu[]=array('index.php?module=Import&action=Step1&import_module=G3L_gel_whatsapp&return_module=G3L_gel_whatsapp&return_action=index', $app_strings['LBL_IMPORT'], 'Import', 'G3L_gel_whatsapp');
+}

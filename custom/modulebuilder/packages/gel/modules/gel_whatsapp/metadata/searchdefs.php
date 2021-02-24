@@ -1,7 +1,4 @@
-<?php 
- //WARNING: The contents of this file are auto-generated
-
-
+<?php
 /**
  *
  * SugarCRM Community Edition is a customer relationship management program developed by
@@ -41,17 +38,26 @@
  * display the words "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  */
 
-$app_list_strings['moduleList']['G3L_gel_whatsapp'] = 'gel_whatsapp';
-
- 
-$app_list_strings['parent_type_display'] = array (
-  'Accounts' => 'Cliente',
-  'Leads' => 'Prospecto',
-);$app_list_strings['asunto_reunion_list'] = array (
-  'VISITA_PROYECTO' => 'Visita al Proyecto',
-  'ACTA_DE_ENTREGA' => 'Visita al proyecto (Acta de entrega)',
-  'FIRMA_MINUTA' => 'Firma Minuta',
-  'FIRMA_PROTOCOLO' => 'Firma de protocolo en la Notaria',
-  'ENTREGA_TESTIMONIO' => 'Entrega del testimonio',
+$module_name = 'G3L_gel_whatsapp';
+$searchdefs[$module_name] = array(
+    'templateMeta' => array(
+        'maxColumns' => '3',
+        'maxColumnsBasic' => '4',
+        'widths' => array('label' => '10', 'field' => '30'),
+    ),
+    'layout' => array(
+        'basic_search' => array(
+            'name',
+            array('name' => 'current_user_only', 'label' => 'LBL_CURRENT_USER_FILTER', 'type' => 'bool'),
+        ),
+        'advanced_search' => array(
+            'name',
+            array(
+                'name' => 'assigned_user_id',
+                'label' => 'LBL_ASSIGNED_TO',
+                'type' => 'enum',
+                'function' => array('name' => 'get_user_array', 'params' => array(false))
+            ),
+        ),
+    ),
 );
-?>

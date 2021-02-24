@@ -1,7 +1,4 @@
-<?php 
- //WARNING: The contents of this file are auto-generated
-
-
+<?php
 /**
  *
  * SugarCRM Community Edition is a customer relationship management program developed by
@@ -41,17 +38,42 @@
  * display the words "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  */
 
-$app_list_strings['moduleList']['G3L_gel_whatsapp'] = 'gel_whatsapp';
+if (!defined('sugarEntry') || !sugarEntry) {
+    die('Not A Valid Entry Point');
+}
 
- 
-$app_list_strings['parent_type_display'] = array (
-  'Accounts' => 'Cliente',
-  'Leads' => 'Prospecto',
-);$app_list_strings['asunto_reunion_list'] = array (
-  'VISITA_PROYECTO' => 'Visita al Proyecto',
-  'ACTA_DE_ENTREGA' => 'Visita al proyecto (Acta de entrega)',
-  'FIRMA_MINUTA' => 'Firma Minuta',
-  'FIRMA_PROTOCOLO' => 'Firma de protocolo en la Notaria',
-  'ENTREGA_TESTIMONIO' => 'Entrega del testimonio',
+global $current_user;
+
+$dashletData['G3L_gel_whatsappDashlet']['searchFields'] = array(
+    'date_entered' => array('default' => ''),
+    'date_modified' => array('default' => ''),
+    'assigned_user_id' => array(
+        'type' => 'assigned_user_name',
+        'default' => $current_user->name
+    )
 );
-?>
+$dashletData['G3L_gel_whatsappDashlet']['columns'] = array(
+    'name' => array(
+        'width' => '40',
+        'label' => 'LBL_LIST_NAME',
+        'link' => true,
+        'default' => true
+    ),
+    'date_entered' => array(
+        'width' => '15',
+        'label' => 'LBL_DATE_ENTERED',
+        'default' => true
+    ),
+    'date_modified' => array(
+        'width' => '15',
+        'label' => 'LBL_DATE_MODIFIED'
+    ),
+    'created_by' => array(
+        'width' => '8',
+        'label' => 'LBL_CREATED'
+    ),
+    'assigned_user_name' => array(
+        'width' => '8',
+        'label' => 'LBL_LIST_ASSIGNED_USER'
+    ),
+);
