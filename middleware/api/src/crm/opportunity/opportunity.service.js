@@ -123,6 +123,7 @@ class OpportunityService {
 
 
 	static async addOpportunity(newOpportunity) {		try {
+
 			let objOpportunity;
 
 			if(sql) {
@@ -385,9 +386,23 @@ class OpportunityService {
 				objOpportunity = new models.mongoose.opportunities(newOpportunity);
 				await objOpportunity.save();
 			}
-
-			await OpportunityService.createAndSendPdf(objOpportunity);
-
+			if (objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in != 'confirmed-opt-in') {
+				await OpportunityService.createAndSendPdf(objOpportunity, async (err,file,info) => {
+					if (err) {
+						objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.invalid_email = 1;
+						objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_fail_date = new Date();
+						objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in = 'not-opt-in';
+					} else {
+						objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.invalid_email = 0;
+						objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in = 'confirmed-opt-in';
+						objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_date = new Date();
+						objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_sent_date = new Date();
+					}
+					let id = objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id;
+					let respEmailAddresses = await models.sequelize.emailAddresses.update(objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses, {where:{id:id}});
+					objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = respEmailAddresses.dataValues;
+				});
+			}
 			return objOpportunity;
 		} catch (error) {
 			throw error;
@@ -733,13 +748,23 @@ class OpportunityService {
 				await objOpportunity.save();
 			}
 
-			await OpportunityService.createAndSendPdf(objOpportunity, (err,file,info) => {
-				if (err) {
-					console.log(err);
-				} else {
-					console.log(file,info)
-				}
-			});
+			if (objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in != 'confirmed-opt-in') {
+				await OpportunityService.createAndSendPdf(objOpportunity, async (err,file,info) => {
+					if (err) {
+						objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.invalid_email = 1;
+						objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_fail_date = new Date();
+						objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in = 'not-opt-in';
+					} else {
+						objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.invalid_email = 0;
+						objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in = 'confirmed-opt-in';
+						objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_date = new Date();
+						objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_sent_date = new Date();
+					}
+					let id = objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id;
+					let respEmailAddresses = await models.sequelize.emailAddresses.update(objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses, {where:{id:id}});
+					objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = respEmailAddresses.dataValues;
+				});
+			}
 
 			return objOpportunity;
 		} catch (error) {
@@ -757,6 +782,7 @@ class OpportunityService {
 						loggerEmail.info('Error al enviar el correo: ' + date.toString(), {error:err, info:info});
 					} {
 						loggerEmail.info('Correo enviado: ' + date.toString(), {file:file, info:info});
+
 						if (typeof callback == 'function') {
 							callback(err, file, info);
 						}
