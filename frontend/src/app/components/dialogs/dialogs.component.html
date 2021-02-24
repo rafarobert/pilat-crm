@@ -7,7 +7,10 @@
         <p>{{message}}</p>
     </mat-dialog-content>
 </div>
-    <mat-dialog-actions align="end">
+    <mat-dialog-actions align="end" *ngIf="functionYes">
         <button mat-button mat-dialog-close>No</button>
         <button (click)="functionYes ? functionYes : ''" mat-button [mat-dialog-close]="true" cdkFocusInitial>Si</button>
+    </mat-dialog-actions>
+    <mat-dialog-actions align="end" *ngIf="!functionYes">
+        <button mat-button mat-dialog-close>Aceptar</button>
     </mat-dialog-actions>
