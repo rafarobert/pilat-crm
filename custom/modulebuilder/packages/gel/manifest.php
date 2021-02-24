@@ -63,9 +63,9 @@ $manifest = array (
   'icon' => '',
   'is_uninstallable' => true,
   'name' => 'gel',
-  'published_date' => '2021-02-24 15:53:47',
+  'published_date' => '2021-02-24 17:01:41',
   'type' => 'module',
-  'version' => 1614182028,
+  'version' => 1614186102,
   'remove_tables' => 'prompt',
 );
 
