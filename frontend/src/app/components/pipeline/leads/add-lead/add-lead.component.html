@@ -60,13 +60,13 @@
             <!--<mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Departamento</mat-label><input matInput #input class="form-control" placeholder="Departamento" [(ngModel)]="data.primary_address_state" name="primary_address_state"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>-->
             <!--<mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Pais</mat-label><input matInput #input class="form-control" placeholder="Pais" [(ngModel)]="data.primary_address_country" name="primary_address_country"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>-->
 
-            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Pais</mat-label><mat-select placeholder="Pais"  [(ngModel)]="data.leadLeadsCstm.pais_c" name="pais_c">
+            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Pais</mat-label><mat-select placeholder="Pais"  [(ngModel)]="data.primary_address_country" name="pais_c">
               <mat-option *ngFor="let parCountry of pilatService.parCountries" [value]="parCountry.par_cod" required >{{parCountry.par_description}}</mat-option>
             </mat-select></mat-form-field></div></mat-grid-tile>
-            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Departamento</mat-label><mat-select placeholder="Departamento"  [(ngModel)]="data.leadLeadsCstm.departamento_c" name="departamento_c">
+            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Departamento</mat-label><mat-select placeholder="Departamento"  [(ngModel)]="data.primary_address_state" name="departamento_c">
               <mat-option *ngFor="let parState of pilatService.parStates" [value]="parState.par_cod" required >{{parState.par_description}}</mat-option>
             </mat-select></mat-form-field></div></mat-grid-tile>
-            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Ciudad</mat-label><mat-select placeholder="Ciudad"  [(ngModel)]="data.leadLeadsCstm.ciudad_c" name="ciudad_c">
+            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Ciudad</mat-label><mat-select placeholder="Ciudad"  [(ngModel)]="data.primary_address_city" name="ciudad_c">
               <mat-option *ngFor="let parCity of pilatService.parCities" [value]="parCity.par_cod" required >{{parCity.par_description}}</mat-option>
             </mat-select></mat-form-field></div></mat-grid-tile>
 

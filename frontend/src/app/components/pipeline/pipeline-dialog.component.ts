@@ -64,6 +64,7 @@ import {MAT_DATE_FORMATS} from "@angular/material/core";
 import {DialogAlreadyLeadComponent} from "../dialogs/dialog-already-lead/dialog-already-lead.component";
 import {SpinnerComponent} from "../spinner/spinner.component";
 import {SpinnerService} from "../../services/spinner.service";
+import {DialogService} from "../../services/dialog.service";
 
 @Component({
   selector: 'app-pipeline-dialog',
@@ -117,7 +118,8 @@ export class PipelineDialogComponent implements OnInit {
     private leadService: LeadService,
     private contactService: ContactService,
     private _snackBar: MatSnackBar,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
@@ -676,6 +678,18 @@ export class PipelineDialogComponent implements OnInit {
             if (responseOpportunity.data) {
               this.spinnerService.stop(this.spinnerRef);
               this.opportunity = responseOpportunity.data;
+              
+              setTimeout(async () => {
+                this.spinnerRef = this.spinnerService.start();
+                responseOpportunity = await this.crmOpportunityService.getOpportunity(this.opportunity.id).toPromise();
+                this.spinnerService.stop(this.spinnerRef);
+                this.opportunity = responseOpportunity.data;
+                if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_sent_date) {
+                  this.dialogService.open('El correo con el detalle de la cotización fue enviado exitosamente al correo del contacto: '+ this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address);
+                } else {
+                  this.dialogService.open('Hubo un problema al enviar la cotización al correo del contacto: '+ this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address);
+                }
+              },4000);
               transferArrayItem(event.previousContainer.data,
                 event.container.data,
                 event.previousIndex,
