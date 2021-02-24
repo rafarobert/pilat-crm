@@ -48,6 +48,56 @@
 <fieldset id='{{$key}}_address_fieldset'>
     <legend>{sugar_translate label='LBL_{{$key}}_ADDRESS' module='{{$module}}'}</legend>
     <table border="0" cellspacing="1" cellpadding="0" class="edit" width="100%">
+	<tr>
+            <td id="{{$country}}_label" width='{{$def.templateMeta.widths[$smarty.foreach.colIteration.index].label}}%'
+                scope='row'>
+
+                <label for="{{$country}}">{sugar_translate label='LBL_COUNTRY' module='{{$module}}'}:</label>
+                {if $fields.{{$country}}.required || {{if $country|lower|in_array:$displayParams.required}}true{{else}}false{{/if}}}
+                <span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span>
+                {/if}
+            </td>
+            <td>
+		<select>
+		  <option>BOLIVIA</option>	
+		</select>
+                <!--input type="text" name="{{$country}}" id="{{$country}}" title='{$fields.{{$country}}.help}' size="{{$displayParams.size|default:30}}"
+                       {{if !empty($vardef.len)}}maxlength='{{$vardef.len}}'{{/if}} value='{$fields.{{$country}}.value}'
+                       tabindex="{{$tabindex}}"-->
+            </td>
+        </tr>
+
+	<tr>
+            <td id="{{$state}}_label" width='{{$def.templateMeta.widths[$smarty.foreach.colIteration.index].label}}%'
+                scope='row'>
+                <label for="{{$state}}">{sugar_translate label='LBL_STATE' module='{{$module}}'}:</label>
+                {if $fields.{{$state}}.required || {{if $state|lower|in_array:$displayParams.required}}true{{else}}false{{/if}}}
+                <span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span>
+                {/if}
+            </td>
+            <td>
+                <input type="text" name="{{$state}}" id="{{$state}}" title='{$fields.{{$state}}.help}' size="{{$displayParams.size|default:30}}"
+                       {{if !empty($vardef.len)}}maxlength='{{$vardef.len}}'{{/if}} value='{$fields.{{$state}}.value}'
+                       tabindex="{{$tabindex}}">
+            </td>
+        </tr>
+
+	 <tr>
+
+            <td id="{{$city}}_label" width='{{$def.templateMeta.widths[$smarty.foreach.colIteration.index].label}}%'
+                scope='row'>
+                <label for="{{$city}}">{sugar_translate label='LBL_CITY' module='{{$module}}'}:
+                    {if $fields.{{$city}}.required || {{if $city|lower|in_array:$displayParams.required}}true{{else}}false{{/if}}}
+                    <span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span>
+                    {/if}
+            </td>
+            <td>
+                <input type="text" name="{{$city}}" id="{{$city}}" title='{$fields.{{$city}}.help}' size="{{$displayParams.size|default:30}}"
+                       {{if !empty($vardef.len)}}maxlength='{{$vardef.len}}'{{/if}} value='{$fields.{{$city}}.value}'
+                       tabindex="{{$tabindex}}">
+            </td>
+        </tr>
+
         <tr>
             <td valign="top" id="{{$street}}_label" width='25%' scope='row'>
                 <label for="{{$street}}">{sugar_translate label='LBL_{{$key}}_STREET' module='{{$module}}'}:</label>
@@ -68,36 +118,9 @@
             </td>
         </tr>
 
-        <tr>
+       
 
-            <td id="{{$city}}_label" width='{{$def.templateMeta.widths[$smarty.foreach.colIteration.index].label}}%'
-                scope='row'>
-                <label for="{{$city}}">{sugar_translate label='LBL_CITY' module='{{$module}}'}:
-                    {if $fields.{{$city}}.required || {{if $city|lower|in_array:$displayParams.required}}true{{else}}false{{/if}}}
-                    <span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span>
-                    {/if}
-            </td>
-            <td>
-                <input type="text" name="{{$city}}" id="{{$city}}" title='{$fields.{{$city}}.help}' size="{{$displayParams.size|default:30}}"
-                       {{if !empty($vardef.len)}}maxlength='{{$vardef.len}}'{{/if}} value='{$fields.{{$city}}.value}'
-                       tabindex="{{$tabindex}}">
-            </td>
-        </tr>
-
-        <tr>
-            <td id="{{$state}}_label" width='{{$def.templateMeta.widths[$smarty.foreach.colIteration.index].label}}%'
-                scope='row'>
-                <label for="{{$state}}">{sugar_translate label='LBL_STATE' module='{{$module}}'}:</label>
-                {if $fields.{{$state}}.required || {{if $state|lower|in_array:$displayParams.required}}true{{else}}false{{/if}}}
-                <span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span>
-                {/if}
-            </td>
-            <td>
-                <input type="text" name="{{$state}}" id="{{$state}}" title='{$fields.{{$state}}.help}' size="{{$displayParams.size|default:30}}"
-                       {{if !empty($vardef.len)}}maxlength='{{$vardef.len}}'{{/if}} value='{$fields.{{$state}}.value}'
-                       tabindex="{{$tabindex}}">
-            </td>
-        </tr>
+       
 
         <tr>
 
@@ -116,22 +139,7 @@
             </td>
         </tr>
 
-        <tr>
-
-            <td id="{{$country}}_label" width='{{$def.templateMeta.widths[$smarty.foreach.colIteration.index].label}}%'
-                scope='row'>
-
-                <label for="{{$country}}">{sugar_translate label='LBL_COUNTRY' module='{{$module}}'}:</label>
-                {if $fields.{{$country}}.required || {{if $country|lower|in_array:$displayParams.required}}true{{else}}false{{/if}}}
-                <span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span>
-                {/if}
-            </td>
-            <td>
-                <input type="text" name="{{$country}}" id="{{$country}}" title='{$fields.{{$country}}.help}' size="{{$displayParams.size|default:30}}"
-                       {{if !empty($vardef.len)}}maxlength='{{$vardef.len}}'{{/if}} value='{$fields.{{$country}}.value}'
-                       tabindex="{{$tabindex}}">
-            </td>
-        </tr>
+        
 
         {{if $displayParams.copy}}
         <tr>

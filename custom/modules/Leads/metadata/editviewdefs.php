@@ -123,35 +123,6 @@ array (
         array (
           0 => 
           array (
-            'name' => 'pais_c',
-            'studio' => 'visible',
-            'label' => 'LBL_PAIS_C',
-          ),
-          1 => 
-          array (
-            'name' => 'departamento_c',
-            'studio' => 'visible',
-            'label' => 'LBL_DEPARTAMENTO_C',
-          ),
-        ),
-        7 => 
-        array (
-          0 => 
-          array (
-            'name' => 'ciudad_c',
-            'studio' => 'visible',
-            'label' => 'LBL_CIUDAD_C',
-          ),
-          1 => 
-          array (
-            'name' => 'direccion_c',
-            'label' => 'LBL_DIRECCION_C',
-          ),
-        ),
-        8 => 
-        array (
-          0 => 
-          array (
             'name' => 'birthdate',
             'comment' => 'The birthdate of the contact',
             'label' => 'LBL_BIRTHDATE',
@@ -161,6 +132,22 @@ array (
             'name' => 'sexo_c',
             'studio' => 'visible',
             'label' => 'LBL_SEXO_C',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'primary_address_street',
+            'hideLabel' => true,
+            'type' => 'address',
+            'displayParams' => 
+            array (
+              'key' => 'primary',
+              'rows' => 2,
+              'cols' => 30,
+              'maxlength' => 150,
+            ),
           ),
         ),
       ),
