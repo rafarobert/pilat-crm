@@ -8,12 +8,21 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 })
 export class DialogsComponent implements OnInit {
 
+  title:string;
+  message:string;
+  functionYes:Function;
+  functionNo:Function;
+  
   constructor(
     public dialogRef: MatDialogRef<DialogsComponent>,
-    @Inject(MAT_DIALOG_DATA) public message: any
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit(): void {
+    this.title = this.data.title;
+    this.message = this.data.message;
+    this.functionYes = this.data.functionYes;
+    this.functionNo = this.data.functionNo;
   }
 
 }

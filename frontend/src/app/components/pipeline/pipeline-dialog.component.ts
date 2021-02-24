@@ -65,6 +65,7 @@ import {DialogAlreadyLeadComponent} from "../dialogs/dialog-already-lead/dialog-
 import {SpinnerComponent} from "../spinner/spinner.component";
 import {SpinnerService} from "../../services/spinner.service";
 import {DialogService} from "../../services/dialog.service";
+import {DialogsComponent} from "../dialogs/dialogs.component";
 
 @Component({
   selector: 'app-pipeline-dialog',
@@ -634,8 +635,46 @@ export class PipelineDialogComponent implements OnInit {
     }
   }
   
-  async verifyMail(event: CdkDragDrop<string[]>, currentColumn: number) {
   
+  
+  async verifyMail(event, currentColumn) {
+    let txtItem = event.previousContainer.data[event.previousIndex];
+    let opportunityId = txtItem.split('<span hidden="opportunityId">')[1].split('</span>')[0];
+    if (this.pilatService.userLoggedIn) {
+      this.spinnerRef = this.spinnerService.start();
+      let responseOpportunity:any = await this.crmOpportunityService.getOpportunity(opportunityId).toPromise();
+      this.spinnerService.stop(this.spinnerRef);
+      this.opportunity = responseOpportunity.data;
+      if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_sent_date) {
+        this.opportunity.sales_stage = this.pipeline.columns[currentColumn].props.par_cod;
+        await this.crmOpportunityService.updateOpportunity(opportunityId,this.opportunity).subscribe(async (res) => {
+          let responseOpportunities = res as {status:string, message:string, data:Opportunities};
+          if(responseOpportunities.data) {
+            transferArrayItem(event.previousContainer.data,
+              event.container.data,
+              event.previousIndex,
+              event.currentIndex);
+            this.setPipeline();
+          }
+        });
+      } else {
+        this.dialogService.open('La cotizacion no fue enviada al cliente, el correo registrado es el siguiente: ' +
+          this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address
+          + ' ¿desea continuar?', 'Envio de Cotización al Contacto', async () => {
+          this.opportunity.sales_stage = this.pipeline.columns[currentColumn].props.par_cod;
+          await this.crmOpportunityService.updateOpportunity(opportunityId,this.opportunity).subscribe(async (res) => {
+            let responseOpportunities = res as {status:string, message:string, data:Opportunities};
+            if(responseOpportunities.data) {
+              transferArrayItem(event.previousContainer.data,
+                event.container.data,
+                event.previousIndex,
+                event.currentIndex);
+              this.setPipeline();
+            }
+          });
+        });
+      }
+    }
   }
   
   async setOpportunityFromProspect(event, currentColumn) {

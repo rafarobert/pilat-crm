@@ -11,11 +11,16 @@ export class DialogService {
 
   constructor(private router: Router, private dialog: MatDialog) { }
   
-  open(message?): MatDialogRef<DialogsComponent> {
+  open(message = '', title:string = '', functionYes:Function = null, functionNo:Function = null): MatDialogRef<DialogsComponent> {
     
     const dialogRef = this.dialog.open(DialogsComponent,{
       disableClose: true ,
-      data: message == ''|| message == undefined ? "Loading..." : message
+      data: {
+        title:title,
+        message:message,
+        functionYes:functionYes,
+        functionNo:functionNo,
+      },
     });
     return dialogRef;
   };

@@ -16,7 +16,7 @@ export class SpinnerService {
     
     const dialogRef = this.dialog.open(SpinnerComponent,{
       disableClose: true ,
-      data: message == ''|| message == undefined ? "Loading..." : message
+      data: message == ''|| message == undefined ? "Cargando..." : message
     });
     return dialogRef;
   };
