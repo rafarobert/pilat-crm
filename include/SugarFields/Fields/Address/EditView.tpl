@@ -48,6 +48,23 @@
 <fieldset id='{{$key}}_address_fieldset'>
     <legend>{sugar_translate label='LBL_{{$key}}_ADDRESS' module='{{$module}}'}</legend>
     <table border="0" cellspacing="1" cellpadding="0" class="edit" width="100%">
+<tr>
+
+            <td id="{{$country}}_label" width='{{$def.templateMeta.widths[$smarty.foreach.colIteration.index].label}}%'
+                scope='row'>
+
+                <label for='{{$country}}'>{sugar_translate label='LBL_COUNTRY' module='{{$module}}'}:</label>
+                {if $fields.{{$country}}.required || {{if $country|lower|in_array:$displayParams.required}}true{{else}}false{{/if}}}
+                <span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span>
+                {/if}
+            </td>
+            <td>
+                <input type="text" name="{{$country}}" id="{{$country}}" size="{{$displayParams.size|default:30}}"
+                       {{if !empty($vardef.len)}}maxlength='{{$vardef.len}}'{{/if}}
+                       value='{$fields.{{$country}}.value}' {{if !empty($tabindex)}} tabindex="{{$tabindex}}" {{/if}}>
+            </td>
+        </tr>
+
         <tr>
             <td valign="top" id="{{$street}}_label" width='25%' scope='row'>
                 <label for='{{$street}}'>{sugar_translate label='LBL_STREET' module='{{$module}}'}:</label>
@@ -120,22 +137,7 @@
             </td>
         </tr>
 
-        <tr>
-
-            <td id="{{$country}}_label" width='{{$def.templateMeta.widths[$smarty.foreach.colIteration.index].label}}%'
-                scope='row'>
-
-                <label for='{{$country}}'>{sugar_translate label='LBL_COUNTRY' module='{{$module}}'}:</label>
-                {if $fields.{{$country}}.required || {{if $country|lower|in_array:$displayParams.required}}true{{else}}false{{/if}}}
-                <span class="required">{$APP.LBL_REQUIRED_SYMBOL}</span>
-                {/if}
-            </td>
-            <td>
-                <input type="text" name="{{$country}}" id="{{$country}}" size="{{$displayParams.size|default:30}}"
-                       {{if !empty($vardef.len)}}maxlength='{{$vardef.len}}'{{/if}}
-                       value='{$fields.{{$country}}.value}' {{if !empty($tabindex)}} tabindex="{{$tabindex}}" {{/if}}>
-            </td>
-        </tr>
+        
 
         {{if $displayParams.copy}}
         <tr>

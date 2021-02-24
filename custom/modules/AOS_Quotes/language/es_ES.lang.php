@@ -1,5 +1,5 @@
 <?php
-// created: 2021-02-19 16:26:57
+// created: 2021-02-24 14:10:03
 $mod_strings = array (
   'LBL_BILLING_ACCOUNT' => 'Cliente',
   'LBL_ACCOUNTS' => 'Clientes',
@@ -21,6 +21,6 @@ $mod_strings = array (
   'LBL_SALDO_C' => 'Saldo',
   'LBL_INVOICE_STATUS' => 'Estado de la Factura',
   'LBL_MONEDA_C' => 'Moneda',
-  'LBL_CURRENCY' => 'Currency',
+  'LBL_CURRENCY' => 'Moneda',
   'LBL_APPROVAL_STATUS' => 'Estado de la Aprobación',
 );
