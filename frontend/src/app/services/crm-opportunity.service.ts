@@ -76,10 +76,7 @@ export class CrmOpportunityService {
     opportunity.created_by = lead.created_by ? lead.created_by : null;
     opportunity.description = lead.description ? lead.description : null;
     opportunity.deleted = lead.deleted ? lead.deleted : null;
-    opportunity.assigned_user_id = lead.assigned_user_id ? lead.assigned_user_id : null;
     opportunity.name = lead.first_name+' '+lead.last_name;
-    opportunity.modified_user_id = this.pilatService.currentUser.id;
-    opportunity.created_by = this.pilatService.currentUser.id;
     opportunity.description = '';
     opportunity.deleted = 0;
     opportunity.date_closed = this.afterMonth;
@@ -91,6 +88,9 @@ export class CrmOpportunityService {
     opportunity.sales_stage = salesStage;
     opportunity.probability = 50;
     opportunity.campaign_id = lead.campaign_id ? lead.campaign_id : null;
+    opportunity.assigned_user_id = lead.assigned_user_id ? lead.assigned_user_id : null;
+    opportunity.modified_user_id = this.pilatService.currentUser.id;
+    opportunity.created_by = this.pilatService.currentUser.id;
   
     opportunity.opportunityOpportunitiesCstm = new OpportunitiesCstm();
     opportunity.opportunityOpportunitiesCstm.jjwg_maps_lng_c = 0;
@@ -110,6 +110,9 @@ export class CrmOpportunityService {
     opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.primary_address_city = lead.primary_address_city;
     opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.primary_address_state = lead.primary_address_state;
     opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.primary_address_country = lead.primary_address_country;
+    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.assigned_user_id = lead.assigned_user_id;
+    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.modified_user_id = lead.assigned_user_id;
+    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.created_by = lead.assigned_user_id;
     // opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.title = '';
  
     opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm.id_c = lead.contact_id ? lead.contact_id : null;

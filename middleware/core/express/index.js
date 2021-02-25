@@ -48,7 +48,9 @@ config.$all = Op.all;
 config.$values = Op.values;
 config.$col = Op.col;
 
-console.log('this is the environment: ', env);
+console.log('This is the environment: ', env);
+console.log('Database host: ', config.host);
+console.log('Node host: ', config.domain);
 
 let sequelize;
 if (config.use_env_variable) {

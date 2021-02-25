@@ -38,6 +38,8 @@ const initApiRoutes = function (app) {
 
 	app.use("/", require("./src/crm/account/account.routes"));
 
+	app.use("/", require("./src/crm/call/call.routes"));
+
 }
 
 export default initApiRoutes;

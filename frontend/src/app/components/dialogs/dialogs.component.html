@@ -8,8 +8,10 @@
     </mat-dialog-content>
 </div>
     <mat-dialog-actions align="end" *ngIf="functionYes">
-        <button mat-button mat-dialog-close>No</button>
-        <button (click)="functionYes ? functionYes : ''" mat-button [mat-dialog-close]="true" cdkFocusInitial>Si</button>
+        <button *ngIf="functionNo || functionYes" (click)="exceuteFunction(functionNo)" mat-button mat-dialog-close>{{btnLabelNo ? btnLabelNo : 'No'}}</button>
+        <button *ngIf="functionYes" (click)="exceuteFunction(functionYes)" mat-button [mat-dialog-close]="true" cdkFocusInitial>{{btnLabelYes ? btnLabelYes : 'Si'}}</button>
+        <button *ngIf="functionOptionOne" (click)="exceuteFunction(functionOptionOne)" mat-button [mat-dialog-close]="true">{{btnLabelOptionOne ? btnLabelOptionOne : 'Primera opción'}}</button>
+        <button *ngIf="functionOptionTwo" (click)="exceuteFunction(functionOptionTwo)" mat-button [mat-dialog-close]="true">{{btnLabelOptionTwo ? btnLabelOptionTwo : 'Segunda opción'}}</button>
     </mat-dialog-actions>
     <mat-dialog-actions align="end" *ngIf="!functionYes">
         <button mat-button mat-dialog-close>Aceptar</button>

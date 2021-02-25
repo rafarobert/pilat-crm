@@ -17,6 +17,7 @@ import {Tracker} from "./tracker";
 import {AccountsContacts} from "./accountsContacts";
 import {AccountsCstm} from "./accountsCstm";
 import {AccountsAudit} from "./accountsAudit";
+import {Emails} from "./emails";
 
 //<es-section>
 
@@ -123,4 +124,6 @@ export class Accounts {
   accountAccountsContacts:AccountsContacts;
  
   accountAccountsAudit:AccountsAudit;
+  
+  accountEmails:Emails;
 }

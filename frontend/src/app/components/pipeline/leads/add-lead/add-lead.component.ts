@@ -46,6 +46,7 @@ export class AddLeadComponent implements OnInit {
   
   ngOnInit(): void {
     this.pilatService.setParams([
+      this.pilatService.DIC_SALUTATIONS,
       this.pilatService.DIC_CI_EXT,
       this.pilatService.DIC_LEAD_STATUSES,
       this.pilatService.DIC_LEAD_SOURCES,

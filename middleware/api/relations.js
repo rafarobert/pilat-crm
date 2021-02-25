@@ -22,6 +22,9 @@ models.sequelize.users.hasMany(models.sequelize.leads,{foreignKey:'created_by', 
 models.sequelize.leads.belongsTo(models.sequelize.users, {foreignKey:'assigned_user_id', targetKey: 'id'});
 models.sequelize.users.hasMany(models.sequelize.leads,{foreignKey:'assigned_user_id', sourceKey: 'id'});
 
+models.sequelize.leads.belongsTo(models.sequelize.emails, {foreignKey:'id', targetKey: 'parent_id', as:'leadEmails'});
+models.sequelize.emails.hasMany(models.sequelize.leads,{foreignKey:'id', sourceKey: 'parent_id', as:'leadEmails'});
+
 models.sequelize.leads.belongsTo(models.sequelize.callsLeads, {foreignKey:'id', targetKey: 'lead_id', as:'leadCallsLeads'});
 models.sequelize.callsLeads.hasMany(models.sequelize.leads,{foreignKey:'id', sourceKey: 'lead_id', as:'leadCallsLeads'});
 
@@ -58,6 +61,9 @@ models.sequelize.users.hasMany(models.sequelize.opportunities,{foreignKey:'creat
 
 models.sequelize.opportunities.belongsTo(models.sequelize.users, {foreignKey:'assigned_user_id', targetKey: 'id', as:'opportunityUsersAssignedUser'});
 models.sequelize.users.hasMany(models.sequelize.opportunities,{foreignKey:'assigned_user_id', sourceKey: 'id', as:'opportunityUsersAssignedUser'});
+
+models.sequelize.opportunities.belongsTo(models.sequelize.emails, {foreignKey:'id', targetKey: 'parent_id', as:'opportunityEmails'});
+models.sequelize.emails.hasMany(models.sequelize.opportunities,{foreignKey:'id', sourceKey: 'parent_id', as:'opportunityEmails'});
 
 models.sequelize.opportunities.belongsTo(models.sequelize.accountsOpportunities, {foreignKey:'id', targetKey: 'opportunity_id', as:'opportunityAccountsOpportunities'});
 models.sequelize.accountsOpportunities.hasMany(models.sequelize.opportunities,{foreignKey:'id', sourceKey: 'opportunity_id', as:'opportunityAccountsOpportunities'});
@@ -112,6 +118,9 @@ models.sequelize.accountsContacts.hasMany(models.sequelize.accounts,{foreignKey:
 
 models.sequelize.accounts.belongsTo(models.sequelize.accountsOpportunities, {foreignKey:'id', targetKey:'account_id', as: 'accountAccountsOpportunities'});
 models.sequelize.accountsOpportunities.hasMany(models.sequelize.accounts,{foreignKey:'id', sourceKey:'account_id', as: 'accountAccountsOpportunities'});
+
+models.sequelize.accounts.belongsTo(models.sequelize.emails, {foreignKey:'id', targetKey:'parent_id', as:'accountEmails'});
+models.sequelize.emails.hasMany(models.sequelize.accounts,{foreignKey:'id', sourceKey:'parent_id', as:'accountEmails'});
 
 models.sequelize.accounts.belongsTo(models.sequelize.tracker, {foreignKey:'id', targetKey:'item_id', as:'accountTracker'});
 models.sequelize.tracker.hasMany(models.sequelize.accounts,{foreignKey:'id', sourceKey:'item_id', as:'accountTracker'});
@@ -280,11 +289,11 @@ models.sequelize.calls.hasMany(models.sequelize.callsLeads,{foreignKey:'call_id'
 
 // CALLS_CONTACTS
 
-models.sequelize.callsContacts.belongsTo(models.sequelize.calls, {foreignKey:'call_id', targetKey: 'id', as:'callCallsContacts'});
-models.sequelize.calls.hasMany(models.sequelize.callsContacts,{foreignKey:'call_id', sourceKey: 'id', as:'callCallsContacts'});
+models.sequelize.callsContacts.belongsTo(models.sequelize.calls, {foreignKey:'call_id', targetKey: 'id', as:'callContactCalls'});
+models.sequelize.calls.hasMany(models.sequelize.callsContacts,{foreignKey:'call_id', sourceKey: 'id', as:'callContactCalls'});
 
-models.sequelize.callsContacts.belongsTo(models.sequelize.contacts, {foreignKey:'lead_id', targetKey: 'id', as:'contactCallsContacts'});
-models.sequelize.contacts.hasMany(models.sequelize.callsContacts,{foreignKey:'lead_id', sourceKey: 'id', as:'contactCallsContacts'});
+models.sequelize.callsContacts.belongsTo(models.sequelize.contacts, {foreignKey:'contact_id', targetKey: 'id', as:'callContactContacts'});
+models.sequelize.contacts.hasMany(models.sequelize.callsContacts,{foreignKey:'contact_id', sourceKey: 'id', as:'callContactContacts'});
 
 // CALLS_USERS
 
@@ -310,6 +319,9 @@ models.sequelize.users.hasMany(models.sequelize.contacts,{foreignKey:'created_by
 
 models.sequelize.contacts.belongsTo(models.sequelize.users, {foreignKey:'assigned_user_id', targetKey: 'id'});
 models.sequelize.users.hasMany(models.sequelize.contacts,{foreignKey:'assigned_user_id', sourceKey: 'id'});
+
+models.sequelize.contacts.belongsTo(models.sequelize.emails, {foreignKey:'id', targetKey: 'parent_id', as:'contactEmails'});
+models.sequelize.emails.hasMany(models.sequelize.contacts,{foreignKey:'id', sourceKey: 'parent_id', as:'contactEmails'});
 
 models.sequelize.contacts.belongsTo(models.sequelize.tracker, {foreignKey:'id', targetKey:'item_id', as:'contactTracker'});
 models.sequelize.tracker.hasMany(models.sequelize.contacts,{foreignKey:'id', sourceKey:'item_id', as:'contactTracker'});
