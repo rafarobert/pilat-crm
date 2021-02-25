@@ -66,6 +66,7 @@ import {SpinnerComponent} from "../spinner/spinner.component";
 import {SpinnerService} from "../../services/spinner.service";
 import {DialogService} from "../../services/dialog.service";
 import {DialogsComponent} from "../dialogs/dialogs.component";
+import {CallsUsers} from "../../../core/models/callsUsers";
 
 @Component({
   selector: 'app-pipeline-dialog',
@@ -134,6 +135,7 @@ export class PipelineDialogComponent implements OnInit {
       this.pilatService.userLoggedIn = true;
       if (this.pilatService.userLoggedIn) {
         this.pilatService.setParams([
+          this.pilatService.DIC_MODULES,
           this.pilatService.DIC_CURRENCIES,
           this.pilatService.DIC_CALL_STATUSES,
         ]);
@@ -147,9 +149,7 @@ export class PipelineDialogComponent implements OnInit {
           verticalPosition:'top'
         });
       }
-      
     });
-    
   }
   
   openLeadDialog($event) {
@@ -217,38 +217,6 @@ export class PipelineDialogComponent implements OnInit {
     });
   }
   
-  async setModules() {
-    await this.pilatParamService.getAllPilatParams([],{par_dictionary_id:'60088baf3682cc5720f557b4'}).subscribe(async (res) => {
-      let response = res as {status:string, message:string, data:PilatParams[]};
-      for (let i = 0 ; i < response.data.length ; i++) {
-        let pilatParam:PilatParams = response.data[i];
-        switch (pilatParam.par_cod) {
-          case 'task':
-            this.parModuleTasks = pilatParam;
-            break;
-          case 'AOS_Quote':
-            this.parModuleAosQuotes = pilatParam;
-            break;
-          case 'opportunity':
-            this.parModuleOpportunities = pilatParam;
-            break;
-          case 'call':
-            this.parModuleCalls = pilatParam;
-            break;
-          case 'account':
-            this.parModuleAccounts = pilatParam;
-            break;
-          case 'contact':
-            this.parModuleContacts = pilatParam;
-            break;
-          case 'lead':
-            this.parModuleLeads = pilatParam;
-            break;
-        }
-      }
-    });
-  }
-  
   async setPipeline(order:string = 'desc') {
     this.isLoading = true;
     
@@ -259,7 +227,7 @@ export class PipelineDialogComponent implements OnInit {
     
     let prospectStages:PilatParams[] = responseProspectStages.data;
     let opportunityStages:PilatParams[] = responseOpportunityStages.data;
-    await this.setModules();
+    //await this.setModules();
         this.pipeline.columns = [];
         let prospects, opportunities;
         for (let i = 0 ; i < opportunityStages.length ; i++) {
@@ -521,11 +489,11 @@ export class PipelineDialogComponent implements OnInit {
       if (!opportunity) {
         opportunity = new Opportunities();
       }
-      opportunity = this.crmOpportunityService.setDataOpportunity(opportunity, lead, salesStage, this.pilatService.currentUser, this.parModuleContacts);
+      opportunity = this.crmOpportunityService.setDataOpportunity(opportunity, lead, salesStage);
       let responseOpportunity:any = await this.crmOpportunityService.createOpportunity(opportunity).toPromise();
       if (responseOpportunity.data) {
         opportunity = responseOpportunity.data;
-        opportunity = this.crmOpportunityService.setDataOpportunity(opportunity, lead, salesStage, this.pilatService.currentUser, this.parModuleOpportunities);
+        opportunity = this.crmOpportunityService.setDataOpportunity(opportunity, lead, salesStage);
         responseOpportunity = await this.crmOpportunityService.updateOpportunity(opportunity.id, opportunity).toPromise();
         if (responseOpportunity.data) {
           this.opportunity = responseOpportunity.data;
@@ -538,7 +506,7 @@ export class PipelineDialogComponent implements OnInit {
   
   async updateOpportunity(opportunity:Opportunities, lead:Leads, account:Accounts, salesStage) {
     return new Promise(async resolve => {
-      opportunity = this.crmOpportunityService.setDataOpportunity(opportunity, lead, salesStage, this.pilatService.currentUser, this.parModuleOpportunities);
+      opportunity = this.crmOpportunityService.setDataOpportunity(opportunity, lead, salesStage);
       let responseOpportunity:any = await this.crmOpportunityService.updateOpportunity(opportunity.id, opportunity).toPromise();
       this.opportunity = responseOpportunity.data;
       resolve(this.opportunity);
@@ -706,7 +674,7 @@ export class PipelineDialogComponent implements OnInit {
         this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel = this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel ? this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel : new EmailAddrBeanRel();
         this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses ? this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses : new EmailAddresses();
         
-        this.opportunity = await this.crmOpportunityService.setDataOpportunity(this.opportunity,this.lead,this.salesStage,this.pilatService.currentUser,this.parModuleOpportunities);
+        this.opportunity = await this.crmOpportunityService.setDataOpportunity(this.opportunity,this.lead,this.salesStage);
         
         let dialogAddOpportunity = this.dialog.open(AddOpportunityComponent, {
           width: '600px',
@@ -768,8 +736,9 @@ export class PipelineDialogComponent implements OnInit {
     this.lead.leadCallsLeads.callLeadCalls.date_start = this.tomorrow;
     this.lead.leadCallsLeads.callLeadCalls.date_end = this.afterTomorrow;
     this.lead.leadCallsLeads.callLeadCalls.callCallsCstm = this.lead.leadCallsLeads.callLeadCalls.callCallsCstm ? this.lead.leadCallsLeads.callLeadCalls.callCallsCstm : new CallsCstm();
+    this.lead.leadCallsLeads.callLeadCalls.callCallsUsers = this.lead.leadCallsLeads.callLeadCalls.callCallsUsers ? this.lead.leadCallsLeads.callLeadCalls.callCallsUsers : new CallsUsers();
   
-    this.lead = await this.crmLeadService.setDataLead(this.lead,this.parModuleLeads,this.pilatService.currentUser,this.pilatService.currentSessId);
+    this.lead = await this.crmLeadService.setDataLead(this.lead);
   
     const dialogRef = this.dialog.open(AddLeadComponent, {
       width:'600px',

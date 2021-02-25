@@ -44,7 +44,7 @@ export class CrmLeadService {
     });
   }
   
-  setDataLead(lead:Leads, moduleLeads:PilatParams, user:Users, sessId:string):Leads {
+  setDataLead(lead:Leads):Leads {
   
     let date = new Date();
     let currentHour = date.getHours();
@@ -65,10 +65,10 @@ export class CrmLeadService {
     lead.date_entered = new Date();
     //lead.date_modified = lead.date_modified ? lead.date_modified : null;
     //lead.modified_user_id = lead.modified_user_id ? lead.modified_user_id : null;
-    lead.created_by = user.id;
+    lead.created_by = this.pilatService.currentUser.id;
     //lead.description = lead.description ? lead.description : null;
     //lead.deleted = lead.deleted ? lead.deleted : null;
-    lead.assigned_user_id = user.id;
+    lead.assigned_user_id = this.pilatService.currentUser.id;
     //lead.salutation = lead.salutation ? lead.salutation : null;
     //lead.first_name = lead.first_name ? lead.first_name : null;
     //lead.last_name = lead.last_name ? lead.last_name : null;
@@ -117,42 +117,45 @@ export class CrmLeadService {
     // lead.website = lead.website ? lead.website : null;
     
     lead.leadLeadsCstm = new LeadsCstm();
+    
     lead.leadCallsLeads.callLeadCalls.date_start = lead.leadCallsLeads.callLeadCalls.date_start ? lead.leadCallsLeads.callLeadCalls.date_start : this.tomorrow;
     lead.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c = lead.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c ? lead.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c : this.tomorrow;
+    
+    lead.leadCallsLeads.callLeadCalls.callCallsUsers.user_id = this.pilatService.currentUser.id;
     
     if (lead.id) {
       
       lead.leadSugarfeed = new Sugarfeed();
-      lead.leadSugarfeed.name = `<b>{this.CREATED_BY}</b> {leadSugarfeed.CREATED_${moduleLeads.par_cod.toUpperCase()} [${moduleLeads.par_cod.ucFirst()}:${lead.id}:${lead.first_name+' '+lead.last_name}]`;
-      lead.leadSugarfeed.modified_user_id = user.id;
-      lead.leadSugarfeed.created_by = user.id;
+      lead.leadSugarfeed.name = `<b>{this.CREATED_BY}</b> {leadSugarfeed.CREATED_${this.pilatService.parModuleLead.par_cod.toUpperCase()} [${this.pilatService.parModuleLead.par_cod.ucFirst()}:${lead.id}:${lead.first_name+' '+lead.last_name}]`;
+      lead.leadSugarfeed.modified_user_id = this.pilatService.currentUser.id;
+      lead.leadSugarfeed.created_by = this.pilatService.currentUser.id;
       lead.leadSugarfeed.description = null;
       lead.leadSugarfeed.deleted = 0;
-      lead.leadSugarfeed.assigned_user_id = user.id;
-      lead.leadSugarfeed.related_module = moduleLeads.par_cod.ucFirst();
+      lead.leadSugarfeed.assigned_user_id = this.pilatService.currentUser.id;
+      lead.leadSugarfeed.related_module = this.pilatService.parModuleLead.par_cod.ucFirst();
       lead.leadSugarfeed.related_id = lead.id;
       lead.leadSugarfeed.link_url = null;
       lead.leadSugarfeed.link_type = null;
       
       lead.leadAodIndexevent = new AodIndexevent();
       lead.leadAodIndexevent.name = '';
-      lead.leadAodIndexevent.modified_user_id = user.id;
-      lead.leadAodIndexevent.created_by = user.id;
+      lead.leadAodIndexevent.modified_user_id = this.pilatService.currentUser.id;
+      lead.leadAodIndexevent.created_by = this.pilatService.currentUser.id;
       lead.leadAodIndexevent.description = '';
       lead.leadAodIndexevent.deleted = 0;
-      lead.leadAodIndexevent.assigned_user_id = user.id;
+      lead.leadAodIndexevent.assigned_user_id = this.pilatService.currentUser.id;
       lead.leadAodIndexevent.error = null;
       lead.leadAodIndexevent.success = 1;
       lead.leadAodIndexevent.record_id = lead.id;
-      lead.leadAodIndexevent.record_module = moduleLeads.par_group;
+      lead.leadAodIndexevent.record_module = this.pilatService.parModuleLead.par_group;
       
       lead.leadTracker = new Tracker();
-      lead.leadTracker.user_id = user.id;
-      lead.leadTracker.module_name = moduleLeads.par_group;
+      lead.leadTracker.user_id = this.pilatService.currentUser.id;
+      lead.leadTracker.module_name = this.pilatService.parModuleLead.par_group;
       lead.leadTracker.item_id = lead.id;
       lead.leadTracker.item_summary = lead.first_name+' '+lead.last_name;
       lead.leadTracker.action = 'editView';
-      lead.leadTracker.session_id = sessId;
+      lead.leadTracker.session_id = this.pilatService.currentSessId;
       lead.leadTracker.visible = 1;
       lead.leadTracker.deleted = 0;
     }

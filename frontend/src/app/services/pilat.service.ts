@@ -117,6 +117,14 @@ export class PilatService {
   parCallFailure: PilatParams;
   parCallPending: PilatParams;
   
+  parModuleLead: PilatParams;
+  parModuleContact: PilatParams;
+  parModuleAccount: PilatParams;
+  parModuleCall: PilatParams;
+  parModuleOpportunity: PilatParams;
+  parModuleAoQuote: PilatParams;
+  parModuleTask: PilatParams;
+  
   constructor(
     breakpointObserver:BreakpointObserver,
     private pilatParamService:PilatParamService
@@ -185,6 +193,15 @@ export class PilatService {
               case 95:this.parCallReceived = param;break;
               case 96:this.parCallFailure = param;break;
               case 97:this.parCallPending = param;break;
+              
+              case 27:this.parModuleLead = param;break;
+              case 28:this.parModuleContact = param;break;
+              case 29:this.parModuleAccount = param;break;
+              case 30:this.parModuleCall = param;break;
+              case 31:this.parModuleOpportunity = param;break;
+              case 32:this.parModuleAoQuote = param;break;
+              case 33:this.parModuleTask = param;break;
+              
             }
           });
         }

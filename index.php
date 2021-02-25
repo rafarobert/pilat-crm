@@ -56,4 +56,4 @@ require_once 'include/MVC/SugarApplication.php';
 $app = new SugarApplication();
 $app->startSession();
 $app->execute();
-require_once 'frontend/index.php';
+//require_once 'frontend/index.php';

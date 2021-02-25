@@ -15,6 +15,7 @@ import {AodIndexevent} from "./aodIndexevent";
 import {Tracker} from "./tracker";
 import {CallsCstm} from "./callsCstm";
 import {CallsContacts} from "./callsContacts";
+import {CallsUsers} from "./callsUsers";
 
 //<es-section>
 
@@ -107,5 +108,7 @@ export class Calls {
   callTracker:Tracker;
   
   callCallsContacts:CallsContacts;
+  
+  callCallsUsers:CallsUsers;
   
 }

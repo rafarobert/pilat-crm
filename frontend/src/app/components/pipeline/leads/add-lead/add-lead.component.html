@@ -104,17 +104,21 @@
         <mat-expansion-panel><mat-expansion-panel-header><mat-panel-title>Datos del Lead</mat-panel-title><mat-panel-description></mat-panel-description></mat-expansion-panel-header>
           <mat-grid-list [cols]="pilatService.isSmallScreen ? '1' : '2'" rowHeight="6:2">
 
-            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Tipo lead</mat-label><mat-select [(ngModel)]="data.leadLeadsCstm.tipo_lead_c" name="Tipo Lead">
+            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Tipo</mat-label><mat-select [(ngModel)]="data.leadLeadsCstm.tipo_lead_c" name="Tipo Lead">
               <mat-option *ngFor="let parLeadTipo of pilatService.parLeadTipos" [value]="parLeadTipo.par_cod"  >{{parLeadTipo.par_description}}</mat-option>
             </mat-select></mat-form-field></div></mat-grid-tile>
             <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Fecha Validez</mat-label><input matInput #input class="form-control" placeholder="Fecha de Validez" [(ngModel)]="data.leadLeadsCstm.fecha_validex_c" name="fecha_validex_c"  [matDatepicker]="fecha_validex_c" required><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error><mat-datepicker-toggle matSuffix [for]="fecha_validex_c"></mat-datepicker-toggle><mat-datepicker #fecha_validex_c></mat-datepicker></mat-form-field></div></mat-grid-tile>
 
-            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Estado del lead</mat-label><mat-select [(ngModel)]="data.status" name="status" required>
+            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Estado</mat-label><mat-select [(ngModel)]="data.status" name="status" required>
               <mat-option *ngFor="let leadStatus of pilatService.parLeadStatuses" [value]="leadStatus.par_cod"  >{{leadStatus.par_description}}</mat-option>
             </mat-select></mat-form-field></div></mat-grid-tile>
 
+            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Origen</mat-label><mat-select [(ngModel)]="data.lead_source" name="lead_source" required>
+              <mat-option *ngFor="let parLeadSource of pilatService.parLeadSources" [value]="parLeadSource.par_cod"  >{{parLeadSource.par_description}}</mat-option>
+            </mat-select></mat-form-field></div></mat-grid-tile>
+
             <!--<div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Etapa del lead</mat-label><input matInput #input class="form-control" placeholder="etapas_c" [(ngModel)]="data.leadLeadsCstm.etapas_c" name="etapas_c"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div>-->
-            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Etapa del lead</mat-label><mat-select [(ngModel)]="data.leadLeadsCstm.etapas_c" name="etapas_c" required>
+            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Etapa</mat-label><mat-select [(ngModel)]="data.leadLeadsCstm.etapas_c" name="etapas_c" required>
               <mat-option *ngFor="let parLeadStage of pilatService.parProspectStages" [value]="parLeadStage.par_cod"  >{{parLeadStage.par_description}}</mat-option>
             </mat-select></mat-form-field></div></mat-grid-tile>
 

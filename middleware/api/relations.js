@@ -259,6 +259,9 @@ models.sequelize.users.hasMany(models.sequelize.calls,{foreignKey:'assigned_user
 models.sequelize.calls.belongsTo(models.sequelize.callsLeads, {foreignKey:'id', targetKey: 'call_id', as:'callCallsLeads'});
 models.sequelize.callsLeads.hasMany(models.sequelize.calls,{foreignKey:'id', sourceKey: 'call_id', as:'callCallsLeads'});
 
+models.sequelize.calls.belongsTo(models.sequelize.callsUsers, {foreignKey:'id', targetKey: 'call_id', as:'callCallsUsers'});
+models.sequelize.callsUsers.hasMany(models.sequelize.calls,{foreignKey:'id', sourceKey: 'call_id', as:'callCallsUsers'});
+
 models.sequelize.calls.belongsTo(models.sequelize.tracker, {foreignKey:'id', targetKey:'item_id', as:'callTracker'});
 models.sequelize.tracker.hasMany(models.sequelize.calls,{foreignKey:'id', sourceKey:'item_id', as:'callTracker'});
 
@@ -282,6 +285,14 @@ models.sequelize.calls.hasMany(models.sequelize.callsContacts,{foreignKey:'call_
 
 models.sequelize.callsContacts.belongsTo(models.sequelize.contacts, {foreignKey:'lead_id', targetKey: 'id', as:'contactCallsContacts'});
 models.sequelize.contacts.hasMany(models.sequelize.callsContacts,{foreignKey:'lead_id', sourceKey: 'id', as:'contactCallsContacts'});
+
+// CALLS_USERS
+
+models.sequelize.callsUsers.belongsTo(models.sequelize.calls, {foreignKey:'call_id', targetKey: 'id', as:'callUserCalls'});
+models.sequelize.calls.hasMany(models.sequelize.callsUsers,{foreignKey:'call_id', sourceKey: 'id', as:'callUserCalls'});
+
+models.sequelize.callsUsers.belongsTo(models.sequelize.users, {foreignKey:'user_id', targetKey: 'id', as:'callUserUsers'});
+models.sequelize.users.hasMany(models.sequelize.callsUsers,{foreignKey:'user_id', sourceKey: 'id', as:'callUserUsers'});
 
 // CONTACTS
 

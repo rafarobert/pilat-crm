@@ -13,6 +13,7 @@ import {Tracker} from "../../core/models/tracker";
 import {OpportunitiesCstm} from "../../core/models/opportunitiesCstm";
 import {Opportunities} from "../../core/models/opportunities";
 import {PilatAuth} from "../models/pilatAuth";
+import {PilatService} from "./pilat.service";
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,10 @@ export class CrmAosQuoteService {
   dataChange: BehaviorSubject<AosQuotes[]> = new BehaviorSubject<AosQuotes[]>([]);
   aosQuoteData: AosQuotes = new AosQuotes();
   
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    public pilatService: PilatService
+  ) { }
   
   get data(): AosQuotes[] {
     return this.dataChange.value;
@@ -38,7 +42,7 @@ export class CrmAosQuoteService {
     });
   }
   
-  setDataAosQuote(aoQuote:AosQuotes, lead:Leads, opportunity:Opportunities, account:Accounts, pilatAuth:PilatAuth, moduleAoQuotes:PilatParams):AosQuotes {
+  setDataAosQuote(aoQuote:AosQuotes, lead:Leads, opportunity:Opportunities, account:Accounts):AosQuotes {
     // before
     aoQuote.date_entered = lead.date_entered ? lead.date_entered : null;
     aoQuote.date_modified = lead.date_modified ? lead.date_modified : null;
@@ -49,11 +53,11 @@ export class CrmAosQuoteService {
     aoQuote.assigned_user_id = lead.assigned_user_id ? lead.assigned_user_id : null;
     
     aoQuote.name = opportunity.name;
-    aoQuote.modified_user_id = pilatAuth.userLoggedId;
-    aoQuote.created_by = pilatAuth.userLoggedId;
+    aoQuote.modified_user_id = this.pilatService.currentUser.id;
+    aoQuote.created_by = this.pilatService.currentUser.id;
     aoQuote.description = '';
     aoQuote.deleted = 0;
-    aoQuote.assigned_user_id = pilatAuth.userLoggedId;
+    aoQuote.assigned_user_id = this.pilatService.currentUser.id;
     aoQuote.opportunity_id = opportunity.id;
     aoQuote.billing_account_id = account.id;
     aoQuote.total_amount = opportunity.amount;
@@ -80,36 +84,36 @@ export class CrmAosQuoteService {
     if (aoQuote.id) {
       
       aoQuote.aoQuoteSugarfeed = new Sugarfeed();
-      aoQuote.aoQuoteSugarfeed.name = `<b>{this.CREATED_BY}</b> {aoQuoteSugarfeed.CREATED_${moduleAoQuotes.par_cod.toUpperCase()} [${moduleAoQuotes.par_cod.ucFirst()}:${aoQuote.id}:${aoQuote.name}}]`;
-      aoQuote.aoQuoteSugarfeed.modified_user_id = pilatAuth.userLoggedId;
-      aoQuote.aoQuoteSugarfeed.created_by = pilatAuth.userLoggedId;
+      aoQuote.aoQuoteSugarfeed.name = `<b>{this.CREATED_BY}</b> {aoQuoteSugarfeed.CREATED_${this.pilatService.parModuleAoQuote.par_cod.toUpperCase()} [${this.pilatService.parModuleAoQuote.par_cod.ucFirst()}:${aoQuote.id}:${aoQuote.name}}]`;
+      aoQuote.aoQuoteSugarfeed.modified_user_id = this.pilatService.currentUser.id;
+      aoQuote.aoQuoteSugarfeed.created_by = this.pilatService.currentUser.id;
       aoQuote.aoQuoteSugarfeed.description = null;
       aoQuote.aoQuoteSugarfeed.deleted = 0;
-      aoQuote.aoQuoteSugarfeed.assigned_user_id = pilatAuth.userLoggedId;
-      aoQuote.aoQuoteSugarfeed.related_module = moduleAoQuotes.par_cod.ucFirst();
+      aoQuote.aoQuoteSugarfeed.assigned_user_id = this.pilatService.currentUser.id;
+      aoQuote.aoQuoteSugarfeed.related_module = this.pilatService.parModuleAoQuote.par_cod.ucFirst();
       aoQuote.aoQuoteSugarfeed.related_id = aoQuote.id;
       aoQuote.aoQuoteSugarfeed.link_url = null;
       aoQuote.aoQuoteSugarfeed.link_type = null;
       
       aoQuote.aoQuoteAodIndexevent = new AodIndexevent();
       aoQuote.aoQuoteAodIndexevent.name = '';
-      aoQuote.aoQuoteAodIndexevent.modified_user_id = pilatAuth.userLoggedId;
-      aoQuote.aoQuoteAodIndexevent.created_by = pilatAuth.userLoggedId;
+      aoQuote.aoQuoteAodIndexevent.modified_user_id = this.pilatService.currentUser.id;
+      aoQuote.aoQuoteAodIndexevent.created_by = this.pilatService.currentUser.id;
       aoQuote.aoQuoteAodIndexevent.description = '';
       aoQuote.aoQuoteAodIndexevent.deleted = 0;
-      aoQuote.aoQuoteAodIndexevent.assigned_user_id = pilatAuth.userLoggedId;
+      aoQuote.aoQuoteAodIndexevent.assigned_user_id = this.pilatService.currentUser.id;
       aoQuote.aoQuoteAodIndexevent.error = null;
       aoQuote.aoQuoteAodIndexevent.success = 1;
       aoQuote.aoQuoteAodIndexevent.record_id = aoQuote.id;
-      aoQuote.aoQuoteAodIndexevent.record_module = moduleAoQuotes.par_group;
+      aoQuote.aoQuoteAodIndexevent.record_module = this.pilatService.parModuleAoQuote.par_group;
       
       aoQuote.aoQuoteTracker = new Tracker();
-      aoQuote.aoQuoteTracker.user_id = pilatAuth.userLoggedId;
-      aoQuote.aoQuoteTracker.module_name = moduleAoQuotes.par_group;
+      aoQuote.aoQuoteTracker.user_id = this.pilatService.currentUser.id;
+      aoQuote.aoQuoteTracker.module_name = this.pilatService.parModuleAoQuote.par_group;
       aoQuote.aoQuoteTracker.item_id = aoQuote.id;
       aoQuote.aoQuoteTracker.item_summary = aoQuote.name;
       aoQuote.aoQuoteTracker.action = 'editView';
-      aoQuote.aoQuoteTracker.session_id = pilatAuth.userSessId;
+      aoQuote.aoQuoteTracker.session_id = this.pilatService.currentSessId;
       aoQuote.aoQuoteTracker.visible = 1;
       aoQuote.aoQuoteTracker.deleted = 0;
     }

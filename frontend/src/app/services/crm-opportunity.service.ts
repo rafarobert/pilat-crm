@@ -48,7 +48,7 @@ export class CrmOpportunityService {
   }
   
   
-  setDataOpportunity(opportunity:Opportunities, lead:Leads, salesStage, user:Users, moduleOpportunities:PilatParams):Opportunities {
+  setDataOpportunity(opportunity:Opportunities, lead:Leads, salesStage):Opportunities {
   
     let date = new Date();
     
@@ -78,12 +78,12 @@ export class CrmOpportunityService {
     opportunity.deleted = lead.deleted ? lead.deleted : null;
     opportunity.assigned_user_id = lead.assigned_user_id ? lead.assigned_user_id : null;
     opportunity.name = lead.first_name+' '+lead.last_name;
-    opportunity.modified_user_id = user.id;
-    opportunity.created_by = user.id;
+    opportunity.modified_user_id = this.pilatService.currentUser.id;
+    opportunity.created_by = this.pilatService.currentUser.id;
     opportunity.description = '';
     opportunity.deleted = 0;
     opportunity.date_closed = this.afterMonth;
-    opportunity.assigned_user_id = user.id;
+    opportunity.assigned_user_id = this.pilatService.currentUser.id;
     opportunity.opportunity_type = '';
     opportunity.campaign_id = '';
     opportunity.lead_source = '';
@@ -144,36 +144,36 @@ export class CrmOpportunityService {
     if (opportunity.id) {
       
       opportunity.opportunitySugarfeed = new Sugarfeed();
-      opportunity.opportunitySugarfeed.name = `<b>{this.CREATED_BY}</b> {opportunitySugarfeed.CREATED_${moduleOpportunities.par_cod.toUpperCase()} [${moduleOpportunities.par_cod.ucFirst()}:${opportunity.id}:${opportunity.name}}]`;
-      opportunity.opportunitySugarfeed.modified_user_id = user.id;
-      opportunity.opportunitySugarfeed.created_by = user.id;
+      opportunity.opportunitySugarfeed.name = `<b>{this.CREATED_BY}</b> {opportunitySugarfeed.CREATED_${this.pilatService.parModuleOpportunity.par_cod.toUpperCase()} [${this.pilatService.parModuleOpportunity.par_cod.ucFirst()}:${opportunity.id}:${opportunity.name}}]`;
+      opportunity.opportunitySugarfeed.modified_user_id = this.pilatService.currentUser.id;
+      opportunity.opportunitySugarfeed.created_by = this.pilatService.currentUser.id;
       opportunity.opportunitySugarfeed.description = null;
       opportunity.opportunitySugarfeed.deleted = 0;
-      opportunity.opportunitySugarfeed.assigned_user_id = user.id;
-      opportunity.opportunitySugarfeed.related_module = moduleOpportunities.par_cod.ucFirst();
+      opportunity.opportunitySugarfeed.assigned_user_id = this.pilatService.currentUser.id;
+      opportunity.opportunitySugarfeed.related_module = this.pilatService.parModuleOpportunity.par_cod.ucFirst();
       opportunity.opportunitySugarfeed.related_id = opportunity.id;
       opportunity.opportunitySugarfeed.link_url = null;
       opportunity.opportunitySugarfeed.link_type = null;
   
       opportunity.opportunityAodIndexevent = new AodIndexevent();
       opportunity.opportunityAodIndexevent.name = '';
-      opportunity.opportunityAodIndexevent.modified_user_id = user.id;
-      opportunity.opportunityAodIndexevent.created_by = user.id;
+      opportunity.opportunityAodIndexevent.modified_user_id = this.pilatService.currentUser.id;
+      opportunity.opportunityAodIndexevent.created_by = this.pilatService.currentUser.id;
       opportunity.opportunityAodIndexevent.description = '';
       opportunity.opportunityAodIndexevent.deleted = 0;
-      opportunity.opportunityAodIndexevent.assigned_user_id = user.id;
+      opportunity.opportunityAodIndexevent.assigned_user_id = this.pilatService.currentUser.id;
       opportunity.opportunityAodIndexevent.error = null;
       opportunity.opportunityAodIndexevent.success = 1;
       opportunity.opportunityAodIndexevent.record_id = opportunity.id;
-      opportunity.opportunityAodIndexevent.record_module = moduleOpportunities.par_group;
+      opportunity.opportunityAodIndexevent.record_module = this.pilatService.parModuleOpportunity.par_group;
   
       opportunity.opportunityTracker = new Tracker();
-      opportunity.opportunityTracker.user_id = user.id;
-      opportunity.opportunityTracker.module_name = moduleOpportunities.par_group;
+      opportunity.opportunityTracker.user_id = this.pilatService.currentUser.id;
+      opportunity.opportunityTracker.module_name = this.pilatService.parModuleOpportunity.par_group;
       opportunity.opportunityTracker.item_id = opportunity.id;
       opportunity.opportunityTracker.item_summary = opportunity.name;
       opportunity.opportunityTracker.action = 'editView';
-      opportunity.opportunityTracker.session_id = user.id;
+      opportunity.opportunityTracker.session_id = this.pilatService.currentUser.id;
       opportunity.opportunityTracker.visible = 1;
       opportunity.opportunityTracker.deleted = 0;
     }

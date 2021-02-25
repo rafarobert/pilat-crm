@@ -9,6 +9,8 @@
  *
  * Caution: es-sections will be replaced by script execution
  */
+import {Calls} from "./calls";
+import {Users} from "./users";
 
 //<es-section>
 
@@ -49,4 +51,9 @@ export class CallsUsers {
   
 
   //</es-section>
+  
+  callUserCalls:Calls;
+  
+  callUserUsers:Users;
+  
 }
