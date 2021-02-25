@@ -81,6 +81,7 @@ export class AddOpportunityComponent implements OnInit {
       this.data.date_closed = new Date(parseInt(yearAfter), parseInt(monthAfter), parseInt(dayAfter));
       this.data.opportunityAosQuotes = this.data.opportunityAosQuotes ? this.data.opportunityAosQuotes : new AosQuotes();
       this.data.opportunityAosQuotes.currency_id = this.pilatService.parMonedaDolar.par_cod;
+      this.data.opportunityAosQuotes.stage = this.pilatService.parQuoteNegociacion.par_cod;
       this.selectPago(this.data.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c);
       if (this.data.opportunityAosQuotes.aoQuoteAosQuotesCstm.moneda_c) {
         this.selectAoQuoteCurrency(this.data.opportunityAosQuotes.aoQuoteAosQuotesCstm.moneda_c);

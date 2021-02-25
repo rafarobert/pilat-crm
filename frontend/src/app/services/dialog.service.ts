@@ -11,7 +11,7 @@ export class DialogService {
 
   constructor(private router: Router, private dialog: MatDialog) { }
   
-  open(message = '', title:string = '', functionYes:Function = null, functionNo:Function = null): MatDialogRef<DialogsComponent> {
+  open(message = '', title:string = '', functionYes:Function = null, btnLabelYes:string = 'Si', functionNo:Function = null, btnLabelNo:string = 'No', functionOptionOne:Function = null, btnLabelOptionOne:string = null, functionOptionTwo:Function = null, btnLabelOptionTwo:string = null): MatDialogRef<DialogsComponent> {
     
     const dialogRef = this.dialog.open(DialogsComponent,{
       disableClose: true ,
@@ -19,7 +19,13 @@ export class DialogService {
         title:title,
         message:message,
         functionYes:functionYes,
+        btnLabelYes:btnLabelYes,
         functionNo:functionNo,
+        btnLabelNo:btnLabelNo,
+        functionOptionOne:functionOptionOne,
+        btnLabelOptionOne:btnLabelOptionOne,
+        functionOptionTwo:functionOptionTwo,
+        btnLabelOptionTwo:btnLabelOptionTwo,
       },
     });
     return dialogRef;

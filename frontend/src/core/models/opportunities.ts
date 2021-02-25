@@ -17,6 +17,7 @@ import {Tracker} from "./tracker";
 import {OpportunitiesContacts} from "./opportunitiesContacts";
 import {AccountsOpportunities} from "./accountsOpportunities";
 import {AosQuotes} from "./aosQuotes";
+import {Emails} from "./emails";
 
 //<es-section>
 
@@ -95,4 +96,6 @@ export class Opportunities {
   opportunityAodIndexevent:AodIndexevent;
   
   opportunityTracker: Tracker;
+  
+  opportunityEmails: Emails;
 }

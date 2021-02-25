@@ -37,7 +37,22 @@ class LeadService {
 						{
 							model:models.sequelize.leadsCstm, as:'leadLeadsCstm',
 							where: where ? where.where ? where.where.leadLeadsCstm ? where.where.leadLeadsCstm : null : null : null,
-						}
+						},
+						{
+							model:models.sequelize.callsLeads, as:'leadCallsLeads',
+							include:{
+								model:models.sequelize.calls, as:'callLeadCalls',
+								include:[
+									{model:models.sequelize.callsCstm, as:'callCallsCstm'},
+									{
+										model:models.sequelize.callsUsers, as:'callCallsUsers',
+										include: {
+											model:models.sequelize.users, as:'callUserUsers'
+										}
+									},
+								]
+							}
+						},
 					]
 				});
 			}

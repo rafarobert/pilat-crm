@@ -16,6 +16,7 @@ import {Sugarfeed} from "./sugarfeed";
 import {AodIndexevent} from "./aodIndexevent";
 import {Tracker} from "./tracker";
 import {EmailAddrBeanRel} from "./emailAddrBeanRel";
+import {Emails} from "./emails";
 
 //<es-section>
 
@@ -138,4 +139,6 @@ export class Contacts {
   contactAodIndexevent:AodIndexevent;
   
   contactTracker:Tracker;
+  
+  contactEmails:Emails;
 }

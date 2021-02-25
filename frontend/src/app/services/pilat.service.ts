@@ -125,6 +125,13 @@ export class PilatService {
   parModuleAoQuote: PilatParams;
   parModuleTask: PilatParams;
   
+  parQuoteBorrador: PilatParams;
+  parQuoteNegociacion: PilatParams;
+  parQuoteEnviado: PilatParams;
+  parQuoteEnEspera: PilatParams;
+  parQuoteCoonfirmado: PilatParams;
+  parQuotePerdida: PilatParams;
+  
   constructor(
     breakpointObserver:BreakpointObserver,
     private pilatParamService:PilatParamService
@@ -202,6 +209,12 @@ export class PilatService {
               case 32:this.parModuleAoQuote = param;break;
               case 33:this.parModuleTask = param;break;
               
+              case 34:this.parQuoteBorrador = param;break;
+              case 35:this.parQuoteNegociacion = param;break;
+              case 36:this.parQuoteEnviado = param;break;
+              case 37:this.parQuoteEnEspera = param;break;
+              case 38:this.parQuoteCoonfirmado = param;break;
+              case 39:this.parQuotePerdida = param;break;
             }
           });
         }

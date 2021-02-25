@@ -9,8 +9,15 @@
 $cookie_http_referer = "httpReferer";
 $httpReferer = $_SERVER['HTTP_REFERER'];
 
-list($root,$request) = explode('?', $httpReferer);
+if (strstr($httpReferer,'?')) {
+    list($root,$request) = explode('?', $httpReferer);
+} else {
+    $root = $httpReferer;
+    $request = '';
+}
+
 $cookie_http_referer_value = isset($root) ? $root : '';
+
 if (!isset($_COOKIE[$cookie_http_referer])) {
     setcookie($cookie_http_referer, $cookie_http_referer_value, time() + (86400 * 30), "/"); // 86400 = 1 day
 }
@@ -22,4 +29,3 @@ setcookie($cookie_user_loggedin, $cookie_user_loggedin_value, time() + (86400 * 
 if ($_REQUEST['module'] != 'ModuleBuilder') {
   echo '<script type="text/javascript" src="frontend/index.js"></script>';
 }
-

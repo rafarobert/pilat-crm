@@ -291,13 +291,18 @@ export class PipelineDialogComponent implements OnInit {
   <div>
   <div>
       <span hidden="opportunityId">${param.id}</span>
+                    <span><b>Cliente:</b></span>
+                    <br>
+                    ${param.name}
+                    <br>
+                    <span><b>Celular:</b></span>
+                    <br>
+                    ${param.opportunityAccountsOpportunities ? param.opportunityAccountsOpportunities.accountOpportunityAccounts.phone_office ? param.opportunityAccountsOpportunities.accountOpportunityAccounts.phone_office : 'Sin Especificar' : '<b style="color: #e93239;">No tiene cliente</b>'}
+                    <br>
                     <span><b>Descripción:</b></span>
                     <br>
                     ${param.description ? param.description : 'Sin Especificar'}
                     <br>
-                    <span><b>Cliente:</b></span>
-                    <br>
-                    ${param.name}
 </div>
 </div>
                 `);
@@ -361,17 +366,20 @@ export class PipelineDialogComponent implements OnInit {
               pipelineColumn.prospectStages = stageProspects;
               pipelineColumn.isInStageOpportunity = false;
               pipelineColumn.isInStageProspect = true;
-              pipelineColumn.tickets = prospects.map(param => `
+              pipelineColumn.tickets = prospects.map((param:Leads) => `
 <div>
 <div>
                 <span hidden="prospectId">${param.id}</span>
-                <span><b>Descripción:</b></span>
-                <br>
-                ${param.description ? param.description : 'Sin especificar'}
-                <br>
                 <span><b>Cliente:</b></span>
                 <br>
-                ${param.first_name} ${param.last_name}
+                ${param.first_name ? param.first_name : ''} ${param.last_name ? param.last_name : ''}
+                <span><b>Celular:</b></span>
+                <br>
+                ${param.phone_mobile ? param.phone_mobile : 'Sin especificar'}
+                <br>
+                <span><b>Descripción:</b></span>
+                <br>
+                ${param.description ? param.description : 'Sin Especificar'}
 </div>
 </div>
               `);
@@ -392,11 +400,13 @@ export class PipelineDialogComponent implements OnInit {
     let opportunityId = txtItem.split('<span hidden="opportunityId">')[1].split('</span>')[0];
     if (this.pilatService.userLoggedIn) {
       if (opportunityId) {
-        let opportunity = new Opportunities();
+        this.spinnerRef = this.spinnerService.start();
+        let respOpportunity:any = await this.crmOpportunityService.getOpportunity(opportunityId).toPromise();
+        let opportunity:Opportunities = respOpportunity.data;
         opportunity.sales_stage = this.pipeline.columns[currentColumn].props.par_cod;
-        opportunity.opportunityOpportunitiesCstm = new OpportunitiesCstm();
         opportunity.opportunityOpportunitiesCstm.id_c = opportunityId;
         await this.crmOpportunityService.updateOpportunity(opportunityId,opportunity).subscribe(async (res) => {
+          this.spinnerService.stop(this.spinnerRef);
           let response = res as {status:string, message:string, data:LeadsCstm};
           if(response.data) {
             transferArrayItem(event.previousContainer.data,
@@ -458,11 +468,11 @@ export class PipelineDialogComponent implements OnInit {
       if (!account) {
         account = new Accounts();
       }
-      account = this.crmAccountService.setDataAccount(account, contact, lead, opportunity, this.pilatAuth, this.parModuleContacts);
+      account = this.crmAccountService.setDataAccount(account, contact, lead, opportunity);
       let responseAccount:any = await this.crmAccountService.createAccount(account).toPromise();
       if (responseAccount.data) {
         account = responseAccount.data;
-        account = this.crmAccountService.setDataAccount(account, contact, lead, opportunity, this.pilatAuth, this.parModuleAccounts);
+        account = this.crmAccountService.setDataAccount(account, contact, lead, opportunity);
         responseAccount = await this.crmAccountService.updateAccount(account.id, account).toPromise();
         if (responseAccount.data) {
           this.account = responseAccount.data;
@@ -475,7 +485,7 @@ export class PipelineDialogComponent implements OnInit {
   
   async updateAccount(account:Accounts, contact:Contacts, lead:Leads, opportunity:Opportunities) {
     return new Promise(async resolve => {
-      account = this.crmAccountService.setDataAccount(account, contact, lead, opportunity, this.pilatAuth, this.parModuleAccounts);
+      account = this.crmAccountService.setDataAccount(account, contact, lead, opportunity);
       let responseAccount:any = await this.crmAccountService.updateAccount(account.id, account).toPromise();
       this.account = responseAccount.data;
       resolve(this.account);
@@ -521,11 +531,11 @@ export class PipelineDialogComponent implements OnInit {
       if (!aosQuote) {
         aosQuote = new AosQuotes();
       }
-      aosQuote = this.crmAosQuoteService.setDataAosQuote(aosQuote, lead, opportunity, account, this.pilatAuth, this.parModuleContacts);
+      aosQuote = this.crmAosQuoteService.setDataAosQuote(aosQuote, lead, opportunity, account);
       let responseAosQuote:any = await this.crmAosQuoteService.createAosQuote(aosQuote).toPromise();
       if (responseAosQuote.data) {
         aosQuote = responseAosQuote.data;
-        aosQuote = this.crmAosQuoteService.setDataAosQuote(aosQuote, lead, opportunity, account, this.pilatAuth, this.parModuleAosQuotes);
+        aosQuote = this.crmAosQuoteService.setDataAosQuote(aosQuote, lead, opportunity, account);
         responseAosQuote = await this.crmAosQuoteService.updateAosQuote(aosQuote.id, aosQuote).toPromise();
         if (responseAosQuote.data) {
           this.aoQuote = responseAosQuote.data;
@@ -538,7 +548,7 @@ export class PipelineDialogComponent implements OnInit {
   
   async updateAosQuote(aosQuote:AosQuotes, lead:Leads, opportunity:Opportunities, account:Accounts) {
     return new Promise(async resolve => {
-      aosQuote = this.crmAosQuoteService.setDataAosQuote(aosQuote, lead, opportunity, account, this.pilatAuth, this.parModuleAosQuotes);
+      aosQuote = this.crmAosQuoteService.setDataAosQuote(aosQuote, lead, opportunity, account);
       let responseAosQuote:any = await this.crmAosQuoteService.updateAosQuote(aosQuote.id, aosQuote).toPromise();
       this.aoQuote = responseAosQuote.data;
       resolve(this.aoQuote);
@@ -614,7 +624,8 @@ export class PipelineDialogComponent implements OnInit {
       this.spinnerService.stop(this.spinnerRef);
       this.opportunity = responseOpportunity.data;
       if (this.opportunity.opportunityOpportunitiesContacts) {
-        if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_sent_date) {
+        if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails) {
+          this.dialogService.open('La cotizacion fue enviada exitosamente al correo del contacto', 'Envio de Cotización al Contacto');
           this.opportunity.sales_stage = this.pipeline.columns[currentColumn].props.par_cod;
           await this.crmOpportunityService.updateOpportunity(opportunityId,this.opportunity).subscribe(async (res) => {
             let responseOpportunities = res as {status:string, message:string, data:Opportunities};
@@ -627,21 +638,21 @@ export class PipelineDialogComponent implements OnInit {
             }
           });
         } else {
-          this.dialogService.open('La cotizacion no fue enviada al cliente, el correo registrado es el siguiente: ' +
-            this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address
-            + ' ¿desea continuar?', 'Envio de Cotización al Contacto', async () => {
-            this.opportunity.sales_stage = this.pipeline.columns[currentColumn].props.par_cod;
-            await this.crmOpportunityService.updateOpportunity(opportunityId,this.opportunity).subscribe(async (res) => {
-              let responseOpportunities = res as {status:string, message:string, data:Opportunities};
-              if(responseOpportunities.data) {
-                transferArrayItem(event.previousContainer.data,
-                  event.container.data,
-                  event.previousIndex,
-                  event.currentIndex);
-                this.setPipeline();
-              }
-            });
-          });
+          if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel && this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address) {
+            this.dialogService.open('La cotizacion no fue enviada al cliente, el correo registrado es el siguiente: ' +
+              this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address
+              + ' ¿Desea reintentar el envio al correo del contacto?', 'Envio de Cotización al Contacto', async () => {
+                let responseOpportunities:any = await this.crmOpportunityService.updateOpportunity(opportunityId,this.opportunity).toPromise();
+                this.opportunity = responseOpportunities;
+                if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails) {
+                  this.dialogService.open('La cotizacion fue enviada exitosamente al correo del contacto', 'Envio de Cotización al Contacto');
+                } else {
+                  this.dialogService.open('No pudo ser validado el envio de la cotizacion al correo del contacto, por favor intenta enviarlo mediante WhatsApp', 'Envio de Cotización al Contacto');
+                }
+              });
+          } else {
+            this.dialogService.open('El contacto de la oportunidad no tiene registrado un correo electrónico', 'Envio de Cotización al Contacto');
+          }
         }
       } else {
         this.dialogService.open('La oportunidad no tiene relacionado un contacto, porfavor actualiza los datos de la oportunidad', 'Envio de Cotización al Contacto');
@@ -752,8 +763,8 @@ export class PipelineDialogComponent implements OnInit {
         this.spinnerRef = this.spinnerService.start();
         await this.crmLeadService.createLead(this.crmLeadService.leadData).subscribe(async (res) => {
           let response = res as { status: string, message: string, data: any };
+          this.spinnerService.stop(this.spinnerRef);
           if (response.data && response.data.length) {
-            this.spinnerService.stop(this.spinnerRef);
             let leads:Leads[] = response.data;
             const dialogRef = this.dialog.open(DialogAlreadyLeadComponent, {
               width:'600px',
@@ -805,7 +816,9 @@ export class PipelineDialogComponent implements OnInit {
           });
           dialogAddLead.afterClosed().subscribe(async result => {
             if (result === 1) {
+              this.spinnerRef = this.spinnerService.start();
               await this.crmLeadService.updateLead(prospect.id, this.crmLeadService.leadData).subscribe(async (res) => {
+                this.spinnerService.stop(this.spinnerRef);
                 let response = res as { status: string, message: string, data: Leads };
                 if (response.data) {
                   // let lead:Leads = response.data;
@@ -897,11 +910,13 @@ export class PipelineDialogComponent implements OnInit {
     let leadId = txtItem.split('<span hidden="prospectId">')[1].split('</span>')[0];
     if (this.pilatService.currentUser.id) {
       if (leadId) {
-        let lead = new Leads();
-        lead.leadLeadsCstm = new LeadsCstm();
+        this.spinnerRef = this.spinnerService.start();
+        let respLead:any = await this.crmLeadService.getLead(leadId).toPromise();
+        let lead = respLead.data;
         lead.leadLeadsCstm.id_c = leadId;
         lead.leadLeadsCstm.etapas_c = this.pipeline.columns[currentColumn].props.par_cod;
         await this.crmLeadService.updateLead(leadId,lead).subscribe(async (res) => {
+          this.spinnerService.stop(this.spinnerRef);
           let response = res as {status:string, message:string, data:LeadsCstm};
           if(response.data) {
             transferArrayItem(event.previousContainer.data,

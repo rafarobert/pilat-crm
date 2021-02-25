@@ -14,6 +14,7 @@ import {Tracker} from "../../core/models/tracker";
 import {PilatAuth} from "../models/pilatAuth";
 import {Opportunities} from "../../core/models/opportunities";
 import {AccountsOpportunities} from "../../core/models/accountsOpportunities";
+import {PilatService} from "./pilat.service";
 
 @Injectable({
   providedIn: 'root'
@@ -24,13 +25,16 @@ export class CrmAccountService {
   dataChange: BehaviorSubject<Accounts[]> = new BehaviorSubject<Accounts[]>([]);
   accountData: Accounts = new Accounts();
   
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    public pilatService:PilatService
+  ) { }
   
   get data(): Accounts[] {
     return this.dataChange.value;
   }
   
-  setDataAccount(account:Accounts, contact:Contacts, lead:Leads, opportunity:Opportunities, pilatAuth:PilatAuth, moduleAccounts:PilatParams = null):Accounts {
+  setDataAccount(account:Accounts, contact:Contacts, lead:Leads, opportunity:Opportunities):Accounts {
     account.date_entered = contact.date_entered;
     account.date_modified = contact.date_modified;
     account.modified_user_id = contact.modified_user_id;
@@ -98,36 +102,36 @@ export class CrmAccountService {
       }
     
       account.accountSugarfeed = new Sugarfeed();
-      account.accountSugarfeed.name = `<b>{this.CREATED_BY}</b> {SugarFeed.CREATED_${moduleAccounts.par_cod.toUpperCase()} [${moduleAccounts.par_cod.ucFirst()}:${account.id}:${account.name}}]`;
-      account.accountSugarfeed.modified_user_id = pilatAuth.userLoggedId;
-      account.accountSugarfeed.created_by = pilatAuth.userLoggedId;
+      account.accountSugarfeed.name = `<b>{this.CREATED_BY}</b> {SugarFeed.CREATED_${this.pilatService.parModuleAccount.par_cod.toUpperCase()} [${this.pilatService.parModuleAccount.par_cod.ucFirst()}:${account.id}:${account.name}}]`;
+      account.accountSugarfeed.modified_user_id = this.pilatService.currentUser.id;
+      account.accountSugarfeed.created_by = this.pilatService.currentUser.id;
       account.accountSugarfeed.description = null;
       account.accountSugarfeed.deleted = 0;
-      account.accountSugarfeed.assigned_user_id = pilatAuth.userLoggedId;
-      account.accountSugarfeed.related_module = moduleAccounts.par_cod.ucFirst();
+      account.accountSugarfeed.assigned_user_id = this.pilatService.currentUser.id;
+      account.accountSugarfeed.related_module = this.pilatService.parModuleAccount.par_cod.ucFirst();
       account.accountSugarfeed.related_id = account.id;
       account.accountSugarfeed.link_url = null;
       account.accountSugarfeed.link_type = null;
     
       account.accountAodIndexevent = new AodIndexevent();
       account.accountAodIndexevent.name = '';
-      account.accountAodIndexevent.modified_user_id = pilatAuth.userLoggedId;
-      account.accountAodIndexevent.created_by = pilatAuth.userLoggedId;
+      account.accountAodIndexevent.modified_user_id = this.pilatService.currentUser.id;
+      account.accountAodIndexevent.created_by = this.pilatService.currentUser.id;
       account.accountAodIndexevent.description = '';
       account.accountAodIndexevent.deleted = 0;
-      account.accountAodIndexevent.assigned_user_id = pilatAuth.userLoggedId;
+      account.accountAodIndexevent.assigned_user_id = this.pilatService.currentUser.id;
       account.accountAodIndexevent.error = null;
       account.accountAodIndexevent.success = 1;
       account.accountAodIndexevent.record_id = account.id;
-      account.accountAodIndexevent.record_module = moduleAccounts.par_group;
+      account.accountAodIndexevent.record_module = this.pilatService.parModuleAccount.par_group;
     
       account.accountTracker = new Tracker();
-      account.accountTracker.user_id = pilatAuth.userLoggedId;
-      account.accountTracker.module_name = moduleAccounts.par_group;
+      account.accountTracker.user_id = this.pilatService.currentUser.id;
+      account.accountTracker.module_name = this.pilatService.parModuleAccount.par_group;
       account.accountTracker.item_id = account.id;
       account.accountTracker.item_summary = account.name;
       account.accountTracker.action = 'editView';
-      account.accountTracker.session_id = pilatAuth.userSessId;
+      account.accountTracker.session_id = this.pilatService.currentSessId;
       account.accountTracker.visible = 1;
       account.accountTracker.deleted = 0;
     }

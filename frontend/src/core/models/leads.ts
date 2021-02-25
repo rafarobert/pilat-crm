@@ -16,6 +16,7 @@ import {Sugarfeed} from "./sugarfeed";
 import {AodIndexevent} from "./aodIndexevent";
 import {Tracker} from "./tracker";
 import {CallsLeads} from "./callsLeads";
+import {Emails} from "./emails";
 
 //<es-section>
 
@@ -162,4 +163,6 @@ export class Leads {
   leadTracker:Tracker;
   
   leadCallsLeads:CallsLeads;
+  
+  leadEmails:Emails;
 }
