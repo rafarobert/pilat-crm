@@ -28,7 +28,7 @@ class UpdateModuleParams extends BaseParam
                 new Assert\NotBlank(),
             ]))
             ->setNormalizer('data', function (Options $options, $values) {
-                $dataParams = new UpdateModuleDataParams($this->validatorFactory, $this->beanManager);
+                $dataParams = new UpdateModuleDataParams($this->validatorFactory, $this->beanManager); 		
                 $dataParams->configure($values);
 
                 return $dataParams;

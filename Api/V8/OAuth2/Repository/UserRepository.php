@@ -34,6 +34,7 @@ class UserRepository implements UserRepositoryInterface
     ) {
         /** @var \User $user */
         $user = $this->beanManager->newBeanSafe('Users');
+	
         $user->retrieve_by_string_fields(
             ['user_name' => $username]
         );
@@ -45,7 +46,6 @@ class UserRepository implements UserRepositoryInterface
         if (!\User::checkPassword($password, $user->user_hash)) {
             throw new \InvalidArgumentException('The password is invalid: ' . $password);
         }
-
-        return new UserEntity();
+        return new UserEntity($user->id);
     }
 }

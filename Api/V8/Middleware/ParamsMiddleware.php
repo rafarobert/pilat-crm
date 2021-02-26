@@ -33,7 +33,11 @@ class ParamsMiddleware
     public function __invoke(Request $request, Response $httpResponse, callable $next)
     {
         try {
+		
+		//$GLOBALS['log']->fatal(implode(", ", $values));
+		//$GLOBALS['log']->fatal(implode(", ", $values[2]));
             $parameters = $this->getParameters($request);
+	   
             $this->params->configure($parameters);
             $request = $request->withAttribute('params', $this->params);
         } catch (Exception $exception) {

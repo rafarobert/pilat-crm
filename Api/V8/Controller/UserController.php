@@ -78,12 +78,12 @@ class UserController extends BaseController
      * @return Response
      */
     public function getCurrentUser(Request $request, Response $response, array $args)
-    {
-        try {
-            $jsonResponse = $this->userService->getCurrentUser($request);
-            return $this->generateResponse($response, $jsonResponse, 200);
+    {      
+	try {
+            $jsonResponse = $this->userService->getCurrentUser($request);	
+	    return $this->generateResponse($response, $jsonResponse, 200);
         } catch (Exception $exception) {
             return $this->generateErrorResponse($response, $exception, 400);
-        }
+       }
     }
 }
