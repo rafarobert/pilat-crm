@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Fri Feb 19 2021 18:37:46 GMT-0400 (Bolivia Time)
- * Time: 18:37:46
+ * Date: Fri Feb 26 2021 00:23:16 GMT-0400 (Bolivia Time)
+ * Time: 0:23:16
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Fri Feb 19 2021 18:37:46 GMT-0400 (Bolivia Time)
- * Last time updated: 18:37:46
+ * Last date updated: Fri Feb 26 2021 00:23:16 GMT-0400 (Bolivia Time)
+ * Last time updated: 0:23:16
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -57,6 +57,11 @@ Ext.define('es.view.leads-cstm.Add', {
 						
 						
 						
+						
+						{
+							fieldLabel: 'comercial_dias_cierre',
+							name: 'comercial_dias_cierre',
+						},
 						
 						
 						{
@@ -167,6 +172,16 @@ Ext.define('es.view.leads-cstm.Add', {
 						{
 							fieldLabel: 'direccion_c',
 							name: 'direccion_c',
+						},
+						
+						{
+							fieldLabel: 'nuevo_rubro_c',
+							name: 'nuevo_rubro_c',
+						},
+						
+						{
+							fieldLabel: 'direccion_empresa_c',
+							name: 'direccion_empresa_c',
 						},
 						
 						

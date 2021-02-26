@@ -671,6 +671,11 @@ let html = `
     <p>Comments</p>
 </div>
 
+<div id="g3l-gel-email-audit-details">
+    <h2>g3l-gel-email-audit</h2>
+    <p>Comments</p>
+</div>
+
 <div id="g3l-gel-whatsapp-details">
     <h2>g3l-gel-whatsapp</h2>
     <p>Comments</p>

@@ -811,6 +811,12 @@
         },
         
         {
+            "text":"G3lGelEmailAudit",
+            "id":"g3l-gel-email-audit",
+            "leaf":true
+        },
+        
+        {
             "text":"G3lGelWhatsapp",
             "id":"g3l-gel-whatsapp",
             "leaf":true

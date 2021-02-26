@@ -122,6 +122,14 @@ export class LeadCstmService {
       return this.http.get(this.basePath + '/findOneByCorreoAlternativoC/' + correoAlternativoC + '?' + attributes);
   }
   
+  findOneByComercialDiasCierre(comercialDiasCierre:any, select = []) {
+      let attributes = '';
+      if(select.length) {
+          attributes += 'select=' + select.toString();
+      }
+      return this.http.get(this.basePath + '/findOneByComercialDiasCierre/' + comercialDiasCierre + '?' + attributes);
+  }
+  
   findOneByJjwgMapsLngC(jjwgMapsLngC:any, select = []) {
       let attributes = '';
       if(select.length) {
@@ -322,6 +330,22 @@ export class LeadCstmService {
       return this.http.get(this.basePath + '/findOneByDireccionC/' + direccionC + '?' + attributes);
   }
   
+  findOneByNuevoRubroC(nuevoRubroC:any, select = []) {
+      let attributes = '';
+      if(select.length) {
+          attributes += 'select=' + select.toString();
+      }
+      return this.http.get(this.basePath + '/findOneByNuevoRubroC/' + nuevoRubroC + '?' + attributes);
+  }
+  
+  findOneByDireccionEmpresaC(direccionEmpresaC:any, select = []) {
+      let attributes = '';
+      if(select.length) {
+          attributes += 'select=' + select.toString();
+      }
+      return this.http.get(this.basePath + '/findOneByDireccionEmpresaC/' + direccionEmpresaC + '?' + attributes);
+  }
+  
   findOneByActividadC(actividadC:any, select = []) {
       let attributes = '';
       if(select.length) {
@@ -365,6 +389,10 @@ export class LeadCstmService {
   
   updateLeadCstmByCorreoAlternativoC(correoAlternativoC:any, leadCstm:LeadsCstm) {
       return this.http.post(this.basePath + '/updateLeadCstmByCorreoAlternativoC?correoAlternativoC=' + correoAlternativoC, leadCstm);
+  }
+  
+  updateLeadCstmByComercialDiasCierre(comercialDiasCierre:any, leadCstm:LeadsCstm) {
+      return this.http.post(this.basePath + '/updateLeadCstmByComercialDiasCierre?comercialDiasCierre=' + comercialDiasCierre, leadCstm);
   }
   
   updateLeadCstmByJjwgMapsLngC(jjwgMapsLngC:any, leadCstm:LeadsCstm) {
@@ -465,6 +493,14 @@ export class LeadCstmService {
   
   updateLeadCstmByDireccionC(direccionC:any, leadCstm:LeadsCstm) {
       return this.http.post(this.basePath + '/updateLeadCstmByDireccionC?direccionC=' + direccionC, leadCstm);
+  }
+  
+  updateLeadCstmByNuevoRubroC(nuevoRubroC:any, leadCstm:LeadsCstm) {
+      return this.http.post(this.basePath + '/updateLeadCstmByNuevoRubroC?nuevoRubroC=' + nuevoRubroC, leadCstm);
+  }
+  
+  updateLeadCstmByDireccionEmpresaC(direccionEmpresaC:any, leadCstm:LeadsCstm) {
+      return this.http.post(this.basePath + '/updateLeadCstmByDireccionEmpresaC?direccionEmpresaC=' + direccionEmpresaC, leadCstm);
   }
   
   updateLeadCstmByActividadC(actividadC:any, leadCstm:LeadsCstm) {

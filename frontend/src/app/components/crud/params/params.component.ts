@@ -10,6 +10,7 @@ import {PilatParamService} from "../../../../core/services/pilat-param.service";
 import {PilatParams} from "../../../../core/models/pilatParams";
 import {DeleteParamComponent} from "./delete-param/delete-param.component";
 import {AddParamComponent} from "./add-param/add-param.component";
+import {PilatService} from "../../../services/pilat.service";
 
 @Component({
   selector: 'app-params',
@@ -43,7 +44,9 @@ export class ParamsComponent implements OnInit {
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
-    public pilatParamService: PilatParamService
+    public pilatParamService: PilatParamService,
+    public pilatService:PilatService
+    
   ) {}
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

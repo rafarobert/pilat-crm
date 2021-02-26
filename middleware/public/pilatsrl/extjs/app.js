@@ -419,6 +419,9 @@ Ext.application({
 		'fp_event_locations_fp_events_1_c.List',
 		'fp_event_locations_fp_events_1_c.Add',
 	
+		'g3l_gel_email_audit.List',
+		'g3l_gel_email_audit.Add',
+	
 		'g3l_gel_whatsapp.List',
 		'g3l_gel_whatsapp.Add',
 	
@@ -1006,6 +1009,8 @@ Ext.application({
 		
 		'fp_event_locations_fp_events_1_c',
 		
+		'g3l_gel_email_audit',
+		
 		'g3l_gel_whatsapp',
 		
 		'g3l_gel_whatsapp_audit',
@@ -1487,6 +1492,8 @@ Ext.application({
 		'fp_event_locations_audit',
 		
 		'fp_event_locations_fp_events_1_c',
+		
+		'g3l_gel_email_audit',
 		
 		'g3l_gel_whatsapp',
 		
@@ -3311,6 +3318,18 @@ function initTable(table){
 			case 'fp-event-locations-fp-events-1-c':
 				newTab = {
 					xtype: 'fpEventLocationsFpEvents1CList',
+					title: table,
+					html: table,
+					id: table,
+					closable: true,
+				};
+				tab = Ext.getCmp('content-panel').add(newTab);
+				Ext.getCmp('content-panel').setActiveTab(tab);
+				break;
+			
+			case 'g3l-gel-email-audit':
+				newTab = {
+					xtype: 'g3lGelEmailAuditList',
 					title: table,
 					html: table,
 					id: table,

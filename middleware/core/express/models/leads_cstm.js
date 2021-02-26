@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Fri Feb 19 2021 18:37:45 GMT-0400 (Bolivia Time)
- * Time: 18:37:45
+ * Date: Fri Feb 26 2021 00:23:15 GMT-0400 (Bolivia Time)
+ * Time: 0:23:15
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Fri Feb 19 2021 18:37:45 GMT-0400 (Bolivia Time)
- * Last time updated: 18:37:45
+ * Last date updated: Fri Feb 26 2021 00:23:15 GMT-0400 (Bolivia Time)
+ * Last time updated: 0:23:15
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -23,6 +23,8 @@ const {Schema} = mongoose;
       id_c: { type: DataTypes.CHAR, primaryKey: true },
       
       
+      
+      comercial_dias_cierre: DataTypes.INTEGER,
       
       
       
@@ -70,6 +72,10 @@ const {Schema} = mongoose;
       
       direccion_c: DataTypes.STRING,
       
+      nuevo_rubro_c: DataTypes.STRING,
+      
+      direccion_empresa_c: DataTypes.STRING,
+      
       
       actividad_c: DataTypes.TEXT,
       
@@ -112,6 +118,8 @@ const {Schema} = mongoose;
 
   //<es-section>
   module.exports.mongoose = mongoose.model("leadsCstm", new Schema({
+    
+    comercial_dias_cierre: {type: Number},
     
     
     
@@ -158,6 +166,10 @@ const {Schema} = mongoose;
     pais_c: {type: String},
     
     direccion_c: {type: String},
+    
+    nuevo_rubro_c: {type: String},
+    
+    direccion_empresa_c: {type: String},
     
     
     actividad_c: {type: String},

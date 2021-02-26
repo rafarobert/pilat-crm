@@ -14,6 +14,7 @@ import {PipelineDialogComponent} from "./components/pipeline/pipeline-dialog.com
 import {MatAccordion} from "@angular/material/expansion";
 import {MatDrawer} from "@angular/material/sidenav";
 import {environment} from "../environments/environment";
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -48,7 +49,8 @@ export class AppComponent implements OnInit{
     public pilatService: PilatService,
     public dialog: MatDialog,
     public cookieService:CookieService,
-    public crmUserService:CrmUserService
+    public crmUserService:CrmUserService,
+    private location: Location
   ) {}
   
   ngOnInit(): void {
@@ -57,6 +59,8 @@ export class AppComponent implements OnInit{
     this.pilatAuth.userLoggedId = this.cookieService.get('userLogguedIn');
     this.pilatAuth.userSessId = this.cookieService.get('PHPSESSID');
     this.pilatService.currentSessId = this.pilatAuth.userSessId;
+    this.pilatService.httpHome = this.httpHome;
+    this.location.replaceState('/');
     this.crmUserService.getUser(this.pilatAuth.userLoggedId).subscribe(res => {
       let response = res as { status: string, message: string, data: Users };
       this.pilatService.currentUser = response.data;
@@ -181,9 +185,19 @@ export class AppComponent implements OnInit{
       ];
       setTimeout(() => {
         this.drawer.toggle();
+        this.pilatService.toggleMenuOpened = true;
       }, 1000)
     });
     
+  }
+  
+  toggleMenu() {
+    this.drawer.toggle();
+    if (this.drawer.opened) {
+      this.pilatService.toggleMenuOpened = true;
+    } else {
+      this.pilatService.toggleMenuOpened = false;
+    }
   }
   
   closeBootomSheet() {

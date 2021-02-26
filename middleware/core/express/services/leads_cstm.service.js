@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Fri Feb 19 2021 18:37:45 GMT-0400 (Bolivia Time)
- * Time: 18:37:45
+ * Date: Fri Feb 26 2021 00:23:16 GMT-0400 (Bolivia Time)
+ * Time: 0:23:16
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Fri Feb 19 2021 18:37:45 GMT-0400 (Bolivia Time)
- * Last time updated: 18:37:45
+ * Last date updated: Fri Feb 26 2021 00:23:16 GMT-0400 (Bolivia Time)
+ * Last time updated: 0:23:16
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -224,6 +224,23 @@ class LeadCstmService {
     			});
     		} else {
     			objLeadCstm = await models.mongoose.leadsCstm.findOne({correo_alternativo_c: correoAlternativoC});
+    		}
+    		return objLeadCstm;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
+	static async findOneByComercialDiasCierre(comercialDiasCierre, query = {}) {
+    	try {
+    		let objLeadCstm;
+    		if(sql) {
+    			objLeadCstm = await models.sequelize.leadsCstm.findOne({
+    				attributes:query.select ? query.select.split(',') : null,
+    			    where: { comercial_dias_cierre: comercialDiasCierre },
+    			});
+    		} else {
+    			objLeadCstm = await models.mongoose.leadsCstm.findOne({comercial_dias_cierre: comercialDiasCierre});
     		}
     		return objLeadCstm;
     	} catch (error) {
@@ -656,6 +673,40 @@ class LeadCstmService {
     	}
     }
 	
+	static async findOneByNuevoRubroC(nuevoRubroC, query = {}) {
+    	try {
+    		let objLeadCstm;
+    		if(sql) {
+    			objLeadCstm = await models.sequelize.leadsCstm.findOne({
+    				attributes:query.select ? query.select.split(',') : null,
+    			    where: { nuevo_rubro_c: nuevoRubroC },
+    			});
+    		} else {
+    			objLeadCstm = await models.mongoose.leadsCstm.findOne({nuevo_rubro_c: nuevoRubroC});
+    		}
+    		return objLeadCstm;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
+	static async findOneByDireccionEmpresaC(direccionEmpresaC, query = {}) {
+    	try {
+    		let objLeadCstm;
+    		if(sql) {
+    			objLeadCstm = await models.sequelize.leadsCstm.findOne({
+    				attributes:query.select ? query.select.split(',') : null,
+    			    where: { direccion_empresa_c: direccionEmpresaC },
+    			});
+    		} else {
+    			objLeadCstm = await models.mongoose.leadsCstm.findOne({direccion_empresa_c: direccionEmpresaC});
+    		}
+    		return objLeadCstm;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
 	static async findOneByActividadC(actividadC, query = {}) {
     	try {
     		let objLeadCstm;
@@ -786,6 +837,23 @@ class LeadCstmService {
     			}
     		} else {
     			objLeadCstm = await models.mongoose.leadsCstm.findOneAndUpdate({correo_alternativo_c: correoAlternativoC}, {$set: updateLeadCstm}, {new: true});
+    		}
+    		return objLeadCstm;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
+	static async updateLeadCstmByComercialDiasCierre(comercialDiasCierre, updateLeadCstm) {
+    	try {
+    		let objLeadCstm;
+    		if(sql) {
+    			objLeadCstm = await models.sequelize.leadsCstm.findOne({where: { comercial_dias_cierre: comercialDiasCierre }});
+    			if (objLeadCstm) {
+    				objLeadCstm = await models.sequelize.leadsCstm.update(updateLeadCstm, { where: { comercial_dias_cierre: comercialDiasCierre } });
+    			}
+    		} else {
+    			objLeadCstm = await models.mongoose.leadsCstm.findOneAndUpdate({comercial_dias_cierre: comercialDiasCierre}, {$set: updateLeadCstm}, {new: true});
     		}
     		return objLeadCstm;
     	} catch (error) {
@@ -1211,6 +1279,40 @@ class LeadCstmService {
     			}
     		} else {
     			objLeadCstm = await models.mongoose.leadsCstm.findOneAndUpdate({direccion_c: direccionC}, {$set: updateLeadCstm}, {new: true});
+    		}
+    		return objLeadCstm;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
+	static async updateLeadCstmByNuevoRubroC(nuevoRubroC, updateLeadCstm) {
+    	try {
+    		let objLeadCstm;
+    		if(sql) {
+    			objLeadCstm = await models.sequelize.leadsCstm.findOne({where: { nuevo_rubro_c: nuevoRubroC }});
+    			if (objLeadCstm) {
+    				objLeadCstm = await models.sequelize.leadsCstm.update(updateLeadCstm, { where: { nuevo_rubro_c: nuevoRubroC } });
+    			}
+    		} else {
+    			objLeadCstm = await models.mongoose.leadsCstm.findOneAndUpdate({nuevo_rubro_c: nuevoRubroC}, {$set: updateLeadCstm}, {new: true});
+    		}
+    		return objLeadCstm;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
+	static async updateLeadCstmByDireccionEmpresaC(direccionEmpresaC, updateLeadCstm) {
+    	try {
+    		let objLeadCstm;
+    		if(sql) {
+    			objLeadCstm = await models.sequelize.leadsCstm.findOne({where: { direccion_empresa_c: direccionEmpresaC }});
+    			if (objLeadCstm) {
+    				objLeadCstm = await models.sequelize.leadsCstm.update(updateLeadCstm, { where: { direccion_empresa_c: direccionEmpresaC } });
+    			}
+    		} else {
+    			objLeadCstm = await models.mongoose.leadsCstm.findOneAndUpdate({direccion_empresa_c: direccionEmpresaC}, {$set: updateLeadCstm}, {new: true});
     		}
     		return objLeadCstm;
     	} catch (error) {

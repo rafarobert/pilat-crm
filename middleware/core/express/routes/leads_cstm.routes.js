@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Fri Feb 19 2021 18:37:45 GMT-0400 (Bolivia Time)
- * Time: 18:37:45
+ * Date: Fri Feb 26 2021 00:23:15 GMT-0400 (Bolivia Time)
+ * Time: 0:23:15
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Fri Feb 19 2021 18:37:45 GMT-0400 (Bolivia Time)
- * Last time updated: 18:37:45
+ * Last date updated: Fri Feb 26 2021 00:23:15 GMT-0400 (Bolivia Time)
+ * Last time updated: 0:23:15
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -32,6 +32,8 @@ router.get(`/api-${sys}/leads-cstm/findOneByTieneWhatsappC/:tieneWhatsappC`, (re
 router.get(`/api-${sys}/leads-cstm/findOneByCorreoPrincipalC/:correoPrincipalC`, (req, res) => leadsCstmCtrl.findOneByCorreoPrincipalC(req, res));
 
 router.get(`/api-${sys}/leads-cstm/findOneByCorreoAlternativoC/:correoAlternativoC`, (req, res) => leadsCstmCtrl.findOneByCorreoAlternativoC(req, res));
+
+router.get(`/api-${sys}/leads-cstm/findOneByComercialDiasCierre/:comercialDiasCierre`, (req, res) => leadsCstmCtrl.findOneByComercialDiasCierre(req, res));
 
 router.get(`/api-${sys}/leads-cstm/findOneByJjwgMapsLngC/:jjwgMapsLngC`, (req, res) => leadsCstmCtrl.findOneByJjwgMapsLngC(req, res));
 
@@ -83,6 +85,10 @@ router.get(`/api-${sys}/leads-cstm/findOneByPaisC/:paisC`, (req, res) => leadsCs
 
 router.get(`/api-${sys}/leads-cstm/findOneByDireccionC/:direccionC`, (req, res) => leadsCstmCtrl.findOneByDireccionC(req, res));
 
+router.get(`/api-${sys}/leads-cstm/findOneByNuevoRubroC/:nuevoRubroC`, (req, res) => leadsCstmCtrl.findOneByNuevoRubroC(req, res));
+
+router.get(`/api-${sys}/leads-cstm/findOneByDireccionEmpresaC/:direccionEmpresaC`, (req, res) => leadsCstmCtrl.findOneByDireccionEmpresaC(req, res));
+
 router.get(`/api-${sys}/leads-cstm/findOneByActividadC/:actividadC`, (req, res) => leadsCstmCtrl.findOneByActividadC(req, res));
 
 router.get(`/api-${sys}/leads-cstm/findOneByActividadLlamarFechaC/:actividadLlamarFechaC`, (req, res) => leadsCstmCtrl.findOneByActividadLlamarFechaC(req, res));
@@ -100,6 +106,8 @@ router.post(`/api-${sys}/leads-cstm/updateLeadCstmByTieneWhatsappC`, (req, res) 
 router.post(`/api-${sys}/leads-cstm/updateLeadCstmByCorreoPrincipalC`, (req, res) => leadsCstmCtrl.updateLeadCstmByCorreoPrincipalC(req, res));
 
 router.post(`/api-${sys}/leads-cstm/updateLeadCstmByCorreoAlternativoC`, (req, res) => leadsCstmCtrl.updateLeadCstmByCorreoAlternativoC(req, res));
+
+router.post(`/api-${sys}/leads-cstm/updateLeadCstmByComercialDiasCierre`, (req, res) => leadsCstmCtrl.updateLeadCstmByComercialDiasCierre(req, res));
 
 router.post(`/api-${sys}/leads-cstm/updateLeadCstmByJjwgMapsLngC`, (req, res) => leadsCstmCtrl.updateLeadCstmByJjwgMapsLngC(req, res));
 
@@ -150,6 +158,10 @@ router.post(`/api-${sys}/leads-cstm/updateLeadCstmByDepartamentoC`, (req, res) =
 router.post(`/api-${sys}/leads-cstm/updateLeadCstmByPaisC`, (req, res) => leadsCstmCtrl.updateLeadCstmByPaisC(req, res));
 
 router.post(`/api-${sys}/leads-cstm/updateLeadCstmByDireccionC`, (req, res) => leadsCstmCtrl.updateLeadCstmByDireccionC(req, res));
+
+router.post(`/api-${sys}/leads-cstm/updateLeadCstmByNuevoRubroC`, (req, res) => leadsCstmCtrl.updateLeadCstmByNuevoRubroC(req, res));
+
+router.post(`/api-${sys}/leads-cstm/updateLeadCstmByDireccionEmpresaC`, (req, res) => leadsCstmCtrl.updateLeadCstmByDireccionEmpresaC(req, res));
 
 router.post(`/api-${sys}/leads-cstm/updateLeadCstmByActividadC`, (req, res) => leadsCstmCtrl.updateLeadCstmByActividadC(req, res));
 

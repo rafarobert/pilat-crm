@@ -240,10 +240,10 @@ export class PipelineDialogComponent implements OnInit {
               let objcurrencies:string[] = [];
               let stageOpportunities = responseStageOpportunities.data.filter((param:Opportunities) => param.sales_stage == opportunityStage.par_cod);
               for (let j = 0 ; j < stageOpportunities.length ; j++) {
-                let stageOpportunity = stageOpportunities[j];
+                let stageOpportunity:Opportunities = stageOpportunities[j];
                 let parCurrency = this.pilatService.parCurrencies.find(param => param.par_cod == stageOpportunity.currency_id);
                 let localConverted;
-                objSuperficies += stageOpportunity.opportunityOpportunitiesCstm.superficie_c ? stageOpportunity.opportunityOpportunitiesCstm.superficie_c : 0;
+                objSuperficies += stageOpportunity.opportunityOpportunitiesCstm ? stageOpportunity.opportunityOpportunitiesCstm.superficie_c ? stageOpportunity.opportunityOpportunitiesCstm.superficie_c : 0 : 0;
                 // $us
                 if (parCurrency) {
                   if (parCurrency._id == '600e7e7e36da387272e6ce50') {
@@ -802,6 +802,7 @@ export class PipelineDialogComponent implements OnInit {
           this.spinnerService.stop(this.spinnerRef);
           let responseLead = res as {status:string, message:string, data:Leads};
           prospect = responseLead.data;
+          prospect.leadLeadsCstm = prospect.leadLeadsCstm ? prospect.leadLeadsCstm : new LeadsCstm();
           prospect.leadCallsLeads = prospect.leadCallsLeads ? prospect.leadCallsLeads : new CallsLeads();
           prospect.leadCallsLeads.callLeadCalls = prospect.leadCallsLeads.callLeadCalls ? prospect.leadCallsLeads.callLeadCalls : new Calls();
           prospect.leadCallsLeads.callLeadCalls.name = prospect.first_name+' '+prospect.last_name;
@@ -846,12 +847,13 @@ export class PipelineDialogComponent implements OnInit {
   async openEditOpportunity(event: CdkDragDrop<string[]>) {
     let txtItem = event['target'].innerHTML;
     let opportunityId = txtItem.split('<span hidden="opportunityId">')[1].split('</span>')[0];
-    let opportunity;
+    let opportunity:Opportunities;
     this.spinnerRef = this.spinnerService.start();
     await this.crmOpportunityService.getOpportunity(opportunityId).subscribe(async (res) => {
       this.spinnerService.stop(this.spinnerRef);
       let responseOpportunity = res as { status: string, message: string, data: Opportunities };
       opportunity = responseOpportunity.data ? responseOpportunity.data : new Opportunities();
+      opportunity.opportunityOpportunitiesCstm = opportunity.opportunityOpportunitiesCstm ? opportunity.opportunityOpportunitiesCstm : new OpportunitiesCstm();
       opportunity.opportunityOpportunitiesContacts = opportunity.opportunityOpportunitiesContacts ? opportunity.opportunityOpportunitiesContacts : new OpportunitiesContacts();
       opportunity.opportunityOpportunitiesContacts.opportunityContactContacts = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts : new Contacts();
       opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm : new ContactsCstm();

@@ -38,6 +38,8 @@ Ext.define('es.model.leadsCstm', {
 		
 		{ name: 'correo_alternativo_c', type: 'types.TINYINT', defaultValue: null },
 		
+		{ name: 'comercial_dias_cierre', type: 'types.INT', defaultValue: null },
+		
 		{ name: 'jjwg_maps_lng_c', type: 'types.FLOAT', defaultValue: null },
 		
 		{ name: 'jjwg_maps_lat_c', type: 'types.FLOAT', defaultValue: null },
@@ -87,6 +89,10 @@ Ext.define('es.model.leadsCstm', {
 		{ name: 'pais_c', type: 'text', defaultValue: null },
 		
 		{ name: 'direccion_c', type: 'text', defaultValue: null },
+		
+		{ name: 'nuevo_rubro_c', type: 'text', defaultValue: null },
+		
+		{ name: 'direccion_empresa_c', type: 'text', defaultValue: null },
 		
 		{ name: 'actividad_c', type: 'text', defaultValue: null },
 		

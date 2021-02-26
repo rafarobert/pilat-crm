@@ -10,6 +10,7 @@ import {DeleteMailComponent} from "../mails/delete-mail/delete-mail.component";
 import {BehaviorSubject, fromEvent, merge, Observable} from "rxjs";
 import {DataSource} from "@angular/cdk/table";
 import {map} from "rxjs/operators";
+import {PilatService} from "../../../services/pilat.service";
 
 @Component({
   selector: 'app-mails',
@@ -39,7 +40,8 @@ export class MailsComponent implements OnInit {
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
-    public pilatMailService: PilatMailService
+    public pilatMailService: PilatMailService,
+    public pilatService:PilatService
   ) {}
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

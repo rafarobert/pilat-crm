@@ -12,6 +12,7 @@ import {UserService} from "../../../../core/services/user.service";
 import {Users} from "../../../../core/models/users";
 import {AddUserComponent} from "./add-user/add-user.component";
 import {DeleteUserComponent} from "./delete-user/delete-user.component";
+import {PilatService} from "../../../services/pilat.service";
 
 @Component({
   selector: 'app-users',
@@ -72,7 +73,8 @@ export class UsersComponent implements OnInit {
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
-    public userService: UserService
+    public userService: UserService,
+    public pilatService:PilatService
   ) {}
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

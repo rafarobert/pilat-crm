@@ -282,6 +282,8 @@ module.exports = function (app) {
 	
 	app.use("/", require("../routes/fp_event_locations_fp_events_1_c.routes"));
 	
+	app.use("/", require("../routes/g3l_gel_email_audit.routes"));
+	
 	app.use("/", require("../routes/g3l_gel_whatsapp.routes"));
 	
 	app.use("/", require("../routes/g3l_gel_whatsapp_audit.routes"));

@@ -22,6 +22,8 @@ export class LeadsCstm {
   
   
   
+  comercial_dias_cierre: number;
+  
   
   
   jjwg_maps_geocode_status_c: string;
@@ -67,6 +69,10 @@ export class LeadsCstm {
   pais_c: string;
   
   direccion_c: string;
+  
+  nuevo_rubro_c: string;
+  
+  direccion_empresa_c: string;
   
   
   actividad_c: string;

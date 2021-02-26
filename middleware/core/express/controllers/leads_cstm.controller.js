@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Fri Feb 19 2021 18:37:45 GMT-0400 (Bolivia Time)
- * Time: 18:37:45
+ * Date: Fri Feb 26 2021 00:23:15 GMT-0400 (Bolivia Time)
+ * Time: 0:23:15
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Fri Feb 19 2021 18:37:45 GMT-0400 (Bolivia Time)
- * Last time updated: 18:37:45
+ * Last date updated: Fri Feb 26 2021 00:23:15 GMT-0400 (Bolivia Time)
+ * Last time updated: 0:23:15
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -185,6 +185,22 @@ leadsCstmCtrl.findOneByCorreoAlternativoC = async (req, res) => {
     try {
         const { correoAlternativoC } = req.params;
         const objLeadCstm = await leadCstmService.findOneByCorreoAlternativoC(correoAlternativoC, req.query);
+        if (!objLeadCstm) {
+            util.setError(404, `Cannot find leadCstm with the lcObjLocalCommonFieldName ${lcObjLocalCommonFieldName}`);
+        } else {
+            util.setSuccess(200, 'Found leadCstm', objLeadCstm);
+        }
+        return util.send(res);
+    } catch(e) {
+        util.setError(400, e);
+        return util.send(res);
+    }
+}
+
+leadsCstmCtrl.findOneByComercialDiasCierre = async (req, res) => {
+    try {
+        const { comercialDiasCierre } = req.params;
+        const objLeadCstm = await leadCstmService.findOneByComercialDiasCierre(comercialDiasCierre, req.query);
         if (!objLeadCstm) {
             util.setError(404, `Cannot find leadCstm with the lcObjLocalCommonFieldName ${lcObjLocalCommonFieldName}`);
         } else {
@@ -597,6 +613,38 @@ leadsCstmCtrl.findOneByDireccionC = async (req, res) => {
     }
 }
 
+leadsCstmCtrl.findOneByNuevoRubroC = async (req, res) => {
+    try {
+        const { nuevoRubroC } = req.params;
+        const objLeadCstm = await leadCstmService.findOneByNuevoRubroC(nuevoRubroC, req.query);
+        if (!objLeadCstm) {
+            util.setError(404, `Cannot find leadCstm with the lcObjLocalCommonFieldName ${lcObjLocalCommonFieldName}`);
+        } else {
+            util.setSuccess(200, 'Found leadCstm', objLeadCstm);
+        }
+        return util.send(res);
+    } catch(e) {
+        util.setError(400, e);
+        return util.send(res);
+    }
+}
+
+leadsCstmCtrl.findOneByDireccionEmpresaC = async (req, res) => {
+    try {
+        const { direccionEmpresaC } = req.params;
+        const objLeadCstm = await leadCstmService.findOneByDireccionEmpresaC(direccionEmpresaC, req.query);
+        if (!objLeadCstm) {
+            util.setError(404, `Cannot find leadCstm with the lcObjLocalCommonFieldName ${lcObjLocalCommonFieldName}`);
+        } else {
+            util.setSuccess(200, 'Found leadCstm', objLeadCstm);
+        }
+        return util.send(res);
+    } catch(e) {
+        util.setError(400, e);
+        return util.send(res);
+    }
+}
+
 leadsCstmCtrl.findOneByActividadC = async (req, res) => {
     try {
         const { actividadC } = req.params;
@@ -735,6 +783,26 @@ leadsCstmCtrl.updateLeadCstmByCorreoAlternativoC = async (req, res) => {
                 return util.send(res);
             }
             const objLeadCstm = await leadCstmService.updateLeadCstmByCorreoAlternativoC(correoAlternativoC, req.body);
+            if (!objLeadCstm) {
+                util.setError(404, `Cannot find leadCstm with the id: ${idC}`);
+            } else {
+                util.setSuccess(200, 'LeadCstm updated', objLeadCstm);
+            }
+            return util.send(res);
+        } catch (e) {
+            util.setError(400, e);
+            return util.send(res);
+        }
+}
+
+leadsCstmCtrl.updateLeadCstmByComercialDiasCierre = async (req, res) => {
+     const { comercialDiasCierre } = req.params;
+        try {
+            if (!util.isChar(idC)) {
+                util.setError(400, 'Please input a valid Char value');
+                return util.send(res);
+            }
+            const objLeadCstm = await leadCstmService.updateLeadCstmByComercialDiasCierre(comercialDiasCierre, req.body);
             if (!objLeadCstm) {
                 util.setError(404, `Cannot find leadCstm with the id: ${idC}`);
             } else {
@@ -1235,6 +1303,46 @@ leadsCstmCtrl.updateLeadCstmByDireccionC = async (req, res) => {
                 return util.send(res);
             }
             const objLeadCstm = await leadCstmService.updateLeadCstmByDireccionC(direccionC, req.body);
+            if (!objLeadCstm) {
+                util.setError(404, `Cannot find leadCstm with the id: ${idC}`);
+            } else {
+                util.setSuccess(200, 'LeadCstm updated', objLeadCstm);
+            }
+            return util.send(res);
+        } catch (e) {
+            util.setError(400, e);
+            return util.send(res);
+        }
+}
+
+leadsCstmCtrl.updateLeadCstmByNuevoRubroC = async (req, res) => {
+     const { nuevoRubroC } = req.params;
+        try {
+            if (!util.isChar(idC)) {
+                util.setError(400, 'Please input a valid Char value');
+                return util.send(res);
+            }
+            const objLeadCstm = await leadCstmService.updateLeadCstmByNuevoRubroC(nuevoRubroC, req.body);
+            if (!objLeadCstm) {
+                util.setError(404, `Cannot find leadCstm with the id: ${idC}`);
+            } else {
+                util.setSuccess(200, 'LeadCstm updated', objLeadCstm);
+            }
+            return util.send(res);
+        } catch (e) {
+            util.setError(400, e);
+            return util.send(res);
+        }
+}
+
+leadsCstmCtrl.updateLeadCstmByDireccionEmpresaC = async (req, res) => {
+     const { direccionEmpresaC } = req.params;
+        try {
+            if (!util.isChar(idC)) {
+                util.setError(400, 'Please input a valid Char value');
+                return util.send(res);
+            }
+            const objLeadCstm = await leadCstmService.updateLeadCstmByDireccionEmpresaC(direccionEmpresaC, req.body);
             if (!objLeadCstm) {
                 util.setError(404, `Cannot find leadCstm with the id: ${idC}`);
             } else {

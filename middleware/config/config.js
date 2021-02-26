@@ -12,6 +12,20 @@ module.exports = {
   system: process.env.SYSTEM,
   sql: process.env.SQL,
 
+  local: {
+    database: process.env.LOCAL_DB_NAME,
+    username: process.env.LOCAL_DB_USER,
+    password: process.env.LOCAL_DB_PASS,
+    host: process.env.LOCAL_DB_HOST,
+    dialect: process.env.LOCAL_DB_DIALECT,
+    secret_token: process.env.LOCAL_SECRET_TOKEN,
+    gate: process.env.LOCAL_PORT,
+    sql: process.env.LOCAL_SQL,
+    access: process.env.LOCAL_ACCESS,
+    domain: process.env.LOCAL_HOST,
+    protocol: process.env.LOCAL_PROTOCOL
+  },
+
   development: {
     database: process.env.DEV_DB_NAME,
     username: process.env.DEV_DB_USER,

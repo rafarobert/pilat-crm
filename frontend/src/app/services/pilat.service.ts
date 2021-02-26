@@ -26,6 +26,7 @@ export class PilatService {
   pipelineStatus:string[] = [];
   isLoading:Boolean;
   currentUser: Users;
+  httpHome: string;
   currentSessId: string;
   userLoggedIn: boolean;
   isSmallScreen:boolean;
@@ -34,7 +35,7 @@ export class PilatService {
   supportsScrollBehavior = supportsScrollBehavior();
   platform:Platform;
   pageTitle:string = '';
-
+  toggleMenuOpened:boolean;
 
   DIC_LEAD_STATUSES = '5fe93b0e3c3708f0b489dcbd';
   DIC_CALL_STATUSES = '603402682f52e342778cd29c';
@@ -221,6 +222,10 @@ export class PilatService {
         resolve();
       });
     });
+  }
+  
+  setUrl() {
+  
   }
   
   setDate(date) {
