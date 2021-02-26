@@ -92,7 +92,7 @@ class ModuleController extends BaseController
      */
     public function updateModuleRecord(Request $request, Response $response, array $args, UpdateModuleParams $params)
     {
-        try {
+        try {	   
             $jsonResponse = $this->moduleService->updateRecord($params, $request);
 
             return $this->generateResponse($response, $jsonResponse, 201);

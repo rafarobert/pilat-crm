@@ -27,7 +27,6 @@ class AccessTokenRepository implements AccessTokenRepositoryInterface
     {
         $this->accessTokenEntity = $accessTokenEntity;
         $this->beanManager = $beanManager;
-	
     }
 
     /**
@@ -51,14 +50,13 @@ class AccessTokenRepository implements AccessTokenRepositoryInterface
      * @inheritdoc
      */
     public function persistNewAccessToken(AccessTokenEntityInterface $accessTokenEntity)
-    {
+    {	
         /** @var \OAuth2Tokens $token */
         $token = $this->beanManager->newBeanSafe(\OAuth2Tokens::class);
         $token->access_token = $accessTokenEntity->getIdentifier();
         $token->access_token_expires = $accessTokenEntity->getExpiryDateTime()->format('Y-m-d H:i:s');
         $token->client = $accessTokenEntity->getClient()->getIdentifier();
-        $token->assigned_user_id = $accessTokenEntity->getUserIdentifier();
-
+	$token->assigned_user_id = $accessTokenEntity->getUserIdentifier();
         $token->save();
     }
 

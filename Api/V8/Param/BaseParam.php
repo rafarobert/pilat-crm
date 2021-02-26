@@ -40,11 +40,11 @@ abstract class BaseParam implements \JsonSerializable
      */
     final public function configure(array $arguments)
     {
+ 	
         $optionsResolver = new OptionsResolver();
         $this->setDefined($optionsResolver, $arguments);
         $this->configureParameters($optionsResolver);
-        $this->parameters = $optionsResolver->resolve($arguments);
-
+        $this->parameters = $optionsResolver->resolve($arguments);	
         return $this;
     }
 

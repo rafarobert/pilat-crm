@@ -15,10 +15,10 @@ class RouteLoader
     public function configureRoutes(App $app)
     {
         $routes = ApiConfig::getRoutes();
-	$i=0;
+
         foreach ($routes as $route) {
             if (ConfigResolver::isFileExist($route)) {
-		require $route;
+                require $route;
             }
         }
     }
