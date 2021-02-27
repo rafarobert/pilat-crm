@@ -34,5 +34,5 @@ if (
     $_REQUEST['module'] == 'AOS_Quotes' ||
     $_REQUEST['module'] == 'Leads'
 ) {
-  echo '<script type="text/javascript" src="frontend/index.js"></script>';
+
 }
