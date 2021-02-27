@@ -27,12 +27,18 @@ $cookie_user_loggedin_value = isset($_SESSION['authenticated_user_id']) ? $_SESS
 setcookie($cookie_user_loggedin, $cookie_user_loggedin_value, time() + (86400 * 30), "/"); // 86400 = 1 day
 
 if (
-    $_REQUEST['module'] == 'Home' ||
-    $_REQUEST['module'] == 'Opportunities' ||
-    $_REQUEST['module'] == 'Accounts' ||
-    $_REQUEST['module'] == 'Contacts' ||
-    $_REQUEST['module'] == 'AOS_Quotes' ||
-    $_REQUEST['module'] == 'Leads'
+//    $_REQUEST['module'] == 'Leads' ||
+//    $_REQUEST['module'] == 'Opportunities' ||
+//    $_REQUEST['module'] == 'Accounts' ||
+//    $_REQUEST['module'] == 'Contacts' ||
+//    $_REQUEST['module'] == 'AOS_Quotes' ||
+    $_REQUEST['module'] == 'Home' 
 ) {
-  echo '<script type="text/javascript" src="frontend/index.js"></script>';
+    if(isset($_REQUEST['action'])){
+        if($_REQUEST['action'] != 'DetailView'){
+//            echo '<script type="text/javascript" src="frontend/index.js"></script>';
+        }
+    } else {
+//        echo '<script type="text/javascript" src="frontend/index.js"></script>';
+    }
 }
