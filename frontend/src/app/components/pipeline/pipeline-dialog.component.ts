@@ -295,9 +295,9 @@ export class PipelineDialogComponent implements OnInit {
                     <br>
                     ${param.name}
                     <br>
-                    <span><b>Celular:</b></span>
+                    <span><b>Celular Contacto:</b></span>
                     <br>
-                    ${param.opportunityAccountsOpportunities ? param.opportunityAccountsOpportunities.accountOpportunityAccounts.phone_office ? param.opportunityAccountsOpportunities.accountOpportunityAccounts.phone_office : 'Sin Especificar' : '<b style="color: #e93239;">No tiene cliente</b>'}
+                    <span class="${!param.opportunityAccountsOpportunities ? 'error-contact' : ''}">${param.opportunityAccountsOpportunities ? param.opportunityAccountsOpportunities.accountOpportunityAccounts.phone_office ? param.opportunityAccountsOpportunities.accountOpportunityAccounts.phone_office : 'Sin Especificar' : 'Sin Especificar'}</span>
                     <br>
                     <span><b>Descripción:</b></span>
                     <br>
@@ -373,9 +373,9 @@ export class PipelineDialogComponent implements OnInit {
                 <span><b>Cliente:</b></span>
                 <br>
                 ${param.first_name ? param.first_name : ''} ${param.last_name ? param.last_name : ''}
-                <span><b>Celular:</b></span>
+                <span><b>Celular Contacto:</b></span>
                 <br>
-                ${param.phone_mobile ? param.phone_mobile : 'Sin especificar'}
+                <span class="${!param.phone_mobile ? 'error-contact' : ''}"></span>${param.phone_mobile ? param.phone_mobile : 'Sin especificar'}
                 <br>
                 <span><b>Descripción:</b></span>
                 <br>
@@ -624,35 +624,39 @@ export class PipelineDialogComponent implements OnInit {
       this.spinnerService.stop(this.spinnerRef);
       this.opportunity = responseOpportunity.data;
       if (this.opportunity.opportunityOpportunitiesContacts) {
-        if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails) {
-          this.dialogService.open('La cotizacion fue enviada exitosamente al correo del contacto', 'Envio de Cotización al Contacto');
-          this.opportunity.sales_stage = this.pipeline.columns[currentColumn].props.par_cod;
-          await this.crmOpportunityService.updateOpportunity(opportunityId,this.opportunity).subscribe(async (res) => {
-            let responseOpportunities = res as {status:string, message:string, data:Opportunities};
-            if(responseOpportunities.data) {
-              transferArrayItem(event.previousContainer.data,
-                event.container.data,
-                event.previousIndex,
-                event.currentIndex);
-              this.setPipeline();
-            }
-          });
-        } else {
-          if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel && this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address) {
-            this.dialogService.open('La cotizacion no fue enviada al cliente, el correo registrado es el siguiente: ' +
-              this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address
-              + ' ¿Desea reintentar el envio al correo del contacto?', 'Envio de Cotización al Contacto', async () => {
-                let responseOpportunities:any = await this.crmOpportunityService.updateOpportunity(opportunityId,this.opportunity).toPromise();
-                this.opportunity = responseOpportunities;
-                if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails) {
-                  this.dialogService.open('La cotizacion fue enviada exitosamente al correo del contacto', 'Envio de Cotización al Contacto');
-                } else {
-                  this.dialogService.open('No pudo ser validado el envio de la cotizacion al correo del contacto, por favor intenta enviarlo mediante WhatsApp', 'Envio de Cotización al Contacto');
-                }
-              });
+        if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts) {
+          if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails) {
+            this.dialogService.open('La cotizacion fue enviada exitosamente al correo del contacto', 'Envio de Cotización al Contacto');
+            this.opportunity.sales_stage = this.pipeline.columns[currentColumn].props.par_cod;
+            await this.crmOpportunityService.updateOpportunity(opportunityId,this.opportunity).subscribe(async (res) => {
+              let responseOpportunities = res as {status:string, message:string, data:Opportunities};
+              if(responseOpportunities.data) {
+                transferArrayItem(event.previousContainer.data,
+                  event.container.data,
+                  event.previousIndex,
+                  event.currentIndex);
+                this.setPipeline();
+              }
+            });
           } else {
-            this.dialogService.open('El contacto de la oportunidad no tiene registrado un correo electrónico', 'Envio de Cotización al Contacto');
+            if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel && this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address) {
+              this.dialogService.open('La cotizacion no fue enviada al cliente, el correo registrado es el siguiente: ' +
+                this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address
+                + ' ¿Desea reintentar el envio al correo del contacto?', 'Envio de Cotización al Contacto', async () => {
+                  let responseOpportunities:any = await this.crmOpportunityService.updateOpportunity(opportunityId,this.opportunity).toPromise();
+                  this.opportunity = responseOpportunities;
+                  if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails) {
+                    this.dialogService.open('La cotizacion fue enviada exitosamente al correo del contacto', 'Envio de Cotización al Contacto');
+                  } else {
+                    this.dialogService.open('No pudo ser validado el envio de la cotizacion al correo del contacto, por favor intenta enviarlo mediante WhatsApp', 'Envio de Cotización al Contacto');
+                  }
+                });
+            } else {
+              this.dialogService.open('El contacto de la oportunidad no tiene registrado un correo electrónico', 'Envio de Cotización al Contacto');
+            }
           }
+        } else {
+          this.dialogService.open('La Oportunidad seleccionada no tiene un cliente, por favor revisa los datos', 'Envio de Cotización al Contacto');
         }
       } else {
         this.dialogService.open('La oportunidad no tiene relacionado un contacto, porfavor actualiza los datos de la oportunidad', 'Envio de Cotización al Contacto');
