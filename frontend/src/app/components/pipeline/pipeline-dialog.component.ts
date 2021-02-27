@@ -291,13 +291,14 @@ export class PipelineDialogComponent implements OnInit {
   <div>
   <div>
       <span hidden="opportunityId">${param.id}</span>
+                    <span class="${!param.opportunityAccountsOpportunities ? 'error-contact' : ''}">Error: Sin Contacto</span>
                     <span><b>Cliente:</b></span>
                     <br>
                     ${param.name}
                     <br>
                     <span><b>Celular Contacto:</b></span>
                     <br>
-                    <span class="${!param.opportunityAccountsOpportunities ? 'error-contact' : ''}">${param.opportunityAccountsOpportunities ? param.opportunityAccountsOpportunities.accountOpportunityAccounts.phone_office ? param.opportunityAccountsOpportunities.accountOpportunityAccounts.phone_office : 'Sin Especificar' : 'Sin Especificar'}</span>
+                    ${param.opportunityAccountsOpportunities ? param.opportunityAccountsOpportunities.accountOpportunityAccounts.phone_office ? param.opportunityAccountsOpportunities.accountOpportunityAccounts.phone_office : 'Sin Especificar' : 'Sin Especificar'}
                     <br>
                     <span><b>Descripción:</b></span>
                     <br>
@@ -369,13 +370,14 @@ export class PipelineDialogComponent implements OnInit {
               pipelineColumn.tickets = prospects.map((param:Leads) => `
 <div>
 <div>
+                <span class="${!param.phone_mobile ? 'error-contact' : ''}">Error: Sin celular</span>
                 <span hidden="prospectId">${param.id}</span>
                 <span><b>Cliente:</b></span>
                 <br>
                 ${param.first_name ? param.first_name : ''} ${param.last_name ? param.last_name : ''}
                 <span><b>Celular Contacto:</b></span>
                 <br>
-                <span class="${!param.phone_mobile ? 'error-contact' : ''}"></span>${param.phone_mobile ? param.phone_mobile : 'Sin especificar'}
+                ${param.phone_mobile ? param.phone_mobile : 'Sin especificar'}
                 <br>
                 <span><b>Descripción:</b></span>
                 <br>
