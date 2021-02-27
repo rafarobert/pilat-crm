@@ -106,9 +106,13 @@ class Opportunity extends SugarBean
  	$parameters_admin = new Administration();
 	$settings = $parameters_admin->retrieveSettings('comercial'); 
 	$days = ' + 15 days';
+
+	/*
 	if($settings->settings['comercial_dias_cierre']){
 	   $days = ' + '.$settings->settings['comercial_dias_cierre'].' days';
 	}
+	*/
+
 	if($sugar_config['default_date_format']){
 	   $date_closed_add =  date('Y-m-d');
 

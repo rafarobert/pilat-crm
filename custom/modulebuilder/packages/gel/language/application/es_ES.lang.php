@@ -38,5 +38,5 @@
  * display the words "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  */
 
-$app_list_strings['moduleList']['G3L_gel_email'] = 'gel_email';
+$app_list_strings['moduleList']['G3L_gel_email'] = 'Email Ctms';
 $app_list_strings['moduleList']['G3L_gel_whatsapp'] = 'gel_whatsapp';

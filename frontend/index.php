@@ -25,14 +25,3 @@ if (!isset($_COOKIE[$cookie_http_referer])) {
 $cookie_user_loggedin = "userLogguedIn";
 $cookie_user_loggedin_value = isset($_SESSION['authenticated_user_id']) ? $_SESSION['authenticated_user_id'] : '';
 setcookie($cookie_user_loggedin, $cookie_user_loggedin_value, time() + (86400 * 30), "/"); // 86400 = 1 day
-
-if (
-    $_REQUEST['module'] == 'Home' ||
-    $_REQUEST['module'] == 'Opportunities' ||
-    $_REQUEST['module'] == 'Accounts' ||
-    $_REQUEST['module'] == 'Contacts' ||
-    $_REQUEST['module'] == 'AOS_Quotes' ||
-    $_REQUEST['module'] == 'Leads'
-) {
-
-}
