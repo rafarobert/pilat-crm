@@ -291,14 +291,16 @@ export class PipelineDialogComponent implements OnInit {
   <div>
   <div>
       <span hidden="opportunityId">${param.id}</span>
-                    <span class="${!param.opportunityAccountsOpportunities ? 'error-contact' : ''}">Error: Sin Contacto</span>
+                    ${!param.opportunityAccountsOpportunities ? '<span class="error-account">Sin Cliente</span><br>' : ''}
+                    ${!param.opportunityOpportunitiesContacts ? '<span class="error-contact">Sin Contacto</span><br>' : ''}
+                    ${!param.opportunityAosQuotes ? '<span class="error-quote">Sin Cotización</span><br>' : ''}
                     <span><b>Cliente:</b></span>
                     <br>
                     ${param.name}
                     <br>
                     <span><b>Celular Contacto:</b></span>
                     <br>
-                    ${param.opportunityAccountsOpportunities ? param.opportunityAccountsOpportunities.accountOpportunityAccounts.phone_office ? param.opportunityAccountsOpportunities.accountOpportunityAccounts.phone_office : 'Sin Especificar' : 'Sin Especificar'}
+                    ${param.opportunityAccountsOpportunities && param.opportunityAccountsOpportunities.accountOpportunityAccounts ? param.opportunityAccountsOpportunities.accountOpportunityAccounts.phone_office ? param.opportunityAccountsOpportunities.accountOpportunityAccounts.phone_office : 'Sin Especificar' : 'Sin Especificar'}
                     <br>
                     <span><b>Descripción:</b></span>
                     <br>
@@ -370,7 +372,7 @@ export class PipelineDialogComponent implements OnInit {
               pipelineColumn.tickets = prospects.map((param:Leads) => `
 <div>
 <div>
-                <span class="${!param.phone_mobile ? 'error-contact' : ''}">Error: Sin celular</span>
+                ${!param.phone_mobile ? '<span class="error-contact">Sin celular</span><br>' : ''}
                 <span hidden="prospectId">${param.id}</span>
                 <span><b>Cliente:</b></span>
                 <br>
@@ -715,7 +717,7 @@ export class PipelineDialogComponent implements OnInit {
                 if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_sent_date) {
                   this.dialogService.open('El correo con el detalle de la cotización fue enviado exitosamente al correo del contacto: '+ this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address);
                 } else {
-                  this.dialogService.open('Hubo un problema al enviar la cotización al correo del contacto: '+ this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address);
+                  this.dialogService.open('Hubo un problema al enviar la cotización al correo del contacto. '+ this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address ? 'Su correo es: ' + this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address : 'No tiene Correo Electronico','Error al enviar la cotización');
                 }
               },4000);
               transferArrayItem(event.previousContainer.data,

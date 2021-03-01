@@ -60,7 +60,7 @@ export class AppComponent implements OnInit{
     this.pilatAuth.userSessId = this.cookieService.get('PHPSESSID');
     this.pilatService.currentSessId = this.pilatAuth.userSessId;
     this.pilatService.httpHome = this.httpHome;
-    this.location.replaceState('/');
+    // this.location.replaceState('/');
     this.crmUserService.getUser(this.pilatAuth.userLoggedId).subscribe(res => {
       let response = res as { status: string, message: string, data: Users };
       this.pilatService.currentUser = response.data;
