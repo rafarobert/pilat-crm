@@ -419,6 +419,9 @@ Ext.application({
 		'fp_event_locations_fp_events_1_c.List',
 		'fp_event_locations_fp_events_1_c.Add',
 	
+		'g3l_gel_email.List',
+		'g3l_gel_email.Add',
+	
 		'g3l_gel_email_audit.List',
 		'g3l_gel_email_audit.Add',
 	
@@ -544,6 +547,9 @@ Ext.application({
 	
 		'outbound_email_audit.List',
 		'outbound_email_audit.Add',
+	
+		'pilat_crons.List',
+		'pilat_crons.Add',
 	
 		'pilat_dictionaries.List',
 		'pilat_dictionaries.Add',
@@ -1009,6 +1015,8 @@ Ext.application({
 		
 		'fp_event_locations_fp_events_1_c',
 		
+		'g3l_gel_email',
+		
 		'g3l_gel_email_audit',
 		
 		'g3l_gel_whatsapp',
@@ -1092,6 +1100,8 @@ Ext.application({
 		'outbound_email',
 		
 		'outbound_email_audit',
+		
+		'pilat_crons',
 		
 		'pilat_dictionaries',
 		
@@ -1493,6 +1503,8 @@ Ext.application({
 		
 		'fp_event_locations_fp_events_1_c',
 		
+		'g3l_gel_email',
+		
 		'g3l_gel_email_audit',
 		
 		'g3l_gel_whatsapp',
@@ -1576,6 +1588,8 @@ Ext.application({
 		'outbound_email',
 		
 		'outbound_email_audit',
+		
+		'pilat_crons',
 		
 		'pilat_dictionaries',
 		
@@ -3327,6 +3341,18 @@ function initTable(table){
 				Ext.getCmp('content-panel').setActiveTab(tab);
 				break;
 			
+			case 'g3l-gel-email':
+				newTab = {
+					xtype: 'g3lGelEmailList',
+					title: table,
+					html: table,
+					id: table,
+					closable: true,
+				};
+				tab = Ext.getCmp('content-panel').add(newTab);
+				Ext.getCmp('content-panel').setActiveTab(tab);
+				break;
+			
 			case 'g3l-gel-email-audit':
 				newTab = {
 					xtype: 'g3lGelEmailAuditList',
@@ -3822,6 +3848,18 @@ function initTable(table){
 			case 'outbound-email-audit':
 				newTab = {
 					xtype: 'outboundEmailAuditList',
+					title: table,
+					html: table,
+					id: table,
+					closable: true,
+				};
+				tab = Ext.getCmp('content-panel').add(newTab);
+				Ext.getCmp('content-panel').setActiveTab(tab);
+				break;
+			
+			case 'pilat-crons':
+				newTab = {
+					xtype: 'pilatCronsList',
 					title: table,
 					html: table,
 					id: table,

@@ -10,7 +10,7 @@ import passport from 'passport';
 import winston from './config/winston';
 import initPassport from './config/passport';
 import initApiRoutes from './api/routes';
-import initCron from './config/cron';
+import initCleanLogs from './config/cron';
 import nodemailer from "nodemailer";
 //import mongoose from "./config/mongoose";
 //import initBpmn from "./config/bpmn";
@@ -24,7 +24,7 @@ dotenv.config();
 
 // Initialize
 initPassport(app);
-initCron();
+initCleanLogs();
 // initBpmn();
 
 //Views
@@ -37,10 +37,10 @@ app.set("host", config.domain || 'localhost');
 app.set("port", config.gate || 8001);
 app.set("sql", config.sql || 1);
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", [config.access]); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", '*'); // update to match the domain you will make the request from
   // res.header("Access-Control-Allow-Origin", "https://corredoresecofuturo.com.bo:7000"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept");
-  res.header("Access-Control-Allow-Credentials", true);
+  //res.header("Access-Control-Allow-Credentials", true);
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   next();
 });

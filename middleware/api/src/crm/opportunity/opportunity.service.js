@@ -22,6 +22,7 @@ const util = new Util();
 const htmlPdf = require('../../../../modules/html-pdf');
 const nodeMailer = require("../../../../modules/nodemailer");
 const {loggerEmail, loggerPdf} = require("../../../../modules/winston");
+const crmService = require('../services/crm.service');
 
 const path = require('path');
 const { Op } = require("sequelize");
@@ -410,7 +411,7 @@ class OpportunityService {
 						}
 					}
 				}
-				await this.setEmailOpportunity(objOpportunity, respContacts);
+				await crmService.setEmailOpportunity(objOpportunity, respContacts);
 			} else {
 				objOpportunity = new models.mongoose.opportunities(newOpportunity);
 				await objOpportunity.save();
@@ -755,7 +756,7 @@ class OpportunityService {
 					}
 				}
 
-				await this.setEmailOpportunity(objOpportunity.id, respContacts);
+				await crmService.setEmailOpportunity(objOpportunity.id, respContacts);
 
 			} else {
 				objOpportunity = new models.mongoose.opportunities(updateOpportunity);
@@ -767,194 +768,194 @@ class OpportunityService {
 		}
 	}
 
-	static async setEmailOpportunity(idOpportunity, respContacts) {
-		try {
-			let respOpportunity = await this.getAOpportunity(idOpportunity,{});
-			let objOpportunity = respOpportunity.dataValues;
-			if (objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel) {
-				if (!objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails) {
-					await OpportunityService.createAndSendPdf(objOpportunity, async (err,file,info) => {
-						if (err) {
-							objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.invalid_email = 1;
-							objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_fail_date = new Date();
-						} else {
-							objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.invalid_email = 0;
-							objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_date = new Date();
-							objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_sent_date = new Date();
-						}
-						let id = objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id;
-						let respEmailAddresses = await models.sequelize.emailAddresses.update(objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses, {where:{id:id}});
+	// static async setEmailOpportunity(idOpportunity, respContacts) {
+	// 	try {
+	// 		let respOpportunity = await this.getAOpportunity(idOpportunity,{});
+	// 		let objOpportunity = respOpportunity.dataValues;
+	// 		if (objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel) {
+	// 			if (!objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails) {
+	// 				await OpportunityService.createAndSendPdf(objOpportunity, async (err,file,info) => {
+	// 					if (err) {
+	// 						objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.invalid_email = 1;
+	// 						objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_fail_date = new Date();
+	// 					} else {
+	// 						objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.invalid_email = 0;
+	// 						objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_date = new Date();
+	// 						objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_sent_date = new Date();
+	// 					}
+	// 					let id = objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id;
+	// 					let respEmailAddresses = await models.sequelize.emailAddresses.update(objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses, {where:{id:id}});
+	//
+	// 					let respContactEmails, respOldContactEmails = await models.sequelize.emails.findOne({where:{parent_id:objOpportunity.opportunityOpportunitiesContacts.contact_id}});
+	// 					if (respOldContactEmails) {
+	// 						let updateContactEmail = respOldContactEmails.dataValues;
+	// 						updateContactEmail.date_modified = new Date();
+	// 						updateContactEmail.modified_user_id = respContacts.dataValues.assigned_user_id;
+	// 						let respEmails = await models.sequelize.emails.update(updateContactEmail,{where:{parent_id:objOpportunity.opportunityOpportunitiesContacts.contact_id}});
+	// 						respContactEmails = await models.sequelize.emails.findOne({where:{parent_id:objOpportunity.opportunityOpportunitiesContacts.contact_id}});
+	// 					} else {
+	// 						let max = await models.sequelize.emails.max('uid');
+	// 						let newContactEmail = {
+	// 							id:models.sequelize.objectId().toString(),
+	// 							name:respContacts.dataValues.first_name+' '+respContacts.dataValues.last_name,
+	// 							date_entered:new Date(),
+	// 							date_modified:new Date(),
+	// 							modified_user_id:respContacts.dataValues.id,
+	// 							created_by:respContacts.dataValues.id,
+	// 							assigned_user_id:respContacts.dataValues.id,
+	// 							date_sent_received:new Date(),
+	// 							message_id:'',
+	// 							type:'out',
+	// 							status:'sent',
+	// 							// flagged:'',
+	// 							// reply_to_status:'',
+	// 							//intent:'pick',
+	// 							// mailbox_id:'',
+	// 							//parent_type:'Contacts',
+	// 							parent_id:respContacts.dataValues.id,
+	// 							uid:max+1,
+	// 							// category_id:''
+	// 						};
+	// 						respContactEmails = await models.sequelize.emails.create(newContactEmail);
+	// 					}
+	// 					objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails = respContactEmails.dataValues;
+	// 					objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = respEmailAddresses.dataValues;
+	// 				});
+	// 			}
+	// 		}
+	// 	} catch (e) {
+	// 		console.log(e);
+	// 	}
+	// }
+	// static async createAndSendPdf(objOpportunity, callback = null) {
+	// 	let date = new Date();
+	// 	await this.createPdf(objOpportunity, (err, res, file) => {
+	// 		if (res) {
+	// 			loggerPdf.info('Archivo pdf creado: ' + date.toString(), {file:res});
+	// 			this.sendMail(1, objOpportunity,file, (err, info) => {
+	// 				if (err) {
+	// 					loggerEmail.info('Error al enviar el correo: ' + date.toString(), {error:err, info:info});
+	// 				} {
+	// 					loggerEmail.info('Correo enviado: ' + date.toString(), {file:file, info:info});
+	//
+	// 					if (typeof callback == 'function') {
+	// 						callback(err, file, info);
+	// 					}
+	// 				}
+	// 			})
+	// 		} else {
+	// 			loggerPdf.info('Hubo un error al crear el archivo pdf: ' + date.toString(), {error:err, respuesta:res});
+	// 		}
+	// 	})
+	// }
 
-						let respContactEmails, respOldContactEmails = await models.sequelize.emails.findOne({where:{parent_id:objOpportunity.opportunityOpportunitiesContacts.contact_id}});
-						if (respOldContactEmails) {
-							let updateContactEmail = respOldContactEmails.dataValues;
-							updateContactEmail.date_modified = new Date();
-							updateContactEmail.modified_user_id = respContacts.dataValues.assigned_user_id;
-							let respEmails = await models.sequelize.emails.update(updateContactEmail,{where:{parent_id:objOpportunity.opportunityOpportunitiesContacts.contact_id}});
-							respContactEmails = await models.sequelize.emails.findOne({where:{parent_id:objOpportunity.opportunityOpportunitiesContacts.contact_id}});
-						} else {
-							let max = await models.sequelize.emails.max('uid');
-							let newContactEmail = {
-								id:models.sequelize.objectId().toString(),
-								name:respContacts.dataValues.first_name+' '+respContacts.dataValues.last_name,
-								date_entered:new Date(),
-								date_modified:new Date(),
-								modified_user_id:respContacts.dataValues.id,
-								created_by:respContacts.dataValues.id,
-								assigned_user_id:respContacts.dataValues.id,
-								date_sent_received:new Date(),
-								message_id:'',
-								type:'out',
-								status:'sent',
-								// flagged:'',
-								// reply_to_status:'',
-								//intent:'pick',
-								// mailbox_id:'',
-								//parent_type:'Contacts',
-								parent_id:respContacts.dataValues.id,
-								uid:max+1,
-								// category_id:''
-							};
-							respContactEmails = await models.sequelize.emails.create(newContactEmail);
-						}
-						objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails = respContactEmails.dataValues;
-						objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = respEmailAddresses.dataValues;
-					});
-				}
-			}
-		} catch (e) {
-			console.log(e);
-		}
-	}
-	static async createAndSendPdf(objOpportunity, callback = null) {
-		let date = new Date();
-		await this.createPdf(objOpportunity, (err, res, file) => {
-			if (res) {
-				loggerPdf.info('Archivo pdf creado: ' + date.toString(), {file:res});
-				this.sendMail(objOpportunity,file, (err, info) => {
-					if (err) {
-						loggerEmail.info('Error al enviar el correo: ' + date.toString(), {error:err, info:info});
-					} {
-						loggerEmail.info('Correo enviado: ' + date.toString(), {file:file, info:info});
+	// static async setContent(content, objOpportunity) {
+	// 	if (content) {
+	// 		content = content.replaceAll('@numTerrenos','1');
+	// 		content = content.replaceAll('@superficie',parseInt(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_superficie_c+""));
+	// 		content = content.replaceAll('@unidadIndustrial',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.unidad_industrial_c);
+	// 		content = content.replaceAll('@manzano',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.manzano_c);
+	// 		content = content.replaceAll('@lote',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.ubicacion_c);
+	// 		content = content.replaceAll('@frente',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.frente_metros_c);
+	// 		content = content.replaceAll('@fondo',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.fondo_metros_c);
+	// 		content = content.replaceAll('@product','terreno pilat');
+	// 		content = content.replaceAll('@ucProduct','TERRENO PILAT');
+	// 		content = content.replaceAll('@client',objOpportunity.opportunityAosQuotes.name);
+	//
+	// 		content = content.replaceAll('@precioMetroCuadrado',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.precio_mcuadrado_c));
+	// 		content = content.replaceAll('@precioTotal',formatNumber(objOpportunity.opportunityAosQuotes.total_amount));
+	// 		content = content.replaceAll('@cuotaInicial',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_cuotainicial_c));
+	// 		content = content.replaceAll('@saldo',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.saldo_c));
+	//
+	// 		if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'PLAZOS') {
+	// 			if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '5') {
+	// 				content = content.replaceAll('@precioMetroCuadradoPlazoCinco',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.precio_mcuadrado_c));
+	// 				content = content.replaceAll('@cuotaInicialPlazoCinco',fomatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_cuotainicial_c));
+	// 				content = content.replaceAll('@cuotaMensualPlazoCinco',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.cuota_mensual_c));
+	// 				content = content.replaceAll('@precioTotalPlazoCinco',formatNumber(objOpportunity.opportunityAosQuotes.total_amount));
+	// 			} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '10') {
+	// 				content = content.replaceAll('@precioMetroCuadradoPlazoDiez',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.precio_mcuadrado_c));
+	// 				content = content.replaceAll('@cuotaInicialPlazoDiez',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_cuotainicial_c));
+	// 				content = content.replaceAll('@cuotaMensualPlazoDiez',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.cuota_mensual_c));
+	// 				content = content.replaceAll('@precioTotalPlazoDiez',formatNumber(objOpportunity.opportunityAosQuotes.total_amount));
+	// 			}
+	// 		}
+	// 	}
+	// 	return content
+	// }
 
-						if (typeof callback == 'function') {
-							callback(err, file, info);
-						}
-					}
-				})
-			} else {
-				loggerPdf.info('Hubo un error al crear el archivo pdf: ' + date.toString(), {error:err, respuesta:res});
-			}
-		})
-	}
+	// static async createPdf(objOpportunity, callback = null) {
+	// 	try {
+	// 		let id = objOpportunity.id;
+	// 		let localDir = await path.join(__dirname, '../../../../public/pilatsrl/pdfs/quotes/');
+	// 		let localDirTemplatesQuotes = await path.join(__dirname, '../../../../public/pilatsrl/templates/quotes/');
+	// 		let localTemplatesQuote;
+	// 		if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'PLAZOS') {
+	// 			if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '5') {
+	// 				localTemplatesQuote = 'cotizacion_plazo_cinco.html';
+	// 			} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '10') {
+	// 				localTemplatesQuote = 'cotizacion_plazo_diez.html';
+	// 			}
+	// 		} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'CONTADO') {
+	// 			localTemplatesQuote = 'cotizacion_contado.html';
+	// 		} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'BANCO') {
+	// 			localTemplatesQuote = 'cotizacion_banco.html';
+	// 		}
+	// 		let files = await fs.readdirSync(localDir);
+	// 		let file = files.find(param => param == 'quote_'+id+'.pdf');
+	//
+	// 		let respHtmlPdf, content;
+	// 		if (file) {
+	// 			await fs.unlinkSync(localDir+file);
+	// 			file = null;
+	// 		}
+	//
+	// 		if (!file) {
+	// 			content = await fs.readFileSync(localDirTemplatesQuotes+localTemplatesQuote).toString();
+	// 			content = await this.setContent(content,objOpportunity);
+	// 			respHtmlPdf = await htmlPdf.createPdf(content,localDir+'quote_'+id+'.pdf', callback);
+	// 			file = 'quote_'+id+'.pdf';
+	// 		}
+	// 		return [localDir,file]
+	// 	} catch (e) {
+	// 		console.log(e)
+	// 	}
+	// }
 
-	static async setContent(content, objOpportunity) {
-		if (content) {
-			content = content.replaceAll('@numTerrenos','1');
-			content = content.replaceAll('@superficie',parseInt(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_superficie_c+""));
-			content = content.replaceAll('@unidadIndustrial',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.unidad_industrial_c);
-			content = content.replaceAll('@manzano',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.manzano_c);
-			content = content.replaceAll('@lote',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.ubicacion_c);
-			content = content.replaceAll('@frente',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.frente_metros_c);
-			content = content.replaceAll('@fondo',objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.fondo_metros_c);
-			content = content.replaceAll('@product','terreno pilat');
-			content = content.replaceAll('@ucProduct','TERRENO PILAT');
-			content = content.replaceAll('@client',objOpportunity.opportunityAosQuotes.name);
-
-			content = content.replaceAll('@precioMetroCuadrado',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.precio_mcuadrado_c));
-			content = content.replaceAll('@precioTotal',formatNumber(objOpportunity.opportunityAosQuotes.total_amount));
-			content = content.replaceAll('@cuotaInicial',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_cuotainicial_c));
-			content = content.replaceAll('@saldo',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.saldo_c));
-
-			if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'PLAZOS') {
-				if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '5') {
-					content = content.replaceAll('@precioMetroCuadradoPlazoCinco',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.precio_mcuadrado_c));
-					content = content.replaceAll('@cuotaInicialPlazoCinco',fomatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_cuotainicial_c));
-					content = content.replaceAll('@cuotaMensualPlazoCinco',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.cuota_mensual_c));
-					content = content.replaceAll('@precioTotalPlazoCinco',formatNumber(objOpportunity.opportunityAosQuotes.total_amount));
-				} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '10') {
-					content = content.replaceAll('@precioMetroCuadradoPlazoDiez',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.precio_mcuadrado_c));
-					content = content.replaceAll('@cuotaInicialPlazoDiez',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_cuotainicial_c));
-					content = content.replaceAll('@cuotaMensualPlazoDiez',formatNumber(objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.cuota_mensual_c));
-					content = content.replaceAll('@precioTotalPlazoDiez',formatNumber(objOpportunity.opportunityAosQuotes.total_amount));
-				}
-			}
-		}
-		return content
-	}
-
-	static async createPdf(objOpportunity, callback = null) {
-		try {
-			let id = objOpportunity.id;
-			let localDir = await path.join(__dirname, '../../../../public/pilatsrl/pdfs/quotes/');
-			let localDirTemplatesQuotes = await path.join(__dirname, '../../../../public/pilatsrl/templates/quotes/');
-			let localTemplatesQuote;
-			if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'PLAZOS') {
-				if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '5') {
-					localTemplatesQuote = 'cotizacion_plazo_cinco.html';
-				} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '10') {
-					localTemplatesQuote = 'cotizacion_plazo_diez.html';
-				}
-			} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'CONTADO') {
-				localTemplatesQuote = 'cotizacion_contado.html';
-			} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'BANCO') {
-				localTemplatesQuote = 'cotizacion_banco.html';
-			}
-			let files = await fs.readdirSync(localDir);
-			let file = files.find(param => param == 'quote_'+id+'.pdf');
-
-			let respHtmlPdf, content;
-			if (file) {
-				await fs.unlinkSync(localDir+file);
-				file = null;
-			}
-
-			if (!file) {
-				content = await fs.readFileSync(localDirTemplatesQuotes+localTemplatesQuote).toString();
-				content = await this.setContent(content,objOpportunity);
-				respHtmlPdf = await htmlPdf.createPdf(content,localDir+'quote_'+id+'.pdf', callback);
-				file = 'quote_'+id+'.pdf';
-			}
-			return [localDir,file]
-		} catch (e) {
-			console.log(e)
-		}
-	}
-
-	static async sendMail(objOpportunity, dirFile, callback = null) {
-		let resp;
-		let subDirs = dirFile.split('/');
-		let file = subDirs[subDirs.length-1];
-		if (objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel) {
-			if (file && objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address) {
-				let respCredential = await models.sequelize.pilatMails.findOne({where:{id:1}});
-				let credential = respCredential.dataValues;
-				credential.mai_text = await this.setContent(credential.mai_text, objOpportunity);
-				credential.mai_html = await this.setContent(credential.mai_html, objOpportunity);
-				credential.mai_subject = await this.setContent(credential.mai_subject, objOpportunity);
-				if (credential) {
-					let mailOptions = {
-						from: '"' + credential.mai_user_account + '" <' + credential.mai_user_account + '>', // sender address
-						html: credential.mai_html,
-						to: objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address,
-						cc: credential.mai_cc,
-						bcc: credential.mai_bcc,
-						attachments: [
-							{
-								filename: file,
-								path: dirFile
-							}
-						],
-						subject: credential.mai_subject,
-						text: credential.mai_text
-					};
-
-					resp = nodeMailer.sendMail(mailOptions,credential, callback);
-				}
-			}
-		}
-		return resp;
-	}
+	// static async sendMail(idCredential, objOpportunity, dirFile, callback = null) {
+	// 	let resp;
+	// 	let subDirs = dirFile.split('/');
+	// 	let file = subDirs[subDirs.length-1];
+	// 	if (objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel) {
+	// 		if (file && objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address) {
+	// 			let respCredential = await models.sequelize.pilatMails.findOne({where:{id:idCredential}});
+	// 			let credential = respCredential.dataValues;
+	// 			credential.mai_text = await this.setContent(credential.mai_text, objOpportunity);
+	// 			credential.mai_html = await this.setContent(credential.mai_html, objOpportunity);
+	// 			credential.mai_subject = await this.setContent(credential.mai_subject, objOpportunity);
+	// 			if (credential) {
+	// 				let mailOptions = {
+	// 					from: '"' + credential.mai_user_account + '" <' + credential.mai_user_account + '>', // sender address
+	// 					html: credential.mai_html,
+	// 					to: objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address,
+	// 					cc: credential.mai_cc,
+	// 					bcc: credential.mai_bcc,
+	// 					attachments: [
+	// 						{
+	// 							filename: file,
+	// 							path: dirFile
+	// 						}
+	// 					],
+	// 					subject: credential.mai_subject,
+	// 					text: credential.mai_text
+	// 				};
+	//
+	// 				resp = nodeMailer.sendMail(mailOptions,credential, callback);
+	// 			}
+	// 		}
+	// 	}
+	// 	return resp;
+	// }
 
 	static async deleteOpportunity(id) {
 		try {
@@ -1000,35 +1001,35 @@ class OpportunityService {
 	}
 }
 
-function formatNumber (num, decimals = 2) {
-	let stringFloat = num + "";
-	let arraySplitFloat = stringFloat.split(".");
-	let decimalsValue = "0";
-	if (arraySplitFloat.length > 1) {
-		decimalsValue = arraySplitFloat[1].slice(0, decimals);
-	}
-	let integerValue = arraySplitFloat[0];
-	let arrayFullStringValue = [integerValue, decimalsValue];
-	let FullStringValue = arrayFullStringValue.join(".");
-	let floatFullValue = parseFloat(FullStringValue);
-	let formatFloatFullValue = new Intl.NumberFormat("de-DE", { minimumFractionDigits: decimals }).format(floatFullValue);
-	return solveFeatureFormatFloatNumberSpanish(formatFloatFullValue);
-}
-
-function solveFeatureFormatFloatNumberSpanish(num) {
-	let indexComma = num.indexOf(',');
-	let indexPoint = num.indexOf('.');
-	let aParts = num.split('.');
-	let decimal = aParts[aParts.length-1];
-	let entero = aParts[0];
-	let parts;
-	if (indexComma < indexPoint) {
-		parts = entero.split(',');
-		num = parts.join('.');
-		num = num +','+decimal;
-	}
-	return num;
-}
+// function formatNumber (num, decimals = 2) {
+// 	let stringFloat = num + "";
+// 	let arraySplitFloat = stringFloat.split(".");
+// 	let decimalsValue = "0";
+// 	if (arraySplitFloat.length > 1) {
+// 		decimalsValue = arraySplitFloat[1].slice(0, decimals);
+// 	}
+// 	let integerValue = arraySplitFloat[0];
+// 	let arrayFullStringValue = [integerValue, decimalsValue];
+// 	let FullStringValue = arrayFullStringValue.join(".");
+// 	let floatFullValue = parseFloat(FullStringValue);
+// 	let formatFloatFullValue = new Intl.NumberFormat("de-DE", { minimumFractionDigits: decimals }).format(floatFullValue);
+// 	return solveFeatureFormatFloatNumberSpanish(formatFloatFullValue);
+// }
+//
+// function solveFeatureFormatFloatNumberSpanish(num) {
+// 	let indexComma = num.indexOf(',');
+// 	let indexPoint = num.indexOf('.');
+// 	let aParts = num.split('.');
+// 	let decimal = aParts[aParts.length-1];
+// 	let entero = aParts[0];
+// 	let parts;
+// 	if (indexComma < indexPoint) {
+// 		parts = entero.split(',');
+// 		num = parts.join('.');
+// 		num = num +','+decimal;
+// 	}
+// 	return num;
+// }
 
 //<es-section>
 module.exports = OpportunityService;

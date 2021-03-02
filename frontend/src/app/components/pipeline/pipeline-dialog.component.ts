@@ -68,6 +68,7 @@ import {DialogService} from "../../services/dialog.service";
 import {DialogsComponent} from "../dialogs/dialogs.component";
 import {CallsUsers} from "../../../core/models/callsUsers";
 import {Emails} from "../../../core/models/emails";
+import {PilatCrons} from "../../../core/models/pilatCrons";
 
 @Component({
   selector: 'app-pipeline-dialog',
@@ -228,8 +229,8 @@ export class PipelineDialogComponent implements OnInit {
     
     let responseProspectStages:any = await this.pilatParamService.getAllPilatParams([],{par_dictionary_id:this.pilatService.DIC_STAGES_PROSPECTS},[['par_order','asc']]).toPromise();
     let responseOpportunityStages:any = await this.pilatParamService.getAllPilatParams([],{par_dictionary_id:this.pilatService.DIC_STAGES_OPPORTUNITIES},[['par_order','asc']]).toPromise();
-    let responseStageOpportunities:any = await this.crmOpportunityService.getAllOpportunities([],{assigned_user_id:this.pilatService.currentUser.id}, [['date_entered',order]]).toPromise();
-    let responseStageProspects:any = await this.crmLeadService.getLeads([],{assigned_user_id:this.pilatService.currentUser.id}, [['date_entered',order]]).toPromise();
+    let responseStageOpportunities:any = await this.crmOpportunityService.getAllOpportunities([],{assigned_user_id:this.pilatService.currentUser.id}, [['date_modified',order]]).toPromise();
+    let responseStageProspects:any = await this.crmLeadService.getLeads([],{assigned_user_id:this.pilatService.currentUser.id}, [['date_modified',order]]).toPromise();
     
     let prospectStages:PilatParams[] = responseProspectStages.data;
     let opportunityStages:PilatParams[] = responseOpportunityStages.data;
@@ -818,9 +819,17 @@ export class PipelineDialogComponent implements OnInit {
         // After dialog is closed we're doing frontend updates
         // For add we're just pushing a new row inside leadService
         this.spinnerRef = this.spinnerService.start();
+        
+        if (this.crmLeadService.leadData.leadCallsLeads.callLeadCalls.date_start) {
+          let dateStart = this.crmLeadService.leadData.leadCallsLeads.callLeadCalls.date_start;
+          let dateLlamada = this.crmLeadService.leadData.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c;
+          let newPilatCron = new PilatCrons();
+        }
+        
         await this.crmLeadService.createLead(this.crmLeadService.leadData).subscribe(async (res) => {
           let response = res as { status: string, message: string, data: any };
           this.spinnerService.stop(this.spinnerRef);
+          
           if (response.data && response.data.length) {
             let leads:Leads[] = response.data;
             const dialogRef = this.dialog.open(DialogAlreadyLeadComponent, {

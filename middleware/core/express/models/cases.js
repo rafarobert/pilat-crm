@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Fri Feb 26 2021 00:22:37 GMT-0400 (Bolivia Time)
- * Time: 0:22:37
+ * Date: Tue Mar 02 2021 14:00:35 GMT-0400 (Bolivia Time)
+ * Time: 14:0:35
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Fri Feb 26 2021 00:22:37 GMT-0400 (Bolivia Time)
- * Last time updated: 0:22:37
+ * Last date updated: Tue Mar 02 2021 14:00:35 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:0:35
  *
  * Caution: es-sections will be replaced by script execution
  */

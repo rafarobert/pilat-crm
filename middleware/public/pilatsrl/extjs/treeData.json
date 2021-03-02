@@ -811,6 +811,12 @@
         },
         
         {
+            "text":"G3lGelEmail",
+            "id":"g3l-gel-email",
+            "leaf":true
+        },
+        
+        {
             "text":"G3lGelEmailAudit",
             "id":"g3l-gel-email-audit",
             "leaf":true
@@ -1059,6 +1065,12 @@
         {
             "text":"OutboundEmailAudit",
             "id":"outbound-email-audit",
+            "leaf":true
+        },
+        
+        {
+            "text":"PilatCrons",
+            "id":"pilat-crons",
             "leaf":true
         },
         
