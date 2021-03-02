@@ -21,6 +21,7 @@ const env = process.env.NODE_ENV || 'development';
 const config = configJson[env];
 const app = express();
 
+app.options('*', cors()) // include before other routes
 app.use(cors());
 dotenv.config();
 
