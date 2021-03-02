@@ -775,15 +775,15 @@ class OpportunityService {
 				if (!objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails) {
 					await OpportunityService.createAndSendPdf(objOpportunity, async (err,file,info) => {
 						if (err) {
-							objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.invalid_email = 1;
-							objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_fail_date = new Date();
+							objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.invalid_email = 1;
+							objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_fail_date = new Date();
 						} else {
-							objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.invalid_email = 0;
-							objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_date = new Date();
-							objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_sent_date = new Date();
+							objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.invalid_email = 0;
+							objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_date = new Date();
+							objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_sent_date = new Date();
 						}
-						let id = objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id;
-						let respEmailAddresses = await models.sequelize.emailAddresses.update(objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses, {where:{id:id}});
+						let id = objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id;
+						let respEmailAddresses = await models.sequelize.emailAddresses.update(objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses, {where:{id:id}});
 
 						let respContactEmails, respOldContactEmails = await models.sequelize.emails.findOne({where:{parent_id:objOpportunity.opportunityOpportunitiesContacts.contact_id}});
 						if (respOldContactEmails) {
@@ -818,7 +818,7 @@ class OpportunityService {
 							respContactEmails = await models.sequelize.emails.create(newContactEmail);
 						}
 						objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails = respContactEmails.dataValues;
-						objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = respEmailAddresses.dataValues;
+						objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = respEmailAddresses.dataValues;
 					});
 				}
 			}
@@ -925,8 +925,8 @@ class OpportunityService {
 		let resp;
 		let subDirs = dirFile.split('/');
 		let file = subDirs[subDirs.length-1];
-		if (objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel) {
-			if (file && objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address) {
+		if (objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel) {
+			if (file && objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address) {
 				let respCredential = await models.sequelize.pilatMails.findOne({where:{id:1}});
 				let credential = respCredential.dataValues;
 				credential.mai_text = await this.setContent(credential.mai_text, objOpportunity);
@@ -936,7 +936,7 @@ class OpportunityService {
 					let mailOptions = {
 						from: '"' + credential.mai_user_account + '" <' + credential.mai_user_account + '>', // sender address
 						html: credential.mai_html,
-						to: objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address,
+						to: objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address,
 						cc: credential.mai_cc,
 						bcc: credential.mai_bcc,
 						attachments: [

@@ -303,7 +303,7 @@ export class PipelineDialogComponent implements OnInit {
                     ${param.opportunityOpportunitiesContacts && param.opportunityOpportunitiesContacts.opportunityContactContacts && param.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails ? '' : '<span class="warn-email">Sin Correo Enviado</span><br>'}
                     <span><b>Cliente:</b></span>
                     <br>
-                    ${param.name}
+                    ${param.opportunityAccountsOpportunities.accountOpportunityAccounts.name}
                     <br>
                     <span><b>Celular Contacto:</b></span>
                     <br>
@@ -886,6 +886,7 @@ export class PipelineDialogComponent implements OnInit {
               this.spinnerRef = this.spinnerService.start();
               let responseLead:any = await this.crmLeadService.updateLead(prospect.id, this.crmLeadService.leadData).toPromise()
               this.spinnerService.stop(this.spinnerRef);
+              this.setPipeline();
               if (responseLead.data) {
                 // let lead:Leads = response.data;
                 //
@@ -947,6 +948,7 @@ export class PipelineDialogComponent implements OnInit {
           this.pilatService.isLoading = true;
           this.spinnerRef = this.spinnerService.start();
           let responseOpportunity:any = await this.crmOpportunityService.updateOpportunity(opportunity.id, this.crmOpportunityService.opportunityData).toPromise();
+          this.setPipeline();
           this.spinnerService.stop(this.spinnerRef);
           this.pilatService.isLoading = false;
         }
