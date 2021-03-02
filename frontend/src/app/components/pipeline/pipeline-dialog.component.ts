@@ -304,7 +304,7 @@ export class PipelineDialogComponent implements OnInit {
                     ${param.opportunityOpportunitiesContacts && param.opportunityOpportunitiesContacts.opportunityContactContacts && param.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails ? '' : '<span class="warn-email">Sin Correo Enviado</span><br>'}
                     <span><b>Cliente:</b></span>
                     <br>
-                    ${param.opportunityAccountsOpportunities.accountOpportunityAccounts.name}
+                    ${param.opportunityAccountsOpportunities ? param.opportunityAccountsOpportunities.accountOpportunityAccounts.name : 'Sin Especificar'}
                     <br>
                     <span><b>Celular Contacto:</b></span>
                     <br>

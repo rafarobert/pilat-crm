@@ -16,13 +16,10 @@ import nodemailer from "nodemailer";
 //import initBpmn from "./config/bpmn";
 
 const configJson = require('./config/config');
-const cors = require('cors');
 const env = process.env.NODE_ENV || 'development';
 const config = configJson[env];
 const app = express();
 
-app.options('*', cors()) // include before other routes
-app.use(cors());
 dotenv.config();
 
 // Initialize
@@ -60,6 +57,7 @@ app.use(expressSession({secret: 'anystringoftext',
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
 app.use(express.json());
 
 // APP - VIEWS
