@@ -16,10 +16,12 @@ import nodemailer from "nodemailer";
 //import initBpmn from "./config/bpmn";
 
 const configJson = require('./config/config');
+const cors = require('cors');
 const env = process.env.NODE_ENV || 'development';
 const config = configJson[env];
 const app = express();
 
+app.use(cors());
 dotenv.config();
 
 // Initialize
@@ -37,10 +39,10 @@ app.set("host", config.domain || 'localhost');
 app.set("port", config.gate || 8001);
 app.set("sql", config.sql || 1);
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", '*'); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", [config.access]); // update to match the domain you will make the request from
   // res.header("Access-Control-Allow-Origin", "https://corredoresecofuturo.com.bo:7000"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept");
-  //res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Credentials", true);
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   next();
 });
@@ -57,7 +59,6 @@ app.use(expressSession({secret: 'anystringoftext',
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-
 app.use(express.json());
 
 // APP - VIEWS
@@ -74,15 +75,6 @@ app.use("/", require("./app/src/crud/crud.routes"));
 // app.use("/", require("./api/src/auth/auth.routes"));
 
 initApiRoutes(app);
-
-//Nodemailer
-let transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: "rgutierrez@gmail.com",
-    pass: "095RAFAgu"
-  }
-});
 
 // Starting the server
 app.listen(app.get("port"), () => {
