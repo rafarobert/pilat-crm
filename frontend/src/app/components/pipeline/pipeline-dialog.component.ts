@@ -297,10 +297,10 @@ export class PipelineDialogComponent implements OnInit {
   <div>
   <div>
       <span hidden="opportunityId">${param.id}</span>
-                    ${!param.opportunityAccountsOpportunities ? '<span class="error-account">Sin Cliente</span><br>' : ''}
-                    ${!param.opportunityOpportunitiesContacts ? '<span class="error-contact">Sin Contacto</span><br>' : ''}
-                    ${!param.opportunityAosQuotes ? '<span class="error-quote">Sin Cotización</span><br>' : ''}
-                    ${param.opportunityOpportunitiesContacts ? !param.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails ? '<span class="warn-email">Sin Correo Enviado</span><br>' : '' : ''}
+                    ${param.opportunityAccountsOpportunities ? '' : '<span class="error-account">Sin Cliente</span><br>'}
+                    ${param.opportunityOpportunitiesContacts ? '' : '<span class="error-contact">Sin Contacto</span><br>'}
+                    ${param.opportunityAosQuotes ? '' : '<span class="error-quote">Sin Cotización</span><br>'}
+                    ${param.opportunityOpportunitiesContacts && param.opportunityOpportunitiesContacts.opportunityContactContacts && param.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails ? '' : '<span class="warn-email">Sin Correo Enviado</span><br>'}
                     <span><b>Cliente:</b></span>
                     <br>
                     ${param.name}
@@ -849,105 +849,109 @@ export class PipelineDialogComponent implements OnInit {
     this.afterTomorrow = new Date(parseInt(yearAfterA), parseInt(monthAfterA), parseInt(dayAfterA));
     
     let txtItem = event['target'].innerHTML;
-    
-    if (txtItem.split('<span hidden="prospectId">')[1]) {
-      let prospectId = txtItem.split('<span hidden="prospectId">')[1].split('</span>')[0];
-      let prospect:Leads;
-      if (prospectId) {
-        this.spinnerRef = this.spinnerService.start();
-        let responseLead:any = await this.crmLeadService.getLead(prospectId).toPromise();
-        this.spinnerService.stop(this.spinnerRef);
-        prospect = responseLead.data;
-        prospect.leadLeadsCstm = prospect.leadLeadsCstm ? prospect.leadLeadsCstm : new LeadsCstm();
-        prospect.leadCallsLeads = prospect.leadCallsLeads ? prospect.leadCallsLeads : new CallsLeads();
-        prospect.leadCallsLeads.callLeadCalls = prospect.leadCallsLeads.callLeadCalls ? prospect.leadCallsLeads.callLeadCalls : new Calls();
-        prospect.leadCallsLeads.callLeadCalls.name = prospect.first_name+' '+prospect.last_name;
-        prospect.leadCallsLeads.callLeadCalls.callCallsCstm = prospect.leadCallsLeads.callLeadCalls.callCallsCstm ? prospect.leadCallsLeads.callLeadCalls.callCallsCstm : new CallsCstm();
-  
-        prospect.leadCallsLeads.callLeadCalls.callCallsUsers = prospect.leadCallsLeads.callLeadCalls.callCallsUsers ? prospect.leadCallsLeads.callLeadCalls.callCallsUsers : new CallsUsers();
-        prospect.leadCallsLeads.callLeadCalls.callCallsUsers.user_id = this.pilatService.currentUser.id;
-        prospect.leadCallsLeads.callLeadCalls.callCallsUsers.required = '1';
-        prospect.leadCallsLeads.callLeadCalls.callCallsUsers.accept_status = prospect.leadCallsLeads.callLeadCalls.callCallsUsers.accept_status ? prospect.leadCallsLeads.callLeadCalls.callCallsUsers.accept_status : this.pilatService.parAcceptCallNone.par_cod;
-  
-        if (prospect.leadCallsLeads.callLeadCalls.status == this.pilatService.parCallHeld.par_cod) {
-          prospect.leadCallsLeads.callLeadCalls.callCallsUsers.accept_status = this.pilatService.parAcceptCallAccept.par_cod;
-        }
-  
-        let llamadaFecha = prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c;
-        if (llamadaFecha) {
-          prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c = this.parseDate(prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c);
-        }
-        let dialogAddLead = this.dialog.open(AddLeadComponent, {
-          width:'600px',
-          data: prospect
-        });
-        dialogAddLead.afterClosed().subscribe(async result => {
-          if (result === 1) {
-            this.spinnerRef = this.spinnerService.start();
-            let responseLead:any = await this.crmLeadService.updateLead(prospect.id, this.crmLeadService.leadData).toPromise()
-            this.spinnerService.stop(this.spinnerRef);
-            if (responseLead.data) {
-              // let lead:Leads = response.data;
-              //
-              // let dialogAddLead = this.dialog.open(AddCallComponent, {
-              //   width:'600px',
-              //   data: prospect
-              // });
-              // dialogAddLead.afterClosed().subscribe(async result => {
-              //   if (result === 1) {
-              //     await this.crmLeadService.updateLead(prospect.id, this.crmLeadService.leadData).subscribe(async (res) => {
-              //       let response = res as { status: string, message: string, data: Opportunities };
-              //     });
-              //   }
-              // });
-            }
+    if (txtItem.includes('<span hidden="prospectId">')) {
+      if (txtItem.split('<span hidden="prospectId">')[1]) {
+        let prospectId = txtItem.split('<span hidden="prospectId">')[1].split('</span>')[0];
+        let prospect:Leads;
+        if (prospectId) {
+          this.spinnerRef = this.spinnerService.start();
+          let responseLead:any = await this.crmLeadService.getLead(prospectId).toPromise();
+          this.spinnerService.stop(this.spinnerRef);
+          prospect = responseLead.data;
+          prospect.leadLeadsCstm = prospect.leadLeadsCstm ? prospect.leadLeadsCstm : new LeadsCstm();
+          prospect.leadCallsLeads = prospect.leadCallsLeads ? prospect.leadCallsLeads : new CallsLeads();
+          prospect.leadCallsLeads.callLeadCalls = prospect.leadCallsLeads.callLeadCalls ? prospect.leadCallsLeads.callLeadCalls : new Calls();
+          prospect.leadCallsLeads.callLeadCalls.name = prospect.first_name+' '+prospect.last_name;
+          prospect.leadCallsLeads.callLeadCalls.callCallsCstm = prospect.leadCallsLeads.callLeadCalls.callCallsCstm ? prospect.leadCallsLeads.callLeadCalls.callCallsCstm : new CallsCstm();
+      
+          prospect.leadCallsLeads.callLeadCalls.callCallsUsers = prospect.leadCallsLeads.callLeadCalls.callCallsUsers ? prospect.leadCallsLeads.callLeadCalls.callCallsUsers : new CallsUsers();
+          prospect.leadCallsLeads.callLeadCalls.callCallsUsers.user_id = this.pilatService.currentUser.id;
+          prospect.leadCallsLeads.callLeadCalls.callCallsUsers.required = '1';
+          prospect.leadCallsLeads.callLeadCalls.callCallsUsers.accept_status = prospect.leadCallsLeads.callLeadCalls.callCallsUsers.accept_status ? prospect.leadCallsLeads.callLeadCalls.callCallsUsers.accept_status : this.pilatService.parAcceptCallNone.par_cod;
+      
+          if (prospect.leadCallsLeads.callLeadCalls.status == this.pilatService.parCallHeld.par_cod) {
+            prospect.leadCallsLeads.callLeadCalls.callCallsUsers.accept_status = this.pilatService.parAcceptCallAccept.par_cod;
           }
-        });
+      
+          let llamadaFecha = prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c;
+          if (llamadaFecha) {
+            prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c = this.parseDate(prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c);
+          }
+          let dialogAddLead = this.dialog.open(AddLeadComponent, {
+            width:'600px',
+            data: prospect
+          });
+          dialogAddLead.afterClosed().subscribe(async result => {
+            if (result === 1) {
+              this.spinnerRef = this.spinnerService.start();
+              let responseLead:any = await this.crmLeadService.updateLead(prospect.id, this.crmLeadService.leadData).toPromise()
+              this.spinnerService.stop(this.spinnerRef);
+              if (responseLead.data) {
+                // let lead:Leads = response.data;
+                //
+                // let dialogAddLead = this.dialog.open(AddCallComponent, {
+                //   width:'600px',
+                //   data: prospect
+                // });
+                // dialogAddLead.afterClosed().subscribe(async result => {
+                //   if (result === 1) {
+                //     await this.crmLeadService.updateLead(prospect.id, this.crmLeadService.leadData).subscribe(async (res) => {
+                //       let response = res as { status: string, message: string, data: Opportunities };
+                //     });
+                //   }
+                // });
+              }
+            }
+          });
+        }
       }
     }
   }
   
   async openEditOpportunity(event: CdkDragDrop<string[]>) {
     let txtItem = event['target'].innerHTML;
-    let opportunityId = txtItem.split('<span hidden="opportunityId">')[1].split('</span>')[0];
-    let opportunity:Opportunities;
-    this.spinnerRef = this.spinnerService.start();
-    let responseOpportunity:any = await this.crmOpportunityService.getOpportunity(opportunityId).toPromise();
-    this.spinnerService.stop(this.spinnerRef);
-    opportunity = responseOpportunity.data ? responseOpportunity.data : new Opportunities();
-    opportunity.opportunityOpportunitiesCstm = opportunity.opportunityOpportunitiesCstm ? opportunity.opportunityOpportunitiesCstm : new OpportunitiesCstm();
-    opportunity.opportunityOpportunitiesContacts = opportunity.opportunityOpportunitiesContacts ? opportunity.opportunityOpportunitiesContacts : new OpportunitiesContacts();
-    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts : new Contacts();
-    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm : new ContactsCstm();
-    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel : new EmailAddrBeanRel();
-    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses : new EmailAddresses();
-    opportunity.opportunityAccountsOpportunities = opportunity.opportunityAccountsOpportunities ? opportunity.opportunityAccountsOpportunities : new AccountsOpportunities();
-    opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts = opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts ? opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts : new Accounts();
-    opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm = opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm ? opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm : new AccountsCstm();
-    opportunity.opportunityAosQuotes = opportunity.opportunityAosQuotes ? opportunity.opportunityAosQuotes : new AosQuotes();
-    opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm = opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm ? opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm : new AosQuotesCstm();
-    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails : new Emails();
-    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.assigned_user_id = this.pilatService.currentUser.id;
-    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.created_by = this.pilatService.currentUser.id;
-    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.intent = this.pilatService.parEmailIntentPick.par_cod;
-    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.parent_type = this.pilatService.parModuleOpportunity.par_cod;
-    
-    let dialogAddOpportunity = this.dialog.open(AddOpportunityComponent, {
-      width:'600px',
-      data: {
-        opportunity: opportunity,
-        lead: this.lead
-      }
-    });
-    dialogAddOpportunity.afterClosed().subscribe(async result => {
-      if (result === 1) {
-        this.pilatService.isLoading = true;
-        this.spinnerRef = this.spinnerService.start();
-        let responseOpportunity:any = await this.crmOpportunityService.updateOpportunity(opportunity.id, this.crmOpportunityService.opportunityData).toPromise();
-        this.spinnerService.stop(this.spinnerRef);
-        this.pilatService.isLoading = false;
-      }
-    });
+    if (txtItem.includes('<span hidden="opportunityId">')) {
+      let opportunityId = txtItem.split('<span hidden="opportunityId">')[1].split('</span>')[0];
+      let opportunity:Opportunities;
+      this.spinnerRef = this.spinnerService.start();
+      let responseOpportunity:any = await this.crmOpportunityService.getOpportunity(opportunityId).toPromise();
+      this.spinnerService.stop(this.spinnerRef);
+      opportunity = responseOpportunity.data ? responseOpportunity.data : new Opportunities();
+      opportunity.opportunityOpportunitiesCstm = opportunity.opportunityOpportunitiesCstm ? opportunity.opportunityOpportunitiesCstm : new OpportunitiesCstm();
+      opportunity.opportunityOpportunitiesContacts = opportunity.opportunityOpportunitiesContacts ? opportunity.opportunityOpportunitiesContacts : new OpportunitiesContacts();
+      opportunity.opportunityOpportunitiesContacts.opportunityContactContacts = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts : new Contacts();
+      opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm : new ContactsCstm();
+      opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel : new EmailAddrBeanRel();
+      opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses : new EmailAddresses();
+      opportunity.opportunityAccountsOpportunities = opportunity.opportunityAccountsOpportunities ? opportunity.opportunityAccountsOpportunities : new AccountsOpportunities();
+      opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts = opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts ? opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts : new Accounts();
+      opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm = opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm ? opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm : new AccountsCstm();
+      opportunity.opportunityAosQuotes = opportunity.opportunityAosQuotes ? opportunity.opportunityAosQuotes : new AosQuotes();
+  
+      opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm = opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm ? opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm : new AosQuotesCstm();
+      opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails : new Emails();
+      opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.assigned_user_id = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.assigned_user_id ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.assigned_user_id : this.pilatService.currentUser.id;
+      opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.created_by = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.created_by ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.created_by : this.pilatService.currentUser.id;
+      opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.intent = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.intent ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.intent : this.pilatService.parEmailIntentPick.par_cod;
+      opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.parent_type = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.parent_type ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.parent_type : this.pilatService.parModuleOpportunity.par_cod;
+  
+      let dialogAddOpportunity = this.dialog.open(AddOpportunityComponent, {
+        width:'600px',
+        data: {
+          opportunity: opportunity,
+          lead: this.lead
+        }
+      });
+      dialogAddOpportunity.afterClosed().subscribe(async result => {
+        if (result === 1) {
+          this.pilatService.isLoading = true;
+          this.spinnerRef = this.spinnerService.start();
+          let responseOpportunity:any = await this.crmOpportunityService.updateOpportunity(opportunity.id, this.crmOpportunityService.opportunityData).toPromise();
+          this.spinnerService.stop(this.spinnerRef);
+          this.pilatService.isLoading = false;
+        }
+      });
+    }
   }
   
   // async openEditAccount(event: CdkDragDrop<string[]>) {

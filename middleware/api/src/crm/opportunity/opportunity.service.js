@@ -49,6 +49,7 @@ class OpportunityService {
 							include:{
 								model:models.sequelize.contacts, as:'opportunityContactContacts',
 								include:[
+									{model:models.sequelize.emails, as:'contactEmails'},
 									{model:models.sequelize.contactsCstm, as:'contactContactsCstm'},
 									{model:models.sequelize.emailAddrBeanRel, as:'contactEmailAddrBeanRel',
 										include:{
@@ -754,7 +755,7 @@ class OpportunityService {
 					}
 				}
 
-				await this.setEmailOpportunity(objOpportunity, respContacts);
+				await this.setEmailOpportunity(objOpportunity.id, respContacts);
 
 			} else {
 				objOpportunity = new models.mongoose.opportunities(updateOpportunity);
@@ -766,10 +767,11 @@ class OpportunityService {
 		}
 	}
 
-	static async setEmailOpportunity(objOpportunity, respContacts) {
+	static async setEmailOpportunity(idOpportunity, respContacts) {
 		try {
-			objOpportunity = await this.getAOpportunity(objOpportunity.id);
-			if (objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel) {
+			let respOpportunity = await this.getAOpportunity(idOpportunity,{});
+			let objOpportunity = respOpportunity.dataValues;
+			if (objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel) {
 				if (!objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails) {
 					await OpportunityService.createAndSendPdf(objOpportunity, async (err,file,info) => {
 						if (err) {
@@ -788,7 +790,8 @@ class OpportunityService {
 							let updateContactEmail = respOldContactEmails.dataValues;
 							updateContactEmail.date_modified = new Date();
 							updateContactEmail.modified_user_id = respContacts.dataValues.assigned_user_id;
-							respContactEmails = await models.sequelize.emails.update(updateContactEmail,{where:{parent_id:objOpportunity.opportunityOpportunitiesContacts.contact_id}})
+							let respEmails = await models.sequelize.emails.update(updateContactEmail,{where:{parent_id:objOpportunity.opportunityOpportunitiesContacts.contact_id}});
+							respContactEmails = await models.sequelize.emails.findOne({where:{parent_id:objOpportunity.opportunityOpportunitiesContacts.contact_id}});
 						} else {
 							let max = await models.sequelize.emails.max('uid');
 							let newContactEmail = {
@@ -796,21 +799,21 @@ class OpportunityService {
 								name:respContacts.dataValues.first_name+' '+respContacts.dataValues.last_name,
 								date_entered:new Date(),
 								date_modified:new Date(),
-								modified_user_id:respContacts.dataValues.modified_user_id,
-								created_by:respContacts.dataValues.created_by,
-								assigned_user_id:respContacts.dataValues.assigned_user_id,
+								modified_user_id:respContacts.dataValues.id,
+								created_by:respContacts.dataValues.id,
+								assigned_user_id:respContacts.dataValues.id,
 								date_sent_received:new Date(),
 								message_id:'',
 								type:'out',
 								status:'sent',
-								flagged:'',
-								reply_to_status:'',
+								// flagged:'',
+								// reply_to_status:'',
 								//intent:'pick',
-								mailbox_id:'',
+								// mailbox_id:'',
 								//parent_type:'Contacts',
 								parent_id:respContacts.dataValues.id,
 								uid:max+1,
-								category_id:''
+								// category_id:''
 							};
 							respContactEmails = await models.sequelize.emails.create(newContactEmail);
 						}
