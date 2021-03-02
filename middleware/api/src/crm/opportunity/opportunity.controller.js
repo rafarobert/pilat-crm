@@ -60,11 +60,12 @@ opportunitiesCtrl.getAOpportunity = async (req, res) => {
 opportunitiesCtrl.updateOpportunity = async (req, res) => {
 	try {
 		const { id } = req.params;
+		const { userLoggedIn } = req.query;
 		if (!util.isChar(id)) {
 			util.setError(400, 'Please input a valid Char value');
 			return util.send(res);
 		}
-		const objOpportunity = await opportunityService.updateOpportunity(id, req.body);
+		const objOpportunity = await opportunityService.updateOpportunity(id, req.body, userLoggedIn);
 		if (!objOpportunity) {
 			util.setError(404, `Cannot find opportunity with the id: ${id}`);
 		} else {

@@ -14,6 +14,8 @@ import {MatAccordion} from "@angular/material/expansion";
 import {PilatService} from "../../../../services/pilat.service";
 import {AosQuotesCstm} from "../../../../../core/models/aosQuotesCstm";
 import {AosQuotes} from "../../../../../core/models/aosQuotes";
+import {Leads} from "../../../../../core/models/leads";
+import {LeadsCstm} from "../../../../../core/models/leadsCstm";
 
 @Component({
   selector: 'app-add-opportunity',
@@ -29,11 +31,14 @@ export class AddOpportunityComponent implements OnInit {
   parCurrentApprobalStatus: PilatParams = new PilatParams();
   parCurrentInvoiceStatus: PilatParams = new PilatParams();
   
+  data:Opportunities;
+  dataLeads:Leads;
+  dataLeadsCstm:LeadsCstm;
+  
   constructor(
     public dialogRef: MatDialogRef<AddOpportunityComponent>,
     private cookieService:CookieService,
-    @Inject(MAT_DIALOG_DATA) public data: Opportunities,
-    @Inject(MAT_DIALOG_DATA) public dataLeadCstm: OpportunitiesCstm,
+    @Inject(MAT_DIALOG_DATA) public input: any,
     private opportunityService: OpportunitieService,
     private crmOpportunityService: CrmOpportunityService,
     private pilatParamService: PilatParamService,
@@ -47,6 +52,9 @@ export class AddOpportunityComponent implements OnInit {
   ]);
   
   ngOnInit():void {
+    this.data = this.input.opportunity;
+    this.dataLeads = this.input.lead;
+    
     this.pilatService.setParams([
       this.pilatService.DIC_OPPORTUNITY_STAGES,
       this.pilatService.DIC_QUOTE_STAGES,

@@ -65,7 +65,9 @@ export class OpportunitiesComponent implements OnInit {
   addNew() {
     let opportunity = new Opportunities();
     const dialogRef = this.dialog.open(AddOpportunityComponent, {
-      data: opportunity,
+      data: {
+        opportunity:opportunity,
+      },
       width: '600px'
     });
     
@@ -88,7 +90,9 @@ export class OpportunitiesComponent implements OnInit {
     this.index = i;
     console.log(this.index);
     const dialogRef = this.dialog.open(AddOpportunityComponent, {
-      data: opportunity,
+      data: {
+        opportunity:opportunity
+      },
       width: '600px'
     });
     

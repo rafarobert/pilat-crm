@@ -209,17 +209,18 @@ class LeadService {
 		}
 	}
 
-	static async updateLead(id, updateLead) {
+	static async updateLead(id, updateLead, userLoggedIn) {
 		try {
 			let objLead;
 
 			if(sql) {
 
 				if (updateLead) {
+					let respLeads;
 					if (updateLead.id) {
 						updateLead.date_modified = new Date();
 						await models.sequelize.leads.update(updateLead, {where:{id:id}});
-						let respLeads = await models.sequelize.leads.findOne({where: { id: id }});
+						respLeads = await models.sequelize.leads.findOne({where: { id: id }});
 						objLead = respLeads.dataValues;
 					} else {
 						let oldLead = await models.sequelize.leads.findOne({where:{id:id}});
@@ -227,35 +228,36 @@ class LeadService {
 							oldLead = oldLead.dataValues;
 							updateLead.date_modified = new Date();
 							await models.sequelize.leads.update(updateLead, {where:{id:oldLead.id}});
-							let respLeads = await models.sequelize.leads.findOne({where: { id: oldLead.id }});
+							respLeads = await models.sequelize.leads.findOne({where: { id: oldLead.id }});
 							objLead = respLeads.dataValues;
 						}  else {
-							let newLead = updateLead;
-							newLead.id = models.sequelize.objectId().toString();
-							newLead.date_entered = new Date();
-							newLead.date_modified = new Date();
-							let respLead = await models.sequelize.leads.create(newLead);
+							//let newLead = updateLead;
+							updateLead.id = models.sequelize.objectId().toString();
+							updateLead.date_entered = new Date();
+							updateLead.date_modified = new Date();
+							let respLead = await models.sequelize.leads.create(updateLead);
 							objLead = respLead.dataValues;
 						}
 					}
 
 					if (updateLead.leadLeadsCstm) {
+						let respLeadsCstm;
 						if (updateLead.leadLeadsCstm.id_c) {
 							updateLead.leadLeadsCstm.date_modified = new Date();
 							await models.sequelize.leadsCstm.update(updateLead.leadLeadsCstm, {where:{id_c:id}});
-							let respLeadsCstm = await models.sequelize.leadsCstm.findOne({where: { id_c: id }});
+							respLeadsCstm = await models.sequelize.leadsCstm.findOne({where: { id_c: id }});
 							objLead.leadLeadsCstm = respLeadsCstm.dataValues;
 						} else {
 							let oldLeadLeadsCstm = await models.sequelize.leadsCstm.findOne({where:{id_c:id}});
 							if (oldLeadLeadsCstm && oldLeadLeadsCstm.dataValues) {
 								oldLeadLeadsCstm = oldLeadLeadsCstm.dataValues;
 								await models.sequelize.leadsCstm.update(updateLead.leadLeadsCstm, {where:{id_c:oldLeadLeadsCstm.id_c}});
-								let respLeadsCstm = await models.sequelize.leadsCstm.findOne({where: { id_c: oldLeadLeadsCstm.id_c }});
+								respLeadsCstm = await models.sequelize.leadsCstm.findOne({where: { id_c: oldLeadLeadsCstm.id_c }});
 								objLead.leadLeadsCstm = respLeadsCstm.dataValues;
 							} else {
-								let newLead = updateLead;
-								newLead.leadLeadsCstm.id_c = newLead.id;
-								let respLeadsCstm = await models.sequelize.leadsCstm.create(newLead.leadLeadsCstm);
+								//let newLead = updateLead;
+								updateLead.leadLeadsCstm.id_c = respLeads.dataValues.id;
+								respLeadsCstm = await models.sequelize.leadsCstm.create(updateLead.leadLeadsCstm);
 								objLead.leadLeadsCstm = respLeadsCstm.dataValues;
 							}
 						}
@@ -280,11 +282,11 @@ class LeadService {
 								await models.sequelize.calls.update(updateLead.leadCallsLeads.callLeadCalls, {where:{id:oldCallLeadCalls.call_id}});
 								respCalls = await models.sequelize.calls.findOne({where: { id: oldCallLeadCalls.call_id }});
 							} else {
-								let newLead = updateLead;
-								newLead.leadCallsLeads.callLeadCalls.id = models.sequelize.objectId().toString();
-								newLead.leadCallsLeads.callLeadCalls.date_entered = new Date();
-								newLead.leadCallsLeads.callLeadCalls.date_modified = new Date();
-								respCalls = await models.sequelize.calls.create(newLead.leadCallsLeads.callLeadCalls);
+								//let newLead = updateLead;
+								updateLead.leadCallsLeads.callLeadCalls.id = models.sequelize.objectId().toString();
+								updateLead.leadCallsLeads.callLeadCalls.date_entered = new Date();
+								updateLead.leadCallsLeads.callLeadCalls.date_modified = new Date();
+								respCalls = await models.sequelize.calls.create(updateLead.leadCallsLeads.callLeadCalls);
 							}
 						}
 
@@ -306,9 +308,9 @@ class LeadService {
 									await models.sequelize.callsCstm.update(updateLead.leadCallsLeads.callLeadCalls.callCallsCstm, {where:{id_c:oldCallCallsCstm.call_id}});
 									respCallsCstm = await models.sequelize.callsCstm.findOne({where: { id_c: oldCallCallsCstm.call_id }});
 								} else {
-									let newLead = updateLead;
-									newLead.leadCallsLeads.callLeadCalls.callCallsCstm.id_c = respCalls && respCalls.dataValues ? respCalls.dataValues.id : null;
-									respCallsCstm = await models.sequelize.callsCstm.create(newLead.leadCallsLeads.callLeadCalls.callCallsCstm);
+									//let newLead = updateLead;
+									updateLead.leadCallsLeads.callLeadCalls.callCallsCstm.id_c = respCalls && respCalls.dataValues ? respCalls.dataValues.id : null;
+									respCallsCstm = await models.sequelize.callsCstm.create(updateLead.leadCallsLeads.callLeadCalls.callCallsCstm);
 								}
 							}
 						}
@@ -328,30 +330,33 @@ class LeadService {
 									respCallsLeads = await models.sequelize.callsLeads.findOne({where: { id: updateLead.leadCallsLeads.id }});
 								} else {
 									updateLead.leadCallsLeads.id = models.sequelize.objectId().toString();
-									updateLead.leadCallsLeads.lead_id = updateLead.id;
+									updateLead.leadCallsLeads.lead_id = respLeads && respLeads.dataValues ? respLeads.dataValues.id : null;
 									updateLead.leadCallsLeads.call_id = respCalls && respCalls.dataValues ? respCalls.dataValues.id : null;
 									updateLead.leadCallsLeads.date_modified = new Date();
 									respCallsLeads = await models.sequelize.callsLeads.create(updateLead.leadCallsLeads);
 								}
 							}
 
-							if (updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.id) {
-								updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.date_modified = new Date();
-								await models.sequelize.callsUsers.update(updateLead.leadCallsLeads.callLeadCalls.callCallsUsers, {where:{id:updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.id}});
-								respCallsUsers = await models.sequelize.callsUsers.findOne({where: { id: updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.id }});
-							} else {
-								let oldLeadCallsUsers = await models.sequelize.callsUsers.findOne({where:{call_id:respCalls.dataValues.id}});
-								if (oldLeadCallsUsers && oldLeadCallsUsers.dataValues) {
-									oldLeadCallsUsers = oldLeadCallsUsers.dataValues;
+							if (updateLead.leadCallsLeads.callLeadCalls.callCallsUsers){
+								if (updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.id) {
 									updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.date_modified = new Date();
-									await models.sequelize.callsUsers.update(updateLead.leadCallsLeads.callLeadCalls.callCallsUsers, {where:{id:oldLeadCallsUsers.id}});
+									await models.sequelize.callsUsers.update(updateLead.leadCallsLeads.callLeadCalls.callCallsUsers, {where:{id:updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.id}});
 									respCallsUsers = await models.sequelize.callsUsers.findOne({where: { id: updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.id }});
 								} else {
-									//let newLead = updateLead;
-									updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.id = models.sequelize.objectId().toString();
-									updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.call_id = respCalls.dataValues.id;
-									updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.date_modified = new Date();
-									respCallsUsers = await models.sequelize.callsUsers.create(updateLead.leadCallsLeads.callLeadCalls.callCallsUsers);
+									let oldLeadCallsUsers = await models.sequelize.callsUsers.findOne({where:{call_id:respCalls.dataValues.id}});
+									if (oldLeadCallsUsers && oldLeadCallsUsers.dataValues) {
+										oldLeadCallsUsers = oldLeadCallsUsers.dataValues;
+										updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.date_modified = new Date();
+										await models.sequelize.callsUsers.update(updateLead.leadCallsLeads.callLeadCalls.callCallsUsers, {where:{id:oldLeadCallsUsers.id}});
+										respCallsUsers = await models.sequelize.callsUsers.findOne({where: { id: updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.id }});
+									} else {
+										//let newLead = updateLead;
+										updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.id = models.sequelize.objectId().toString();
+										updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.call_id = respCalls && respCalls.dataValues ? respCalls.dataValues.id : null;
+										updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.user_id = userLoggedIn ? userLoggedIn : updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.user_id;
+										updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.date_modified = new Date();
+										respCallsUsers = await models.sequelize.callsUsers.create(updateLead.leadCallsLeads.callLeadCalls.callCallsUsers);
+									}
 								}
 							}
 						}
@@ -365,10 +370,11 @@ class LeadService {
 					// END CALLS
 
 					if (updateLead.leadAodIndexevent) {
+						let respAodindexevent;
 						if (updateLead.leadAodIndexevent.id) {
 							updateLead.leadAodIndexevent.date_modified = new Date();
 							await models.sequelize.aodIndexevent.update(updateLead.leadAodIndexevent, {where:{record_id:id}});
-							let respAodindexevent = await models.sequelize.aodIndexevent.findOne({where: { record_id: id }});
+							respAodindexevent = await models.sequelize.aodIndexevent.findOne({where: { record_id: id }});
 							objLead.leadAodIndexevent = respAodindexevent.dataValues;
 						} else {
 							let oldLeadAodIndexevent = await models.sequelize.aodIndexevent.findOne({where:{record_id:id}});
@@ -376,16 +382,16 @@ class LeadService {
 								oldLeadAodIndexevent = oldLeadAodIndexevent.dataValues;
 								updateLead.leadAodIndexevent.date_modified = new Date();
 								await models.sequelize.aodIndexevent.update(updateLead.leadAodIndexevent, {where:{id:oldLeadAodIndexevent.id}});
-								let respAodindexevent = await models.sequelize.aodIndexevent.findOne({where: { id: oldLeadAodIndexevent.id }});
+								respAodindexevent = await models.sequelize.aodIndexevent.findOne({where: { id: oldLeadAodIndexevent.id }});
 								objLead.leadAodIndexevent = respAodindexevent.dataValues;
 							} else {
-								let newLead = updateLead;
-								newLead.leadAodIndexevent.id = models.sequelize.objectId().toString();
-								newLead.leadAodIndexevent.record_id = newLead.id;
-								newLead.leadAodIndexevent.date_entered = new Date();
-								newLead.leadAodIndexevent.date_modified = new Date();
-								let respAodIndexevent = await models.sequelize.aodIndexevent.create(newLead.leadAodIndexevent);
-								objLead.leadAodIndexevent = respAodIndexevent.dataValues;
+								//let newLead = updateLead;
+								updateLead.leadAodIndexevent.id = models.sequelize.objectId().toString();
+								updateLead.leadAodIndexevent.record_id = respLeads.dataValues.id;
+								updateLead.leadAodIndexevent.date_entered = new Date();
+								updateLead.leadAodIndexevent.date_modified = new Date();
+								respAodindexevent = await models.sequelize.aodIndexevent.create(updateLead.leadAodIndexevent);
+								objLead.leadAodIndexevent = respAodindexevent.dataValues;
 							}
 						}
 

@@ -60,11 +60,12 @@ leadsCtrl.getALead = async (req, res) => {
 leadsCtrl.updateLead = async (req, res) => {
 	try {
 		const { id } = req.params;
+		const { userLoggedIn } = req.query;
 		if (!util.isChar(id)) {
 			util.setError(400, 'Please input a valid Char value');
 			return util.send(res);
 		}
-		const objLead = await leadService.updateLead(id, req.body);
+		const objLead = await leadService.updateLead(id, req.body, userLoggedIn);
 		if (!objLead) {
 			util.setError(404, `Cannot find lead with the id: ${id}`);
 		} else {

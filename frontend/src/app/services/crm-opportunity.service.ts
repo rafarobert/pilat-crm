@@ -16,6 +16,7 @@ import {PilatAuth} from "../models/pilatAuth";
 import {PilatService} from "./pilat.service";
 import {addDias, addMeses} from "fechas";
 import {Users} from "../../core/models/users";
+import {Emails} from "../../core/models/emails";
 
 @Injectable({
   providedIn: 'root'
@@ -142,7 +143,14 @@ export class CrmOpportunityService {
     opportunity.opportunityAosQuotes.description = lead.description;
     opportunity.opportunityAosQuotes.expiration = this.afterMonth;
     opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.fecha_envio_programada_c = this.tomorrow;
+    
     opportunity.opportunityAccountsOpportunities.account_id = opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.id ? opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.id : null;
+  
+    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails = opportunity.opportunityEmails ? opportunity.opportunityEmails : new Emails();
+    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.assigned_user_id = this.pilatService.currentUser.id;
+    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.created_by = this.pilatService.currentUser.id;
+    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.intent = this.pilatService.parEmailIntentPick.par_cod;
+    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.parent_type = this.pilatService.parModuleOpportunity.par_cod;
     
     if (opportunity.id) {
       

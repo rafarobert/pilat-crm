@@ -39,6 +39,7 @@ export class PilatService {
 
   DIC_LEAD_STATUSES = '5fe93b0e3c3708f0b489dcbd';
   DIC_CALL_STATUSES = '603402682f52e342778cd29c';
+  DIC_ACCEPT_CALL_STATUSES = '603dbaff36a4741d6003d9d6';
   DIC_PROSPECT_STAGES = '5ff2c4520a60a5252ddf62f6';
   DIC_OPPORTUNITY_STAGES = '5ff4a8d9aef65440b888db40';
   DIC_CI_EXT = '60029af5e2015758ec69b743';
@@ -63,6 +64,9 @@ export class PilatService {
   DIC_STAGES_PROSPECTS = '5ff2c4520a60a5252ddf62f6';
   DIC_STAGES_OPPORTUNITIES = '5ff4a8d9aef65440b888db40';
   DIC_OPPORTUNITY_TIPOS = '602fcc02429ac05467f9fe47';
+  DIC_EMAILS_TYPES = '603dd6ef36a4741d6003d9df';
+  DIC_EMAILS_STATUSES = '603dd76636a4741d6003d9e1';
+  DIC_EMAILS_INTENT = '603ddcdd36a4741d6003d9e4';
   
   parLeadStatuses:PilatParams[] = [];
   parProspectStages:PilatParams[] = [];
@@ -88,6 +92,10 @@ export class PilatService {
   parCities:PilatParams[] = [];
   parOpportunityTipos:PilatParams[] = [];
   parCallStatuses:PilatParams[] = [];
+  parAcceptCallStatuses:PilatParams[] = [];
+  parEmailStatuses:PilatParams[] = [];
+  parEmailTypes:PilatParams[] = [];
+  parEmailIntents:PilatParams[] = [];
   
   parPersonaNatural:PilatParams;
   parPersonaJuridica:PilatParams;
@@ -109,6 +117,14 @@ export class PilatService {
   parLeadCaptadoStage: PilatParams;
   parLeadCalificadoStage: PilatParams;
   parLeadVisitaFisicaVirtualStage: PilatParams;
+  
+  parOpportunityStageCotizacion:PilatParams;
+  parOpportunityStageNegociacion:PilatParams;
+  parOpportunityStageReserva:PilatParams;
+  parOpportunityStageCuotaInicial:PilatParams;
+  parOpportunityStageArmadoCarpeta:PilatParams;
+  parOpportunityStageCierreGanado:PilatParams;
+  parOpportunityStageCierrePerdido:PilatParams;
   
   parCallPlanned: PilatParams;
   parCallHeld: PilatParams;
@@ -133,6 +149,14 @@ export class PilatService {
   parQuoteCoonfirmado: PilatParams;
   parQuotePerdida: PilatParams;
   
+  parAcceptCallNone: PilatParams;
+  parAcceptCallAccept: PilatParams;
+  
+  parEmailStatusSent: PilatParams;
+  parEmailTypeOut: PilatParams;
+  
+  parEmailIntentPick: PilatParams;
+  
   constructor(
     breakpointObserver:BreakpointObserver,
     private pilatParamService:PilatParamService
@@ -149,6 +173,7 @@ export class PilatService {
             switch (param.par_dictionary_id) {
               case this.DIC_LEAD_STATUSES: !this.parLeadStatuses.find(par => par._id == param._id) ? this.parLeadStatuses.push(param) : false; break;
               case this.DIC_CALL_STATUSES: !this.parCallStatuses.find(par => par._id == param._id) ? this.parCallStatuses.push(param) : false; break;
+              case this.DIC_ACCEPT_CALL_STATUSES: !this.parAcceptCallStatuses.find(par => par._id == param._id) ? this.parAcceptCallStatuses.push(param) : false; break;
               case this.DIC_PROSPECT_STAGES: !this.parProspectStages.find(par => par._id == param._id) ? this.parProspectStages.push(param) : false; break;
               case this.DIC_OPPORTUNITY_STAGES: !this.parOpportunityStages.find(par => par._id == param._id) ? this.parOpportunityStages.push(param) : false; break;
               case this.DIC_CI_EXT: !this.parCiExtentions.find(par => par._id == param._id) ? this.parCiExtentions.push(param) : false; break;
@@ -171,6 +196,9 @@ export class PilatService {
               case this.DIC_STATES: !this.parStates.find(par => par._id == param._id) ? this.parStates.push(param) : false; break;
               case this.DIC_CITIES: !this.parCities.find(par => par._id == param._id) ? this.parCities.push(param) : false; break;
               case this.DIC_OPPORTUNITY_TIPOS: !this.parOpportunityTipos.find(par => par._id == param._id) ? this.parOpportunityTipos.push(param) : false; break;
+              case this.DIC_EMAILS_STATUSES: !this.parEmailStatuses.find(par => par._id == param._id) ? this.parEmailStatuses.push(param) : false; break;
+              case this.DIC_EMAILS_TYPES: !this.parEmailTypes.find(par => par._id == param._id) ? this.parEmailTypes.push(param) : false; break;
+              case this.DIC_EMAILS_INTENT: !this.parEmailIntents.find(par => par._id == param._id) ? this.parEmailIntents.push(param) : false; break;
             }
         
             switch (param.id) {
@@ -216,6 +244,23 @@ export class PilatService {
               case 37:this.parQuoteEnEspera = param;break;
               case 38:this.parQuoteCoonfirmado = param;break;
               case 39:this.parQuotePerdida = param;break;
+              
+              case 105:this.parAcceptCallNone = param;break;
+              case 106:this.parAcceptCallAccept = param;break;
+              
+              case 107:this.parEmailTypeOut = param;break;
+              case 108:this.parEmailStatusSent = param;break;
+              
+              case 109:this.parEmailIntentPick = param;break;
+              
+              case 11:this.parOpportunityStageCotizacion = param;break;
+              case 12:this.parOpportunityStageNegociacion = param;break;
+              case 13:this.parOpportunityStageReserva = param;break;
+              case 14:this.parOpportunityStageCuotaInicial = param;break;
+              case 15:this.parOpportunityStageArmadoCarpeta = param;break;
+              case 16:this.parOpportunityStageCierreGanado = param;break;
+              case 17:this.parOpportunityStageCierrePerdido = param;break;
+              
             }
           });
         }

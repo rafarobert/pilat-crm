@@ -67,6 +67,7 @@ import {SpinnerService} from "../../services/spinner.service";
 import {DialogService} from "../../services/dialog.service";
 import {DialogsComponent} from "../dialogs/dialogs.component";
 import {CallsUsers} from "../../../core/models/callsUsers";
+import {Emails} from "../../../core/models/emails";
 
 @Component({
   selector: 'app-pipeline-dialog',
@@ -138,6 +139,11 @@ export class PipelineDialogComponent implements OnInit {
           this.pilatService.DIC_MODULES,
           this.pilatService.DIC_CURRENCIES,
           this.pilatService.DIC_CALL_STATUSES,
+          this.pilatService.DIC_ACCEPT_CALL_STATUSES,
+          this.pilatService.DIC_EMAILS_INTENT,
+          this.pilatService.DIC_EMAILS_TYPES,
+          this.pilatService.DIC_EMAILS_STATUSES,
+          this.pilatService.DIC_STAGES_OPPORTUNITIES,
         ]);
         this.pilatService.pageTitle = 'CRM PILAT';
         this.setPipeline();
@@ -294,6 +300,7 @@ export class PipelineDialogComponent implements OnInit {
                     ${!param.opportunityAccountsOpportunities ? '<span class="error-account">Sin Cliente</span><br>' : ''}
                     ${!param.opportunityOpportunitiesContacts ? '<span class="error-contact">Sin Contacto</span><br>' : ''}
                     ${!param.opportunityAosQuotes ? '<span class="error-quote">Sin Cotización</span><br>' : ''}
+                    ${param.opportunityOpportunitiesContacts ? !param.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails ? '<span class="warn-email">Sin Correo Enviado</span><br>' : '' : ''}
                     <span><b>Cliente:</b></span>
                     <br>
                     ${param.name}
@@ -568,56 +575,88 @@ export class PipelineDialogComponent implements OnInit {
     let leadId = txtItem.split('<span hidden="prospectId">')[1].split('</span>')[0];
     if (leadId) {
       let lead: Leads;
+      this.spinnerRef = this.spinnerService.start();
       await this.crmLeadService.getLead(leadId).subscribe(async (res) => {
         let responseLead = res as { status: string, message: string, data: Leads };
         lead = responseLead.data;
         if (lead.leadCallsLeads) {
           if (lead.leadCallsLeads.callLeadCalls) {
             if (lead.leadCallsLeads.callLeadCalls.callCallsCstm) {
-              if (lead.leadCallsLeads.callLeadCalls.status == this.pilatService.parCallHeld.par_cod) {
-                lead = new Leads();
-                lead.leadLeadsCstm = new LeadsCstm();
-                lead.leadLeadsCstm.id_c = leadId;
-                lead.leadLeadsCstm.etapas_c = this.pipeline.columns[currentColumn].props.par_cod;
-                await this.crmLeadService.updateLead(leadId,lead).subscribe(async (res) => {
-                  let response = res as {status:string, message:string, data:LeadsCstm};
-                  if(response.data) {
-                    transferArrayItem(event.previousContainer.data,
-                      event.container.data,
-                      event.previousIndex,
-                      event.currentIndex);
-                    this.setPipeline();
+              if (lead.leadCallsLeads.callLeadCalls.callCallsUsers) {
+                if (lead.leadCallsLeads.callLeadCalls.status == this.pilatService.parCallHeld.par_cod) {
+                  if (lead.leadCallsLeads.callLeadCalls.callCallsUsers.accept_status) {
+                    lead = new Leads();
+                    lead.leadLeadsCstm = new LeadsCstm();
+                    lead.leadLeadsCstm.id_c = leadId;
+                    lead.leadLeadsCstm.etapas_c = this.pipeline.columns[currentColumn].props.par_cod;
+                    let responseLead:any = await this.crmLeadService.updateLead(leadId,lead).toPromise();
+                    this.spinnerService.stop(this.spinnerRef);
+                    if(responseLead.data) {
+                      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+                      this.setPipeline();
+                    }
+                  } else {
+                    this.spinnerService.stop(this.spinnerRef);
+                    this.dialogService.open('La llamada realizada por el usuario, no tiene el estado: '+this.pilatService.parAcceptCallAccept.par_description+', por favor verifica el estado de la llamada realizada por el usuario', 'Verificacion del estado de la llamada');
                   }
-                });
+                } else {
+                  this.spinnerService.stop(this.spinnerRef);
+                  this.dialogService.open('La llamada registrado en el prospecto no tiene el estado: '+ this.pilatService.parCallHeld.par_description + ', Ppor favor verifica que se haya realizado la llamada.', 'Verificacion del estado de la llamada');
+                }
               } else {
-                this.dialog.open(DialogSetCallComponent, {
-                  width:'600px',
-                  data: lead,
-                });
+                this.spinnerService.stop(this.spinnerRef);
+                this.dialogService.open('El prospecto no tiene asignado una llamada realizada por el usuario: '+this.pilatService.currentUser.user_name+', verifica que se haya realizado el registro de la llamada asignado al usuario', 'Verificacion del registro de la llamada');
               }
             } else {
-              this.dialog.open(DialogSetCallComponent, {
-                width:'600px',
-                data: lead,
-              });
+              this.spinnerService.stop(this.spinnerRef);
+              this.dialogService.open('Existe un error en los datos de la llamada, por favor actualiza el prospecto y vuelve a intentar', 'Validacion de datos de la llamada');
             }
           } else {
-            this.dialog.open(DialogSetCallComponent, {
-              width:'600px',
-              data: lead,
-            });
+            this.spinnerService.stop(this.spinnerRef);
+            this.dialogService.open('El prospecto no tiene un registro de llamada, por favor actualiza los datos del prospecto', 'Validacion de datos de la llamada');
           }
         } else {
-          this.dialog.open(DialogSetCallComponent, {
-            width:'600px',
-            data: lead,
-          });
+          this.spinnerService.stop(this.spinnerRef);
+          this.dialogService.open('El prospecto no tiene un registro de llamada, por favor actualiza los datos del prospecto', 'Validacion de datos de la llamada');
         }
       });
     }
   }
   
-  
+  async verifyNextStep(event, currentColumn) {
+    let txtItem = event.previousContainer.data[event.previousIndex];
+    if (currentColumn == 9) {
+      let aTxtItem = txtItem.includes('<span hidden="opportunityId">');
+      if (aTxtItem) {
+        if (this.pilatService.userLoggedIn) {
+          let opportunityId = txtItem.split('<span hidden="opportunityId">')[1].split('</span>')[0];
+          if (opportunityId) {
+            transferArrayItem(event.previousContainer.data,
+              event.container.data,
+              event.previousIndex,
+              event.currentIndex);
+            this.setPipeline();
+          }
+        }
+      } else {
+        aTxtItem = txtItem.includes('<span hidden="prospectId">');
+        if (aTxtItem) {
+          if (this.pilatService.userLoggedIn) {
+            let prospectId = txtItem.split('<span hidden="prospectId">')[1].split('</span>')[0];
+            if (prospectId) {
+              this.dialogService.open('El prospecto seleccionado no puede pasar a la etapa: '+this.pilatService.parOpportunityStageCierrePerdido.par_description+', debido a que esta etapa pertenece a una oportunidad, ¿Desea eliminar el prospecto?',
+                'Validacion en flujo de etapas',() => {
+                  let responseLead:any = this.crmLeadService.deleteLead(prospectId).toPromise();
+                },'Si')
+            }
+          }
+        }
+      }
+    }
+  }
   
   async verifyMail(event, currentColumn) {
     let txtItem = event.previousContainer.data[event.previousIndex];
@@ -697,7 +736,10 @@ export class PipelineDialogComponent implements OnInit {
         
         let dialogAddOpportunity = this.dialog.open(AddOpportunityComponent, {
           width: '600px',
-          data: this.opportunity
+          data: {
+            opportunity:this.opportunity,
+            lead:this.lead
+          }
         });
         dialogAddOpportunity.afterClosed().subscribe(async result => {
           if (result === 1) {
@@ -706,25 +748,32 @@ export class PipelineDialogComponent implements OnInit {
             this.opportunity = this.crmOpportunityService.opportunityData;
             let responseOpportunity:any = await this.crmOpportunityService.createOpportunity(this.opportunity).toPromise();
             if (responseOpportunity.data) {
-              this.spinnerService.stop(this.spinnerRef);
               this.opportunity = responseOpportunity.data;
-              
-              setTimeout(async () => {
-                this.spinnerRef = this.spinnerService.start();
-                responseOpportunity = await this.crmOpportunityService.getOpportunity(this.opportunity.id).toPromise();
+              this.lead.opportunity_id = this.opportunity.id;
+              this.lead.opportunity_amount = this.opportunity.amount+'';
+              this.lead.opportunity_name = this.opportunity.name;
+              let responseLead:any = await this.crmLeadService.updateLead(this.lead.id, this.lead).toPromise();
+              if (responseOpportunity.data) {
                 this.spinnerService.stop(this.spinnerRef);
                 this.opportunity = responseOpportunity.data;
-                if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_sent_date) {
-                  this.dialogService.open('El correo con el detalle de la cotización fue enviado exitosamente al correo del contacto: '+ this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address);
-                } else {
-                  this.dialogService.open('Hubo un problema al enviar la cotización al correo del contacto. '+ this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address ? 'Su correo es: ' + this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address : 'No tiene Correo Electronico','Error al enviar la cotización');
-                }
-              },4000);
-              transferArrayItem(event.previousContainer.data,
-                event.container.data,
-                event.previousIndex,
-                event.currentIndex);
-              this.setPipeline();
+                
+                setTimeout(async () => {
+                  this.spinnerRef = this.spinnerService.start();
+                  responseOpportunity = await this.crmOpportunityService.getOpportunity(this.opportunity.id).toPromise();
+                  this.spinnerService.stop(this.spinnerRef);
+                  this.opportunity = responseOpportunity.data;
+                  if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_sent_date) {
+                    this.dialogService.open('El correo con el detalle de la cotización fue enviado exitosamente al correo del contacto: '+ this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address);
+                  } else {
+                    this.dialogService.open('Hubo un problema al enviar la cotización al correo del contacto. '+ this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address ? 'Su correo es: ' + this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address : 'No tiene Correo Electronico','Error al enviar la cotización');
+                  }
+                },6000);
+                transferArrayItem(event.previousContainer.data,
+                  event.container.data,
+                  event.previousIndex,
+                  event.currentIndex);
+                this.setPipeline();
+              }
             }
           }
         });
@@ -806,47 +855,53 @@ export class PipelineDialogComponent implements OnInit {
       let prospect:Leads;
       if (prospectId) {
         this.spinnerRef = this.spinnerService.start();
-        await this.crmLeadService.getLead(prospectId).subscribe(async (res) => {
-          this.spinnerService.stop(this.spinnerRef);
-          let responseLead = res as {status:string, message:string, data:Leads};
-          prospect = responseLead.data;
-          prospect.leadLeadsCstm = prospect.leadLeadsCstm ? prospect.leadLeadsCstm : new LeadsCstm();
-          prospect.leadCallsLeads = prospect.leadCallsLeads ? prospect.leadCallsLeads : new CallsLeads();
-          prospect.leadCallsLeads.callLeadCalls = prospect.leadCallsLeads.callLeadCalls ? prospect.leadCallsLeads.callLeadCalls : new Calls();
-          prospect.leadCallsLeads.callLeadCalls.name = prospect.first_name+' '+prospect.last_name;
-          prospect.leadCallsLeads.callLeadCalls.callCallsCstm = prospect.leadCallsLeads.callLeadCalls.callCallsCstm ? prospect.leadCallsLeads.callLeadCalls.callCallsCstm : new CallsCstm();
-          let llamadaFecha = prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c;
-          if (llamadaFecha) {
-            prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c = this.parseDate(prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c);
-          }
-          let dialogAddLead = this.dialog.open(AddLeadComponent, {
-            width:'600px',
-            data: prospect
-          });
-          dialogAddLead.afterClosed().subscribe(async result => {
-            if (result === 1) {
-              this.spinnerRef = this.spinnerService.start();
-              await this.crmLeadService.updateLead(prospect.id, this.crmLeadService.leadData).subscribe(async (res) => {
-                this.spinnerService.stop(this.spinnerRef);
-                let response = res as { status: string, message: string, data: Leads };
-                if (response.data) {
-                  // let lead:Leads = response.data;
-                  //
-                  // let dialogAddLead = this.dialog.open(AddCallComponent, {
-                  //   width:'600px',
-                  //   data: prospect
-                  // });
-                  // dialogAddLead.afterClosed().subscribe(async result => {
-                  //   if (result === 1) {
-                  //     await this.crmLeadService.updateLead(prospect.id, this.crmLeadService.leadData).subscribe(async (res) => {
-                  //       let response = res as { status: string, message: string, data: Opportunities };
-                  //     });
-                  //   }
-                  // });
-                }
-              });
+        let responseLead:any = await this.crmLeadService.getLead(prospectId).toPromise();
+        this.spinnerService.stop(this.spinnerRef);
+        prospect = responseLead.data;
+        prospect.leadLeadsCstm = prospect.leadLeadsCstm ? prospect.leadLeadsCstm : new LeadsCstm();
+        prospect.leadCallsLeads = prospect.leadCallsLeads ? prospect.leadCallsLeads : new CallsLeads();
+        prospect.leadCallsLeads.callLeadCalls = prospect.leadCallsLeads.callLeadCalls ? prospect.leadCallsLeads.callLeadCalls : new Calls();
+        prospect.leadCallsLeads.callLeadCalls.name = prospect.first_name+' '+prospect.last_name;
+        prospect.leadCallsLeads.callLeadCalls.callCallsCstm = prospect.leadCallsLeads.callLeadCalls.callCallsCstm ? prospect.leadCallsLeads.callLeadCalls.callCallsCstm : new CallsCstm();
+  
+        prospect.leadCallsLeads.callLeadCalls.callCallsUsers = prospect.leadCallsLeads.callLeadCalls.callCallsUsers ? prospect.leadCallsLeads.callLeadCalls.callCallsUsers : new CallsUsers();
+        prospect.leadCallsLeads.callLeadCalls.callCallsUsers.user_id = this.pilatService.currentUser.id;
+        prospect.leadCallsLeads.callLeadCalls.callCallsUsers.required = '1';
+        prospect.leadCallsLeads.callLeadCalls.callCallsUsers.accept_status = prospect.leadCallsLeads.callLeadCalls.callCallsUsers.accept_status ? prospect.leadCallsLeads.callLeadCalls.callCallsUsers.accept_status : this.pilatService.parAcceptCallNone.par_cod;
+  
+        if (prospect.leadCallsLeads.callLeadCalls.status == this.pilatService.parCallHeld.par_cod) {
+          prospect.leadCallsLeads.callLeadCalls.callCallsUsers.accept_status = this.pilatService.parAcceptCallAccept.par_cod;
+        }
+  
+        let llamadaFecha = prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c;
+        if (llamadaFecha) {
+          prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c = this.parseDate(prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c);
+        }
+        let dialogAddLead = this.dialog.open(AddLeadComponent, {
+          width:'600px',
+          data: prospect
+        });
+        dialogAddLead.afterClosed().subscribe(async result => {
+          if (result === 1) {
+            this.spinnerRef = this.spinnerService.start();
+            let responseLead:any = await this.crmLeadService.updateLead(prospect.id, this.crmLeadService.leadData).toPromise()
+            this.spinnerService.stop(this.spinnerRef);
+            if (responseLead.data) {
+              // let lead:Leads = response.data;
+              //
+              // let dialogAddLead = this.dialog.open(AddCallComponent, {
+              //   width:'600px',
+              //   data: prospect
+              // });
+              // dialogAddLead.afterClosed().subscribe(async result => {
+              //   if (result === 1) {
+              //     await this.crmLeadService.updateLead(prospect.id, this.crmLeadService.leadData).subscribe(async (res) => {
+              //       let response = res as { status: string, message: string, data: Opportunities };
+              //     });
+              //   }
+              // });
             }
-          });
+          }
         });
       }
     }
@@ -857,59 +912,63 @@ export class PipelineDialogComponent implements OnInit {
     let opportunityId = txtItem.split('<span hidden="opportunityId">')[1].split('</span>')[0];
     let opportunity:Opportunities;
     this.spinnerRef = this.spinnerService.start();
-    await this.crmOpportunityService.getOpportunity(opportunityId).subscribe(async (res) => {
-      this.spinnerService.stop(this.spinnerRef);
-      let responseOpportunity = res as { status: string, message: string, data: Opportunities };
-      opportunity = responseOpportunity.data ? responseOpportunity.data : new Opportunities();
-      opportunity.opportunityOpportunitiesCstm = opportunity.opportunityOpportunitiesCstm ? opportunity.opportunityOpportunitiesCstm : new OpportunitiesCstm();
-      opportunity.opportunityOpportunitiesContacts = opportunity.opportunityOpportunitiesContacts ? opportunity.opportunityOpportunitiesContacts : new OpportunitiesContacts();
-      opportunity.opportunityOpportunitiesContacts.opportunityContactContacts = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts : new Contacts();
-      opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm : new ContactsCstm();
-      opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel : new EmailAddrBeanRel();
-      opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses : new EmailAddresses();
-      opportunity.opportunityAccountsOpportunities = opportunity.opportunityAccountsOpportunities ? opportunity.opportunityAccountsOpportunities : new AccountsOpportunities();
-      opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts = opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts ? opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts : new Accounts();
-      opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm = opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm ? opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm : new AccountsCstm();
-      opportunity.opportunityAosQuotes = opportunity.opportunityAosQuotes ? opportunity.opportunityAosQuotes : new AosQuotes();
-      opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm = opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm ? opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm : new AosQuotesCstm();
-      
-      let dialogAddOpportunity = this.dialog.open(AddOpportunityComponent, {
-        width:'600px',
-        data: opportunity
-      });
-      dialogAddOpportunity.afterClosed().subscribe(async result => {
-        if (result === 1) {
-          this.pilatService.isLoading = true;
-          this.spinnerRef = this.spinnerService.start();
-          await this.crmOpportunityService.updateOpportunity(opportunity.id, this.crmOpportunityService.opportunityData).subscribe(async (res) => {
-            this.spinnerService.stop(this.spinnerRef);
-            let response = res as { status: string, message: string, data: Opportunities };
-            this.pilatService.isLoading = false;
-          });
-        }
-      });
+    let responseOpportunity:any = await this.crmOpportunityService.getOpportunity(opportunityId).toPromise();
+    this.spinnerService.stop(this.spinnerRef);
+    opportunity = responseOpportunity.data ? responseOpportunity.data : new Opportunities();
+    opportunity.opportunityOpportunitiesCstm = opportunity.opportunityOpportunitiesCstm ? opportunity.opportunityOpportunitiesCstm : new OpportunitiesCstm();
+    opportunity.opportunityOpportunitiesContacts = opportunity.opportunityOpportunitiesContacts ? opportunity.opportunityOpportunitiesContacts : new OpportunitiesContacts();
+    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts : new Contacts();
+    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm : new ContactsCstm();
+    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel : new EmailAddrBeanRel();
+    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses : new EmailAddresses();
+    opportunity.opportunityAccountsOpportunities = opportunity.opportunityAccountsOpportunities ? opportunity.opportunityAccountsOpportunities : new AccountsOpportunities();
+    opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts = opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts ? opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts : new Accounts();
+    opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm = opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm ? opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm : new AccountsCstm();
+    opportunity.opportunityAosQuotes = opportunity.opportunityAosQuotes ? opportunity.opportunityAosQuotes : new AosQuotes();
+    opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm = opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm ? opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm : new AosQuotesCstm();
+    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails = opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails ? opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails : new Emails();
+    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.assigned_user_id = this.pilatService.currentUser.id;
+    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.created_by = this.pilatService.currentUser.id;
+    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.intent = this.pilatService.parEmailIntentPick.par_cod;
+    opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails.parent_type = this.pilatService.parModuleOpportunity.par_cod;
+    
+    let dialogAddOpportunity = this.dialog.open(AddOpportunityComponent, {
+      width:'600px',
+      data: {
+        opportunity: opportunity,
+        lead: this.lead
+      }
+    });
+    dialogAddOpportunity.afterClosed().subscribe(async result => {
+      if (result === 1) {
+        this.pilatService.isLoading = true;
+        this.spinnerRef = this.spinnerService.start();
+        let responseOpportunity:any = await this.crmOpportunityService.updateOpportunity(opportunity.id, this.crmOpportunityService.opportunityData).toPromise();
+        this.spinnerService.stop(this.spinnerRef);
+        this.pilatService.isLoading = false;
+      }
     });
   }
   
-  async openEditAccount(event: CdkDragDrop<string[]>) {
-    let txtItem = event['target'].innerHTML;
-    let opportunityId = txtItem.split('<span hidden="accountId">')[1].split('</span>')[0];
-    let opportunity;
-    await this.crmAccountService.getAccount(opportunityId).subscribe(async (res) => {
-      let responseOpportunity = res as { status: string, message: string, data: Opportunities };
-      opportunity = responseOpportunity.data;
-      let dialogAddOpportunity = this.dialog.open(AddOpportunityComponent, {
-        data: opportunity
-      });
-      dialogAddOpportunity.afterClosed().subscribe(async result => {
-        if (result === 1) {
-          await this.crmOpportunityService.updateOpportunity(opportunity.id, this.crmOpportunityService.opportunityData).subscribe(async (res) => {
-            let response = res as { status: string, message: string, data: Opportunities };
-          });
-        }
-      });
-    });
-  }
+  // async openEditAccount(event: CdkDragDrop<string[]>) {
+  //   let txtItem = event['target'].innerHTML;
+  //   let opportunityId = txtItem.split('<span hidden="accountId">')[1].split('</span>')[0];
+  //   let opportunity;
+  //   await this.crmAccountService.getAccount(opportunityId).subscribe(async (res) => {
+  //     let responseOpportunity = res as { status: string, message: string, data: Opportunities };
+  //     opportunity = responseOpportunity.data;
+  //     let dialogAddOpportunity = this.dialog.open(AddOpportunityComponent, {
+  //       data: opportunity
+  //     });
+  //     dialogAddOpportunity.afterClosed().subscribe(async result => {
+  //       if (result === 1) {
+  //         await this.crmOpportunityService.updateOpportunity(opportunity.id, this.crmOpportunityService.opportunityData).subscribe(async (res) => {
+  //           let response = res as { status: string, message: string, data: Opportunities };
+  //         });
+  //       }
+  //     });
+  //   });
+  // }
   
   openDialogLeadToOpportunity() {
     this.dialog.open(DialogLeadToOpportunityComponent);
@@ -965,7 +1024,11 @@ export class PipelineDialogComponent implements OnInit {
       if(currentColumn > previousColumn) {
         if (currentColumn >= 3) {
           if (currentColumn >= 4) {
-            await this.verifyMail(event,currentColumn);
+            if (currentColumn == 9) {
+              await this.verifyNextStep(event,currentColumn)
+            } else {
+              await this.verifyMail(event,currentColumn);
+            }
           } else if (previousColumn <= 2) {
             await this.setOpportunityFromProspect(event,currentColumn);
           } else {
