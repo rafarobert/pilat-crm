@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild,} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild,} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import * as $ from 'jquery';
 import {PilatService} from "./services/pilat.service";
@@ -15,13 +15,14 @@ import {MatAccordion} from "@angular/material/expansion";
 import {MatDrawer} from "@angular/material/sidenav";
 import {environment} from "../environments/environment";
 import {Location} from '@angular/common';
+import {SpinnerService} from "./services/spinner.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, AfterViewInit{
   
   @ViewChild('drawer') drawer: MatDrawer;
   title:string = 'CRM Pilat';
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit{
   name: string;
   
   pilatAuth:PilatAuth;
+  spinnerRef;
   
   appItems:any[];
   httpHome:string;
@@ -50,17 +52,24 @@ export class AppComponent implements OnInit{
     public dialog: MatDialog,
     public cookieService:CookieService,
     public crmUserService:CrmUserService,
-    private location: Location
+    private location: Location,
+    public spinnerService:SpinnerService
   ) {}
   
+  ngAfterViewInit(): void {
+    this.spinnerService.stop(this.spinnerService.spinnerRef);
+  }
+  
   ngOnInit(): void {
+    this.pilatService.pageTitle = 'CRM PILAT';
+    this.spinnerService.spinnerRef = this.spinnerService.start();
     this.httpHome = this.cookieService.get('httpReferer');
     this.pilatAuth = new PilatAuth();
     this.pilatAuth.userLoggedId = this.cookieService.get('userLogguedIn');
     this.pilatAuth.userSessId = this.cookieService.get('PHPSESSID');
     this.pilatService.currentSessId = this.pilatAuth.userSessId;
     this.pilatService.httpHome = this.httpHome;
-    // this.location.replaceState('/');
+    this.location.replaceState('/');
     this.crmUserService.getUser(this.pilatAuth.userLoggedId).subscribe(res => {
       let response = res as { status: string, message: string, data: Users };
       this.pilatService.currentUser = response.data;
@@ -68,7 +77,7 @@ export class AppComponent implements OnInit{
       this.appItems = [
         {
           label: 'CRM Pipeline',
-          link: '/crm/pipeline',
+          link: '/pipeline',
           icon: 'view_column'
         },
         {
@@ -77,33 +86,33 @@ export class AppComponent implements OnInit{
           items: [
             {
               label: 'Inicio',
-              link: this.httpHome + '?module=Home',
+              link: '/',
               icon: 'home_work',
-              externalRedirect: true,
+              //externalRedirect: true,
             },
             {
               label: 'Clientes',
-              link: this.httpHome + '?module=Accounts&action=index&parentTab=Ventas',
+              link: '/accounts',
               icon: 'account_box',
-              externalRedirect: true,
+              // externalRedirect: true,
             },
             {
               label: 'Contactos',
-              link: this.httpHome + '?module=Contacts&action=index&parentTab=Ventas',
+              link: '/contacts',
               icon: 'manage_accounts',
-              externalRedirect: true,
+              // externalRedirect: true,
             },
             {
               label: 'Oportunidades',
-              link: this.httpHome + '?module=Opportunities&action=index&parentTab=Ventas',
+              link: '/opportunities',
               icon: 'lightbulb',
-              externalRedirect: true,
+              // externalRedirect: true,
             },
             {
               label: 'Prospectos',
-              link: this.httpHome + '?module=Leads&action=index&parentTab=Ventas',
+              link: '/leads',
               icon: 'face_retouching_natural',
-              externalRedirect: true,
+              // externalRedirect: true,
             }
           ],
         },
@@ -113,45 +122,45 @@ export class AppComponent implements OnInit{
           items: [
             {
               label: 'Inicio',
-              link: this.httpHome + '?module=Home&action=index&parentTab=Actividades',
+              link: '/',
               icon: 'home_work',
-              externalRedirect: true,
+              // externalRedirect: true,
             },
             {
               label: 'Calendario',
-              link: this.httpHome + '?module=Calendar&action=index&parentTab=Actividades',
+              link: '/calendar',
               icon: 'insert_invitation',
-              externalRedirect: true,
+              // externalRedirect: true,
             },
             {
               label: 'Llamadas',
-              link: this.httpHome + '?module=Calls&action=index&parentTab=Actividades',
+              link: '/calls',
               icon: 'perm_phone_msg',
-              externalRedirect: true,
+              // externalRedirect: true,
             },
             {
               label: 'Reuniones',
-              link: this.httpHome + '?module=Meetings&action=index&parentTab=Actividades',
+              link: '/meetings',
               icon: 'meeting_room',
-              externalRedirect: true,
+              // externalRedirect: true,
             },
             {
               label: 'Correos',
-              link: this.httpHome + '?module=Emails&action=index&parentTab=Actividades',
+              link: '/mails',
               icon: 'mark_as_unread',
-              externalRedirect: true,
+              // externalRedirect: true,
             },
             {
               label: 'Tareas',
-              link: this.httpHome + '?module=Tasks&action=index&parentTab=Actividades',
+              link: '/tasks',
               icon: 'task',
-              externalRedirect: true,
+              // externalRedirect: true,
             },
             {
               label: 'Notas',
-              link: this.httpHome + '?module=Notes&action=index&parentTab=Actividades',
+              link: '/notes',
               icon: 'file_present',
-              externalRedirect: true,
+              // externalRedirect: true,
             }
           ],
         },
@@ -161,22 +170,22 @@ export class AppComponent implements OnInit{
           items: [
             {
               label: 'Diccionarios',
-              link: '/crm/admin/dictionaries',
+              link: '/admin/dictionaries',
               icon: 'menu_book'
             },
             {
               label: 'Parametros',
-              link: '/crm/admin/params',
+              link: '/admin/params',
               icon: 'menu_book'
             },
             {
               label: 'Usuarios',
-              link: '/crm/admin/users',
+              link: '/admin/users',
               icon: 'manage_accounts'
             },
             {
               label: 'Correos',
-              link: '/crm/admin/mails',
+              link: '/admin/mails',
               icon: 'email'
             }
           ],
@@ -198,6 +207,7 @@ export class AppComponent implements OnInit{
     } else {
       this.pilatService.toggleMenuOpened = false;
     }
+    this.pilatService.setiFrameInterface();
   }
   
   closeBootomSheet() {

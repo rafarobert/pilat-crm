@@ -8,9 +8,12 @@ import {SpinnerComponent} from "../components/spinner/spinner.component";
 })
 export class SpinnerService {
   
+  spinnerRef;
+  
   constructor(private router: Router, private dialog: MatDialog) {
   
   }
+  
   
   start(message?): MatDialogRef<SpinnerComponent> {
     

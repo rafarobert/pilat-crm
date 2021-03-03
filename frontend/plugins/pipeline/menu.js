@@ -5,7 +5,7 @@ menuHtml = $('#side-menu').html();
 
 newItem = `
 	<li>
-		<a href="frontend/dist/frontend"><span class="nav-label">PIPELINE</span></a>
+		<a href="frontend/crm"><span class="nav-label">NUEVA VERSION</span></a>
 	</li>
 	`;
 

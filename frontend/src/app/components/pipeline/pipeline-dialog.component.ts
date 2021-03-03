@@ -69,6 +69,7 @@ import {DialogsComponent} from "../dialogs/dialogs.component";
 import {CallsUsers} from "../../../core/models/callsUsers";
 import {Emails} from "../../../core/models/emails";
 import {PilatCrons} from "../../../core/models/pilatCrons";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-pipeline-dialog',
@@ -123,10 +124,12 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
     private contactService: ContactService,
     private _snackBar: MatSnackBar,
     private spinnerService: SpinnerService,
+    private location: Location,
     private dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
+    this.location.replaceState('/');
     this.spinnerRef = this.spinnerService.start();
     this.pilatAuth = new PilatAuth();
     this.pilatAuth.userLoggedId = this.cookieService.get('userLogguedIn');

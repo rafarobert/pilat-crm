@@ -212,7 +212,7 @@ export class CrmOpportunityService {
   }
   
   updateOpportunity(id:any, opportunity:Opportunities) {
-    return this.http.post(this.basePath + '/' + id, opportunity);
+    return this.http.put(this.basePath + '/' + id, opportunity);
   }
   createOpportunity(opportunity:Opportunities) {
     return this.http.post(this.basePath, opportunity);

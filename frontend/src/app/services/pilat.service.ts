@@ -14,6 +14,8 @@ import {addDias, setFormatoFecha} from "fechas";
 import {CodigoFormatoFecha} from "fechas/dist/src";
 import {type} from "os";
 import {AbstractControl, FormControl, FormGroup, ValidationErrors} from "@angular/forms";
+import {HttpClient} from "@angular/common/http";
+declare var $:any;
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +23,7 @@ import {AbstractControl, FormControl, FormGroup, ValidationErrors} from "@angula
 export class PilatService {
   
   environment = environment;
-  
+  header;
   featuresPilatService:boolean = true;
   pipelineStatus:string[] = [];
   isLoading:Boolean;
@@ -34,7 +36,7 @@ export class PilatService {
   supportsPassiveEventListeners = supportsPassiveEventListeners();
   supportsScrollBehavior = supportsScrollBehavior();
   platform:Platform;
-  pageTitle:string = '';
+  pageTitle:string = 'CRM PILAT';
   toggleMenuOpened:boolean;
 
   DIC_LEAD_STATUSES = '5fe93b0e3c3708f0b489dcbd';
@@ -159,7 +161,8 @@ export class PilatService {
   
   constructor(
     breakpointObserver:BreakpointObserver,
-    private pilatParamService:PilatParamService
+    private pilatParamService:PilatParamService,
+    private http: HttpClient,
   ) {
     this.isSmallScreen = breakpointObserver.isMatched('(max-width: 599px)');
   }
@@ -289,4 +292,31 @@ export class PilatService {
     return null
   }
   
+  getExternalHtml(url) {
+    return this.http.get(url);
+  }
+  
+  setiFrameInterface() {
+    if (this.toggleMenuOpened) {
+      $('body .iframe-suitecrm').css('width','89%');
+    } else {
+      $('body .iframe-suitecrm').css('width','100%');
+    }
+    $('body .iframe-suitecrm').css('height','100%');
+  }
+  
+  fixSuiteCrmInterface() {
+    $('body').find('iframe').contents().find('body').find('#menu').hide();
+    $('body').find('iframe').contents().find('body').find('#wrapper').css('margin','0px');
+    $('body').find('iframe').contents().find('body').find('#logo').hide();
+    $('body').find('iframe').contents().find('body').find('#header').css('position','absolute');
+    $('body').find('iframe').contents().find('body').find('.navbar-right').find('#logout_link').hide();
+    $('body').find('iframe').contents().find('body').find('.navbar-right').find('#admin_link').hide();
+    $('body').find('iframe').contents().find('body').find('.navbar-right').find('#utilsLink').hide();
+  }
+  
+  fixiFrameSuitecrmInterface() {
+    $('body .iframe-suitecrm').css('width','89%');
+    $('body .iframe-suitecrm').css('height','100%');
+  }
 }

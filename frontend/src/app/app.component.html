@@ -15,7 +15,8 @@
     <!--</button>-->
 
     <!--<button mat-stroked-button [mat-dialog-close]="true" cdkFocusInitial>Aceptar</button>-->
-    <a [href]="httpHome+'?module=Users&action=Logout'"><mat-icon>logout</mat-icon></a>
+    <a mat-icon-button routerLink="/tools" ><mat-icon>handyman</mat-icon></a>
+    <a mat-icon-button [href]="httpHome+'?module=Users&action=Logout'"><mat-icon>logout</mat-icon></a>
     <!--<button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="closeBootomSheet()">-->
       <!--<mat-icon>logout</mat-icon>-->
     <!--</button>-->
@@ -28,8 +29,8 @@
       <mat-card class="example-card">
         <img class="portal-user-img" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
         <mat-card-content>
-          <b class="portal-username">{{pilatService.currentUser.first_name+' '+pilatService.currentUser.last_name }}</b><br>
-          <b class="portal-username">{{pilatService.currentUser.user_name}}</b>
+          <div class="portal-username">{{pilatService.currentUser ? pilatService.currentUser.first_name+' '+pilatService.currentUser.last_name : ''}}</div><br>
+          <div class="portal-username">{{pilatService.currentUser ? pilatService.currentUser.user_name : ''}}</div>
         </mat-card-content>
 
       </mat-card>

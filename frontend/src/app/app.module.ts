@@ -85,6 +85,19 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { DialogSetContactMailComponent } from './components/dialogs/dialog-set-contact-mail/dialog-set-contact-mail.component';
 import { DialogsComponent } from './components/dialogs/dialogs.component';
 import {MatCardModule} from "@angular/material/card";
+import {SuitecrmComponent} from "./components/suitecrm/suitecrm.component";
+import { BuildingComponent } from './components/building/building.component';
+import { CrmAccountsComponent } from './components/suitecrm/crm-accounts/crm-accounts.component';
+import { CrmContactsComponent } from './components/suitecrm/crm-contacts/crm-contacts.component';
+import { CrmOpportunitiesComponent } from './components/suitecrm/crm-opportunities/crm-opportunities.component';
+import { CrmLeadsComponent } from './components/suitecrm/crm-leads/crm-leads.component';
+import { CrmCalendarComponent } from './components/suitecrm/crm-calendar/crm-calendar.component';
+import { CrmCallsComponent } from './components/suitecrm/crm-calls/crm-calls.component';
+import { CrmMeetingsComponent } from './components/suitecrm/crm-meetings/crm-meetings.component';
+import { CrmMailsComponent } from './components/suitecrm/crm-mails/crm-mails.component';
+import { CrmTasksComponent } from './components/suitecrm/crm-tasks/crm-tasks.component';
+import { CrmNotesComponent } from './components/suitecrm/crm-notes/crm-notes.component';
+import { CrmToolsComponent } from './components/suitecrm/crm-tools/crm-tools.component';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -143,6 +156,20 @@ export const MY_DATE_FORMATS = {
     SpinnerComponent,
     DialogSetContactMailComponent,
     DialogsComponent,
+    SuitecrmComponent,
+    BuildingComponent,
+    AccountsComponent,
+    CrmAccountsComponent,
+    CrmContactsComponent,
+    CrmOpportunitiesComponent,
+    CrmLeadsComponent,
+    CrmCalendarComponent,
+    CrmCallsComponent,
+    CrmMeetingsComponent,
+    CrmMailsComponent,
+    CrmTasksComponent,
+    CrmNotesComponent,
+    CrmToolsComponent
   ],
   imports: [
     BrowserModule,
@@ -234,7 +261,8 @@ export const MY_DATE_FORMATS = {
     MailsComponent,
     SpinnerComponent,
     DialogSetContactMailComponent,
-    DialogsComponent
+    DialogsComponent,
+    BuildingComponent
   ],
   
 })
