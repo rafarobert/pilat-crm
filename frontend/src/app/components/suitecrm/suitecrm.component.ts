@@ -34,6 +34,7 @@ export class SuitecrmComponent implements OnInit,AfterViewInit {
     this.location.replaceState('/');
     this.pilatService.fixSuiteCrmInterface();
     this.buildingService.stop(this.buildingService.buildingRef);
+    this.pilatService.fixiFrameSuitecrmInterface();
   }
   
   ngOnInit(): void {
@@ -42,7 +43,6 @@ export class SuitecrmComponent implements OnInit,AfterViewInit {
   }
   
   ngAfterViewInit(): void {
-    this.pilatService.fixiFrameSuitecrmInterface()
     //this.fixSuiteCrmInterface();
   }
 
