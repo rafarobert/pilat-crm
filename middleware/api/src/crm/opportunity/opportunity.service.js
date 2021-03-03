@@ -659,8 +659,10 @@ class OpportunityService {
 
 					if (updateOpportunity.opportunityOpportunitiesAudit) {
 						if (updateOpportunity.opportunityOpportunitiesAudit.id) {
-							await models.sequelize.opportunitiesAudit.update(updateOpportunity.opportunityOpportunitiesAudit,{where:{parent_id:id}});
-							let respOpportunitiesAudit = await models.sequelize.opportunitiesAudit.findOne({where: { parent_id: id }});
+							let opportunityAuditId = updateOpportunity.opportunityOpportunitiesAudit.id;
+							delete updateOpportunity.opportunityOpportunitiesAudit.id;
+							await models.sequelize.opportunitiesAudit.update(updateOpportunity.opportunityOpportunitiesAudit,{where:{id:opportunityAuditId}});
+							let respOpportunitiesAudit = await models.sequelize.opportunitiesAudit.findOne({where: { id: opportunityAuditId }});
 							objOpportunity.opportunityOpportunitiesAudit = respOpportunitiesAudit.dataValues;
 						} else {
 							let oldOpportunityOpportunitiesAudit = await models.sequelize.opportunitiesAudit.findOne({where:{parent_id:id}});
@@ -681,9 +683,11 @@ class OpportunityService {
 
 					if (updateOpportunity.opportunitySugarfeed) {
 						if (updateOpportunity.opportunitySugarfeed.id) {
+							let sugarfeedId = updateOpportunity.opportunitySugarfeed.id;
+							delete updateOpportunity.opportunitySugarfeed.id;
 							updateOpportunity.opportunitySugarfeed.date_modified = new Date();
-							await models.sequelize.sugarfeed.update(updateOpportunity.opportunitySugarfeed, {where:{related_id:id}});
-							let respSugarfeed = await models.sequelize.sugarfeed.findOne({where: { related_id: id }});
+							await models.sequelize.sugarfeed.update(updateOpportunity.opportunitySugarfeed, {where:{id:sugarfeedId}});
+							let respSugarfeed = await models.sequelize.sugarfeed.findOne({where: { id: sugarfeedId}});
 							objOpportunity.opportunitySugarfeed = respSugarfeed.dataValues;
 						} else {
 							let oldOpportunitySugarfeed = await models.sequelize.sugarfeed.findOne({where:{related_id:id}});
@@ -706,9 +710,11 @@ class OpportunityService {
 
 					if (updateOpportunity.opportunityAodIndexevent) {
 						if (updateOpportunity.opportunityAodIndexevent.id) {
+							let aodIndexeventId = updateOpportunity.opportunityAodIndexevent.id;
+							delete updateOpportunity.opportunityAodIndexevent.id;
 							updateOpportunity.opportunityAodIndexevent.date_modified = new Date();
-							await models.sequelize.aodIndexevent.update(updateOpportunity.opportunityAodIndexevent, {where:{record_id:id}});
-							let respAodIndexevent = await models.sequelize.aodIndexevent.findOne({where: { record_id: id }});
+							await models.sequelize.aodIndexevent.update(updateOpportunity.opportunityAodIndexevent, {where:{id:aodIndexeventId}});
+							let respAodIndexevent = await models.sequelize.aodIndexevent.findOne({where: { id: aodIndexeventId }});
 							objOpportunity.opportunityAodIndexevent = respAodIndexevent.dataValues;
 						} else {
 							let oldOpportunityAodIndexevent = await models.sequelize.aodIndexevent.findOne({where: { record_id: id }});
@@ -731,9 +737,11 @@ class OpportunityService {
 
 					if (updateOpportunity.opportunityTracker) {
 						if (updateOpportunity.opportunityTracker.id) {
+							let trackerId = updateOpportunity.opportunityTracker.id;
+							delete updateOpportunity.opportunityTracker.id;
 							updateOpportunity.opportunityTracker.date_modified = new Date();
-							await models.sequelize.tracker.update(updateOpportunity.opportunityTracker, {where:{item_id:id}});
-							let respTracker = await models.sequelize.tracker.findOne({where: { item_id: id }});
+							await models.sequelize.tracker.update(updateOpportunity.opportunityTracker, {where:{id:trackerId}});
+							let respTracker = await models.sequelize.tracker.findOne({where: { id: trackerId }});
 							objOpportunity.opportunityTracker = respTracker.dataValues;
 						} else {
 							let oldOpportunityTracker = await models.sequelize.tracker.findOne({where: { item_id: id }});

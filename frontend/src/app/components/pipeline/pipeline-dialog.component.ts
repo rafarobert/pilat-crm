@@ -985,9 +985,8 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
           this.pilatService.isLoading = true;
           this.spinnerService.spinnerRef = this.spinnerService.start();
           let responseOpportunity:any = await this.crmOpportunityService.updateOpportunity(opportunity.id, this.crmOpportunityService.opportunityData).toPromise();
-          this.setPipeline();
           this.spinnerService.stop(this.spinnerService.spinnerRef);
-          this.pilatService.isLoading = false;
+          this.setPipeline();
         }
       });
     }

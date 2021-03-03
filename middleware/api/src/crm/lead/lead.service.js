@@ -372,9 +372,11 @@ class LeadService {
 					if (updateLead.leadAodIndexevent) {
 						let respAodindexevent;
 						if (updateLead.leadAodIndexevent.id) {
+							let aodIndexeventId = updateLead.leadAodIndexevent.id;
+							delete updateLead.leadAodIndexevent.id;
 							updateLead.leadAodIndexevent.date_modified = new Date();
-							await models.sequelize.aodIndexevent.update(updateLead.leadAodIndexevent, {where:{record_id:id}});
-							respAodindexevent = await models.sequelize.aodIndexevent.findOne({where: { record_id: id }});
+							await models.sequelize.aodIndexevent.update(updateLead.leadAodIndexevent, {where:{id:aodIndexeventId}});
+							respAodindexevent = await models.sequelize.aodIndexevent.findOne({where: { id: aodIndexeventId}});
 							objLead.leadAodIndexevent = respAodindexevent.dataValues;
 						} else {
 							let oldLeadAodIndexevent = await models.sequelize.aodIndexevent.findOne({where:{record_id:id}});
@@ -399,9 +401,11 @@ class LeadService {
 
 					if (updateLead.leadTracker) {
 						if (updateLead.leadTracker.id) {
+							let trackerId = updateLead.leadTracker.id;
+							delete updateLead.leadTracker.id;
 							updateLead.leadTracker.date_modified = new Date();
-							await models.sequelize.tracker.update(updateLead.leadTracker, {where:{item_id:id}});
-							let respTracker = await models.sequelize.tracker.findOne({where: { item_id: id }});
+							await models.sequelize.tracker.update(updateLead.leadTracker, {where:{id:trackerId}});
+							let respTracker = await models.sequelize.tracker.findOne({where: { id: trackerId }});
 							objLead.leadTracker = respTracker.dataValues;
 						} else {
 							let oldLeadTracker = await models.sequelize.tracker.findOne({where:{item_id:id}});
@@ -426,9 +430,11 @@ class LeadService {
 
 					if (updateLead.leadSugarfeed) {
 						if (updateLead.leadSugarfeed.id) {
+							let sugarfeedId = updateLead.leadSugarfeed.id;
+							delete updateLead.leadSugarfeed.id;
 							updateLead.leadSugarfeed.date_modified = new Date();
-							await models.sequelize.sugarfeed.update(updateLead.leadSugarfeed, {where:{related_id:id}});
-							let respSugarfeed = await models.sequelize.sugarfeed.findOne({where: { related_id: id }});
+							await models.sequelize.sugarfeed.update(updateLead.leadSugarfeed, {where:{id:sugarfeedId }});
+							let respSugarfeed = await models.sequelize.sugarfeed.findOne({where: { id:sugarfeedId }});
 							objLead.leadSugarfeed = respSugarfeed.dataValues;
 						}  else {
 							let oldLeadSugarfeed = await models.sequelize.sugarfeed.findOne({where:{related_id:id}});
