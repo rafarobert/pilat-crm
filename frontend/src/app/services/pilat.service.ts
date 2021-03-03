@@ -69,6 +69,7 @@ export class PilatService {
   DIC_EMAILS_TYPES = '603dd6ef36a4741d6003d9df';
   DIC_EMAILS_STATUSES = '603dd76636a4741d6003d9e1';
   DIC_EMAILS_INTENT = '603ddcdd36a4741d6003d9e4';
+  DIC_CALL_DIRECTION = '603fc1819700a32438f9fc65';
   
   parLeadStatuses:PilatParams[] = [];
   parProspectStages:PilatParams[] = [];
@@ -98,6 +99,7 @@ export class PilatService {
   parEmailStatuses:PilatParams[] = [];
   parEmailTypes:PilatParams[] = [];
   parEmailIntents:PilatParams[] = [];
+  parCallDirections:PilatParams[] = [];
   
   parPersonaNatural:PilatParams;
   parPersonaJuridica:PilatParams;
@@ -136,6 +138,9 @@ export class PilatService {
   parCallFailure: PilatParams;
   parCallPending: PilatParams;
   
+  parCallDirectionInbound: PilatParams;
+  parCallDirectionOutbound: PilatParams;
+  
   parModuleLead: PilatParams;
   parModuleContact: PilatParams;
   parModuleAccount: PilatParams;
@@ -158,6 +163,7 @@ export class PilatService {
   parEmailTypeOut: PilatParams;
   
   parEmailIntentPick: PilatParams;
+	hourDifference: number;
   
   constructor(
     breakpointObserver:BreakpointObserver,
@@ -165,6 +171,7 @@ export class PilatService {
     private http: HttpClient,
   ) {
     this.isSmallScreen = breakpointObserver.isMatched('(max-width: 599px)');
+    this.hourDifference = 4;
   }
   
   async setParams(aDictionaries:string[]) {
@@ -202,6 +209,7 @@ export class PilatService {
               case this.DIC_EMAILS_STATUSES: !this.parEmailStatuses.find(par => par._id == param._id) ? this.parEmailStatuses.push(param) : false; break;
               case this.DIC_EMAILS_TYPES: !this.parEmailTypes.find(par => par._id == param._id) ? this.parEmailTypes.push(param) : false; break;
               case this.DIC_EMAILS_INTENT: !this.parEmailIntents.find(par => par._id == param._id) ? this.parEmailIntents.push(param) : false; break;
+              case this.DIC_CALL_DIRECTION: !this.parCallDirections.find(par => par._id == param._id) ? this.parCallDirections.push(param) : false; break;
             }
         
             switch (param.id) {
@@ -225,6 +233,7 @@ export class PilatService {
               case 66:this.parNotApproved = param;break;
               case 63:this.parInvoiced = param;break;
               case 64:this.parNotInvoiced = param;break;
+              
               case 91:this.parCallPlanned = param;break;
               case 92:this.parCallHeld = param;break;
               case 93:this.parCallNotHeld = param;break;

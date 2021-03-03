@@ -135,6 +135,17 @@ export class AddLeadComponent implements OnInit {
     return new Date(parts[0], parts[1]-1, parts[2],parts[3],parts[4]); // months are 0-based
   }
   
+  setCallTime() {
+    let callDate = this.data.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c;
+    let callHour = callDate.getHours();
+    let callMinutes = callDate.getMinutes();
+    this.data.leadCallsLeads.callLeadCalls.duration_hours = callHour;
+    this.data.leadCallsLeads.callLeadCalls.duration_minutes = callMinutes;
+    this.data.leadCallsLeads.callLeadCalls.date_start.setHours(callHour);
+    this.data.leadCallsLeads.callLeadCalls.date_start.setMinutes(callMinutes);
+  }
+  
+  
   public confirmAdd(): void {
     this.crmLeadService.leadData = this.data;
   }

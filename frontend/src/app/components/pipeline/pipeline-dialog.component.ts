@@ -130,7 +130,7 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.location.replaceState('/');
-    this.spinnerRef = this.spinnerService.start();
+    this.spinnerService.spinnerRef = this.spinnerService.start();
     this.pilatAuth = new PilatAuth();
     this.pilatAuth.userLoggedId = this.cookieService.get('userLogguedIn');
     this.pilatAuth.userSessId = this.cookieService.get('PHPSESSID');
@@ -164,7 +164,7 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
   }
   
   ngAfterViewInit(): void {
-    this.spinnerService.stop(this.spinnerRef);
+    this.spinnerService.stop(this.spinnerService.spinnerRef);
   }
   
   openLeadDialog($event) {
@@ -234,7 +234,7 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
   
   async setPipeline(order:string = 'desc') {
     this.isLoading = true;
-    this.spinnerRef = this.spinnerService.start();
+    this.spinnerService.spinnerRef = this.spinnerService.start();
     let responseProspectStages:any = await this.pilatParamService.getAllPilatParams([],{par_dictionary_id:this.pilatService.DIC_STAGES_PROSPECTS},[['par_order','asc']]).toPromise();
     let responseOpportunityStages:any = await this.pilatParamService.getAllPilatParams([],{par_dictionary_id:this.pilatService.DIC_STAGES_OPPORTUNITIES},[['par_order','asc']]).toPromise();
     let responseStageOpportunities:any = await this.crmOpportunityService.getAllOpportunities([],{assigned_user_id:this.pilatService.currentUser.id}, [['date_modified',order]]).toPromise();
@@ -411,7 +411,7 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
             this.pipeline.columns[i] = pipelineColumn;
             this.isLoading = false;
         }
-      this.spinnerService.stop(this.spinnerRef);
+      this.spinnerService.stop(this.spinnerService.spinnerRef);
     
   }
   
@@ -420,13 +420,13 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
     let opportunityId = txtItem.split('<span hidden="opportunityId">')[1].split('</span>')[0];
     if (this.pilatService.userLoggedIn) {
       if (opportunityId) {
-        this.spinnerRef = this.spinnerService.start();
+        this.spinnerService.spinnerRef = this.spinnerService.start();
         let respOpportunity:any = await this.crmOpportunityService.getOpportunity(opportunityId).toPromise();
         let opportunity:Opportunities = respOpportunity.data;
         opportunity.sales_stage = this.pipeline.columns[currentColumn].props.par_cod;
         opportunity.opportunityOpportunitiesCstm.id_c = opportunityId;
         await this.crmOpportunityService.updateOpportunity(opportunityId,opportunity).subscribe(async (res) => {
-          this.spinnerService.stop(this.spinnerRef);
+          this.spinnerService.stop(this.spinnerService.spinnerRef);
           let response = res as {status:string, message:string, data:LeadsCstm};
           if(response.data) {
             transferArrayItem(event.previousContainer.data,
@@ -584,7 +584,7 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
     let leadId = txtItem.split('<span hidden="prospectId">')[1].split('</span>')[0];
     if (leadId) {
       let lead: Leads;
-      this.spinnerRef = this.spinnerService.start();
+      this.spinnerService.spinnerRef = this.spinnerService.start();
       await this.crmLeadService.getLead(leadId).subscribe(async (res) => {
         let responseLead = res as { status: string, message: string, data: Leads };
         lead = responseLead.data;
@@ -599,7 +599,7 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
                     lead.leadLeadsCstm.id_c = leadId;
                     lead.leadLeadsCstm.etapas_c = this.pipeline.columns[currentColumn].props.par_cod;
                     let responseLead:any = await this.crmLeadService.updateLead(leadId,lead).toPromise();
-                    this.spinnerService.stop(this.spinnerRef);
+                    this.spinnerService.stop(this.spinnerService.spinnerRef);
                     if(responseLead.data) {
                       transferArrayItem(event.previousContainer.data,
                         event.container.data,
@@ -608,27 +608,27 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
                       this.setPipeline();
                     }
                   } else {
-                    this.spinnerService.stop(this.spinnerRef);
+                    this.spinnerService.stop(this.spinnerService.spinnerRef);
                     this.dialogService.open('La llamada realizada por el usuario, no tiene el estado: '+this.pilatService.parAcceptCallAccept.par_description+', por favor verifica el estado de la llamada realizada por el usuario', 'Verificacion del estado de la llamada');
                   }
                 } else {
-                  this.spinnerService.stop(this.spinnerRef);
+                  this.spinnerService.stop(this.spinnerService.spinnerRef);
                   this.dialogService.open('La llamada registrado en el prospecto no tiene el estado: '+ this.pilatService.parCallHeld.par_description + ', Ppor favor verifica que se haya realizado la llamada.', 'Verificacion del estado de la llamada');
                 }
               } else {
-                this.spinnerService.stop(this.spinnerRef);
+                this.spinnerService.stop(this.spinnerService.spinnerRef);
                 this.dialogService.open('El prospecto no tiene asignado una llamada realizada por el usuario: '+this.pilatService.currentUser.user_name+', verifica que se haya realizado el registro de la llamada asignado al usuario', 'Verificacion del registro de la llamada');
               }
             } else {
-              this.spinnerService.stop(this.spinnerRef);
+              this.spinnerService.stop(this.spinnerService.spinnerRef);
               this.dialogService.open('Existe un error en los datos de la llamada, por favor actualiza el prospecto y vuelve a intentar', 'Validacion de datos de la llamada');
             }
           } else {
-            this.spinnerService.stop(this.spinnerRef);
+            this.spinnerService.stop(this.spinnerService.spinnerRef);
             this.dialogService.open('El prospecto no tiene un registro de llamada, por favor actualiza los datos del prospecto', 'Validacion de datos de la llamada');
           }
         } else {
-          this.spinnerService.stop(this.spinnerRef);
+          this.spinnerService.stop(this.spinnerService.spinnerRef);
           this.dialogService.open('El prospecto no tiene un registro de llamada, por favor actualiza los datos del prospecto', 'Validacion de datos de la llamada');
         }
       });
@@ -671,9 +671,9 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
     let txtItem = event.previousContainer.data[event.previousIndex];
     let opportunityId = txtItem.split('<span hidden="opportunityId">')[1].split('</span>')[0];
     if (this.pilatService.userLoggedIn) {
-      this.spinnerRef = this.spinnerService.start();
+      this.spinnerService.spinnerRef = this.spinnerService.start();
       let responseOpportunity:any = await this.crmOpportunityService.getOpportunity(opportunityId).toPromise();
-      this.spinnerService.stop(this.spinnerRef);
+      this.spinnerService.stop(this.spinnerService.spinnerRef);
       this.opportunity = responseOpportunity.data;
       if (this.opportunity.opportunityOpportunitiesContacts) {
         if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts) {
@@ -722,9 +722,9 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
     this.salesStage = this.pipeline.columns[currentColumn].props.par_cod;
     if (this.pilatService.userLoggedIn) {
       if (leadId) {
-        this.spinnerRef = this.spinnerService.start();
+        this.spinnerService.spinnerRef = this.spinnerService.start();
         let responseLead: any = await this.crmLeadService.getLead(leadId).toPromise();
-        this.spinnerService.stop(this.spinnerRef);
+        this.spinnerService.stop(this.spinnerService.spinnerRef);
         this.lead = responseLead.data;
         this.opportunity = new Opportunities();
         
@@ -753,7 +753,7 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
         dialogAddOpportunity.afterClosed().subscribe(async result => {
           if (result === 1) {
             // after
-            this.spinnerRef = this.spinnerService.start();
+            this.spinnerService.spinnerRef = this.spinnerService.start();
             this.opportunity = this.crmOpportunityService.opportunityData;
             let responseOpportunity:any = await this.crmOpportunityService.createOpportunity(this.opportunity).toPromise();
             if (responseOpportunity.data) {
@@ -763,13 +763,13 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
               this.lead.opportunity_name = this.opportunity.name;
               let responseLead:any = await this.crmLeadService.updateLead(this.lead.id, this.lead).toPromise();
               if (responseOpportunity.data) {
-                this.spinnerService.stop(this.spinnerRef);
+                this.spinnerService.stop(this.spinnerService.spinnerRef);
                 this.opportunity = responseOpportunity.data;
                 
                 setTimeout(async () => {
-                  this.spinnerRef = this.spinnerService.start();
+                  this.spinnerService.spinnerRef = this.spinnerService.start();
                   responseOpportunity = await this.crmOpportunityService.getOpportunity(this.opportunity.id).toPromise();
-                  this.spinnerService.stop(this.spinnerRef);
+                  this.spinnerService.stop(this.spinnerService.spinnerRef);
                   this.opportunity = responseOpportunity.data;
                   if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_sent_date) {
                     this.dialogService.open('El correo con el detalle de la cotización fue enviado exitosamente al correo del contacto: '+ this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address);
@@ -806,12 +806,21 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
     this.afterTomorrow = new Date(parseInt(yearAfterA), parseInt(monthAfterA), parseInt(dayAfterA));
     
     this.lead = new Leads();
+    this.lead.assigned_user_id = this.pilatService.currentUser.id;
+    this.lead.created_by = this.pilatService.currentUser.id;
+    this.lead.modified_user_id = this.pilatService.currentUser.id;
+    
     this.lead.leadLeadsCstm = new LeadsCstm();
     this.lead.leadCallsLeads = this.lead.leadCallsLeads ? this.lead.leadCallsLeads: new CallsLeads();
+    
     this.lead.leadCallsLeads.callLeadCalls = this.lead.leadCallsLeads.callLeadCalls ? this.lead.leadCallsLeads.callLeadCalls : new Calls();
+    this.lead.leadCallsLeads.callLeadCalls.created_by = this.pilatService.currentUser.id;
+    this.lead.leadCallsLeads.callLeadCalls.modified_user_id = this.pilatService.currentUser.id;
+    this.lead.leadCallsLeads.callLeadCalls.assigned_user_id = this.pilatService.currentUser.id;
     this.lead.leadCallsLeads.callLeadCalls.name = this.lead ? this.lead.first_name && this.lead.last_name ? this.lead.first_name+' '+this.lead.last_name : '' : '';
     this.lead.leadCallsLeads.callLeadCalls.date_start = this.tomorrow;
     this.lead.leadCallsLeads.callLeadCalls.date_end = this.afterTomorrow;
+    
     this.lead.leadCallsLeads.callLeadCalls.callCallsCstm = this.lead.leadCallsLeads.callLeadCalls.callCallsCstm ? this.lead.leadCallsLeads.callLeadCalls.callCallsCstm : new CallsCstm();
     this.lead.leadCallsLeads.callLeadCalls.callCallsUsers = this.lead.leadCallsLeads.callLeadCalls.callCallsUsers ? this.lead.leadCallsLeads.callLeadCalls.callCallsUsers : new CallsUsers();
   
@@ -826,7 +835,7 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
       if (result === 1) {
         // After dialog is closed we're doing frontend updates
         // For add we're just pushing a new row inside leadService
-        this.spinnerRef = this.spinnerService.start();
+        this.spinnerService.spinnerRef = this.spinnerService.start();
         
         if (this.crmLeadService.leadData.leadCallsLeads.callLeadCalls.date_start) {
           let dateStart = this.crmLeadService.leadData.leadCallsLeads.callLeadCalls.date_start;
@@ -836,7 +845,7 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
         
         await this.crmLeadService.createLead(this.crmLeadService.leadData).subscribe(async (res) => {
           let response = res as { status: string, message: string, data: any };
-          this.spinnerService.stop(this.spinnerRef);
+          this.spinnerService.stop(this.spinnerService.spinnerRef);
           
           if (response.data && response.data.length) {
             let leads:Leads[] = response.data;
@@ -871,14 +880,24 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
         let prospectId = txtItem.split('<span hidden="prospectId">')[1].split('</span>')[0];
         let prospect:Leads;
         if (prospectId) {
-          this.spinnerRef = this.spinnerService.start();
+          this.spinnerService.spinnerRef = this.spinnerService.start();
           let responseLead:any = await this.crmLeadService.getLead(prospectId).toPromise();
-          this.spinnerService.stop(this.spinnerRef);
+          this.spinnerService.stop(this.spinnerService.spinnerRef);
           prospect = responseLead.data;
+          
+          prospect.modified_user_id = this.pilatService.currentUser.id;
+          prospect.created_by = this.pilatService.currentUser.id;
+          prospect.assigned_user_id = this.pilatService.currentUser.id;
+          
           prospect.leadLeadsCstm = prospect.leadLeadsCstm ? prospect.leadLeadsCstm : new LeadsCstm();
           prospect.leadCallsLeads = prospect.leadCallsLeads ? prospect.leadCallsLeads : new CallsLeads();
+          
           prospect.leadCallsLeads.callLeadCalls = prospect.leadCallsLeads.callLeadCalls ? prospect.leadCallsLeads.callLeadCalls : new Calls();
           prospect.leadCallsLeads.callLeadCalls.name = prospect.first_name+' '+prospect.last_name;
+          prospect.leadCallsLeads.callLeadCalls.assigned_user_id = this.pilatService.currentUser.id;
+          prospect.leadCallsLeads.callLeadCalls.modified_user_id = this.pilatService.currentUser.id;
+          prospect.leadCallsLeads.callLeadCalls.created_by = this.pilatService.currentUser.id;
+          
           prospect.leadCallsLeads.callLeadCalls.callCallsCstm = prospect.leadCallsLeads.callLeadCalls.callCallsCstm ? prospect.leadCallsLeads.callLeadCalls.callCallsCstm : new CallsCstm();
       
           prospect.leadCallsLeads.callLeadCalls.callCallsUsers = prospect.leadCallsLeads.callLeadCalls.callCallsUsers ? prospect.leadCallsLeads.callLeadCalls.callCallsUsers : new CallsUsers();
@@ -893,7 +912,7 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
           let llamadaFecha = prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c;
           if (llamadaFecha) {
             prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c = this.parseDate(prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c);
-            prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c = this.parseDate(prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c);
+            // prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c = this.parseDate(prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c);
           }
           let dialogAddLead = this.dialog.open(AddLeadComponent, {
             width:'600px',
@@ -901,9 +920,9 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
           });
           dialogAddLead.afterClosed().subscribe(async result => {
             if (result === 1) {
-              this.spinnerRef = this.spinnerService.start();
+              this.spinnerService.spinnerRef = this.spinnerService.start();
               let responseLead:any = await this.crmLeadService.updateLead(prospect.id, this.crmLeadService.leadData).toPromise()
-              this.spinnerService.stop(this.spinnerRef);
+              this.spinnerService.stop(this.spinnerService.spinnerRef);
               this.setPipeline();
               if (responseLead.data) {
                 // let lead:Leads = response.data;
@@ -932,9 +951,9 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
     if (txtItem.includes('<span hidden="opportunityId">')) {
       let opportunityId = txtItem.split('<span hidden="opportunityId">')[1].split('</span>')[0];
       let opportunity:Opportunities;
-      this.spinnerRef = this.spinnerService.start();
+      this.spinnerService.spinnerRef = this.spinnerService.start();
       let responseOpportunity:any = await this.crmOpportunityService.getOpportunity(opportunityId).toPromise();
-      this.spinnerService.stop(this.spinnerRef);
+      this.spinnerService.stop(this.spinnerService.spinnerRef);
       opportunity = responseOpportunity.data ? responseOpportunity.data : new Opportunities();
       opportunity.opportunityOpportunitiesCstm = opportunity.opportunityOpportunitiesCstm ? opportunity.opportunityOpportunitiesCstm : new OpportunitiesCstm();
       opportunity.opportunityOpportunitiesContacts = opportunity.opportunityOpportunitiesContacts ? opportunity.opportunityOpportunitiesContacts : new OpportunitiesContacts();
@@ -964,10 +983,10 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
       dialogAddOpportunity.afterClosed().subscribe(async result => {
         if (result === 1) {
           this.pilatService.isLoading = true;
-          this.spinnerRef = this.spinnerService.start();
+          this.spinnerService.spinnerRef = this.spinnerService.start();
           let responseOpportunity:any = await this.crmOpportunityService.updateOpportunity(opportunity.id, this.crmOpportunityService.opportunityData).toPromise();
           this.setPipeline();
-          this.spinnerService.stop(this.spinnerRef);
+          this.spinnerService.stop(this.spinnerService.spinnerRef);
           this.pilatService.isLoading = false;
         }
       });
@@ -1003,13 +1022,13 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
     let leadId = txtItem.split('<span hidden="prospectId">')[1].split('</span>')[0];
     if (this.pilatService.currentUser.id) {
       if (leadId) {
-        this.spinnerRef = this.spinnerService.start();
+        this.spinnerService.spinnerRef = this.spinnerService.start();
         let respLead:any = await this.crmLeadService.getLead(leadId).toPromise();
         let lead = respLead.data;
         lead.leadLeadsCstm.id_c = leadId;
         lead.leadLeadsCstm.etapas_c = this.pipeline.columns[currentColumn].props.par_cod;
         await this.crmLeadService.updateLead(leadId,lead).subscribe(async (res) => {
-          this.spinnerService.stop(this.spinnerRef);
+          this.spinnerService.stop(this.spinnerService.spinnerRef);
           let response = res as {status:string, message:string, data:LeadsCstm};
           if(response.data) {
             transferArrayItem(event.previousContainer.data,
@@ -1079,15 +1098,20 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
     }
   }
   
-  parseDate(input) {
+  parseDate(input:any) {
     let parts;
     if (input) {
   	  if (typeof input == 'string') {
 	      parts = input.match(/(\d+)/g);
-	      return new Date(parts[0], parts[1]-1, parts[2],parts[3],parts[4]); // months are 0-based
+	      return new Date(parts[0], parts[1]-1, parts[2],parts[3]-this.pilatService.hourDifference,parts[4]); // months are 0-based
       }
 	    // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
 	  }
+    if (input.getTime) {
+      let date:Date = input;
+      date.setTime(date.getTime()-this.pilatService.hourDifference);
+      return date
+    }
   	return input
   }
 }
