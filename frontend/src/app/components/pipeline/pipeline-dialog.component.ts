@@ -892,8 +892,8 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
       
           let llamadaFecha = prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c;
           if (llamadaFecha) {
-            prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c = this.parseDate(prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c);
-            prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c = this.parseDate(prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c);
+            //prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c = this.parseDate(prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c);
+            //prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c = this.parseDate(prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c);
           }
           let dialogAddLead = this.dialog.open(AddLeadComponent, {
             width:'600px',
@@ -1080,8 +1080,11 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
   }
   
   parseDate(input) {
-    var parts = input.match(/(\d+)/g);
-    // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
-    return new Date(parts[0], parts[1]-1, parts[2],parts[3],parts[4]); // months are 0-based
+  	if (input) {
+	    var parts = input.match(/(\d+)/g);
+	    // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
+	    return new Date(parts[0], parts[1]-1, parts[2],parts[3],parts[4]); // months are 0-based
+	  }
+  	return input
   }
 }
