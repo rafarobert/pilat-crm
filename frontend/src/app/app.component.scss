@@ -37,9 +37,10 @@
   flex: 1 1 auto;
 }
 
-//mat-drawer{
-//  width: 13%;
-//}
+mat-drawer{
+  max-width: 210px;
+}
 .mat-list-base .mat-list-item {
   font-size: 11px!important;
 }
+

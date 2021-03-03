@@ -31,8 +31,6 @@
     <!--<button mat-raised-button color="primary" class="btn-lead-trigger" (click)="openOpportunityDialog($event)">Ver Oportunidades</button>-->
   <!--</div>-->
 
-  <mat-spinner diameter="50" class="mat-spinner" *ngIf="isLoading"></mat-spinner>
-
   <div cdkDropListGroup *ngIf="pipeline.columns">
     <div class="example-container" *ngFor="let column of pipeline.columns; let i = index">
       <h2 *ngIf="column">{{column.props.par_description}} <br>({{column.currencyTo ? column.currencyTo : pilatService.parMonedaDolar.par_abbr}}. {{column.totalTo ? column.totalTo.formatNumber() : '0'}})</h2><br>

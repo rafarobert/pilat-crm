@@ -28,6 +28,9 @@ export class AddLeadComponent implements OnInit {
   tomorrow:Date;
   afterTomorrow:Date;
   parCurrentTipoCliente:PilatParams;
+  parCurrentCountry: PilatParams;
+  parCurrentState: PilatParams;
+  parCurrentCity: PilatParams;
   
   constructor(
     public dialogRef: MatDialogRef<AddLeadComponent>,
@@ -84,6 +87,26 @@ export class AddLeadComponent implements OnInit {
         this.accordion.openAll();
       },1000)
     });
+  }
+  
+  selectCountry(value) {
+    if (value) {
+      this.parCurrentCountry = this.pilatService.parCountries.find(param => param.par_cod == value);
+      this.pilatService.parStates = this.pilatService.parStates.filter(param => param.par_parent_id == this.parCurrentCountry._id);
+    }
+  }
+  
+  selectState(value) {
+    if (value) {
+      this.parCurrentState = this.pilatService.parStates.find(param => param.par_cod == value);
+      this.pilatService.parCities = this.pilatService.parCities.filter(param => param.par_parent_id == this.parCurrentState._id);
+    }
+  }
+  
+  selectCity(value) {
+    if (value) {
+      this.parCurrentCity = this.pilatService.parCities.find(param => param.par_cod == value);
+    }
   }
   
   selectTipoCliente(value) {

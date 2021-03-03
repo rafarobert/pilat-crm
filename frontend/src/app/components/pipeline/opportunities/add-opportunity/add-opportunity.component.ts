@@ -34,6 +34,12 @@ export class AddOpportunityComponent implements OnInit {
   data:Opportunities;
   dataLeads:Leads;
   dataLeadsCstm:LeadsCstm;
+  parCurrentAccountCountry: PilatParams;
+  parCurrentAccountState: PilatParams;
+  parCurrentAccountCity: PilatParams;
+  parCurrentContactCountry: PilatParams;
+  parCurrentContactState: PilatParams;
+  parCurrentContactCity: PilatParams;
   
   constructor(
     public dialogRef: MatDialogRef<AddOpportunityComponent>,
@@ -108,6 +114,46 @@ export class AddOpportunityComponent implements OnInit {
         this.accordion.openAll();
       },1000);
     });
+  }
+  
+  selectAccountCountry(value) {
+    if (value) {
+      this.parCurrentAccountCountry = this.pilatService.parCountries.find(param => param.par_cod == value);
+      this.pilatService.parStates = this.pilatService.parStates.filter(param => param.par_parent_id == this.parCurrentAccountCountry._id);
+    }
+  }
+  
+  selectAccountState(value) {
+    if (value) {
+      this.parCurrentAccountState = this.pilatService.parStates.find(param => param.par_cod == value);
+      this.pilatService.parCities = this.pilatService.parCities.filter(param => param.par_parent_id == this.parCurrentAccountState._id);
+    }
+  }
+  
+  selectAccountCity(value) {
+    if (value) {
+      this.parCurrentAccountCity = this.pilatService.parCities.find(param => param.par_cod == value);
+    }
+  }
+  
+  selectContactCountry(value) {
+    if (value) {
+      this.parCurrentContactCountry = this.pilatService.parCountries.find(param => param.par_cod == value);
+      this.pilatService.parStates = this.pilatService.parStates.filter(param => param.par_parent_id == this.parCurrentContactCountry._id);
+    }
+  }
+  
+  selectContactState(value) {
+    if (value) {
+      this.parCurrentContactState = this.pilatService.parStates.find(param => param.par_cod == value);
+      this.pilatService.parCities = this.pilatService.parCities.filter(param => param.par_parent_id == this.parCurrentContactState._id);
+    }
+  }
+  
+  selectContactCity(value) {
+    if (value) {
+      this.parCurrentContactCity = this.pilatService.parCities.find(param => param.par_cod == value);
+    }
   }
   
   getErrorMessage() {

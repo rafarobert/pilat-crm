@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnInit} from '@angular/core';
 import {Pipeline} from "../../models/pipeline";
 import {PilatParamService} from "../../../core/services/pilat-param.service";
 import {PilatService} from "../../services/pilat.service";
@@ -75,7 +75,7 @@ import {PilatCrons} from "../../../core/models/pilatCrons";
   templateUrl: './pipeline-dialog.component.html',
   styleUrls: ['./pipeline-dialog.component.scss'],
 })
-export class PipelineDialogComponent implements OnInit {
+export class PipelineDialogComponent implements OnInit, AfterViewInit {
   
   pipeline:Pipeline = new Pipeline();
   isLoading:boolean = true;
@@ -127,6 +127,7 @@ export class PipelineDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.spinnerRef = this.spinnerService.start();
     this.pilatAuth = new PilatAuth();
     this.pilatAuth.userLoggedId = this.cookieService.get('userLogguedIn');
     this.pilatAuth.userSessId = this.cookieService.get('PHPSESSID');
@@ -157,6 +158,10 @@ export class PipelineDialogComponent implements OnInit {
         });
       }
     });
+  }
+  
+  ngAfterViewInit(): void {
+    this.spinnerService.stop(this.spinnerRef);
   }
   
   openLeadDialog($event) {
@@ -226,7 +231,7 @@ export class PipelineDialogComponent implements OnInit {
   
   async setPipeline(order:string = 'desc') {
     this.isLoading = true;
-    
+    this.spinnerRef = this.spinnerService.start();
     let responseProspectStages:any = await this.pilatParamService.getAllPilatParams([],{par_dictionary_id:this.pilatService.DIC_STAGES_PROSPECTS},[['par_order','asc']]).toPromise();
     let responseOpportunityStages:any = await this.pilatParamService.getAllPilatParams([],{par_dictionary_id:this.pilatService.DIC_STAGES_OPPORTUNITIES},[['par_order','asc']]).toPromise();
     let responseStageOpportunities:any = await this.crmOpportunityService.getAllOpportunities([],{assigned_user_id:this.pilatService.currentUser.id}, [['date_modified',order]]).toPromise();
@@ -403,7 +408,7 @@ export class PipelineDialogComponent implements OnInit {
             this.pipeline.columns[i] = pipelineColumn;
             this.isLoading = false;
         }
-      
+      this.spinnerService.stop(this.spinnerRef);
     
   }
   
@@ -884,6 +889,7 @@ export class PipelineDialogComponent implements OnInit {
       
           let llamadaFecha = prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c;
           if (llamadaFecha) {
+            prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c = this.parseDate(prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c);
             prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c = this.parseDate(prospect.leadCallsLeads.callLeadCalls.callCallsCstm.llamada_fecha_c);
           }
           let dialogAddLead = this.dialog.open(AddLeadComponent, {

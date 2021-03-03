@@ -84,6 +84,7 @@ import { HomeComponent } from './components/home/home.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { DialogSetContactMailComponent } from './components/dialogs/dialog-set-contact-mail/dialog-set-contact-mail.component';
 import { DialogsComponent } from './components/dialogs/dialogs.component';
+import {MatCardModule} from "@angular/material/card";
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -179,7 +180,8 @@ export const MY_DATE_FORMATS = {
     MatExpansionModule,
     NgxMaterialTimepickerModule,
     MatTimepickerModule,
-    MomentDateModule
+    MomentDateModule,
+    MatCardModule
   ],
   exports: [],
   providers: [

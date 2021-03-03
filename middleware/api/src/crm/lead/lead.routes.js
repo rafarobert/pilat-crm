@@ -15,16 +15,15 @@ const sys = configJson.system;
 const express = require("express");
 const router = express.Router();
 //const authenticateToken = require("../../../../config/token");
-const cors = require("cors");
 
 //<es-section>
 const leadsCtrl = require("./lead.controller");
 
-router.get(`/api-${sys}/crm/leads`, cors(), (req, res) => leadsCtrl.getAllLeads(req, res));
-router.get(`/api-${sys}/crm/leads/:id`, cors(), (req, res) => leadsCtrl.getALead(req, res));
-router.put(`/api-${sys}/crm/leads/:id`, cors(), (req, res) => leadsCtrl.updateLead(req, res));
-router.delete(`/api-${sys}/crm/leads/:id`, cors(), (req, res) => leadsCtrl.deleteLead(req, res));
-router.post(`/api-${sys}/crm/leads/`, cors(), (req, res) => leadsCtrl.addLead(req, res));
+router.get(`/api-${sys}/crm/leads`, (req, res) => leadsCtrl.getAllLeads(req, res));
+router.get(`/api-${sys}/crm/leads/:id`, (req, res) => leadsCtrl.getALead(req, res));
+router.put(`/api-${sys}/crm/leads/:id`, (req, res) => leadsCtrl.updateLead(req, res));
+router.delete(`/api-${sys}/crm/leads/:id`, (req, res) => leadsCtrl.deleteLead(req, res));
+router.post(`/api-${sys}/crm/leads/`, (req, res) => leadsCtrl.addLead(req, res));
 
 
 // router.get(`/api-${sys}/crm/leads`, (req, res) => leadCtrl.getLeads(req, res));

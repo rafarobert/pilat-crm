@@ -19,7 +19,10 @@ const configJson = require('./config/config');
 const env = process.env.NODE_ENV || 'development';
 const config = configJson[env];
 const app = express();
+const cors = require('cors');
 
+app.options('*', cors()); // include before other routes
+app.use(cors());
 dotenv.config();
 
 // Initialize
@@ -57,7 +60,6 @@ app.use(expressSession({secret: 'anystringoftext',
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-
 app.use(express.json());
 
 // APP - VIEWS

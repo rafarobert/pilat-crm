@@ -183,7 +183,7 @@ export class CrmLeadService {
   }
   
   updateLead(id:any, lead:Leads) {
-    return this.http.put(this.basePath + '/' + id, lead);
+    return this.http.post(this.basePath + '/' + id, lead);
   }
   createLead(lead:Leads) {
     return this.http.post(this.basePath, lead);

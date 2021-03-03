@@ -14,18 +14,16 @@ import configJson from '../../../../config/config';
 const sys = configJson.system;
 const express = require("express");
 const router = express.Router();
-const cors = require("cors");
-
 //const authenticateToken = require("../../../../config/token");
 
 //<es-section>
 const opportunitiesCtrl = require("./opportunity.controller");
 
-router.get(`/api-${sys}/crm/opportunities`, cors(), (req, res) => opportunitiesCtrl.getAllOpportunities(req, res));
-router.get(`/api-${sys}/crm/opportunities/:id`, cors(), (req, res) => opportunitiesCtrl.getAOpportunity(req, res));
-router.put(`/api-${sys}/crm/opportunities/:id`, cors(), (req, res) => opportunitiesCtrl.updateOpportunity(req, res));
-router.delete(`/api-${sys}/crm/opportunities/:id`, cors(), (req, res) => opportunitiesCtrl.deleteOpportunity(req, res));
-router.post(`/api-${sys}/crm/opportunities/`, cors(), (req, res) => opportunitiesCtrl.addOpportunity(req, res));
+router.get(`/api-${sys}/crm/opportunities`, (req, res) => opportunitiesCtrl.getAllOpportunities(req, res));
+router.get(`/api-${sys}/crm/opportunities/:id`, (req, res) => opportunitiesCtrl.getAOpportunity(req, res));
+router.put(`/api-${sys}/crm/opportunities/:id`, (req, res) => opportunitiesCtrl.updateOpportunity(req, res));
+router.delete(`/api-${sys}/crm/opportunities/:id`, (req, res) => opportunitiesCtrl.deleteOpportunity(req, res));
+router.post(`/api-${sys}/crm/opportunities/`, (req, res) => opportunitiesCtrl.addOpportunity(req, res));
 
 
 // router.get(`/api-${sys}/crm/leads`, (req, res) => leadCtrl.getOpportunities(req, res));

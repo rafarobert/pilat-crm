@@ -25,6 +25,14 @@
 
   <mat-drawer-container class="example-container" [hasBackdrop]="false">
     <mat-drawer #drawer [mode]="'push'" [style]="pilatService.isSmallScreen ? 'width:100%' : 'width:40%'">
+      <mat-card class="example-card">
+        <img class="portal-user-img" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <b class="portal-username">{{pilatService.currentUser.first_name+' '+pilatService.currentUser.last_name }}</b><br>
+          <b class="portal-username">{{pilatService.currentUser.user_name}}</b>
+        </mat-card-content>
+
+      </mat-card>
 
       <ng-material-multilevel-menu [configuration]="appConfig" [items]="appItems"></ng-material-multilevel-menu>
 
