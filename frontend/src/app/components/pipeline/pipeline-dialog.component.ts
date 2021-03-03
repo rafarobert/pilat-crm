@@ -1080,10 +1080,13 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
   }
   
   parseDate(input) {
-  	if (input) {
-	    var parts = input.match(/(\d+)/g);
+    let parts;
+    if (input) {
+  	  if (typeof input == 'string') {
+	      parts = input.match(/(\d+)/g);
+	      return new Date(parts[0], parts[1]-1, parts[2],parts[3],parts[4]); // months are 0-based
+      }
 	    // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
-	    return new Date(parts[0], parts[1]-1, parts[2],parts[3],parts[4]); // months are 0-based
 	  }
   	return input
   }
