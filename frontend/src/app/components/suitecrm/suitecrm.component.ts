@@ -15,7 +15,6 @@ declare var $:any;
   styleUrls: ['./suitecrm.component.scss']
 })
 export class SuitecrmComponent implements OnInit,AfterViewInit {
-
   suiteCrmHtml:any;
   urlHome;
   
@@ -32,29 +31,19 @@ export class SuitecrmComponent implements OnInit,AfterViewInit {
   }
   
   iFrameLoaded() {
-    this.fixSuiteCrmInterface();
+    this.location.replaceState('/');
+    this.pilatService.fixSuiteCrmInterface();
     this.buildingService.stop(this.buildingService.buildingRef);
   }
   
   ngOnInit(): void {
-    this.location.replaceState('/');
     this.buildingService.buildingRef= this.buildingService.start();
     this.urlHome = this.sanitizer.bypassSecurityTrustResourceUrl(this.pilatService.httpHome);
   }
   
   ngAfterViewInit(): void {
-    $('body .iframe-suitecrm').css('width','89%');
-    $('body .iframe-suitecrm').css('height','100%');
+    this.pilatService.fixiFrameSuitecrmInterface()
     //this.fixSuiteCrmInterface();
-  }
-  
-  fixSuiteCrmInterface() {
-    $('body').find('iframe').contents().find('body').find('#menu').hide();
-    $('body').find('iframe').contents().find('body').find('#wrapper').css('margin','0px');
-    $('body').find('iframe').contents().find('body').find('#logo').hide();
-    $('body').find('iframe').contents().find('body').find('.navbar-right').find('#logout_link').hide();
-    $('body').find('iframe').contents().find('body').find('.navbar-right').find('#admin_link').hide();
-    $('body').find('iframe').contents().find('body').find('.navbar-right').find('#utilsLink').hide();
   }
 
 }
