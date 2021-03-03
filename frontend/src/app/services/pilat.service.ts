@@ -311,16 +311,18 @@ export class PilatService {
       $('body').find('iframe').contents().find('body').find('#wrapper').css('margin','0px');
       $('body').find('iframe').contents().find('body').find('#logo').hide();
       $('body').find('iframe').contents().find('body').find('#header').css('position','absolute');
+      $('body').find('iframe').contents().find('body').find('#header').css('left','-27px');
       $('body').find('iframe').contents().find('body').find('.navbar-right').find('#logout_link').hide();
       $('body').find('iframe').contents().find('body').find('.navbar-right').find('#admin_link').hide();
       $('body').find('iframe').contents().find('body').find('.navbar-right').find('#utilsLink').hide();
+      $('body .iframe-suitecrm').css('width','89%');
+      $('body .iframe-suitecrm').css('height','100%');
     }
   }
   
   fixiFrameSuitecrmInterface() {
     if (this.currentUser) {
-      $('body .iframe-suitecrm').css('width','89%');
-      $('body .iframe-suitecrm').css('height','100%');
+    
     }
   }
 }
