@@ -104,7 +104,7 @@ class LeadService {
 				if (newLead) {
 					let alreadyLeads;
 
-					alreadyLeads = await models.sequelize.leads.findAll({where:{[Op.or]:[{phone_mobile: newLead.phone_mobile+''},{first_name: newLead.first_name+''},{last_name: newLead.last_name+''}]}});
+					alreadyLeads = await models.sequelize.leads.findAll({where:{[Op.and]:[{phone_mobile: newLead.phone_mobile+''},{first_name: newLead.first_name+''},{last_name: newLead.last_name+''}]}});
 
 					if (alreadyLeads && alreadyLeads.length) {
 						objLead = alreadyLeads;
