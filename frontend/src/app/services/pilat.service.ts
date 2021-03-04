@@ -93,6 +93,8 @@ export class PilatService {
   parCountries:PilatParams[] = [];
   parStates:PilatParams[] = [];
   parCities:PilatParams[] = [];
+  parStatesBkp:PilatParams[] = [];
+  parCitiesBkp:PilatParams[] = [];
   parOpportunityTipos:PilatParams[] = [];
   parCallStatuses:PilatParams[] = [];
   parAcceptCallStatuses:PilatParams[] = [];
@@ -205,8 +207,8 @@ export class PilatService {
               case this.DIC_APPROBAL_STATUSES: !this.parApprovalStatuses.find(par => par._id == param._id) ? this.parApprovalStatuses.push(param) : false; break;
               case this.DIC_INVOICE_STATUSES: !this.parInvoiceStatuses.find(par => par._id == param._id) ? this.parInvoiceStatuses.push(param) : false; break;
               case this.DIC_COUNTRIES: !this.parCountries.find(par => par._id == param._id) ? this.parCountries.push(param) : false; break;
-              case this.DIC_STATES: !this.parStates.find(par => par._id == param._id) ? this.parStates.push(param) : false; break;
-              case this.DIC_CITIES: !this.parCities.find(par => par._id == param._id) ? this.parCities.push(param) : false; break;
+              case this.DIC_STATES: !this.parStates.find(par => par._id == param._id) ? this.parStates.push(param) : false; this.parStatesBkp = this.parStates; break;
+              case this.DIC_CITIES: !this.parCities.find(par => par._id == param._id) ? this.parCities.push(param) : false; this.parCitiesBkp = this.parCities; break;
               case this.DIC_OPPORTUNITY_TIPOS: !this.parOpportunityTipos.find(par => par._id == param._id) ? this.parOpportunityTipos.push(param) : false; break;
               case this.DIC_EMAILS_STATUSES: !this.parEmailStatuses.find(par => par._id == param._id) ? this.parEmailStatuses.push(param) : false; break;
               case this.DIC_EMAILS_TYPES: !this.parEmailTypes.find(par => par._id == param._id) ? this.parEmailTypes.push(param) : false; break;

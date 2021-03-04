@@ -158,6 +158,7 @@ export class AddOpportunityComponent implements OnInit {
   
   selectContactState(value) {
     if (value) {
+      this.pilatService.parCities = this.pilatService.parCitiesBkp;
       this.parCurrentContactState = this.pilatService.parStates.find(param => param.par_cod == value);
       this.pilatService.parCities = this.pilatService.parCities.filter(param => param.par_parent_id == this.parCurrentContactState._id);
     }
