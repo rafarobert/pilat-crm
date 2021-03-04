@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {NgModule, Pipe, PipeTransform} from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -98,6 +98,8 @@ import { CrmMailsComponent } from './components/suitecrm/crm-mails/crm-mails.com
 import { CrmTasksComponent } from './components/suitecrm/crm-tasks/crm-tasks.component';
 import { CrmNotesComponent } from './components/suitecrm/crm-notes/crm-notes.component';
 import { CrmToolsComponent } from './components/suitecrm/crm-tools/crm-tools.component';
+import {PilatService} from "./services/pilat.service";
+import {NumberPipe} from "./components/utils/number.pipe";
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -169,7 +171,8 @@ export const MY_DATE_FORMATS = {
     CrmMailsComponent,
     CrmTasksComponent,
     CrmNotesComponent,
-    CrmToolsComponent
+    CrmToolsComponent,
+    NumberPipe
   ],
   imports: [
     BrowserModule,
@@ -208,7 +211,8 @@ export const MY_DATE_FORMATS = {
     NgxMaterialTimepickerModule,
     MatTimepickerModule,
     MomentDateModule,
-    MatCardModule
+    MatCardModule,
+    
   ],
   exports: [],
   providers: [

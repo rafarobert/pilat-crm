@@ -62,6 +62,7 @@ export class AddLeadComponent implements OnInit {
       this.pilatService.DIC_COUNTRIES,
       this.pilatService.DIC_STATES,
       this.pilatService.DIC_CITIES,
+      this.pilatService.DIC_CALL_DIRECTION,
     ]).then(() => {
       let date = new Date();
       let day = date.getDate().pad(2);

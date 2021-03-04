@@ -113,11 +113,13 @@ export class PilatService {
   parInvoiced: PilatParams;
   parNotInvoiced: PilatParams;
   parLeadAssignedStatus: PilatParams;
+  
   parLeadNewStatus: PilatParams;
   parLeadInProcessStatus: PilatParams;
   parLeadConvertedStatus: PilatParams;
   parLeadRecycledStatus: PilatParams;
   parLeadDeadStatus: PilatParams;
+  
   parLeadCaptadoStage: PilatParams;
   parLeadCalificadoStage: PilatParams;
   parLeadVisitaFisicaVirtualStage: PilatParams;
@@ -219,6 +221,7 @@ export class PilatService {
               case 5:this.parLeadConvertedStatus = param;break;
               case 6:this.parLeadRecycledStatus = param;break;
               case 7:this.parLeadDeadStatus = param;break;
+              
               case 8:this.parLeadCaptadoStage = param;break;
               case 9:this.parLeadCalificadoStage = param;break;
               case 10:this.parLeadVisitaFisicaVirtualStage = param;break;
@@ -272,7 +275,7 @@ export class PilatService {
               case 15:this.parOpportunityStageArmadoCarpeta = param;break;
               case 16:this.parOpportunityStageCierreGanado = param;break;
               case 17:this.parOpportunityStageCierrePerdido = param;break;
-              
+
             }
           });
         }
@@ -334,4 +337,20 @@ export class PilatService {
     
     }
   }
+  
+  formatNumber(float, decimals = 2) {
+    let stringFloat = float + "";
+    let arraySplitFloat = stringFloat.split(".");
+    let decimalsValue = "0";
+    if (arraySplitFloat.length > 1) {
+      decimalsValue = arraySplitFloat[1].slice(0, decimals);
+    }
+    let integerValue = arraySplitFloat[0];
+    let arrayFullStringValue = [integerValue, decimalsValue];
+    let FullStringValue = arrayFullStringValue.join(".");
+    let floatFullValue = parseFloat(FullStringValue);
+    let formatFloatFullValue = new Intl.NumberFormat('es-ES', { minimumFractionDigits: decimals }).format(floatFullValue);
+    return formatFloatFullValue;
+  }
+  
 }

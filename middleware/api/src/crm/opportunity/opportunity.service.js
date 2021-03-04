@@ -464,8 +464,8 @@ class OpportunityService {
 							}
 						}
 					}
-					objOpportunity = respOpportunity.dataValues;
-					objOpportunity.opportunityOpportunitiesCstm = respOpportunitiesCstm.dataValues;
+					objOpportunity = respOpportunity && respOpportunity.dataValues ? respOpportunity.dataValues : null;
+					objOpportunity.opportunityOpportunitiesCstm = respOpportunitiesCstm && respOpportunitiesCstm.dataValues ? respOpportunitiesCstm.dataValues : null;
 
 					// Begin Contacts
 
@@ -520,48 +520,49 @@ class OpportunityService {
 									}
 								}
 							}
-							objOpportunity.opportunityOpportunitiesContacts = respOpportunitiesContacts.dataValues;
-							objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts = respContacts.dataValues;
-							objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm = respContactsCstm.dataValues;
-						}
+							objOpportunity.opportunityOpportunitiesContacts = respOpportunitiesContacts && respOpportunitiesContacts.dataValues ? respOpportunitiesContacts.dataValues : null;
+							objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts = respContacts && respContacts.dataValues ? respContacts.dataValues : null;
+							objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm = respContactsCstm && respContactsCstm.dataValues ? respContactsCstm.dataValues : null;
 
-						// End Contacts
-						//
-						// Begin Email Addresses
+							// End Contacts
+							//
+							// Begin Email Addresses
 
-						let respEmailAddresses, respEmailAddrBeanRel;
-						if (updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses) {
-							if (updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id) {
-								updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_modified = new Date();
-								await models.sequelize.emailAddresses.update(updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses, {where:{id:updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id}});
-								respEmailAddresses = await models.sequelize.emailAddresses.findOne({where: { id: updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id }});
-							} else {
-								updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id = models.sequelize.objectId().toString();
-								updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_entered = new Date();
-								updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_reviewed = new Date();
-								updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_modified = new Date();
-								respEmailAddresses = await models.sequelize.emailAddresses.create(updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses);
-							}
-
-							if (updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel) {
-								if (updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.bean_id) {
-									updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.date_modified = new Date();
-									updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.bean_id = respContacts.dataValues.id;
-									updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.email_address_id = respEmailAddresses.dataValues.id;
-									await models.sequelize.emailAddrBeanRel.update(updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel, {where: {bean_id: updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.bean_id}});
-									respEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.findOne({where: {bean_id: updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.bean_id}});
+							let respEmailAddresses, respEmailAddrBeanRel;
+							if (updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses) {
+								if (updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id) {
+									updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_modified = new Date();
+									await models.sequelize.emailAddresses.update(updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses, {where:{id:updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id}});
+									respEmailAddresses = await models.sequelize.emailAddresses.findOne({where: { id: updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id }});
 								} else {
-									updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.id = models.sequelize.objectId().toString();
-									updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.bean_id = respContacts.dataValues.id;
-									updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.email_address_id = respEmailAddresses.dataValues.id;
-									updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.date_created = new Date();
-									updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.date_modified = new Date();
-									respEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.create(updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel);
+									updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id = models.sequelize.objectId().toString();
+									updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_entered = new Date();
+									updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_reviewed = new Date();
+									updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_modified = new Date();
+									respEmailAddresses = await models.sequelize.emailAddresses.create(updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses);
 								}
-								objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel = respEmailAddrBeanRel.dataValues;
-								objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = respEmailAddresses.dataValues;
+
+								if (updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel) {
+									if (updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.bean_id) {
+										updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.date_modified = new Date();
+										updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.bean_id = respContacts.dataValues.id;
+										updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.email_address_id = respEmailAddresses.dataValues.id;
+										await models.sequelize.emailAddrBeanRel.update(updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel, {where: {bean_id: updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.bean_id}});
+										respEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.findOne({where: {bean_id: updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.bean_id}});
+									} else {
+										updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.id = models.sequelize.objectId().toString();
+										updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.bean_id = respContacts.dataValues.id;
+										updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.email_address_id = respEmailAddresses.dataValues.id;
+										updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.date_created = new Date();
+										updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.date_modified = new Date();
+										respEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.create(updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel);
+									}
+									objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel = respEmailAddrBeanRel && respEmailAddrBeanRel.dataValues ? respEmailAddrBeanRel.dataValues : null;
+									objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = respEmailAddresses && respEmailAddresses.dataValues ? respEmailAddresses.dataValues : null;
+								}
 							}
 						}
+
 					}
 
 					// End Email Addresses
@@ -608,9 +609,9 @@ class OpportunityService {
 									updateOpportunity.opportunityAccountsOpportunities.account_id = respAccounts.dataValues.id;
 									respAccountsOpportunities = await models.sequelize.accountsOpportunities.create(updateOpportunity.opportunityAccountsOpportunities);
 								}
-								objOpportunity.opportunityAccountsOpportunities = respAccountsOpportunities.dataValues;
-								objOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts = respAccounts.dataValues;
-								objOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm = respAccountsCstm.dataValues;
+								objOpportunity.opportunityAccountsOpportunities = respAccountsOpportunities && respAccountsOpportunities.dataValues ? respAccountsOpportunities.dataValues : null;
+								objOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts = respAccounts && respAccounts.dataValues ? respAccounts.dataValues : null;
+								objOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm = respAccountsCstm && respAccountsCstm.dataValues ? respAccountsCstm.dataValues : null;
 							}
 						}
 					}
@@ -651,8 +652,8 @@ class OpportunityService {
 								respAosQuotesCstm = await models.sequelize.aosQuotesCstm.create(updateOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm);
 							}
 						}
-						objOpportunity.opportunityAosQuotes = respAosQuotes.dataValues;
-						objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm= respAosQuotesCstm.dataValues;
+						objOpportunity.opportunityAosQuotes = respAosQuotes && respAosQuotes.dataValues ? respAosQuotes.dataValues : null;
+						objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm = respAosQuotesCstm && respAosQuotesCstm.dataValues ? respAosQuotesCstm.dataValues : null;
 					}
 
 					// End Aos Quotes
@@ -676,7 +677,7 @@ class OpportunityService {
 								updateOpportunity.opportunityOpportunitiesAudit.parent_id = respOpportunity.dataValues.id;
 								updateOpportunity.opportunityOpportunitiesAudit.date_created = new Date();
 								let respOpportunitiesAudit = await models.sequelize.opportunitiesAudit.create(updateOpportunity.opportunityOpportunitiesAudit);
-								objOpportunity.opportunityOpportunitiesAudit = respOpportunitiesAudit.dataValues;
+								objOpportunity.opportunityOpportunitiesAudit = respOpportunitiesAudit && respOpportunitiesAudit.dataValues ? respOpportunitiesAudit.dataValues : null;
 							}
 						}
 					}
@@ -703,7 +704,7 @@ class OpportunityService {
 								updateOpportunity.opportunitySugarfeed.date_entered = new Date();
 								updateOpportunity.opportunitySugarfeed.date_modified = new Date();
 								let respSugarfeed = await models.sequelize.sugarfeed.create(updateOpportunity.opportunitySugarfeed);
-								objOpportunity.opportunitySugarfeed = respSugarfeed.dataValues;
+								objOpportunity.opportunitySugarfeed = respSugarfeed && respSugarfeed.dataValues ? respSugarfeed.dataValues : null;
 							}
 						}
 					}
@@ -730,7 +731,7 @@ class OpportunityService {
 								updateOpportunity.opportunityAodIndexevent.date_entered = new Date();
 								updateOpportunity.opportunityAodIndexevent.date_modified = new Date();
 								let respAodIndexevent = await models.sequelize.aodIndexevent.create(updateOpportunity.opportunityAodIndexevent);
-								objOpportunity.opportunityAodIndexevent = respAodIndexevent.dataValues;
+								objOpportunity.opportunityAodIndexevent = respAodIndexevent && respAodIndexevent.dataValues ? respAodIndexevent.dataValues : null;
 							}
 						}
 					}
@@ -758,7 +759,7 @@ class OpportunityService {
 								updateOpportunity.opportunityTracker.item_id = respOpportunity.dataValues.id;
 								updateOpportunity.opportunityTracker.date_modified = new Date();
 								let respTracker = await models.sequelize.tracker.create(updateOpportunity.opportunityTracker);
-								objOpportunity.opportunityTracker = respTracker.dataValues;
+								objOpportunity.opportunityTracker = respTracker && respTracker.dataValues ? respTracker.dataValues : null;
 							}
 						}
 					}

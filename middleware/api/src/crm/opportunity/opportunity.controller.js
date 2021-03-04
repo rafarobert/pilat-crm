@@ -44,11 +44,11 @@ opportunitiesCtrl.getAOpportunity = async (req, res) => {
 			util.setError(400, 'Please input a valid Char value');
 			return util.send(res);
 		}
-		const objAccount = await opportunityService.getAOpportunity(id, req.query);
-		if (!objAccount) {
+		const objOpportunity = await opportunityService.getAOpportunity(id, req.query);
+		if (!objOpportunity) {
 			util.setError(404, `Cannot find opportunity with the id ${id}`);
 		} else {
-			util.setSuccess(200, 'Found opportunity', objAccount);
+			util.setSuccess(200, 'Found opportunity', objOpportunity);
 		}
 		return util.send(res);
 	} catch (e) {

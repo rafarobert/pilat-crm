@@ -212,6 +212,16 @@ export class CrmOpportunityService {
   }
   
   updateOpportunity(id:any, opportunity:Opportunities) {
+    opportunity.amount = parseFloat(opportunity.amount+'');
+    if (opportunity.opportunityAosQuotes) {
+      opportunity.opportunityAosQuotes.total_amount = parseFloat(opportunity.opportunityAosQuotes.total_amount+'');
+      opportunity.opportunityAosQuotes.discount_amount = parseFloat(opportunity.opportunityAosQuotes.discount_amount+'');
+      if (opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm) {
+        opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.precio_mcuadrado_c = parseFloat(opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.precio_mcuadrado_c +'');
+        opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_cuotainicial_c = parseFloat(opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_cuotainicial_c+'');
+        opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.saldo_c = parseFloat(opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.saldo_c+'');
+      }
+    }
     return this.http.put(this.basePath + '/' + id, opportunity);
   }
   createOpportunity(opportunity:Opportunities) {

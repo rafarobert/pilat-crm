@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit, Pipe, PipeTransform, ViewChild} from '@angular/core';
 import {PilatParams} from "../../../../../core/models/pilatParams";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {PilatParamService} from "../../../../../core/services/pilat-param.service";
@@ -22,6 +22,7 @@ import {LeadsCstm} from "../../../../../core/models/leadsCstm";
   templateUrl: './add-opportunity.component.html',
   styleUrls: ['./add-opportunity.component.scss'],
 })
+
 export class AddOpportunityComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   
@@ -40,6 +41,13 @@ export class AddOpportunityComponent implements OnInit {
   parCurrentContactCountry: PilatParams;
   parCurrentContactState: PilatParams;
   parCurrentContactCity: PilatParams;
+  
+  aoQuoteAosQuotesCstmPrecioMcuadrado:any;
+  aosQuotesTotalAmount:any;
+  aosQuoteAosQuotesCstmLblCuotainicial:any;
+  aosQuoteAosQuotesCstmSaldo:any;
+  aosQuotesDiscountAmount:any;
+  opportunityAmount:any;
   
   constructor(
     public dialogRef: MatDialogRef<AddOpportunityComponent>,
@@ -60,7 +68,6 @@ export class AddOpportunityComponent implements OnInit {
   ngOnInit():void {
     this.data = this.input.opportunity;
     this.dataLeads = this.input.lead;
-    
     this.pilatService.setParams([
       this.pilatService.DIC_OPPORTUNITY_STAGES,
       this.pilatService.DIC_QUOTE_STAGES,
@@ -78,6 +85,7 @@ export class AddOpportunityComponent implements OnInit {
       this.pilatService.DIC_STATES,
       this.pilatService.DIC_OPPORTUNITY_TIPOS,
     ]).then(async () => {
+      
       let date = new Date();
       let day = date.getDate().pad(2);
       let month = (date.getMonth()).pad(2);
@@ -97,6 +105,7 @@ export class AddOpportunityComponent implements OnInit {
       this.data.opportunityAosQuotes.currency_id = this.pilatService.parMonedaDolar.par_cod;
       this.data.opportunityAosQuotes.stage = this.pilatService.parQuoteNegociacion.par_cod;
       this.selectPago(this.data.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c);
+      
       if (this.data.opportunityAosQuotes.aoQuoteAosQuotesCstm.moneda_c) {
         this.selectAoQuoteCurrency(this.data.opportunityAosQuotes.aoQuoteAosQuotesCstm.moneda_c);
       } else {
@@ -114,6 +123,10 @@ export class AddOpportunityComponent implements OnInit {
         this.accordion.openAll();
       },1000);
     });
+  }
+  
+  setInputNumeric() {
+  
   }
   
   selectAccountCountry(value) {
