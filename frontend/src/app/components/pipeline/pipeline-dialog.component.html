@@ -33,9 +33,9 @@
 
   <div cdkDropListGroup *ngIf="pipeline.columns">
     <div class="example-container" *ngFor="let column of pipeline.columns; let i = index">
-      <h2 *ngIf="column">{{column.props.par_description}} <br>({{column.currencyTo ? column.currencyTo : pilatService.parMonedaDolar.par_abbr}}. {{column.totalTo ? column.totalTo.formatNumber() : '0'}})</h2><br>
+      <h2 *ngIf="column">{{column.props.par_description}} <br>({{column.currencyTo ? column.currencyTo == '-99' ? '$us' : column.currencyTo : pilatService.parMonedaDolar.par_abbr}}. {{column.totalTo ? column.totalTo.formatNumber() : '0'}})</h2><br>
       <div class="title" *ngIf="column && column.totalLeads"><b>{{column.totalLeads}}</b></div>
-      <div class="title" *ngIf="column && column.totalFrom && column.totalTo">{{column.currencyFrom}} {{column.totalFrom.formatNumber()}} / {{column.currencyTo}} {{column.totalTo.formatNumber()}}</div>
+      <div class="title" *ngIf="column && column.totalFrom && column.totalTo">{{column.currencyFrom == '-99' ? '$us' : column.currencyFrom}} {{column.totalFrom.formatNumber()}} / {{column.currencyTo == '-99' ? '$us' : column.currencyTo}} {{column.totalTo.formatNumber()}}</div>
       <div class="title" *ngIf="column && column.totalSuperficies">Total superficie: {{column.totalSuperficies.formatNumber()}} </div>
       <div (dblclick)="column.isInStageProspect ? openEditProspect($event) : column.isInStageOpportunity ? openEditOpportunity($event) : ''"
         *ngIf="column"
