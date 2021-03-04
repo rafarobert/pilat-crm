@@ -18,8 +18,8 @@ export class NumberPipe implements PipeTransform {
 			//number = this.pilatService.formatNumber(number);
 			number = number +'';
 			if (number.replace) {
-				let thousand_separator = ',',
-					decimal_separator = '.',
+				let thousand_separator = '.',
+					decimal_separator = ',',
 					regex = new RegExp('[^' + decimal_separator + '\\d]', 'g'),
 					number_string = number.replace(regex, '').toString(),
 					split = number_string.split(decimal_separator),

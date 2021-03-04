@@ -253,6 +253,22 @@ class CrmService {
 		}
 		return num;
 	}
+
+	static setNumberToSave(amount) {
+		if (amount) {
+			amount = amount+'';
+			if (typeof amount == 'string') {
+				let numParts = amount.split(',');
+				let integer = numParts[0] ? numParts[0] : '';
+				let decimal = numParts[1] ? numParts[1] : '';
+				integer = integer ? integer.replaceAll('.','') : integer;
+				decimal = decimal ? decimal.replaceAll(',','') : decimal;
+				let numToReturn = integer;
+				return numToReturn;
+			}
+		}
+		return amount;
+	}
 }
 
 //<es-section>

@@ -158,6 +158,7 @@ class OpportunityService {
 			if(sql) {
 
 				if (newOpportunity) {
+					newOpportunity.amount = crmService.setNumberToSave(newOpportunity.amount)
 					let respOpportunity, respOpportunitiesCstm;
 					if (newOpportunity.id) {
 						newOpportunity.date_modified = new Date();
@@ -318,6 +319,13 @@ class OpportunityService {
 					let nextNumber = await models.sequelize.aosQuotes.max('number');
 					let respAosQuotes, respAosQuotesCstm;
 					if (newOpportunity.opportunityAosQuotes) {
+
+						newOpportunity.opportunityAosQuotes.total_amount = crmService.setNumberToSave(newOpportunity.opportunityAosQuotes.total_amount);
+						newOpportunity.opportunityAosQuotes.discount_amount = crmService.setNumberToSave(newOpportunity.opportunityAosQuotes.discount_amount);
+						newOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_cuotainicial_c = crmService.setNumberToSave(newOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_cuotainicial_c);
+						newOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.precio_mcuadrado_c = crmService.setNumberToSave(newOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.precio_mcuadrado_c);
+						newOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.saldo_c = crmService.setNumberToSave(newOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.saldo_c);
+
 						if (newOpportunity.opportunityAosQuotes.id) {
 							newOpportunity.opportunityAosQuotes.date_modified = new Date();
 							newOpportunity.opportunityAosQuotes.opportunity_id = respOpportunity.dataValues.id;
@@ -429,6 +437,7 @@ class OpportunityService {
 			if(sql) {
 				let respOpportunity, respContacts, respOpportunitiesCstm;
 				if (updateOpportunity) {
+					updateOpportunity.amount = crmService.setNumberToSave(updateOpportunity.amount);
 					if (updateOpportunity.id) {
 						updateOpportunity.date_modified = new Date();
 						await models.sequelize.opportunities.update(updateOpportunity, {where:{id:id}});
@@ -623,6 +632,13 @@ class OpportunityService {
 					let nextNumber = await models.sequelize.aosQuotes.max('number');
 					let respAosQuotes, respAosQuotesCstm;
 					if (updateOpportunity.opportunityAosQuotes) {
+
+						updateOpportunity.opportunityAosQuotes.total_amount = crmService.setNumberToSave(updateOpportunity.opportunityAosQuotes.total_amount);
+						updateOpportunity.opportunityAosQuotes.discount_amount = crmService.setNumberToSave(updateOpportunity.opportunityAosQuotes.discount_amount);
+						updateOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_cuotainicial_c = crmService.setNumberToSave(updateOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.lbl_cuotainicial_c);
+						updateOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.precio_mcuadrado_c = crmService.setNumberToSave(updateOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.precio_mcuadrado_c);
+						updateOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.saldo_c = crmService.setNumberToSave(updateOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.saldo_c);
+
 						if (updateOpportunity.opportunityAosQuotes.id) {
 							updateOpportunity.opportunityAosQuotes.date_modified = new Date();
 							updateOpportunity.opportunityAosQuotes.opportunity_id = respOpportunity.dataValues.id;
