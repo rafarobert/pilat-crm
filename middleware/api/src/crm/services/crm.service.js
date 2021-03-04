@@ -33,55 +33,60 @@ class CrmService {
 			let respOpportunity = await this.getAOpportunity(idOpportunity,{});
 			let objOpportunity = respOpportunity.dataValues;
 			if (objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel) {
-				if (!objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails) {
-					await CrmService.createAndSendPdf(objOpportunity, async (err, file, info) => {
-						if (err) {
-							objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.invalid_email = 1;
-							objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_fail_date = new Date();
-						} else {
-							objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.invalid_email = 0;
-							objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_date = new Date();
-							objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_sent_date = new Date();
-						}
-						let id = objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id;
-						let respEmailAddresses = await models.sequelize.emailAddresses.update(objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses, {where:{id:id}});
-
-						let respContactEmails, respOldContactEmails = await models.sequelize.emails.findOne({where:{parent_id:objOpportunity.opportunityOpportunitiesContacts.contact_id}});
-						if (respOldContactEmails) {
-							let updateContactEmail = respOldContactEmails.dataValues;
-							updateContactEmail.date_modified = new Date();
-							updateContactEmail.modified_user_id = respContacts.dataValues.assigned_user_id;
-							let respEmails = await models.sequelize.emails.update(updateContactEmail,{where:{parent_id:objOpportunity.opportunityOpportunitiesContacts.contact_id}});
-							respContactEmails = await models.sequelize.emails.findOne({where:{parent_id:objOpportunity.opportunityOpportunitiesContacts.contact_id}});
-						} else {
-							let max = await models.sequelize.emails.max('uid');
-							let newContactEmail = {
-								id:models.sequelize.objectId().toString(),
-								name:respContacts.dataValues.first_name+' '+respContacts.dataValues.last_name,
-								date_entered:new Date(),
-								date_modified:new Date(),
-								modified_user_id:respContacts.dataValues.id,
-								created_by:respContacts.dataValues.id,
-								assigned_user_id:respContacts.dataValues.id,
-								date_sent_received:new Date(),
-								message_id:'',
-								type:'out',
-								status:'sent',
-								// flagged:'',
-								// reply_to_status:'',
-								//intent:'pick',
-								// mailbox_id:'',
-								//parent_type:'Contacts',
-								parent_id:respContacts.dataValues.id,
-								uid:max+1,
-								// category_id:''
-							};
-							respContactEmails = await models.sequelize.emails.create(newContactEmail);
-						}
-						objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails = respContactEmails.dataValues;
-						objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = respEmailAddresses.dataValues;
-					});
+				let hasEmailHistory;
+				if (objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails) {
+					hasEmailHistory = true;
+				} else {
+					hasEmailHistory = false;
 				}
+
+				await CrmService.createAndSendPdf(objOpportunity, async (err, file, info) => {
+					if (err) {
+						objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.invalid_email = 1;
+						objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_fail_date = new Date();
+					} else {
+						objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.invalid_email = 0;
+						objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_date = new Date();
+						objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.confirm_opt_in_sent_date = new Date();
+					}
+					let id = objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id;
+					let respEmailAddresses = await models.sequelize.emailAddresses.update(objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses, {where:{id:id}});
+
+					let respContactEmails, respOldContactEmails = await models.sequelize.emails.findOne({where:{parent_id:objOpportunity.opportunityOpportunitiesContacts.contact_id}});
+					if (respOldContactEmails) {
+						let updateContactEmail = respOldContactEmails.dataValues;
+						updateContactEmail.date_modified = new Date();
+						updateContactEmail.modified_user_id = respContacts.dataValues.assigned_user_id;
+						let respEmails = await models.sequelize.emails.update(updateContactEmail,{where:{parent_id:objOpportunity.opportunityOpportunitiesContacts.contact_id}});
+						respContactEmails = await models.sequelize.emails.findOne({where:{parent_id:objOpportunity.opportunityOpportunitiesContacts.contact_id}});
+					} else {
+						let max = await models.sequelize.emails.max('uid');
+						let newContactEmail = {
+							id:models.sequelize.objectId().toString(),
+							name:respContacts.dataValues.first_name+' '+respContacts.dataValues.last_name,
+							date_entered:new Date(),
+							date_modified:new Date(),
+							modified_user_id:respContacts.dataValues.id,
+							created_by:respContacts.dataValues.id,
+							assigned_user_id:respContacts.dataValues.id,
+							date_sent_received:new Date(),
+							message_id:'',
+							type:'out',
+							status:err ? '' : 'sent',
+							// flagged:'',
+							// reply_to_status:'',
+							//intent:'pick',
+							// mailbox_id:'',
+							//parent_type:'Contacts',
+							parent_id:respContacts.dataValues.id,
+							uid:max+1,
+							// category_id:''
+						};
+						respContactEmails = await models.sequelize.emails.create(newContactEmail);
+					}
+					objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails = respContactEmails.dataValues;
+					objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = respEmailAddresses.dataValues;
+				});
 			}
 		} catch (e) {
 			console.log(e);
