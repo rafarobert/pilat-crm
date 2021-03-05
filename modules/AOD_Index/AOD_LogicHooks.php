@@ -42,12 +42,14 @@ class AOD_LogicHooks
 
     public function saveModuleDelete(SugarBean $bean, $event, $arguments)
     {
+        //var_dump("AQUI"); die();
         if ($bean->module_name == 'AOD_Index') {
             return;
         }
         if (defined('sugarEntry') && defined('SUGARCRM_IS_INSTALLING')) {
             return;
         }
+        
         try {
             $index = BeanFactory::getBean("AOD_Index")->getIndex();
             $index->remove($bean->module_name, $bean->id);
