@@ -209,7 +209,7 @@ class LogicHook
             }
         }
         $hooks = $this->getHooks('');
-        if (!empty($hooks)) {
+        if (!empty($hooks)) {            
             $this->process_hooks($hooks, $event, $arguments);
         }
     }
@@ -239,7 +239,6 @@ class LogicHook
             asort($sorted_indexes);
 
             $process_order = array_keys($sorted_indexes);
-
             foreach ($process_order as $hook_index) {
                 $hook_details = $hook_array[$event][$hook_index];
                 if (!file_exists($hook_details[2])) {
@@ -268,10 +267,11 @@ class LogicHook
                         $GLOBALS['log']->debug('Creating new instance of hook class '.$hook_class.' without parameters');
                     }
                     $class = new $hook_class();
+		    	
                     if (!is_null($this->bean)) {
-                        $class->$hook_function($this->bean, $event, $arguments);
+                      // $class->$hook_function($this->bean, $event, $arguments);
                     } else {
-                        $class->$hook_function($event, $arguments);
+                       $class->$hook_function($event, $arguments);
                     }
                 }
             }

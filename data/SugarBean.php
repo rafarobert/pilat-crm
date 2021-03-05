@@ -2323,7 +2323,7 @@ class SugarBean
         // this will be removed in a future release
         $this->fixUpFormatting();
         global $current_user, $action;
-
+	 
         $isUpdate = true;
         if (empty($this->id)) {
             $isUpdate = false;
@@ -2368,6 +2368,7 @@ class SugarBean
 
         require_once("data/BeanFactory.php");
         BeanFactory::registerBean($this->module_name, $this);
+
 
         if (empty($GLOBALS['updating_relationships']) && empty($GLOBALS['saving_relationships'])
             && empty($GLOBALS['resavingRelatedBeans'])) {
@@ -2430,13 +2431,16 @@ class SugarBean
             SugarRelationship::resaveRelatedBeans();
         }
 
+
         /* BEGIN - SECURITY GROUPS - inheritance */
         require_once('modules/SecurityGroups/SecurityGroup.php');
         SecurityGroup::inherit($this, $isUpdate);
         /* END - SECURITY GROUPS */
         //If we aren't in setup mode and we have a current user and module, then we track
         if (isset($GLOBALS['current_user']) && isset($this->module_dir)) {
+
             $this->track_view($current_user->id, $this->module_dir, 'save');
+
         }
 
         $this->call_custom_logic('after_save', '');
@@ -3106,13 +3110,15 @@ class SugarBean
     {
         if (!isset($this->processed) || !$this->processed) {
             //add some logic to ensure we do not get into an infinite loop
-            if (!empty($this->logicHookDepth[$event])) {
+            if (!empty($this->logicHookDepth[$event])) {	
+
                 if ($this->logicHookDepth[$event] > $this->max_logic_depth) {
                     return;
                 }
             } else {
                 $this->logicHookDepth[$event] = 0;
             }
+	  	
 
             //we have to put the increment operator here
             //otherwise we may never increase the depth for that event in the case
@@ -3127,7 +3133,10 @@ class SugarBean
             $logicHook = new LogicHook();
             $logicHook->setBean($this);
             $logicHook->call_custom_logic($this->module_dir, $event, $arguments);
+	   
+
             $this->logicHookDepth[$event]--;
+			
         }
     }
 

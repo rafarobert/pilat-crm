@@ -191,13 +191,14 @@ class ModuleService
         $id = $params->getData()->getId();
         $attributes = $params->getData()->getAttributes();
         $bean = $this->beanManager->getBeanSafe($module, $id);
-
+	
         foreach ($attributes as $property => $value) {
             $bean->$property = $value;
         }
 
+	
         $bean->save();
-
+	
         $dataResponse = $this->getDataResponse(
             $bean,
             null,

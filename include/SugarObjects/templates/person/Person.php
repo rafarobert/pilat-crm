@@ -191,6 +191,7 @@ class Person extends Basic
             }
             return $this->id;
         }
+	
         $this->add_address_streets('primary_address_street');
         $this->add_address_streets('alt_address_street');
         $ori_in_workflow = empty($this->in_workflow) ? false : true;
@@ -198,6 +199,7 @@ class Person extends Basic
         // bug #39188 - store emails state before workflow make any changes
         $this->emailAddress->stash($this->id, $this->module_dir);
         $retId = parent::save($check_notify);
+
         if (!$retId) {
             LoggerManager::getLogger()->fatal('Person is not saved, SugarBean ID is not returned.');
         }
