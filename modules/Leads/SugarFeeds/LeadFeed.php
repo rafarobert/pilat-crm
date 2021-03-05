@@ -51,7 +51,7 @@ class LeadFeed extends FeedLogicBase
     {
         global $locale;
 
-        $text = '';
+        $text = '';        
         if (empty($bean->fetched_row)) {
             $full_name = $locale->getLocaleFormattedName($bean->first_name, $bean->last_name, '');
 
@@ -63,10 +63,12 @@ class LeadFeed extends FeedLogicBase
 
                 $text =  '{SugarFeed.CONVERTED_LEAD} [' . $bean->module_dir . ':' . $bean->id . ':' . $full_name . ']';
             }
-        }
+        }        
         
         if (!empty($text)) {
             SugarFeed::pushFeed2($text, $bean);
         }
+        
+        //var_dump($locale); die();
     }
 }

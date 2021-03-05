@@ -1,10 +1,11 @@
 <?php
 
 // Muestra toda la información, por defecto INFO_ALL
-phpinfo();
+//phpinfo();
 
 // Muestra solamente la información de los módulos.
 // phpinfo(8) hace exactamente lo mismo.
-phpinfo(INFO_MODULES);
+//phpinfo(INFO_MODULES);
+echo date("Y-m-d H:i:s");
 
 ?>
