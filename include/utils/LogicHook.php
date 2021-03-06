@@ -256,10 +256,8 @@ class LogicHook {
                         $GLOBALS['log']->debug('Creating new instance of hook class ' . $hook_class . ' without parameters');
                     }
                     $class = new $hook_class();
-                    if (!is_null($this->bean)) {
-                        if( !in_array($hook_details[3], array("AOD_LogicHooks")) ) {
-                        	$class->$hook_function($this->bean, $event, $arguments);
-                        }
+                    if (!is_null($this->bean)) {  
+                       $class->$hook_function($this->bean, $event, $arguments);                       
                     } else {
                         $class->$hook_function($event, $arguments);
                     }

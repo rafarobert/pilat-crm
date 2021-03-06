@@ -315,20 +315,23 @@ class AOD_Index extends AOD_Index_sugar
             if (!$bean) {
                 return false;
             }
-
+	    	
             $indexEvent = $this->getIndexEvent($module, $beanId);
             $indexEvent->name = $bean->get_summary_text();
-
             $document = $this->getDocumentForBean($bean);
             //Index name, id, date, filename
-            if (!$document['error']) {
-                $this->remove($module, $beanId);
-                $this->getLuceneIndex()->addDocument($document['document']);
+	    //var_dump($document); die();	
+	    
+            if (!$document['error']) {	            
+    		$this->remove($module, $beanId);
+                $this->getLuceneIndex()->addDocument($document['document']);               
                 $indexEvent->success = true;
             } else {
+	
                 $indexEvent->success = false;
                 $indexEvent->error = $document['error'];
             }
+	
             $indexEvent->save();
         } catch (Exception $ex) {
             $GLOBALS['log']->error($ex->getMessage());
@@ -343,8 +346,9 @@ class AOD_Index extends AOD_Index_sugar
 
     public function remove($module, $beanId)
     {
-        $term  = new Zend_Search_Lucene_Index_Term($module.' '.$beanId, 'aod_id');
-        $query = new Zend_Search_Lucene_Search_Query_Term($term);
+ //
+        $term  = new Zend_Search_Lucene_Index_Term($module.' '.$beanId, 'aod_id');	
+        $query = new Zend_Search_Lucene_Search_Query_Term($term);	
         $hits = $this->getLuceneIndex()->find($query);
         foreach ($hits as $hit) {
             $this->getLuceneIndex()->delete($hit->id);
@@ -356,7 +360,7 @@ class AOD_Index extends AOD_Index_sugar
      * @return Zend_Search_Lucene_Interface
      */
     private function getLuceneIndex()
-    {
+    {	
         if (file_exists($this->location)) {
             $this->index = new Zend_Search_Lucene($this->location);
         } else {
