@@ -19,6 +19,12 @@ import {CrmNotesComponent} from "./components/suitecrm/crm-notes/crm-notes.compo
 import {CrmMailsComponent} from "./components/suitecrm/crm-mails/crm-mails.component";
 import {CrmTasksComponent} from "./components/suitecrm/crm-tasks/crm-tasks.component";
 import {CrmToolsComponent} from "./components/suitecrm/crm-tools/crm-tools.component";
+import {CrmAosQuoteService} from "./services/crm-aos-quote.service";
+import {CrmDocumentsComponent} from "./components/suitecrm/crm-documents/crm-documents.component";
+import {CrmDynamicAnalysisComponent} from "./components/suitecrm/crm-dynamic-analysis/crm-dynamic-analysis.component";
+import {CrmCampaignsComponent} from "./components/suitecrm/crm-campaigns/crm-campaigns.component";
+import {CrmBillsComponent} from "./components/suitecrm/crm-bills/crm-bills.component";
+import {CrmQuotesComponent} from "./components/suitecrm/crm-quotes/crm-quotes.component";
 
 
 const routes: Routes = [
@@ -36,6 +42,12 @@ const routes: Routes = [
   { path: 'mails', component: CrmMailsComponent, pathMatch: 'full' },
   { path: 'tasks', component: CrmTasksComponent, pathMatch: 'full' },
   { path: 'tools', component: CrmToolsComponent, pathMatch: 'full' },
+  { path: 'quotes', component: CrmQuotesComponent, pathMatch: 'full' },
+  { path: 'documents', component: CrmDocumentsComponent, pathMatch: 'full' },
+  { path: 'dynamic-analysis', component: CrmDynamicAnalysisComponent, pathMatch: 'full' },
+  { path: 'campaigns', component: CrmCampaignsComponent, pathMatch: 'full' },
+  { path: 'bills', component: CrmBillsComponent, pathMatch: 'full' },
+  { path: 'contracts', component: CrmContactsComponent, pathMatch: 'full' },
   { path: 'admin/dictionaries', component: DictionariesComponent, pathMatch: 'full' },
   { path: 'admin/params', component: ParamsComponent, pathMatch: 'full' },
   { path: 'admin/users', component: UsersComponent, pathMatch: 'full' },

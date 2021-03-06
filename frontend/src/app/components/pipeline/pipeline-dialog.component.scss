@@ -225,8 +225,12 @@
   justify-content: center;
   width: 120px;
 }
+.mat-dialog-content {
+  min-height: 94%;
+  min-width: 100%;
+}
 .mat-dialog-content >div{
-  width: 290%;
+  width: 150%;
 }
 .btn-lead-trigger {
   background-color: #00458D;
@@ -239,7 +243,7 @@
   width: 10%;
 }
 mat-button-toggle-group {
-  width: 290%;
+  width: 100%;
   position: static;
   border: solid 1px #0a0b0c;
   border-radius: 0;

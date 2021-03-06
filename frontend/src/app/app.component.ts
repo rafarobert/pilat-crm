@@ -53,7 +53,7 @@ export class AppComponent implements OnInit, AfterViewInit{
     public cookieService:CookieService,
     public crmUserService:CrmUserService,
     private location: Location,
-    public spinnerService:SpinnerService
+    public spinnerService:SpinnerService,
   ) {}
   
   ngAfterViewInit(): void {
@@ -165,6 +165,54 @@ export class AppComponent implements OnInit, AfterViewInit{
           ],
         },
         {
+          label: 'TODO',
+          icon: 'local_activity',
+          items: [
+            {
+              label: 'Inicio',
+              link: '/',
+              icon: 'home_work',
+              // externalRedirect: true,
+            },
+            {
+              label: 'Presupuestos',
+              link: '/quotes',
+              icon: 'request_quote',
+              // externalRedirect: true,
+            },
+            {
+              label: 'Documentos',
+              link: '/documents',
+              icon: 'description',
+              // externalRedirect: true,
+            },
+            {
+              label: 'Analisis Dinamico',
+              link: '/dynamic-analysis',
+              icon: 'psychology',
+              // externalRedirect: true,
+            },
+            {
+              label: 'Campañas',
+              link: '/campaigns',
+              icon: 'campaign',
+              // externalRedirect: true,
+            },
+            {
+              label: 'Facturas',
+              link: '/bills',
+              icon: 'price_change',
+              // externalRedirect: true,
+            },
+            {
+              label: 'contratos',
+              link: '/contracts',
+              icon: 'save',
+              // externalRedirect: true,
+            }
+          ],
+        },
+        {
           label: 'Administrador',
           icon: 'settings',
           items: [
@@ -193,8 +241,12 @@ export class AppComponent implements OnInit, AfterViewInit{
         },
       ];
       setTimeout(() => {
-        this.drawer.toggle();
-        this.pilatService.toggleMenuOpened = true;
+        if (!this.pilatService.isSmallScreen) {
+          this.drawer.toggle();
+          this.pilatService.toggleMenuOpened = true;
+        } else {
+          this.pilatService.toggleMenuOpened = false;
+        }
       }, 1000)
     });
     

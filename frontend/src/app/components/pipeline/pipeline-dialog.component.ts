@@ -403,7 +403,8 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
                 <span><b>Cliente:</b></span>
                 <br>
                 ${param.first_name ? param.first_name : ''} ${param.last_name ? param.last_name : ''}
-                <span><b>Celular Contacto:</b></span>
+                <br>
+                <span><b>Celular:</b></span>
                 <br>
                 ${param.phone_mobile ? param.phone_mobile : 'Sin especificar'}
                 <br>
@@ -698,35 +699,43 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
       this.opportunity = responseOpportunity.data;
       if (this.opportunity.opportunityOpportunitiesContacts) {
         if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts) {
-          if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails) {
-            this.dialogService.open('La cotizacion fue enviada exitosamente al correo del contacto', 'Envio de Cotización al Contacto');
-            this.opportunity.sales_stage = this.pipeline.columns[currentColumn].props.par_cod;
-            await this.crmOpportunityService.updateOpportunity(opportunityId,this.opportunity).subscribe(async (res) => {
-              let responseOpportunities = res as {status:string, message:string, data:Opportunities};
-              if(responseOpportunities.data) {
-                transferArrayItem(event.previousContainer.data,
-                  event.container.data,
-                  event.previousIndex,
-                  event.currentIndex);
-                this.setPipeline();
-              }
-            });
-          } else {
-            if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel && this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address) {
-              this.dialogService.open('La cotizacion no fue enviada al cliente, el correo registrado es el siguiente: ' +
-                this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address
-                + ' ¿Desea reintentar el envio al correo del contacto?', 'Envio de Cotización al Contacto', async () => {
-                  let responseOpportunities:any = await this.crmOpportunityService.updateOpportunity(opportunityId,this.opportunity).toPromise();
-                  this.opportunity = responseOpportunities;
-                  if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails) {
-                    this.dialogService.open('La cotizacion fue enviada exitosamente al correo del contacto', 'Envio de Cotización al Contacto');
-                  } else {
-                    this.dialogService.open('No pudo ser validado el envio de la cotizacion al correo del contacto, por favor intenta enviarlo mediante WhatsApp', 'Envio de Cotización al Contacto');
+          if (this.opportunity.opportunityAosQuotes) {
+            if (this.opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm) {
+              if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails) {
+                this.dialogService.open('La cotizacion fue enviada exitosamente al correo del contacto', 'Envio de Cotización al Contacto');
+                this.opportunity.sales_stage = this.pipeline.columns[currentColumn].props.par_cod;
+                await this.crmOpportunityService.updateOpportunity(opportunityId,this.opportunity).subscribe(async (res) => {
+                  let responseOpportunities = res as {status:string, message:string, data:Opportunities};
+                  if(responseOpportunities.data) {
+                    transferArrayItem(event.previousContainer.data,
+                      event.container.data,
+                      event.previousIndex,
+                      event.currentIndex);
+                    this.setPipeline();
                   }
                 });
+              } else {
+                if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel && this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address) {
+                  this.dialogService.open('La cotizacion no fue enviada al cliente, el correo registrado es el siguiente: ' +
+                    this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address
+                    + ' ¿Desea reintentar el envio al correo del contacto?', 'Envio de Cotización al Contacto', async () => {
+                      let responseOpportunities:any = await this.crmOpportunityService.updateOpportunity(opportunityId,this.opportunity).toPromise();
+                      this.opportunity = responseOpportunities;
+                      if (this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails) {
+                        this.dialogService.open('La cotizacion fue enviada exitosamente al correo del contacto', 'Envio de Cotización al Contacto');
+                      } else {
+                        this.dialogService.open('No pudo ser validado el envio de la cotizacion al correo del contacto, por favor intenta enviarlo mediante WhatsApp', 'Envio de Cotización al Contacto');
+                      }
+                    });
+                } else {
+                  this.dialogService.open('El contacto de la oportunidad no tiene registrado un correo electrónico', 'Envio de Cotización al Contacto');
+                }
+              }
             } else {
-              this.dialogService.open('El contacto de la oportunidad no tiene registrado un correo electrónico', 'Envio de Cotización al Contacto');
+              this.dialogService.open('La Oportunidad seleccionada no tiene una cotización, por favor revisa los datos', 'Sin Cotización');
             }
+          } else {
+            this.dialogService.open('La Oportunidad seleccionada no tiene una cotización, por favor revisa los datos', 'Sin Cotización');
           }
         } else {
           this.dialogService.open('La Oportunidad seleccionada no tiene un cliente, por favor revisa los datos', 'Envio de Cotización al Contacto');

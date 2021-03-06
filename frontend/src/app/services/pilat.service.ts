@@ -312,7 +312,7 @@ export class PilatService {
   
   setiFrameInterface() {
     if (this.toggleMenuOpened) {
-      $('body .iframe-suitecrm').css('width','89%');
+      $('body .iframe-suitecrm').css('width','90%');
     } else {
       $('body .iframe-suitecrm').css('width','100%');
     }
@@ -324,12 +324,22 @@ export class PilatService {
       $('body').find('iframe').contents().find('body').find('#menu').hide();
       $('body').find('iframe').contents().find('body').find('#wrapper').css('margin','0px');
       $('body').find('iframe').contents().find('body').find('#logo').hide();
-      $('body').find('iframe').contents().find('body').find('#header').css('position','absolute');
-      $('body').find('iframe').contents().find('body').find('#header').css('left','-27px');
+      // $('body').find('iframe').contents().find('body').find('.dropdown').hide();
+      $('body').find('iframe').contents().find('body').find('.navbar-right').css('width','100%');
+      $('body').find('iframe').contents().find('body').find('.navbar-right .dropdown-menu').css('left','0px');
+      $('body').find('iframe').contents().find('body').find('.navbar-right .navbar-nav').css('padding-right','15px');
+      $('body').find('iframe').contents().find('body').find('.header-link').hide();
+      $('body').find('iframe').contents().find('body').find('.small-logo').hide();
+      $('body').find('iframe').contents().find('body').find('.navbar-right').css('width','100%');
+      // $('body').find('iframe').contents().find('body').find('#header').css('left','-27px');
       $('body').find('iframe').contents().find('body').find('.navbar-right').find('#logout_link').hide();
       $('body').find('iframe').contents().find('body').find('.navbar-right').find('#admin_link').hide();
       $('body').find('iframe').contents().find('body').find('.navbar-right').find('#utilsLink').hide();
-      $('body .iframe-suitecrm').css('width','89%');
+      if (this.isSmallScreen) {
+        $('body .iframe-suitecrm').css('width','100%');
+      } else {
+        $('body .iframe-suitecrm').css('width','90%');
+      }
       $('body .iframe-suitecrm').css('height','100%');
     }
   }

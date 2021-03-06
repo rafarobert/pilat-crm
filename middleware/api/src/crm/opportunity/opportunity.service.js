@@ -28,6 +28,9 @@ const path = require('path');
 const { Op } = require("sequelize");
 
 class OpportunityService {
+	constructor() {
+
+	}
 
 	static async getAllOpportunities(query) {
 		try {
@@ -158,7 +161,7 @@ class OpportunityService {
 			if(sql) {
 
 				if (newOpportunity) {
-					newOpportunity.amount = crmService.setNumberToSave(newOpportunity.amount)
+					newOpportunity.amount = crmService.setNumberToSave(newOpportunity.amount);
 					let respOpportunity, respOpportunitiesCstm;
 					if (newOpportunity.id) {
 						newOpportunity.date_modified = new Date();
@@ -566,8 +569,8 @@ class OpportunityService {
 										updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.date_modified = new Date();
 										respEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.create(updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel);
 									}
-									objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel = respEmailAddrBeanRel && respEmailAddrBeanRel.dataValues ? respEmailAddrBeanRel.dataValues : null;
-									objOpportunity.opportunityOpportunitiesContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = respEmailAddresses && respEmailAddresses.dataValues ? respEmailAddresses.dataValues : null;
+									objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel = respEmailAddrBeanRel && respEmailAddrBeanRel.dataValues ? respEmailAddrBeanRel.dataValues : null;
+									objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = respEmailAddresses && respEmailAddresses.dataValues ? respEmailAddresses.dataValues : null;
 								}
 							}
 						}
@@ -781,7 +784,7 @@ class OpportunityService {
 					}
 				}
 
-				await crmService.setEmailOpportunity(objOpportunity.id, respContacts);
+				await crmService.setEmailOpportunity(objOpportunity, respContacts);
 
 			} else {
 				objOpportunity = new models.mongoose.opportunities(updateOpportunity);

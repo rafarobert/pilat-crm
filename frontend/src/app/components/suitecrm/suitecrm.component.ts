@@ -32,7 +32,24 @@ export class SuitecrmComponent implements OnInit,AfterViewInit {
   
   iFrameLoaded() {
     this.location.replaceState('/');
-    this.pilatService.fixSuiteCrmInterface();
+    if (this.pilatService.currentUser) {
+      $('body').find('iframe').contents().find('body').find('#menu').hide();
+      $('body').find('iframe').contents().find('body').find('#wrapper').css('margin','0px');
+      $('body').find('iframe').contents().find('body').find('#logo').hide();
+      // $('body').find('iframe').contents().find('body').find('.dropdown').hide();
+      // $('body').find('iframe').contents().find('body').find('#header').css('left','-27px');
+      $('body').find('iframe').contents().find('body').find('.navbar-right').css('width','100%');
+      $('body').find('iframe').contents().find('body').find('.navbar-right .dropdown-menu').css('left','0px');
+      $('body').find('iframe').contents().find('body').find('.navbar-right').find('#logout_link').hide();
+      $('body').find('iframe').contents().find('body').find('.navbar-right').find('#admin_link').hide();
+      $('body').find('iframe').contents().find('body').find('.navbar-right').find('#utilsLink').hide();
+      if (this.pilatService.isSmallScreen) {
+        $('body .iframe-suitecrm').css('width','100%');
+      } else {
+        $('body .iframe-suitecrm').css('width','90%');
+      }
+      $('body .iframe-suitecrm').css('height','100%');
+    }
     this.buildingService.stop(this.buildingService.buildingRef);
   }
   

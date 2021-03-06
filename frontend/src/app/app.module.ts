@@ -100,6 +100,12 @@ import { CrmNotesComponent } from './components/suitecrm/crm-notes/crm-notes.com
 import { CrmToolsComponent } from './components/suitecrm/crm-tools/crm-tools.component';
 import {PilatService} from "./services/pilat.service";
 import {NumberPipe} from "./components/utils/number.pipe";
+import { CrmQuotesComponent } from './components/suitecrm/crm-quotes/crm-quotes.component';
+import { CrmDocumentsComponent } from './components/suitecrm/crm-documents/crm-documents.component';
+import { CrmDynamicAnalysisComponent } from './components/suitecrm/crm-dynamic-analysis/crm-dynamic-analysis.component';
+import { CrmCampaignsComponent } from './components/suitecrm/crm-campaigns/crm-campaigns.component';
+import { CrmContractsComponent } from './components/suitecrm/crm-contracts/crm-contracts.component';
+import { CrmBillsComponent } from './components/suitecrm/crm-bills/crm-bills.component';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -172,7 +178,13 @@ export const MY_DATE_FORMATS = {
     CrmTasksComponent,
     CrmNotesComponent,
     CrmToolsComponent,
-    NumberPipe
+    NumberPipe,
+    CrmQuotesComponent,
+    CrmDocumentsComponent,
+    CrmDynamicAnalysisComponent,
+    CrmCampaignsComponent,
+    CrmContractsComponent,
+    CrmBillsComponent
   ],
   imports: [
     BrowserModule,

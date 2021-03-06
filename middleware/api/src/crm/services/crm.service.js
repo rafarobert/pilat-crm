@@ -28,10 +28,8 @@ const { Op } = require("sequelize");
 
 class CrmService {
 
-	static async setEmailOpportunity(idOpportunity, respContacts) {
+	static async setEmailOpportunity(objOpportunity, respContacts) {
 		try {
-			let respOpportunity = await this.getAOpportunity(idOpportunity,{});
-			let objOpportunity = respOpportunity.dataValues;
 			if (objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel) {
 				let hasEmailHistory;
 				if (objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmails) {
@@ -156,32 +154,34 @@ class CrmService {
 			let id = objOpportunity.id;
 			let localDir = await path.join(__dirname, '../../../../public/pilatsrl/pdfs/quotes/');
 			let localDirTemplatesQuotes = await path.join(__dirname, '../../../../public/pilatsrl/templates/quotes/');
-			let localTemplatesQuote;
-			if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'PLAZOS') {
-				if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '5') {
-					localTemplatesQuote = 'cotizacion_plazo_cinco.html';
-				} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '10') {
-					localTemplatesQuote = 'cotizacion_plazo_diez.html';
+			let localTemplatesQuote, files, file;
+			if (objOpportunity.opportunityAosQuotes) {
+				if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'PLAZOS') {
+					if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '5') {
+						localTemplatesQuote = 'cotizacion_plazo_cinco.html';
+					} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.term_years_c == '10') {
+						localTemplatesQuote = 'cotizacion_plazo_diez.html';
+					}
+				} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'CONTADO') {
+					localTemplatesQuote = 'cotizacion_contado.html';
+				} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'BANCO') {
+					localTemplatesQuote = 'cotizacion_banco.html';
 				}
-			} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'CONTADO') {
-				localTemplatesQuote = 'cotizacion_contado.html';
-			} else if (objOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm.tipo_pago_c == 'BANCO') {
-				localTemplatesQuote = 'cotizacion_banco.html';
-			}
-			let files = await fs.readdirSync(localDir);
-			let file = files.find(param => param == 'quote_'+id+'.pdf');
+				files = await fs.readdirSync(localDir);
+				file = files.find(param => param == 'quote_'+id+'.pdf');
 
-			let respHtmlPdf, content;
-			if (file) {
-				await fs.unlinkSync(localDir+file);
-				file = null;
-			}
+				let respHtmlPdf, content;
+				if (file) {
+					await fs.unlinkSync(localDir+file);
+					file = null;
+				}
 
-			if (!file) {
-				content = await fs.readFileSync(localDirTemplatesQuotes+localTemplatesQuote).toString();
-				content = await this.setContent(content,objOpportunity);
-				respHtmlPdf = await htmlPdf.createPdf(content,localDir+'quote_'+id+'.pdf', callback);
-				file = 'quote_'+id+'.pdf';
+				if (!file) {
+					content = await fs.readFileSync(localDirTemplatesQuotes+localTemplatesQuote).toString();
+					content = await this.setContent(content,objOpportunity);
+					respHtmlPdf = await htmlPdf.createPdf(content,localDir+'quote_'+id+'.pdf', callback);
+					file = 'quote_'+id+'.pdf';
+				}
 			}
 			return [localDir,file]
 		} catch (e) {
