@@ -224,7 +224,7 @@ class CrmService {
 		return resp;
 	}
 
-	static async formatNumber (num, decimals = 2) {
+	static formatNumber (num, decimals = 2) {
 		let stringFloat = num + "";
 		let arraySplitFloat = stringFloat.split(".");
 		let decimalsValue = "0";
