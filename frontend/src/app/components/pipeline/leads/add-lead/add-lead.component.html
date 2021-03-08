@@ -12,10 +12,6 @@
     <!--<div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>deleted</mat-label><input matInput #inputstate class="form-control" placeholder="deleted" [(ngModel)]="data.deleted" name="deleted" maxlength="10"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error><mat-hint align="end">{{inputstate.value?.length || 0}}/8</mat-hint></mat-form-field></div>-->
     <!--<div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>salutation</mat-label><input matInput #input class="form-control" placeholder="salutation" [(ngModel)]="data.salutation" name="salutation"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div>-->
 
-
-
-
-
       <div class="example-action-buttons">
         <button mat-button (click)="accordion.openAll()">Validar</button>
         <button mat-button (click)="accordion.openAll()">Expandir Todo</button>
@@ -116,7 +112,7 @@
               <mat-option *ngFor="let leadStatus of pilatService.parLeadStatuses" [value]="leadStatus.par_cod"  >{{leadStatus.par_description}}</mat-option>
             </mat-select></mat-form-field></div></mat-grid-tile>
 
-            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Origen</mat-label><mat-select [(ngModel)]="data.lead_source" name="lead_source" required>
+            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Origen</mat-label><mat-select [(ngModel)]="data.lead_source" name="lead_source" (ngModelChange)="selectOrigenCliente($event)" required>
               <mat-option *ngFor="let parLeadSource of pilatService.parLeadSources" [value]="parLeadSource.par_cod"  >{{parLeadSource.par_description}}</mat-option>
             </mat-select></mat-form-field></div></mat-grid-tile>
 
@@ -181,12 +177,12 @@
         </mat-expansion-panel>
         <mat-expansion-panel><mat-expansion-panel-header><mat-panel-title>Recordar llamada</mat-panel-title> <mat-panel-description><mat-icon>date_range</mat-icon></mat-panel-description></mat-expansion-panel-header>
           <mat-grid-list [cols]="pilatService.isSmallScreen ? '1' : '2'" rowHeight="6:2">
-            <mat-grid-tile colspan="2"><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Nombre</mat-label><input matInput #input class="form-control" placeholder="Nombre" [(ngModel)]="data.leadCallsLeads.callLeadCalls.name" name="name"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
+            <mat-grid-tile colspan="2"><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Nombre</mat-label><input matInput #input class="form-control" placeholder="Nombre" [value]="data.leadCallsLeads.callLeadCalls.name ? data.leadCallsLeads.callLeadCalls.name : data.first_name+' '+data.last_name" [(ngModel)]="data.leadCallsLeads.callLeadCalls.name" name="callName"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
             <!--<mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>date_entered</mat-label><input matInput #input class="form-control" placeholder="date_entered" [(ngModel)]="data.leadCallsLeads.callLeadCalls.date_entered" name="date_entered"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>-->
             <!--<mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>date_modified</mat-label><input matInput #input class="form-control" placeholder="date_modified" [(ngModel)]="data.leadCallsLeads.callLeadCalls.date_modified" name="date_modified"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>-->
             <!--<mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>modified_user_id</mat-label><input matInput #input class="form-control" placeholder="modified_user_id" [(ngModel)]="data.leadCallsLeads.callLeadCalls.modified_user_id" name="modified_user_id"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>-->
             <!--<mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>created_by</mat-label><input matInput #input class="form-control" placeholder="created_by" [(ngModel)]="data.leadCallsLeads.callLeadCalls.created_by" name="created_by"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>-->
-            <mat-grid-tile colspan="2"><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Descripción</mat-label><input matInput #input class="form-control" placeholder="Descripción" [(ngModel)]="data.leadCallsLeads.callLeadCalls.description" name="description"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
+            <mat-grid-tile colspan="2"><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Descripción</mat-label><input matInput #input class="form-control" placeholder="Descripción" [value]="data.leadCallsLeads.callLeadCalls.description ? data.leadCallsLeads.callLeadCalls.description : 'Llamar al cliente'" [(ngModel)]="data.leadCallsLeads.callLeadCalls.description" name="callDescription"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
 
             <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Estado de la Llamada</mat-label><mat-select [(ngModel)]="data.leadCallsLeads.callLeadCalls.status" name="call_status">
               <mat-option *ngFor="let parCallStatus of pilatService.parCallStatuses" [value]="parCallStatus.par_cod"  >{{parCallStatus.par_description}}</mat-option>

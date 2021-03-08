@@ -31,6 +31,7 @@ export class AddLeadComponent implements OnInit {
   parCurrentCountry: PilatParams;
   parCurrentState: PilatParams;
   parCurrentCity: PilatParams;
+  parCurrentOrigen: PilatParams;
   
   constructor(
     public dialogRef: MatDialogRef<AddLeadComponent>,
@@ -83,7 +84,7 @@ export class AddLeadComponent implements OnInit {
       this.afterTomorrow = new Date(parseInt(yearAfterA), parseInt(monthAfterA), parseInt(dayAfterA));
       this.data.status = this.data.status ? this.data.status : this.pilatService.parLeadNewStatus.par_cod;
       this.data.leadLeadsCstm.etapas_c = this.data.leadLeadsCstm.etapas_c ? this.data.leadLeadsCstm.etapas_c : this.pilatService.parLeadCaptadoStage.par_cod;
-      console.log(this.leadForm);
+      this.selectOrigenCliente(this.pilatService.parLeadOrigenSitioWeb.par_cod);
       setTimeout(() => {
         this.accordion.openAll();
       },1000)
@@ -94,25 +95,37 @@ export class AddLeadComponent implements OnInit {
     if (value) {
       this.parCurrentCountry = this.pilatService.parCountries.find(param => param.par_cod == value);
       this.pilatService.parStates = this.pilatService.parStates.filter(param => param.par_parent_id == this.parCurrentCountry._id);
+      this.data.primary_address_country = this.parCurrentCountry.par_cod;
     }
   }
   
   selectState(value) {
     if (value) {
       this.parCurrentState = this.pilatService.parStates.find(param => param.par_cod == value);
+      this.pilatService.parCities = this.pilatService.parCitiesBkp;
       this.pilatService.parCities = this.pilatService.parCities.filter(param => param.par_parent_id == this.parCurrentState._id);
+      this.data.primary_address_state = this.parCurrentState.par_cod;
     }
   }
   
   selectCity(value) {
     if (value) {
       this.parCurrentCity = this.pilatService.parCities.find(param => param.par_cod == value);
+      this.data.primary_address_city = this.parCurrentCity.par_cod;
     }
   }
   
   selectTipoCliente(value) {
     if (value) {
       this.parCurrentTipoCliente = this.pilatService.parClienteTipos.find(param => param.par_cod == value);
+      this.data.leadLeadsCstm.tipo_cliente_c = this.parCurrentTipoCliente.par_cod;
+    }
+  }
+  
+  selectOrigenCliente(value) {
+    if (value) {
+      this.parCurrentOrigen = this.pilatService.parLeadSources.find(param => param.par_cod == value);
+      this.data.lead_source = this.parCurrentOrigen.par_cod;
     }
   }
   

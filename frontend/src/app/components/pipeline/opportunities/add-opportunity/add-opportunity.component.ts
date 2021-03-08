@@ -133,19 +133,23 @@ export class AddOpportunityComponent implements OnInit {
     if (value) {
       this.parCurrentAccountCountry = this.pilatService.parCountries.find(param => param.par_cod == value);
       this.pilatService.parStates = this.pilatService.parStates.filter(param => param.par_parent_id == this.parCurrentAccountCountry._id);
+      this.data.opportunityAccountsOpportunities.accountOpportunityAccounts.billing_address_country = this.parCurrentAccountCountry.par_cod;
     }
   }
   
   selectAccountState(value) {
     if (value) {
       this.parCurrentAccountState = this.pilatService.parStates.find(param => param.par_cod == value);
+      this.pilatService.parCities = this.pilatService.parCitiesBkp;
       this.pilatService.parCities = this.pilatService.parCities.filter(param => param.par_parent_id == this.parCurrentAccountState._id);
+      this.data.opportunityAccountsOpportunities.accountOpportunityAccounts.billing_address_state = this.parCurrentAccountState.par_cod;
     }
   }
   
   selectAccountCity(value) {
     if (value) {
       this.parCurrentAccountCity = this.pilatService.parCities.find(param => param.par_cod == value);
+      this.data.opportunityAccountsOpportunities.accountOpportunityAccounts.billing_address_city = this.parCurrentAccountCity.par_cod;
     }
   }
   
@@ -153,6 +157,7 @@ export class AddOpportunityComponent implements OnInit {
     if (value) {
       this.parCurrentContactCountry = this.pilatService.parCountries.find(param => param.par_cod == value);
       this.pilatService.parStates = this.pilatService.parStates.filter(param => param.par_parent_id == this.parCurrentContactCountry._id);
+      this.data.opportunityOpportunitiesContacts.opportunityContactContacts.primary_address_country = this.parCurrentContactCountry.par_cod
     }
   }
   
@@ -161,12 +166,14 @@ export class AddOpportunityComponent implements OnInit {
       this.pilatService.parCities = this.pilatService.parCitiesBkp;
       this.parCurrentContactState = this.pilatService.parStates.find(param => param.par_cod == value);
       this.pilatService.parCities = this.pilatService.parCities.filter(param => param.par_parent_id == this.parCurrentContactState._id);
+      this.data.opportunityOpportunitiesContacts.opportunityContactContacts.primary_address_state = this.parCurrentContactState.par_cod;
     }
   }
   
   selectContactCity(value) {
     if (value) {
       this.parCurrentContactCity = this.pilatService.parCities.find(param => param.par_cod == value);
+      this.data.opportunityOpportunitiesContacts.opportunityContactContacts.primary_address_city = this.parCurrentContactCity.par_cod;
     }
   }
   

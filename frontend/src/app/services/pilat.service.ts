@@ -168,6 +168,10 @@ export class PilatService {
   
   parEmailIntentPick: PilatParams;
 	hourDifference: number;
+	
+  parLeadOrigenFacebook: PilatParams;
+  parLeadOrigenSitioWeb: PilatParams;
+  parLeadOrigenOtro: PilatParams;
   
   constructor(
     breakpointObserver:BreakpointObserver,
@@ -277,6 +281,10 @@ export class PilatService {
               case 15:this.parOpportunityStageArmadoCarpeta = param;break;
               case 16:this.parOpportunityStageCierreGanado = param;break;
               case 17:this.parOpportunityStageCierrePerdido = param;break;
+              
+              case 43:this.parLeadOrigenFacebook = param;break;
+              case 44:this.parLeadOrigenSitioWeb = param;break;
+              case 45:this.parLeadOrigenOtro = param;break;
 
             }
           });
