@@ -17,6 +17,7 @@ import {AodIndexevent} from "./aodIndexevent";
 import {Tracker} from "./tracker";
 import {CallsLeads} from "./callsLeads";
 import {Emails} from "./emails";
+import {EmailAddrBeanRel} from "./emailAddrBeanRel";
 
 //<es-section>
 
@@ -165,4 +166,7 @@ export class Leads {
   leadCallsLeads:CallsLeads;
   
   leadEmails:Emails;
+  
+  leadEmailAddrBeanRel:EmailAddrBeanRel;
+  
 }

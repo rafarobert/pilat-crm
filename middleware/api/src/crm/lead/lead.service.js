@@ -52,7 +52,12 @@ class LeadService {
 									},
 								]
 							}
-						},
+						},{
+							model:models.sequelize.emailAddrBeanRel, as:'leadEmailAddrBeanRel',
+							include: {
+								model:models.sequelize.emailAddresses, as:'emailAddrBeanRelEmailAddresses'
+							}
+						}
 					]
 				});
 			}
@@ -82,6 +87,12 @@ class LeadService {
 										}
 									},
 								]
+							}
+						},
+						{
+							model:models.sequelize.emailAddrBeanRel, as:'leadEmailAddrBeanRel',
+							include: {
+								model:models.sequelize.emailAddresses, as:'emailAddrBeanRelEmailAddresses'
 							}
 						},
 						{model:models.sequelize.sugarfeed, as:'leadSugarfeed'},
@@ -140,8 +151,8 @@ class LeadService {
 
 								if (newLead.leadCallsLeads) {
 									newLead.leadCallsLeads.id = models.sequelize.objectId().toString();
-									newLead.leadCallsLeads.lead_id = newLead.id;
-									newLead.leadCallsLeads.call_id = respCalls.dataValues.id;
+									newLead.leadCallsLeads.lead_id = respLead && respLead.dataValues ? respLead.dataValues.id : null;
+									newLead.leadCallsLeads.call_id = respCalls && respLead.dataValues ? respCalls.dataValues.id : null;
 									newLead.leadCallsLeads.date_modified = new Date();
 									respCallsLeads = await models.sequelize.callsLeads.create(newLead.leadCallsLeads);
 								}
@@ -161,6 +172,33 @@ class LeadService {
 						}
 
 						// END CALLS
+						//
+						// BEGIN EMAIL_ADDRESSES
+
+						let respEmailAddresses, respEmailAddrBeanRel;
+
+						if (newLead.leadEmailAddrBeanRel) {
+							if (newLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses) {
+
+								newLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id = models.sequelize.objectId().toString();
+								newLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_created = new Date();
+								newLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_modified = new Date();
+								respEmailAddresses = await models.sequelize.emailAddresses.create(newLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses);
+
+								if (newLead.leadEmailAddrBeanRel) {
+									newLead.leadEmailAddrBeanRel.id = models.sequelize.objectId().toString();
+									newLead.leadEmailAddrBeanRel.bean_id = respLead && respLead.dataValues ? respLead.dataValues.id : null;
+									newLead.leadEmailAddrBeanRel.date_created = new Date();
+									newLead.leadEmailAddrBeanRel.date_modified = new Date();
+									respEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.create(newLead.leadEmailAddrBeanRel);
+								}
+
+								objLead.leadEmailAddrBeanRel = respEmailAddrBeanRel && respEmailAddrBeanRel.dataValues ? respEmailAddrBeanRel.dataValues : {};
+								objLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = respEmailAddresses && respEmailAddresses.dataValues ? respEmailAddresses.dataValues : {};
+							}
+						}
+
+						// END EMAIL_ADDRESSES
 
 						if (newLead.leadLeadsAudit) {
 							newLead.leadLeadsAudit.id = models.sequelize.objectId().toString();
@@ -368,6 +406,62 @@ class LeadService {
 					}
 
 					// END CALLS
+					//
+					// BEGIN EMAIL_ADDRESSES
+
+					let respEmailAddresses, respEmailAddrBeanRel;
+					if (updateLead.leadEmailAddrBeanRel) {
+						if (updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id) {
+							updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_modified = new Date();
+							await models.sequelize.emailAddresses.update(updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses, {where:{id:updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id}});
+							respEmailAddresses = await models.sequelize.emailAddresses.findOne({where: { id: updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id }});
+						} else {
+							let oldEmailAddresses = await models.sequelize.emailAddresses.findOne({
+								include:{
+									model:models.sequelize.emailAddrBeanRel, as:'emailAddressEmailAddrBeanRel',
+									where:{bean_id:id}
+								}
+							});
+							if (oldEmailAddresses && oldEmailAddresses.dataValues) {
+								oldEmailAddresses = oldEmailAddresses.dataValues;
+								updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_modified = new Date();
+								await models.sequelize.emailAddresses.update(updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses, {where:{id:oldEmailAddresses.id}});
+								respEmailAddresses = await models.sequelize.emailAddresses.findOne({where: { id: oldEmailAddresses.id }});
+							} else {
+								//let newLead = updateLead;
+								updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id = models.sequelize.objectId().toString();
+								updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_created = new Date();
+								updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_modified = new Date();
+								respEmailAddresses = await models.sequelize.emailAddresses.create(updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses);
+							}
+
+							if (updateLead.leadEmailAddrBeanRel) {
+								if (updateLead.leadEmailAddrBeanRel.id) {
+									updateLead.leadEmailAddrBeanRel.date_modified = new Date();
+									await models.sequelize.emailAddrBeanRel.update(updateLead.leadEmailAddrBeanRel, {where:{id:updateLead.leadEmailAddrBeanRel.id}});
+									respEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.findOne({where: { id: updateLead.leadEmailAddrBeanRel.id }});
+								} else {
+									let oldEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.findOne({where:{bean_id:id}});
+									if (oldEmailAddrBeanRel && oldEmailAddrBeanRel.dataValues) {
+										oldEmailAddrBeanRel = oldEmailAddrBeanRel.dataValues;
+										updateLead.leadEmailAddrBeanRel.date_modified = new Date();
+										await models.sequelize.emailAddrBeanRel.update(updateLead.leadEmailAddrBeanRel, {where:{id:oldEmailAddrBeanRel.id}});
+										respEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.findOne({where: { id:oldEmailAddrBeanRel.id }});
+									} else {
+										//let newLead = updateLead;
+										updateLead.leadEmailAddrBeanRel.date_modified = new Date();
+										updateLead.leadEmailAddrBeanRel.date_created = new Date();
+										updateLead.leadEmailAddrBeanRel.id = respEmailAddrBeanRel && respEmailAddrBeanRel.dataValues ? respEmailAddrBeanRel.dataValues.id : null;
+										respEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.create(updateLead.leadEmailAddrBeanRel);
+									}
+								}
+							}
+						}
+						objLead.leadEmailAddrBeanRel = respEmailAddrBeanRel && respEmailAddrBeanRel.dataValues ? respEmailAddrBeanRel.dataValues : null;
+						objLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = respEmailAddresses && respEmailAddresses.dataValues ? respEmailAddresses.dataValues : null;
+					}
+
+					// END EMAIL_ADDRESSES
 
 					if (updateLead.leadAodIndexevent) {
 						let respAodindexevent;
@@ -396,7 +490,6 @@ class LeadService {
 								objLead.leadAodIndexevent = respAodindexevent.dataValues;
 							}
 						}
-
 					}
 
 					if (updateLead.leadTracker) {

@@ -10,6 +10,16 @@ import {DeleteOpportunityComponent} from "./delete-opportunity/delete-opportunit
 import {BehaviorSubject, fromEvent, merge, Observable} from "rxjs";
 import {DataSource} from "@angular/cdk/table";
 import {map} from "rxjs/operators";
+import {OpportunitiesContacts} from "../../../../core/models/opportunitiesContacts";
+import {Contacts} from "../../../../core/models/contacts";
+import {ContactsCstm} from "../../../../core/models/contactsCstm";
+import {AccountsOpportunities} from "../../../../core/models/accountsOpportunities";
+import {Accounts} from "../../../../core/models/accounts";
+import {AccountsCstm} from "../../../../core/models/accountsCstm";
+import {AosQuotes} from "../../../../core/models/aosQuotes";
+import {AosQuotesCstm} from "../../../../core/models/aosQuotesCstm";
+import {EmailAddrBeanRel} from "../../../../core/models/emailAddrBeanRel";
+import {EmailAddresses} from "../../../../core/models/emailAddresses";
 
 @Component({
   selector: 'app-opportunities',
@@ -18,6 +28,7 @@ import {map} from "rxjs/operators";
 })
 export class OpportunitiesComponent implements OnInit {
   
+  opportunity:Opportunities;
   displayedColumns = [
     'name',
     // 'date_entered',
@@ -63,10 +74,21 @@ export class OpportunitiesComponent implements OnInit {
   }
   
   addNew() {
-    let opportunity = new Opportunities();
+    this.opportunity = new Opportunities();
+    this.opportunity.opportunityOpportunitiesContacts = this.opportunity.opportunityOpportunitiesContacts ? this.opportunity.opportunityOpportunitiesContacts : new OpportunitiesContacts();
+    this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts = this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts ? this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts : new Contacts();
+    this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm = this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm ? this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm : new ContactsCstm();
+    this.opportunity.opportunityAccountsOpportunities = this.opportunity.opportunityAccountsOpportunities ? this.opportunity.opportunityAccountsOpportunities : new AccountsOpportunities();
+    this.opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts = this.opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts ? this.opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts : new Accounts();
+    this.opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm = this.opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm ? this.opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm : new AccountsCstm();
+    this.opportunity.opportunityAosQuotes = this.opportunity.opportunityAosQuotes ? this.opportunity.opportunityAosQuotes : new AosQuotes();
+    this.opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm = this.opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm ? this.opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm : new AosQuotesCstm();
+    this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel = this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel ? this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel : new EmailAddrBeanRel();
+    this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses ? this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses : new EmailAddresses();
+    
     const dialogRef = this.dialog.open(AddOpportunityComponent, {
       data: {
-        opportunity:opportunity,
+        opportunity:this.opportunity,
       },
       width: '600px'
     });
@@ -88,10 +110,22 @@ export class OpportunitiesComponent implements OnInit {
     // this.id = id;
     // index row is used just for debugging proposes and can be removed
     this.index = i;
+    this.opportunity = opportunity;
+    this.opportunity.opportunityOpportunitiesContacts = this.opportunity.opportunityOpportunitiesContacts ? this.opportunity.opportunityOpportunitiesContacts : new OpportunitiesContacts();
+    this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts = this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts ? this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts : new Contacts();
+    this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm = this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm ? this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm : new ContactsCstm();
+    this.opportunity.opportunityAccountsOpportunities = this.opportunity.opportunityAccountsOpportunities ? this.opportunity.opportunityAccountsOpportunities : new AccountsOpportunities();
+    this.opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts = this.opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts ? this.opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts : new Accounts();
+    this.opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm = this.opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm ? this.opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm : new AccountsCstm();
+    this.opportunity.opportunityAosQuotes = this.opportunity.opportunityAosQuotes ? this.opportunity.opportunityAosQuotes : new AosQuotes();
+    this.opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm = this.opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm ? this.opportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm : new AosQuotesCstm();
+    this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel = this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel ? this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel : new EmailAddrBeanRel();
+    this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses ? this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses : new EmailAddresses();
+  
     console.log(this.index);
     const dialogRef = this.dialog.open(AddOpportunityComponent, {
       data: {
-        opportunity:opportunity
+        opportunity:this.opportunity
       },
       width: '600px'
     });

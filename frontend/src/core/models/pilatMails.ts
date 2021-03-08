@@ -23,8 +23,8 @@ export class PilatMails {
   _id: string;
   
   
-  
   id: number;
+  
   
   mai_port: number;
   

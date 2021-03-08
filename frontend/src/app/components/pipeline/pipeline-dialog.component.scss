@@ -227,7 +227,7 @@
 }
 .mat-dialog-content {
   min-height: 94%;
-  min-width: 100%;
+  min-width: 450%;
 }
 .mat-dialog-content >div{
   width: 150%;
@@ -243,7 +243,7 @@
   width: 10%;
 }
 mat-button-toggle-group {
-  width: 100%;
+  width: 150%;
   position: static;
   border: solid 1px #0a0b0c;
   border-radius: 0;
@@ -290,4 +290,8 @@ mat-button-toggle-group {
 
 .mat-dialog-title{
   margin: 0px!important;
+}
+
+.search-input{
+  min-width: 30%;
 }

@@ -11,6 +11,7 @@ import {BehaviorSubject, fromEvent, merge, Observable} from "rxjs";
 import {DataSource} from "@angular/cdk/table";
 import {map} from "rxjs/operators";
 import {PilatService} from "../../../services/pilat.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-mails',
@@ -40,6 +41,7 @@ export class MailsComponent implements OnInit {
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
+    private location: Location,
     public pilatMailService: PilatMailService,
     public pilatService:PilatService
   ) {}
@@ -49,6 +51,7 @@ export class MailsComponent implements OnInit {
   @ViewChild('filter',  {static: true}) filter: ElementRef;
   
   ngOnInit() {
+    this.location.replaceState('/');
     this.loadData();
   }
   

@@ -11,6 +11,14 @@ import {AddLeadComponent} from "./add-lead/add-lead.component";
 import {DeleteLeadComponent} from "./delete-lead/delete-lead.component";
 import {CrmLeadService} from "../../../services/crm-lead.service";
 import {PilatService} from "../../../services/pilat.service";
+import {LeadsCstm} from "../../../../core/models/leadsCstm";
+import {CallsLeads} from "../../../../core/models/callsLeads";
+import {Calls} from "../../../../core/models/calls";
+import {EmailAddrBeanRel} from "../../../../core/models/emailAddrBeanRel";
+import {EmailAddresses} from "../../../../core/models/emailAddresses";
+import {CallsCstm} from "../../../../core/models/callsCstm";
+import {CallsUsers} from "../../../../core/models/callsUsers";
+import {addDias} from "fechas";
 
 @Component({
   selector: 'app-leads',
@@ -19,6 +27,7 @@ import {PilatService} from "../../../services/pilat.service";
 })
 export class LeadsComponent implements OnInit {
   
+  lead:Leads;
   displayedColumns = [
     // 'date_entered',
     // 'date_modified',
@@ -79,6 +88,8 @@ export class LeadsComponent implements OnInit {
   index: number;
   id: number;
   isLoading:boolean = true;
+  tomorrow:Date;
+  afterTomorrow:Date;
   
   constructor(
     public httpClient: HttpClient,
@@ -100,10 +111,45 @@ export class LeadsComponent implements OnInit {
   }
   
   addNew() {
-    let lead = new Leads();
+  
+    let date = new Date();
+    let dayPad = date.getDate().pad(2);
+    let monthPad = (date.getMonth()).pad(2);
+    let yearPad = date.getFullYear();
+    let strToday = `${dayPad}/${monthPad}/${yearPad}`;
+    let strTomorrow = addDias(strToday,1);
+    let strAfterTomorrow = addDias(strToday,2);
+    let [day, month, year] = strTomorrow.split('/');
+    let [dayT, monthT, yearT] = strTomorrow.split('/');
+    let [dayAfterA, monthAfterA, yearAfterA] = strAfterTomorrow.split('/');
+    this.tomorrow = new Date(parseInt(yearT), parseInt(monthT), parseInt(dayT));
+    this.afterTomorrow = new Date(parseInt(yearAfterA), parseInt(monthAfterA), parseInt(dayAfterA));
+    
+    this.lead = new Leads();
+    this.lead.assigned_user_id = this.pilatService.currentUser.id;
+    this.lead.created_by = this.pilatService.currentUser.id;
+    this.lead.modified_user_id = this.pilatService.currentUser.id;
+  
+    this.lead.leadLeadsCstm = new LeadsCstm();
+    this.lead.leadCallsLeads = this.lead.leadCallsLeads ? this.lead.leadCallsLeads: new CallsLeads();
+  
+    this.lead.leadCallsLeads.callLeadCalls = this.lead.leadCallsLeads.callLeadCalls ? this.lead.leadCallsLeads.callLeadCalls : new Calls();
+    this.lead.leadCallsLeads.callLeadCalls.created_by = this.pilatService.currentUser.id;
+    this.lead.leadCallsLeads.callLeadCalls.modified_user_id = this.pilatService.currentUser.id;
+    this.lead.leadCallsLeads.callLeadCalls.assigned_user_id = this.pilatService.currentUser.id;
+    this.lead.leadCallsLeads.callLeadCalls.name = this.lead ? this.lead.first_name && this.lead.last_name ? this.lead.first_name+' '+this.lead.last_name : '' : '';
+    this.lead.leadCallsLeads.callLeadCalls.date_start = this.tomorrow;
+    this.lead.leadCallsLeads.callLeadCalls.date_end = this.afterTomorrow;
+  
+    this.lead.leadEmailAddrBeanRel = this.lead.leadEmailAddrBeanRel ? this.lead.leadEmailAddrBeanRel : new EmailAddrBeanRel();
+    this.lead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = this.lead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses ? this.lead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses : new EmailAddresses();
+  
+    this.lead.leadCallsLeads.callLeadCalls.callCallsCstm = this.lead.leadCallsLeads.callLeadCalls.callCallsCstm ? this.lead.leadCallsLeads.callLeadCalls.callCallsCstm : new CallsCstm();
+    this.lead.leadCallsLeads.callLeadCalls.callCallsUsers = this.lead.leadCallsLeads.callLeadCalls.callCallsUsers ? this.lead.leadCallsLeads.callLeadCalls.callCallsUsers : new CallsUsers();
+    
     const dialogRef = this.dialog.open(AddLeadComponent, {
       width:'500px',
-      data: lead,
+      data: this.lead,
     });
     
     dialogRef.afterClosed().subscribe(async result => {
@@ -123,10 +169,45 @@ export class LeadsComponent implements OnInit {
     // this.id = id;
     // index row is used just for debugging proposes and can be removed
     this.index = i;
+    let date = new Date();
+    let dayPad = date.getDate().pad(2);
+    let monthPad = (date.getMonth()).pad(2);
+    let yearPad = date.getFullYear();
+    let strToday = `${dayPad}/${monthPad}/${yearPad}`;
+    let strTomorrow = addDias(strToday,1);
+    let strAfterTomorrow = addDias(strToday,2);
+    let [day, month, year] = strTomorrow.split('/');
+    let [dayT, monthT, yearT] = strTomorrow.split('/');
+    let [dayAfterA, monthAfterA, yearAfterA] = strAfterTomorrow.split('/');
+    this.tomorrow = new Date(parseInt(yearT), parseInt(monthT), parseInt(dayT));
+    this.afterTomorrow = new Date(parseInt(yearAfterA), parseInt(monthAfterA), parseInt(dayAfterA));
+  
+    this.lead = lead;
+    this.lead.assigned_user_id = this.pilatService.currentUser.id;
+    this.lead.created_by = this.pilatService.currentUser.id;
+    this.lead.modified_user_id = this.pilatService.currentUser.id;
+  
+    this.lead.leadLeadsCstm = new LeadsCstm();
+    this.lead.leadCallsLeads = this.lead.leadCallsLeads ? this.lead.leadCallsLeads: new CallsLeads();
+  
+    this.lead.leadCallsLeads.callLeadCalls = this.lead.leadCallsLeads.callLeadCalls ? this.lead.leadCallsLeads.callLeadCalls : new Calls();
+    this.lead.leadCallsLeads.callLeadCalls.created_by = this.pilatService.currentUser.id;
+    this.lead.leadCallsLeads.callLeadCalls.modified_user_id = this.pilatService.currentUser.id;
+    this.lead.leadCallsLeads.callLeadCalls.assigned_user_id = this.pilatService.currentUser.id;
+    this.lead.leadCallsLeads.callLeadCalls.name = this.lead ? this.lead.first_name && this.lead.last_name ? this.lead.first_name+' '+this.lead.last_name : '' : '';
+    this.lead.leadCallsLeads.callLeadCalls.date_start = this.tomorrow;
+    this.lead.leadCallsLeads.callLeadCalls.date_end = this.afterTomorrow;
+  
+    this.lead.leadEmailAddrBeanRel = this.lead.leadEmailAddrBeanRel ? this.lead.leadEmailAddrBeanRel : new EmailAddrBeanRel();
+    this.lead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = this.lead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses ? this.lead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses : new EmailAddresses();
+  
+    this.lead.leadCallsLeads.callLeadCalls.callCallsCstm = this.lead.leadCallsLeads.callLeadCalls.callCallsCstm ? this.lead.leadCallsLeads.callLeadCalls.callCallsCstm : new CallsCstm();
+    this.lead.leadCallsLeads.callLeadCalls.callCallsUsers = this.lead.leadCallsLeads.callLeadCalls.callCallsUsers ? this.lead.leadCallsLeads.callLeadCalls.callCallsUsers : new CallsUsers();
+  
     console.log(this.index);
     const dialogRef = this.dialog.open(AddLeadComponent, {
       width:'500px',
-      data: lead
+      data: this.lead
     });
     
     dialogRef.afterClosed().subscribe(async result => {

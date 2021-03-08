@@ -1,0 +1,27 @@
+
+<h1 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>Crons</h1>
+
+<div mat-dialog-content >
+
+    <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+        <mat-grid-list [cols]="pilatService.isSmallScreen ? '1' : '2'" rowHeight="6:2">
+            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>cro_description</mat-label><input matInput #input class="form-control" placeholder="cro_description" [(ngModel)]="data.cro_description" name="cro_description" required ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
+            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>cro_expression</mat-label><input matInput #input class="form-control" placeholder="cro_expression" [(ngModel)]="data.cro_expression" name="cro_expression" required ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
+            <mat-grid-tile><div class="form"><mat-checkbox matInput #input class="form-control" placeholder="Estado" [(ngModel)]="data.cro_status" name="cro_status" >Estado</mat-checkbox></div></mat-grid-tile>
+            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>cro_group</mat-label><input matInput #input class="form-control" placeholder="cro_group" [(ngModel)]="data.cro_group" name="cro_group" required ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
+
+            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Correos Configurados</mat-label><mat-select [(ngModel)]="data.cro_mai_id" name="cro_mai_id">
+                <mat-option *ngFor="let pilatMail of pilatMails" [value]="pilatMail._id" required >{{pilatMail.mai_description}}</mat-option>
+            </mat-select></mat-form-field></div></mat-grid-tile>
+
+        </mat-grid-list>
+        <div mat-dialog-actions>
+            <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Guardar</button>
+            <button mat-button (click)="onNoClick()" tabindex="-1">Cancelar</button>
+        </div>
+
+    </form>
+
+</div>
+

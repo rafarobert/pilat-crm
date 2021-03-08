@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Tue Mar 02 2021 14:01:15 GMT-0400 (Bolivia Time)
- * Time: 14:1:15
+ * Date: Sun Mar 07 2021 15:36:41 GMT-0400 (Bolivia Time)
+ * Time: 15:36:41
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Tue Mar 02 2021 14:01:15 GMT-0400 (Bolivia Time)
- * Last time updated: 14:1:15
+ * Last date updated: Sun Mar 07 2021 15:36:41 GMT-0400 (Bolivia Time)
+ * Last time updated: 15:36:41
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -76,6 +76,11 @@ class PilatCronService {
 			if(util.PrimaryKeyTypeIsString(models.sequelize.pilatCrons.primaryKeys._id.type.toString())) {
 			    newPilatCron._id = models.sequelize.objectId().toString();
 		    }
+			
+			if(!newPilatCron.id) {
+              let max = await models.sequelize.pilatCrons.max('id');
+              newPilatCron.id = newPilatCron.id ? newPilatCron.id : max+1;
+			}
 			
 			
 			
@@ -163,23 +168,6 @@ class PilatCronService {
     	}
     }
 	
-	static async findOneByCroStatus(croStatus, query = {}) {
-    	try {
-    		let objPilatCron;
-    		if(sql) {
-    			objPilatCron = await models.sequelize.pilatCrons.findOne({
-    				attributes:query.select ? query.select.split(',') : null,
-    			    where: { cro_status: croStatus },
-    			});
-    		} else {
-    			objPilatCron = await models.mongoose.pilatCrons.findOne({cro_status: croStatus});
-    		}
-    		return objPilatCron;
-    	} catch (error) {
-    		throw error;
-    	}
-    }
-	
 	static async findOneById(id, query = {}) {
     	try {
     		let objPilatCron;
@@ -190,6 +178,23 @@ class PilatCronService {
     			});
     		} else {
     			objPilatCron = await models.mongoose.pilatCrons.findOne({id: id});
+    		}
+    		return objPilatCron;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
+	static async findOneByCroStatus(croStatus, query = {}) {
+    	try {
+    		let objPilatCron;
+    		if(sql) {
+    			objPilatCron = await models.sequelize.pilatCrons.findOne({
+    				attributes:query.select ? query.select.split(',') : null,
+    			    where: { cro_status: croStatus },
+    			});
+    		} else {
+    			objPilatCron = await models.mongoose.pilatCrons.findOne({cro_status: croStatus});
     		}
     		return objPilatCron;
     	} catch (error) {
@@ -258,23 +263,6 @@ class PilatCronService {
     			});
     		} else {
     			objPilatCron = await models.mongoose.pilatCrons.findOne({cro_mai_id: croMaiId});
-    		}
-    		return objPilatCron;
-    	} catch (error) {
-    		throw error;
-    	}
-    }
-	
-	static async findOneByCroLeadId(croLeadId, query = {}) {
-    	try {
-    		let objPilatCron;
-    		if(sql) {
-    			objPilatCron = await models.sequelize.pilatCrons.findOne({
-    				attributes:query.select ? query.select.split(',') : null,
-    			    where: { cro_lead_id: croLeadId },
-    			});
-    		} else {
-    			objPilatCron = await models.mongoose.pilatCrons.findOne({cro_lead_id: croLeadId});
     		}
     		return objPilatCron;
     	} catch (error) {
@@ -385,23 +373,6 @@ class PilatCronService {
     	}
     }
 	
-	static async updatePilatCronByCroStatus(croStatus, updatePilatCron) {
-    	try {
-    		let objPilatCron;
-    		if(sql) {
-    			objPilatCron = await models.sequelize.pilatCrons.findOne({where: { cro_status: croStatus }});
-    			if (objPilatCron) {
-    				objPilatCron = await models.sequelize.pilatCrons.update(updatePilatCron, { where: { cro_status: croStatus } });
-    			}
-    		} else {
-    			objPilatCron = await models.mongoose.pilatCrons.findOneAndUpdate({cro_status: croStatus}, {$set: updatePilatCron}, {new: true});
-    		}
-    		return objPilatCron;
-    	} catch (error) {
-    		throw error;
-    	}
-    }
-	
 	static async updatePilatCronById(id, updatePilatCron) {
     	try {
     		let objPilatCron;
@@ -412,6 +383,23 @@ class PilatCronService {
     			}
     		} else {
     			objPilatCron = await models.mongoose.pilatCrons.findOneAndUpdate({id: id}, {$set: updatePilatCron}, {new: true});
+    		}
+    		return objPilatCron;
+    	} catch (error) {
+    		throw error;
+    	}
+    }
+	
+	static async updatePilatCronByCroStatus(croStatus, updatePilatCron) {
+    	try {
+    		let objPilatCron;
+    		if(sql) {
+    			objPilatCron = await models.sequelize.pilatCrons.findOne({where: { cro_status: croStatus }});
+    			if (objPilatCron) {
+    				objPilatCron = await models.sequelize.pilatCrons.update(updatePilatCron, { where: { cro_status: croStatus } });
+    			}
+    		} else {
+    			objPilatCron = await models.mongoose.pilatCrons.findOneAndUpdate({cro_status: croStatus}, {$set: updatePilatCron}, {new: true});
     		}
     		return objPilatCron;
     	} catch (error) {
@@ -480,23 +468,6 @@ class PilatCronService {
     			}
     		} else {
     			objPilatCron = await models.mongoose.pilatCrons.findOneAndUpdate({cro_mai_id: croMaiId}, {$set: updatePilatCron}, {new: true});
-    		}
-    		return objPilatCron;
-    	} catch (error) {
-    		throw error;
-    	}
-    }
-	
-	static async updatePilatCronByCroLeadId(croLeadId, updatePilatCron) {
-    	try {
-    		let objPilatCron;
-    		if(sql) {
-    			objPilatCron = await models.sequelize.pilatCrons.findOne({where: { cro_lead_id: croLeadId }});
-    			if (objPilatCron) {
-    				objPilatCron = await models.sequelize.pilatCrons.update(updatePilatCron, { where: { cro_lead_id: croLeadId } });
-    			}
-    		} else {
-    			objPilatCron = await models.mongoose.pilatCrons.findOneAndUpdate({cro_lead_id: croLeadId}, {$set: updatePilatCron}, {new: true});
     		}
     		return objPilatCron;
     	} catch (error) {

@@ -25,8 +25,8 @@ export class PilatViews {
   _id: string;
   
   
-  
   id: number;
+  
   
   
   

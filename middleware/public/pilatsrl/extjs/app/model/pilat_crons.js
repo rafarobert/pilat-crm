@@ -30,9 +30,9 @@ Ext.define('es.model.pilatCrons', {
 		
 		{ name: '_id', type: 'text', defaultValue: null },
 		
-		{ name: 'cro_status', type: 'types.TINYINT', defaultValue: null },
+		{ name: 'id', type: 'number', defaultValue: null },
 		
-		{ name: 'id', type: 'types.INT', defaultValue: null },
+		{ name: 'cro_status', type: 'types.TINYINT', defaultValue: null },
 		
 		{ name: 'cro_description', type: 'text', defaultValue: null },
 		
@@ -41,8 +41,6 @@ Ext.define('es.model.pilatCrons', {
 		{ name: 'cro_group', type: 'text', defaultValue: null },
 		
 		{ name: 'cro_mai_id', type: 'text', defaultValue: null },
-		
-		{ name: 'cro_lead_id', type: 'text', defaultValue: null },
 		
 		{ name: 'createdBy', type: 'text', defaultValue: null },
 		

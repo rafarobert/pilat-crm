@@ -269,6 +269,9 @@ class CrmService {
 		}
 		return amount;
 	}
+	static minTwoDigits(n) {
+		return (n < 10 ? '0' : '') + n;
+	}
 }
 
 //<es-section>

@@ -11,6 +11,7 @@ import {BehaviorSubject, fromEvent, merge, Observable} from "rxjs";
 import {DataSource} from "@angular/cdk/table";
 import {map} from "rxjs/operators";
 import {PilatService} from "../../../services/pilat.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-dictionaries',
@@ -40,6 +41,7 @@ export class DictionariesComponent implements OnInit {
   
   constructor(
     public httpClient: HttpClient,
+    private location: Location,
     public dialog: MatDialog,
     public pilatDictionaryService: PilatDictionaryService,
     public pilatService: PilatService
@@ -50,6 +52,7 @@ export class DictionariesComponent implements OnInit {
   @ViewChild('filter',  {static: true}) filter: ElementRef;
   
   ngOnInit() {
+    this.location.replaceState('/');
     this.loadData();
   }
   

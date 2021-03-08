@@ -312,7 +312,7 @@ export class PilatService {
   
   setiFrameInterface() {
     if (this.toggleMenuOpened) {
-      $('body .iframe-suitecrm').css('width','90%');
+      $('body .iframe-suitecrm').css('width','88%');
     } else {
       $('body .iframe-suitecrm').css('width','100%');
     }
@@ -338,7 +338,7 @@ export class PilatService {
       if (this.isSmallScreen) {
         $('body .iframe-suitecrm').css('width','100%');
       } else {
-        $('body .iframe-suitecrm').css('width','90%');
+        $('body .iframe-suitecrm').css('width','88%');
       }
       $('body .iframe-suitecrm').css('height','100%');
     }

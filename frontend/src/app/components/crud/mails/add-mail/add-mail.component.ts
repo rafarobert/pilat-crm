@@ -28,12 +28,8 @@ export class AddMailComponent implements OnInit {
     // Validators.email,
   ]);
   
-  pilatDictionaries:PilatDictionaries[] = [];
   ngOnInit(): void {
-    this.pilatDictionaryService.getAllPilatDictionaries().subscribe(res => {
-      let response = res as { status: string, message: string, data: PilatDictionaries[] };
-      this.pilatDictionaries = response.data;
-    });
+  
   }
   
   getErrorMessage() {

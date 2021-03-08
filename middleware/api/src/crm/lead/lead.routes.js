@@ -14,7 +14,7 @@ import configJson from '../../../../config/config';
 const sys = configJson.system;
 const express = require("express");
 const router = express.Router();
-//const authenticateToken = require("../../../../config/token");
+const authenticateToken = require("../../../../config/token");
 
 //<es-section>
 const leadsCtrl = require("./lead.controller");

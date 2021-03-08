@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Tue Mar 02 2021 14:01:15 GMT-0400 (Bolivia Time)
- * Time: 14:1:15
+ * Date: Sun Mar 07 2021 15:36:41 GMT-0400 (Bolivia Time)
+ * Time: 15:36:41
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Tue Mar 02 2021 14:01:15 GMT-0400 (Bolivia Time)
- * Last time updated: 14:1:15
+ * Last date updated: Sun Mar 07 2021 15:36:41 GMT-0400 (Bolivia Time)
+ * Last time updated: 15:36:41
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -133,10 +133,10 @@ pilatCronsCtrl.findOneByUid = async (req, res) => {
     }
 }
 
-pilatCronsCtrl.findOneByCroStatus = async (req, res) => {
+pilatCronsCtrl.findOneById = async (req, res) => {
     try {
-        const { croStatus } = req.params;
-        const objPilatCron = await pilatCronService.findOneByCroStatus(croStatus, req.query);
+        const { id } = req.params;
+        const objPilatCron = await pilatCronService.findOneById(id, req.query);
         if (!objPilatCron) {
             util.setError(404, `Cannot find pilatCron with the lcObjLocalCommonFieldName ${lcObjLocalCommonFieldName}`);
         } else {
@@ -149,10 +149,10 @@ pilatCronsCtrl.findOneByCroStatus = async (req, res) => {
     }
 }
 
-pilatCronsCtrl.findOneById = async (req, res) => {
+pilatCronsCtrl.findOneByCroStatus = async (req, res) => {
     try {
-        const { id } = req.params;
-        const objPilatCron = await pilatCronService.findOneById(id, req.query);
+        const { croStatus } = req.params;
+        const objPilatCron = await pilatCronService.findOneByCroStatus(croStatus, req.query);
         if (!objPilatCron) {
             util.setError(404, `Cannot find pilatCron with the lcObjLocalCommonFieldName ${lcObjLocalCommonFieldName}`);
         } else {
@@ -217,22 +217,6 @@ pilatCronsCtrl.findOneByCroMaiId = async (req, res) => {
     try {
         const { croMaiId } = req.params;
         const objPilatCron = await pilatCronService.findOneByCroMaiId(croMaiId, req.query);
-        if (!objPilatCron) {
-            util.setError(404, `Cannot find pilatCron with the lcObjLocalCommonFieldName ${lcObjLocalCommonFieldName}`);
-        } else {
-            util.setSuccess(200, 'Found pilatCron', objPilatCron);
-        }
-        return util.send(res);
-    } catch(e) {
-        util.setError(400, e);
-        return util.send(res);
-    }
-}
-
-pilatCronsCtrl.findOneByCroLeadId = async (req, res) => {
-    try {
-        const { croLeadId } = req.params;
-        const objPilatCron = await pilatCronService.findOneByCroLeadId(croLeadId, req.query);
         if (!objPilatCron) {
             util.setError(404, `Cannot find pilatCron with the lcObjLocalCommonFieldName ${lcObjLocalCommonFieldName}`);
         } else {
@@ -347,14 +331,14 @@ pilatCronsCtrl.updatePilatCronByUid = async (req, res) => {
         }
 }
 
-pilatCronsCtrl.updatePilatCronByCroStatus = async (req, res) => {
-     const { croStatus } = req.params;
+pilatCronsCtrl.updatePilatCronById = async (req, res) => {
+     const { id } = req.params;
         try {
             if (!util.isString(Id)) {
                 util.setError(400, 'Please input a valid String value');
                 return util.send(res);
             }
-            const objPilatCron = await pilatCronService.updatePilatCronByCroStatus(croStatus, req.body);
+            const objPilatCron = await pilatCronService.updatePilatCronById(id, req.body);
             if (!objPilatCron) {
                 util.setError(404, `Cannot find pilatCron with the id: ${Id}`);
             } else {
@@ -367,14 +351,14 @@ pilatCronsCtrl.updatePilatCronByCroStatus = async (req, res) => {
         }
 }
 
-pilatCronsCtrl.updatePilatCronById = async (req, res) => {
-     const { id } = req.params;
+pilatCronsCtrl.updatePilatCronByCroStatus = async (req, res) => {
+     const { croStatus } = req.params;
         try {
             if (!util.isString(Id)) {
                 util.setError(400, 'Please input a valid String value');
                 return util.send(res);
             }
-            const objPilatCron = await pilatCronService.updatePilatCronById(id, req.body);
+            const objPilatCron = await pilatCronService.updatePilatCronByCroStatus(croStatus, req.body);
             if (!objPilatCron) {
                 util.setError(404, `Cannot find pilatCron with the id: ${Id}`);
             } else {
@@ -455,26 +439,6 @@ pilatCronsCtrl.updatePilatCronByCroMaiId = async (req, res) => {
                 return util.send(res);
             }
             const objPilatCron = await pilatCronService.updatePilatCronByCroMaiId(croMaiId, req.body);
-            if (!objPilatCron) {
-                util.setError(404, `Cannot find pilatCron with the id: ${Id}`);
-            } else {
-                util.setSuccess(200, 'PilatCron updated', objPilatCron);
-            }
-            return util.send(res);
-        } catch (e) {
-            util.setError(400, e);
-            return util.send(res);
-        }
-}
-
-pilatCronsCtrl.updatePilatCronByCroLeadId = async (req, res) => {
-     const { croLeadId } = req.params;
-        try {
-            if (!util.isString(Id)) {
-                util.setError(400, 'Please input a valid String value');
-                return util.send(res);
-            }
-            const objPilatCron = await pilatCronService.updatePilatCronByCroLeadId(croLeadId, req.body);
             if (!objPilatCron) {
                 util.setError(404, `Cannot find pilatCron with the id: ${Id}`);
             } else {

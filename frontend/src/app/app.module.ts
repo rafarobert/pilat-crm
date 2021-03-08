@@ -106,6 +106,9 @@ import { CrmDynamicAnalysisComponent } from './components/suitecrm/crm-dynamic-a
 import { CrmCampaignsComponent } from './components/suitecrm/crm-campaigns/crm-campaigns.component';
 import { CrmContractsComponent } from './components/suitecrm/crm-contracts/crm-contracts.component';
 import { CrmBillsComponent } from './components/suitecrm/crm-bills/crm-bills.component';
+import { CronsComponent } from './components/crud/crons/crons.component';
+import { AddCronComponent } from './components/crud/crons/add-cron/add-cron.component';
+import { DeleteCronComponent } from './components/crud/crons/delete-cron/delete-cron.component';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -184,7 +187,10 @@ export const MY_DATE_FORMATS = {
     CrmDynamicAnalysisComponent,
     CrmCampaignsComponent,
     CrmContractsComponent,
-    CrmBillsComponent
+    CrmBillsComponent,
+    CronsComponent,
+    AddCronComponent,
+    DeleteCronComponent
   ],
   imports: [
     BrowserModule,
@@ -278,6 +284,9 @@ export const MY_DATE_FORMATS = {
     SpinnerComponent,
     DialogSetContactMailComponent,
     DialogsComponent,
+    CronsComponent,
+    AddCronComponent,
+    DeleteCronComponent,
     BuildingComponent
   ],
   

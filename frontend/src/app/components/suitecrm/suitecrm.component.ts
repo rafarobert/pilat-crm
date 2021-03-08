@@ -36,6 +36,8 @@ export class SuitecrmComponent implements OnInit,AfterViewInit {
       $('body').find('iframe').contents().find('body').find('#menu').hide();
       $('body').find('iframe').contents().find('body').find('#wrapper').css('margin','0px');
       $('body').find('iframe').contents().find('body').find('#logo').hide();
+      $('body').find('iframe').contents().find('body').find('.header-link').hide();
+      $('body').find('iframe').contents().find('body').find('.small-logo').hide();
       // $('body').find('iframe').contents().find('body').find('.dropdown').hide();
       // $('body').find('iframe').contents().find('body').find('#header').css('left','-27px');
       $('body').find('iframe').contents().find('body').find('.navbar-right').css('width','100%');
@@ -46,7 +48,7 @@ export class SuitecrmComponent implements OnInit,AfterViewInit {
       if (this.pilatService.isSmallScreen) {
         $('body .iframe-suitecrm').css('width','100%');
       } else {
-        $('body .iframe-suitecrm').css('width','90%');
+        $('body .iframe-suitecrm').css('width','88%');
       }
       $('body .iframe-suitecrm').css('height','100%');
     }

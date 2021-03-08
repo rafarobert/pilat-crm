@@ -88,6 +88,7 @@ for(let  i = 0 ; i < dbSequelizeKeys.length ; i++) {
 	}
 }
 
+db.sequelize.DATE = Sequelize.DATE;
 db.sequelize.getDatabaseName = () => {
 	return sequelize.config.database;
 }

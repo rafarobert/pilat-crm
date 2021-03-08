@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Tue Mar 02 2021 14:01:15 GMT-0400 (Bolivia Time)
- * Time: 14:1:15
+ * Date: Sun Mar 07 2021 15:36:41 GMT-0400 (Bolivia Time)
+ * Time: 15:36:41
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Tue Mar 02 2021 14:01:15 GMT-0400 (Bolivia Time)
- * Last time updated: 14:1:15
+ * Last date updated: Sun Mar 07 2021 15:36:41 GMT-0400 (Bolivia Time)
+ * Last time updated: 15:36:41
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -23,8 +23,8 @@ const {Schema} = mongoose;
       _id: { type: DataTypes.STRING, primaryKey: true },
       
       
-      
       id: DataTypes.INTEGER,
+      
       
       
       
@@ -35,8 +35,6 @@ const {Schema} = mongoose;
       cro_group: DataTypes.STRING,
       
       cro_mai_id: DataTypes.STRING,
-      
-      cro_lead_id: DataTypes.STRING,
       
       createdBy: DataTypes.STRING,
       
@@ -73,8 +71,8 @@ const {Schema} = mongoose;
   //<es-section>
   module.exports.mongoose = mongoose.model("pilatCrons", new Schema({
     
-    id: {type: Number},
     
+    id: {type: Number},
     
     
     cro_description: {type: String},
@@ -84,8 +82,6 @@ const {Schema} = mongoose;
     cro_group: {type: String},
     
     cro_mai_id: {type: String},
-    
-    cro_lead_id: {type: String},
     
     createdBy: {type: String},
     

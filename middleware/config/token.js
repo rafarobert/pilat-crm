@@ -17,7 +17,7 @@ module.exports = (req, res, next) => {
 		user = req.session.passport.user;
 	}
 	if(user) {
-		token = user.usr_token;
+		token = user.token;
 	} else {
 		authHeader = req.headers['authorization'];
 		token = authHeader && authHeader.split(' ')[1];

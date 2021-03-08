@@ -11,6 +11,7 @@ import {PilatParams} from "../../../../core/models/pilatParams";
 import {DeleteParamComponent} from "./delete-param/delete-param.component";
 import {AddParamComponent} from "./add-param/add-param.component";
 import {PilatService} from "../../../services/pilat.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-params',
@@ -44,6 +45,7 @@ export class ParamsComponent implements OnInit {
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
+    private location: Location,
     public pilatParamService: PilatParamService,
     public pilatService:PilatService
     
@@ -54,6 +56,7 @@ export class ParamsComponent implements OnInit {
   @ViewChild('filter',  {static: true}) filter: ElementRef;
   
   ngOnInit() {
+    this.location.replaceState('/');
     this.loadData();
   }
   

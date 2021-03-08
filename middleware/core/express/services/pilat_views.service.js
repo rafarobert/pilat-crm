@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Tue Mar 02 2021 14:01:18 GMT-0400 (Bolivia Time)
- * Time: 14:1:18
+ * Date: Sun Mar 07 2021 15:36:45 GMT-0400 (Bolivia Time)
+ * Time: 15:36:45
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Tue Mar 02 2021 14:01:18 GMT-0400 (Bolivia Time)
- * Last time updated: 14:1:18
+ * Last date updated: Sun Mar 07 2021 15:36:45 GMT-0400 (Bolivia Time)
+ * Last time updated: 15:36:45
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -76,6 +76,11 @@ class PilatViewService {
 			if(util.PrimaryKeyTypeIsString(models.sequelize.pilatViews.primaryKeys._id.type.toString())) {
 			    newPilatView._id = models.sequelize.objectId().toString();
 		    }
+			
+			if(!newPilatView.id) {
+              let max = await models.sequelize.pilatViews.max('id');
+              newPilatView.id = newPilatView.id ? newPilatView.id : max+1;
+			}
 			
 			
 			

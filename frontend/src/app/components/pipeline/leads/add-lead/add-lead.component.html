@@ -1,5 +1,5 @@
 
-<h1 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>Prospecto: <span>{{data.first_name && data.last_name ? data.first_name+' '+data.last_name : 'Nuevo'}}</span></h1>
+<h1 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>Prospecto: <span>{{data.first_name || data.last_name ? data.first_name+' '+data.last_name : 'Nuevo'}}</span></h1>
 
 <div mat-dialog-content >
 
@@ -47,7 +47,7 @@
             <mat-grid-tile><div class="form"><mat-checkbox matInput #input class="form-control" placeholder="tiene_whatsapp_c" [(ngModel)]="data.leadLeadsCstm.tiene_whatsapp_c" name="tiene_whatsapp_c" >Tiene WhatsApp</mat-checkbox></div></mat-grid-tile>
             <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Celular 2</mat-label><input matInput #input class="form-control" placeholder="Celular 2" [(ngModel)]="data.leadLeadsCstm.phone_mobil_2_c" name="phone_mobil_2_c"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
             <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Celular 3</mat-label><input matInput #input class="form-control" placeholder="Celular 3" [(ngModel)]="data.leadLeadsCstm.phone_mobil_3_c" name="phone_mobil_3_c"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
-            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Correo</mat-label><input matInput #input class="form-control" placeholder="Ex. pat@example.com" [(ngModel)]="data.leadLeadsCstm.sec_email_c" name="sec_email_c"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
+            <mat-grid-tile><div class="form"><mat-form-field appearance="outline" class="example-full-width" color="accent"><mat-label>Correo</mat-label><input matInput #input class="form-control" placeholder="Ex. pat@example.com" [(ngModel)]="data.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address" name="email_address"  ><mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error></mat-form-field></div></mat-grid-tile>
           </mat-grid-list>
         </mat-expansion-panel>
 

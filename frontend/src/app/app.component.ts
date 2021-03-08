@@ -29,6 +29,8 @@ export class AppComponent implements OnInit, AfterViewInit{
   userId:string;
   animal: string;
   name: string;
+  user:Users;
+  userLoggoedIn:Users;
   
   pilatAuth:PilatAuth;
   spinnerRef;
@@ -70,186 +72,199 @@ export class AppComponent implements OnInit, AfterViewInit{
     this.pilatService.currentSessId = this.pilatAuth.userSessId;
     this.pilatService.httpHome = this.httpHome;
     this.location.replaceState('/');
-    this.crmUserService.getUser(this.pilatAuth.userLoggedId).subscribe(res => {
-      let response = res as { status: string, message: string, data: Users };
-      this.pilatService.currentUser = response.data;
-      this.pilatService.userLoggedIn = true;
-      this.appItems = [
-        {
-          label: 'CRM Pipeline',
-          link: '/pipeline',
-          icon: 'view_column'
-        },
-        {
-          label: 'VENTAS',
-          icon: 'sell',
-          items: [
-            {
-              label: 'Inicio',
-              link: '/',
-              icon: 'home_work',
-              //externalRedirect: true,
-            },
-            {
-              label: 'Clientes',
-              link: '/accounts',
-              icon: 'account_box',
-              // externalRedirect: true,
-            },
-            {
-              label: 'Contactos',
-              link: '/contacts',
-              icon: 'manage_accounts',
-              // externalRedirect: true,
-            },
-            {
-              label: 'Oportunidades',
-              link: '/opportunities',
-              icon: 'lightbulb',
-              // externalRedirect: true,
-            },
-            {
-              label: 'Prospectos',
-              link: '/leads',
-              icon: 'face_retouching_natural',
-              // externalRedirect: true,
-            }
-          ],
-        },
-        {
-          label: 'ACTIVIDADES',
-          icon: 'local_activity',
-          items: [
-            {
-              label: 'Inicio',
-              link: '/',
-              icon: 'home_work',
-              // externalRedirect: true,
-            },
-            {
-              label: 'Calendario',
-              link: '/calendar',
-              icon: 'insert_invitation',
-              // externalRedirect: true,
-            },
-            {
-              label: 'Llamadas',
-              link: '/calls',
-              icon: 'perm_phone_msg',
-              // externalRedirect: true,
-            },
-            {
-              label: 'Reuniones',
-              link: '/meetings',
-              icon: 'meeting_room',
-              // externalRedirect: true,
-            },
-            {
-              label: 'Correos',
-              link: '/mails',
-              icon: 'mark_as_unread',
-              // externalRedirect: true,
-            },
-            {
-              label: 'Tareas',
-              link: '/tasks',
-              icon: 'task',
-              // externalRedirect: true,
-            },
-            {
-              label: 'Notas',
-              link: '/notes',
-              icon: 'file_present',
-              // externalRedirect: true,
-            }
-          ],
-        },
-        {
-          label: 'TODO',
-          icon: 'local_activity',
-          items: [
-            {
-              label: 'Inicio',
-              link: '/',
-              icon: 'home_work',
-              // externalRedirect: true,
-            },
-            {
-              label: 'Presupuestos',
-              link: '/quotes',
-              icon: 'request_quote',
-              // externalRedirect: true,
-            },
-            {
-              label: 'Documentos',
-              link: '/documents',
-              icon: 'description',
-              // externalRedirect: true,
-            },
-            {
-              label: 'Analisis Dinamico',
-              link: '/dynamic-analysis',
-              icon: 'psychology',
-              // externalRedirect: true,
-            },
-            {
-              label: 'Campañas',
-              link: '/campaigns',
-              icon: 'campaign',
-              // externalRedirect: true,
-            },
-            {
-              label: 'Facturas',
-              link: '/bills',
-              icon: 'price_change',
-              // externalRedirect: true,
-            },
-            {
-              label: 'contratos',
-              link: '/contracts',
-              icon: 'save',
-              // externalRedirect: true,
-            }
-          ],
-        },
-        {
-          label: 'Administrador',
-          icon: 'settings',
-          items: [
-            {
-              label: 'Diccionarios',
-              link: '/admin/dictionaries',
-              icon: 'menu_book'
-            },
-            {
-              label: 'Parametros',
-              link: '/admin/params',
-              icon: 'menu_book'
-            },
-            {
-              label: 'Usuarios',
-              link: '/admin/users',
-              icon: 'manage_accounts'
-            },
-            {
-              label: 'Correos',
-              link: '/admin/mails',
-              icon: 'email'
-            }
-          ],
-          hidden:this.pilatService.currentUser.id == 'a7e346e4-47ed-c596-2bcb-5be199070c40' ? false : true,
-        },
-      ];
-      setTimeout(() => {
-        if (!this.pilatService.isSmallScreen) {
-          this.drawer.toggle();
-          this.pilatService.toggleMenuOpened = true;
-        } else {
-          this.pilatService.toggleMenuOpened = false;
-        }
-      }, 1000)
-    });
-    
+    this.setParams();
+  }
+  
+  async setParams() {
+    let respUsers:any = await this.crmUserService.getUser(this.pilatAuth.userLoggedId).toPromise();
+    if (respUsers && respUsers.data) {
+      this.user = respUsers.data;
+      let respRestLogin:any = await this.crmUserService.restLogin(this.user.user_name, this.user.user_hash).toPromise();
+      if (respRestLogin && respRestLogin.data) {
+        this.userLoggoedIn = respRestLogin.data;
+        this.pilatService.currentUser = this.userLoggoedIn;
+        this.pilatService.userLoggedIn = true;
+        this.appItems = [
+          {
+            label: 'CRM Pipeline',
+            link: '/pipeline',
+            icon: 'view_column'
+          },
+          {
+            label: 'VENTAS',
+            icon: 'sell',
+            items: [
+              {
+                label: 'Inicio',
+                link: '/',
+                icon: 'home_work',
+                //externalRedirect: true,
+              },
+              {
+                label: 'Clientes',
+                link: '/accounts',
+                icon: 'account_box',
+                // externalRedirect: true,
+              },
+              {
+                label: 'Contactos',
+                link: '/contacts',
+                icon: 'manage_accounts',
+                // externalRedirect: true,
+              },
+              {
+                label: 'Oportunidades',
+                link: '/opportunities',
+                icon: 'lightbulb',
+                // externalRedirect: true,
+              },
+              {
+                label: 'Prospectos',
+                link: '/leads',
+                icon: 'face_retouching_natural',
+                // externalRedirect: true,
+              }
+            ],
+          },
+          {
+            label: 'ACTIVIDADES',
+            icon: 'local_activity',
+            items: [
+              {
+                label: 'Inicio',
+                link: '/',
+                icon: 'home_work',
+                // externalRedirect: true,
+              },
+              {
+                label: 'Calendario',
+                link: '/calendar',
+                icon: 'insert_invitation',
+                // externalRedirect: true,
+              },
+              {
+                label: 'Llamadas',
+                link: '/calls',
+                icon: 'perm_phone_msg',
+                // externalRedirect: true,
+              },
+              {
+                label: 'Reuniones',
+                link: '/meetings',
+                icon: 'meeting_room',
+                // externalRedirect: true,
+              },
+              {
+                label: 'Correos',
+                link: '/mails',
+                icon: 'mark_as_unread',
+                // externalRedirect: true,
+              },
+              {
+                label: 'Tareas',
+                link: '/tasks',
+                icon: 'task',
+                // externalRedirect: true,
+              },
+              {
+                label: 'Notas',
+                link: '/notes',
+                icon: 'file_present',
+                // externalRedirect: true,
+              }
+            ],
+          },
+          {
+            label: 'TODO',
+            icon: 'local_activity',
+            items: [
+              {
+                label: 'Inicio',
+                link: '/',
+                icon: 'home_work',
+                // externalRedirect: true,
+              },
+              {
+                label: 'Presupuestos',
+                link: '/quotes',
+                icon: 'request_quote',
+                // externalRedirect: true,
+              },
+              {
+                label: 'Documentos',
+                link: '/documents',
+                icon: 'description',
+                // externalRedirect: true,
+              },
+              {
+                label: 'Analisis Dinamico',
+                link: '/dynamic-analysis',
+                icon: 'psychology',
+                // externalRedirect: true,
+              },
+              {
+                label: 'Campañas',
+                link: '/campaigns',
+                icon: 'campaign',
+                // externalRedirect: true,
+              },
+              {
+                label: 'Facturas',
+                link: '/bills',
+                icon: 'price_change',
+                // externalRedirect: true,
+              },
+              {
+                label: 'contratos',
+                link: '/contracts',
+                icon: 'save',
+                // externalRedirect: true,
+              }
+            ],
+          },
+          {
+            label: 'Administrador',
+            icon: 'settings',
+            items: [
+              {
+                label: 'Diccionarios',
+                link: '/admin/dictionaries',
+                icon: 'menu_book'
+              },
+              {
+                label: 'Parametros',
+                link: '/admin/params',
+                icon: 'menu_book'
+              },
+              {
+                label: 'Usuarios',
+                link: '/admin/users',
+                icon: 'manage_accounts'
+              },
+              {
+                label: 'Correos',
+                link: '/admin/mails',
+                icon: 'email'
+              },
+              {
+                label: 'Crons',
+                link: '/admin/crons',
+                icon: 'alarm_add'
+              }
+            ],
+            hidden:this.pilatService.currentUser.id == 'a7e346e4-47ed-c596-2bcb-5be199070c40' ? false : true,
+          },
+        ];
+        setTimeout(() => {
+          if (!this.pilatService.isSmallScreen) {
+            this.drawer.toggle();
+            this.pilatService.toggleMenuOpened = true;
+          } else {
+            this.pilatService.toggleMenuOpened = false;
+          }
+        }, 1000);
+      }
+    }
   }
   
   toggleMenu() {

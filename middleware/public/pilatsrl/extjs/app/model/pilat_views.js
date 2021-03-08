@@ -30,7 +30,7 @@ Ext.define('es.model.pilatViews', {
 		
 		{ name: '_id', type: 'text', defaultValue: null },
 		
-		{ name: 'id', type: 'types.INT', defaultValue: null },
+		{ name: 'id', type: 'number', defaultValue: null },
 		
 		{ name: 'vie_code', type: 'text', defaultValue: null },
 		

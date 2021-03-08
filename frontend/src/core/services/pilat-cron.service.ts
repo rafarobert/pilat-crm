@@ -90,20 +90,20 @@ export class PilatCronService {
       return this.http.get(this.basePath + '/findOneByUid/' + Id + '?' + attributes);
   }
   
-  findOneByCroStatus(croStatus:any, select = []) {
-      let attributes = '';
-      if(select.length) {
-          attributes += 'select=' + select.toString();
-      }
-      return this.http.get(this.basePath + '/findOneByCroStatus/' + croStatus + '?' + attributes);
-  }
-  
   findOneById(id:any, select = []) {
       let attributes = '';
       if(select.length) {
           attributes += 'select=' + select.toString();
       }
       return this.http.get(this.basePath + '/findOneById/' + id + '?' + attributes);
+  }
+  
+  findOneByCroStatus(croStatus:any, select = []) {
+      let attributes = '';
+      if(select.length) {
+          attributes += 'select=' + select.toString();
+      }
+      return this.http.get(this.basePath + '/findOneByCroStatus/' + croStatus + '?' + attributes);
   }
   
   findOneByCroDescription(croDescription:any, select = []) {
@@ -136,14 +136,6 @@ export class PilatCronService {
           attributes += 'select=' + select.toString();
       }
       return this.http.get(this.basePath + '/findOneByCroMaiId/' + croMaiId + '?' + attributes);
-  }
-  
-  findOneByCroLeadId(croLeadId:any, select = []) {
-      let attributes = '';
-      if(select.length) {
-          attributes += 'select=' + select.toString();
-      }
-      return this.http.get(this.basePath + '/findOneByCroLeadId/' + croLeadId + '?' + attributes);
   }
   
   findOneByCreatedby(createdby:any, select = []) {
@@ -191,12 +183,12 @@ export class PilatCronService {
       return this.http.post(this.basePath + '/updatePilatCronByUid?Id=' + Id, pilatCron);
   }
   
-  updatePilatCronByCroStatus(croStatus:any, pilatCron:PilatCrons) {
-      return this.http.post(this.basePath + '/updatePilatCronByCroStatus?croStatus=' + croStatus, pilatCron);
-  }
-  
   updatePilatCronById(id:any, pilatCron:PilatCrons) {
       return this.http.post(this.basePath + '/updatePilatCronById?id=' + id, pilatCron);
+  }
+  
+  updatePilatCronByCroStatus(croStatus:any, pilatCron:PilatCrons) {
+      return this.http.post(this.basePath + '/updatePilatCronByCroStatus?croStatus=' + croStatus, pilatCron);
   }
   
   updatePilatCronByCroDescription(croDescription:any, pilatCron:PilatCrons) {
@@ -213,10 +205,6 @@ export class PilatCronService {
   
   updatePilatCronByCroMaiId(croMaiId:any, pilatCron:PilatCrons) {
       return this.http.post(this.basePath + '/updatePilatCronByCroMaiId?croMaiId=' + croMaiId, pilatCron);
-  }
-  
-  updatePilatCronByCroLeadId(croLeadId:any, pilatCron:PilatCrons) {
-      return this.http.post(this.basePath + '/updatePilatCronByCroLeadId?croLeadId=' + croLeadId, pilatCron);
   }
   
   updatePilatCronByCreatedby(createdby:any, pilatCron:PilatCrons) {

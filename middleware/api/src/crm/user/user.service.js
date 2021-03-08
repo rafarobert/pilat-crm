@@ -303,6 +303,22 @@ class UserService {
 		}
 	}
 
+	static async findOneByUserNameAndUserHash(userName, userHash, query = {}) {
+		try {
+			let objUser;
+			if(sql) {
+				objUser = await models.sequelize.users.findOne({
+					attributes:query.select ? query.select.split(',') : null,
+					where: { user_name: userName, user_hash: userHash},
+				});
+			} else {
+				objUser = await models.mongoose.users.findOne({user_name: userName, user_hash: userHash});
+			}
+			return objUser;
+		} catch (error) {
+			throw error;
+		}
+	}
 
 }
 

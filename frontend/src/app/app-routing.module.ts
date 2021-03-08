@@ -25,6 +25,7 @@ import {CrmDynamicAnalysisComponent} from "./components/suitecrm/crm-dynamic-ana
 import {CrmCampaignsComponent} from "./components/suitecrm/crm-campaigns/crm-campaigns.component";
 import {CrmBillsComponent} from "./components/suitecrm/crm-bills/crm-bills.component";
 import {CrmQuotesComponent} from "./components/suitecrm/crm-quotes/crm-quotes.component";
+import {CronsComponent} from "./components/crud/crons/crons.component";
 
 
 const routes: Routes = [
@@ -52,6 +53,7 @@ const routes: Routes = [
   { path: 'admin/params', component: ParamsComponent, pathMatch: 'full' },
   { path: 'admin/users', component: UsersComponent, pathMatch: 'full' },
   { path: 'admin/mails', component: MailsComponent, pathMatch: 'full' },
+  { path: 'admin/crons', component: CronsComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

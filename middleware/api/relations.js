@@ -25,6 +25,9 @@ models.sequelize.users.hasMany(models.sequelize.leads,{foreignKey:'assigned_user
 models.sequelize.leads.belongsTo(models.sequelize.emails, {foreignKey:'id', targetKey: 'parent_id', as:'leadEmails'});
 models.sequelize.emails.hasMany(models.sequelize.leads,{foreignKey:'id', sourceKey: 'parent_id', as:'leadEmails'});
 
+models.sequelize.leads.belongsTo(models.sequelize.emailAddrBeanRel, {foreignKey:'id', targetKey: 'bean_id', as:'leadEmailAddrBeanRel'});
+models.sequelize.emailAddrBeanRel.hasMany(models.sequelize.leads,{foreignKey:'id', sourceKey: 'bean_id', as:'leadEmailAddrBeanRel'});
+
 models.sequelize.leads.belongsTo(models.sequelize.callsLeads, {foreignKey:'id', targetKey: 'lead_id', as:'leadCallsLeads'});
 models.sequelize.callsLeads.hasMany(models.sequelize.leads,{foreignKey:'id', sourceKey: 'lead_id', as:'leadCallsLeads'});
 
@@ -193,19 +196,25 @@ models.sequelize.users.belongsTo(models.sequelize.users, {foreignKey:'created_by
 
 // EMAIL_ADDRESSES
 
+models.sequelize.emailAddresses.belongsTo(models.sequelize.emailAddrBeanRel, {foreignKey:'id', targetKey:'email_address_id', as:'emailAddressEmailAddrBeanRel'});
+models.sequelize.emailAddrBeanRel.hasMany(models.sequelize.emailAddresses,{foreignKey:'id', sourceKey:'email_address_id', as:'emailAddressEmailAddrBeanRel'});
+
 // EMAIL_ADDR_BEAN_REL
 
 models.sequelize.emailAddrBeanRel.belongsTo(models.sequelize.emailAddresses, {foreignKey:'email_address_id', targetKey:'id', as:'emailAddrBeanRelEmailAddresses'});
 models.sequelize.emailAddresses.hasMany(models.sequelize.emailAddrBeanRel,{foreignKey:'email_address_id', sourceKey:'id', as:'emailAddrBeanRelEmailAddresses'});
 
+models.sequelize.emailAddrBeanRel.belongsTo(models.sequelize.users, {foreignKey:'bean_id', targetKey:'id', as:'emailAddrBeanRelUsers'});
+models.sequelize.users.hasMany(models.sequelize.emailAddrBeanRel,{foreignKey:'bean_id', sourceKey:'id', as:'emailAddrBeanRelUsers'});
+
 models.sequelize.emailAddrBeanRel.belongsTo(models.sequelize.contacts, {foreignKey:'bean_id', targetKey:'id', as:'emailAddrBeanRelContacts'});
 models.sequelize.contacts.hasMany(models.sequelize.emailAddrBeanRel,{foreignKey:'bean_id', sourceKey:'id', as:'emailAddrBeanRelContacts'});
 
+models.sequelize.emailAddrBeanRel.belongsTo(models.sequelize.leads, {foreignKey:'bean_id', targetKey:'id', as:'emailAddrBeanRelLeads'});
+models.sequelize.leads.hasMany(models.sequelize.emailAddrBeanRel,{foreignKey:'bean_id', sourceKey:'id', as:'emailAddrBeanRelLeads'});
+
 models.sequelize.emailAddrBeanRel.belongsTo(models.sequelize.accounts, {foreignKey:'bean_id', targetKey:'id', as:'emailAddrBeanRelAccounts'});
 models.sequelize.accounts.hasMany(models.sequelize.emailAddrBeanRel,{foreignKey:'bean_id', sourceKey:'id', as:'emailAddrBeanRelAccounts'});
-
-models.sequelize.emailAddrBeanRel.belongsTo(models.sequelize.users, {foreignKey:'bean_id', targetKey:'id', as:'emailAddrBeanRelUsers'});
-models.sequelize.users.hasMany(models.sequelize.emailAddrBeanRel,{foreignKey:'bean_id', sourceKey:'id', as:'emailAddrBeanRelUsers'});
 
 // EMAIL_ADDRESSES_AUDIT
 
@@ -215,13 +224,6 @@ models.sequelize.emailAddresses.hasMany(models.sequelize.emailAddressesAudit,{fo
 models.sequelize.emailAddressesAudit.belongsTo(models.sequelize.users, {foreignKey:'created_by', targetKey:'id'});
 models.sequelize.users.hasMany(models.sequelize.emailAddressesAudit,{foreignKey:'created_by', sourceKey:'id'});
 
-// EMAIL_ADDR_BEAN_REL
-
-models.sequelize.emailAddrBeanRel.belongsTo(models.sequelize.emailAddresses, {foreignKey:'email_address_id', targetKey:'id'});
-models.sequelize.emailAddresses.hasMany(models.sequelize.emailAddrBeanRel,{foreignKey:'email_address_id', sourceKey:'id'});
-
-models.sequelize.emailAddrBeanRel.belongsTo(models.sequelize.users, {foreignKey:'bean_id', targetKey:'id'});
-models.sequelize.users.hasMany(models.sequelize.emailAddrBeanRel,{foreignKey:'bean_id', sourceKey:'id'});
 
 // USER_PREFERENCES
 

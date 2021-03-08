@@ -624,7 +624,7 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
                   }
                 } else {
                   this.spinnerService.stop(this.spinnerService.spinnerRef);
-                  this.dialogService.open('La llamada registrado en el prospecto no tiene el estado: '+ this.pilatService.parCallHeld.par_description + ', Ppor favor verifica que se haya realizado la llamada.', 'Verificacion del estado de la llamada');
+                  this.dialogService.open('La llamada registrada en el prospecto no tiene el estado: '+ this.pilatService.parCallHeld.par_description + ', Ppor favor verifica que se haya realizado la llamada.', 'Verificacion del estado de la llamada');
                 }
               } else {
                 this.spinnerService.stop(this.spinnerService.spinnerRef);
@@ -850,7 +850,10 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
     this.lead.leadCallsLeads.callLeadCalls.name = this.lead ? this.lead.first_name && this.lead.last_name ? this.lead.first_name+' '+this.lead.last_name : '' : '';
     this.lead.leadCallsLeads.callLeadCalls.date_start = this.tomorrow;
     this.lead.leadCallsLeads.callLeadCalls.date_end = this.afterTomorrow;
-    
+  
+    this.lead.leadEmailAddrBeanRel = this.lead.leadEmailAddrBeanRel ? this.lead.leadEmailAddrBeanRel : new EmailAddrBeanRel();
+    this.lead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = this.lead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses ? this.lead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses : new EmailAddresses();
+  
     this.lead.leadCallsLeads.callLeadCalls.callCallsCstm = this.lead.leadCallsLeads.callLeadCalls.callCallsCstm ? this.lead.leadCallsLeads.callLeadCalls.callCallsCstm : new CallsCstm();
     this.lead.leadCallsLeads.callLeadCalls.callCallsUsers = this.lead.leadCallsLeads.callLeadCalls.callCallsUsers ? this.lead.leadCallsLeads.callLeadCalls.callCallsUsers : new CallsUsers();
   
@@ -934,7 +937,10 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
           prospect.leadCallsLeads.callLeadCalls.callCallsUsers.user_id = this.pilatService.currentUser.id;
           prospect.leadCallsLeads.callLeadCalls.callCallsUsers.required = '1';
           prospect.leadCallsLeads.callLeadCalls.callCallsUsers.accept_status = prospect.leadCallsLeads.callLeadCalls.callCallsUsers.accept_status ? prospect.leadCallsLeads.callLeadCalls.callCallsUsers.accept_status : this.pilatService.parAcceptCallNone.par_cod;
-      
+          
+          prospect.leadEmailAddrBeanRel = prospect.leadEmailAddrBeanRel ? prospect.leadEmailAddrBeanRel : new EmailAddrBeanRel();
+          prospect.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = prospect.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses ? prospect.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses : new EmailAddresses();
+          
           if (prospect.leadCallsLeads.callLeadCalls.status == this.pilatService.parCallHeld.par_cod) {
             prospect.leadCallsLeads.callLeadCalls.callCallsUsers.accept_status = this.pilatService.parAcceptCallAccept.par_cod;
           }

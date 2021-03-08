@@ -13,6 +13,7 @@ import {Users} from "../../../../core/models/users";
 import {AddUserComponent} from "./add-user/add-user.component";
 import {DeleteUserComponent} from "./delete-user/delete-user.component";
 import {PilatService} from "../../../services/pilat.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-users',
@@ -72,6 +73,7 @@ export class UsersComponent implements OnInit {
   
   constructor(
     public httpClient: HttpClient,
+    private location: Location,
     public dialog: MatDialog,
     public userService: UserService,
     public pilatService:PilatService
@@ -82,6 +84,7 @@ export class UsersComponent implements OnInit {
   @ViewChild('filter',  {static: true}) filter: ElementRef;
   
   ngOnInit() {
+    this.location.replaceState('/');
     this.loadData();
   }
   

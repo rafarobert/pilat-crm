@@ -12,6 +12,7 @@ import initPassport from './config/passport';
 import initApiRoutes from './api/routes';
 import initCleanLogs from './config/cron';
 import nodemailer from "nodemailer";
+import nodeCron from './modules/nodecron'
 //import mongoose from "./config/mongoose";
 //import initBpmn from "./config/bpmn";
 
@@ -28,6 +29,9 @@ dotenv.config();
 // Initialize
 initPassport(app);
 initCleanLogs();
+
+nodeCron.initLeadsNotificationCalls();
+
 // initBpmn();
 
 //Views
@@ -66,8 +70,8 @@ app.use(express.json());
 app.set('views', path.join(__dirname, '/app/src'));
 
 // APP - ROUTES
-// app.use("/", require("./app/src/main/main.routes"));
-// app.use("/", require("./app/src/auth/auth.routes"));
+app.use("/", require("./app/src/main/main.routes"));
+app.use("/", require("./app/src/auth/auth.routes"));
 app.use("/", require("./app/src/crud/crud.routes"));
 // app.use("/", require("./app/src/bpmn/bpmn.routes"));
 

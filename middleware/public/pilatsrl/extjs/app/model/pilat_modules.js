@@ -30,7 +30,7 @@ Ext.define('es.model.pilatModules', {
 		
 		{ name: '_id', type: 'text', defaultValue: null },
 		
-		{ name: 'id', type: 'types.INT', defaultValue: null },
+		{ name: 'id', type: 'number', defaultValue: null },
 		
 		{ name: 'mod_code', type: 'text', defaultValue: null },
 		

@@ -21,8 +21,8 @@ export class PilatCrons {
   _id: string;
   
   
-  
   id: number;
+  
   
   
   
@@ -33,8 +33,6 @@ export class PilatCrons {
   cro_group: string;
   
   cro_mai_id: string;
-  
-  cro_lead_id: string;
   
   createdBy: string;
   

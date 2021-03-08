@@ -30,7 +30,7 @@ Ext.define('es.model.pilatMails', {
 		
 		{ name: '_id', type: 'text', defaultValue: null },
 		
-		{ name: 'id', type: 'types.INT', defaultValue: null },
+		{ name: 'id', type: 'number', defaultValue: null },
 		
 		{ name: 'mai_port', type: 'types.INT', defaultValue: null },
 		

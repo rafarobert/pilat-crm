@@ -25,4 +25,8 @@ router.put(`/api-${sys}/crm/users/:id`, (req, res) => userCtrl.updateUser(req, r
 router.delete(`/api-${sys}/crm/users/:id`, (req, res) => userCtrl.deleteUser(req, res));
 router.post(`/api-${sys}/crm/users`, (req, res) => userCtrl.addUser(req, res));
 
+router.post(`/api-${sys}/crm/users/rest-login`, userCtrl.restLocalLogin(), (req, res) => userCtrl.restOnLogin(req,res));
+router.get(`/api-${sys}/crm/users/rest-logout`, (req, res) => userCtrl.restLogout(req,res));
+router.post(`/api-${sys}/crm/users/rest-signup`, userCtrl.restLocalSignup(), (req, res) => userCtrl.restOnSignup(req,res));
+
 module.exports = router;

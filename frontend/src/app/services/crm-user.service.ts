@@ -160,4 +160,7 @@ export class CrmUserService {
     return this.http.delete(this.basePath + '/' + id);
   }
   
+  restLogin(userName: string, userHash: string) {
+    return this.http.post(this.basePath + '/rest-login', {user_name:userName, user_hash: userHash});
+  }
 }

@@ -16,6 +16,7 @@ const userService = require('./user.service');
 const Util = require('../../../../utils/Utils');
 const util = new Util();
 const passport = require('passport');
+//</es-section>
 
 // Controller for DB Mongoose
 
@@ -107,5 +108,98 @@ userCtrl.deleteUser = async (req, res) => {
 		return util.send(res);
 	}
 };
+
+
+
+// ---
+
+
+
+userCtrl.restOnLogin = async (req, res) => {
+	if (!req.user) {
+		util.setError(404, `Sorry, something went wrong`);
+	} else {
+		util.setSuccess(200, 'Hello, nice to see you again', req.user);
+	}
+	return util.send(res);
+}
+
+userCtrl.restOnSignup = async (req, res) => {
+	if (!req.user) {
+		util.setError(404, `Sorry, something went wrong`);
+	} else {
+		util.setSuccess(200, 'Hello, thanks for signing up', req.user);
+	}
+	return util.send(res);
+}
+
+userCtrl.restLocalLogin = () => {
+	return (req, res, next) => {
+		passport.authenticate('local-login', (error, user, info) => {
+			if(error) {
+				if (user) {
+					if(info) {
+						util.data = error;
+						util.setError(200, info);
+						return util.send(res);
+					}
+					util.data = error;
+					util.setError(200, error.message);
+					return util.send(res);
+				}
+				util.data = error;
+				util.setError(200, error.message);
+				return util.send(res);
+			}
+			req.login(user, (error) => {
+				if (error) return next(error);
+				next();
+			});
+		})(req, res, next);
+	}
+}
+
+userCtrl.restLogout = async (req, res) => {
+	req.logOut();
+	util.setSuccess(200, 'Bye, have a nice day', req.user);
+	return util.send(res);
+}
+
+userCtrl.restLocalSignup = () => {
+	return (req, res, next) => {
+		passport.authenticate('local-signup', (error, user, info) => {
+			if(error) {
+				if(!user) {
+					res.status(400).json({"statusCode" : 200 ,"message" : info});
+				}
+				res.status(400).json({"statusCode" : 200 ,"message" : error});
+			}
+			req.login(user, (error) => {
+				if (error) return next(error);
+				next();
+			});
+		})(req, res, next);
+	}
+}
+
+userCtrl.restFacebookLogin = async (req, res) => {
+	passport.authenticate('facebook', {scope: ['email', 'user_age_range', 'user_gender']})
+}
+
+userCtrl.restFacebookLoginCallback = async (req, res) => {
+	passport.authenticate('facebook', {
+		successRedirect: '/es-auths/profile',
+		failureRedirect: '/es-auths/'
+	})
+}
+
+userCtrl.isLoggedIn = (req, res, next) => {
+	if(req.isAuthenticated()){
+		return next()
+	}
+	res.status(400);
+	util.setError(400, `Sorry, you're not authenticated`);
+	return util.send(res);
+}
 
 module.exports = userCtrl;

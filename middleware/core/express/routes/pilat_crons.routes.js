@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Tue Mar 02 2021 14:01:15 GMT-0400 (Bolivia Time)
- * Time: 14:1:15
+ * Date: Sun Mar 07 2021 15:36:41 GMT-0400 (Bolivia Time)
+ * Time: 15:36:41
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Tue Mar 02 2021 14:01:15 GMT-0400 (Bolivia Time)
- * Last time updated: 14:1:15
+ * Last date updated: Sun Mar 07 2021 15:36:41 GMT-0400 (Bolivia Time)
+ * Last time updated: 15:36:41
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -25,9 +25,9 @@ const pilatCronsCtrl = require("../controllers/pilat_crons.controller");
 
 router.get(`/api-${sys}/pilat-crons/findOneByUid/:Id`, (req, res) => pilatCronsCtrl.findOneByUid(req, res));
 
-router.get(`/api-${sys}/pilat-crons/findOneByCroStatus/:croStatus`, (req, res) => pilatCronsCtrl.findOneByCroStatus(req, res));
-
 router.get(`/api-${sys}/pilat-crons/findOneById/:id`, (req, res) => pilatCronsCtrl.findOneById(req, res));
+
+router.get(`/api-${sys}/pilat-crons/findOneByCroStatus/:croStatus`, (req, res) => pilatCronsCtrl.findOneByCroStatus(req, res));
 
 router.get(`/api-${sys}/pilat-crons/findOneByCroDescription/:croDescription`, (req, res) => pilatCronsCtrl.findOneByCroDescription(req, res));
 
@@ -36,8 +36,6 @@ router.get(`/api-${sys}/pilat-crons/findOneByCroExpression/:croExpression`, (req
 router.get(`/api-${sys}/pilat-crons/findOneByCroGroup/:croGroup`, (req, res) => pilatCronsCtrl.findOneByCroGroup(req, res));
 
 router.get(`/api-${sys}/pilat-crons/findOneByCroMaiId/:croMaiId`, (req, res) => pilatCronsCtrl.findOneByCroMaiId(req, res));
-
-router.get(`/api-${sys}/pilat-crons/findOneByCroLeadId/:croLeadId`, (req, res) => pilatCronsCtrl.findOneByCroLeadId(req, res));
 
 router.get(`/api-${sys}/pilat-crons/findOneByCreatedby/:createdby`, (req, res) => pilatCronsCtrl.findOneByCreatedby(req, res));
 
@@ -53,9 +51,9 @@ router.get(`/api-${sys}/pilat-crons/findOneByUpdatedat/:updatedat`, (req, res) =
 
 router.post(`/api-${sys}/pilat-crons/updatePilatCronByUid`, (req, res) => pilatCronsCtrl.updatePilatCronByUid(req, res));
 
-router.post(`/api-${sys}/pilat-crons/updatePilatCronByCroStatus`, (req, res) => pilatCronsCtrl.updatePilatCronByCroStatus(req, res));
-
 router.post(`/api-${sys}/pilat-crons/updatePilatCronById`, (req, res) => pilatCronsCtrl.updatePilatCronById(req, res));
+
+router.post(`/api-${sys}/pilat-crons/updatePilatCronByCroStatus`, (req, res) => pilatCronsCtrl.updatePilatCronByCroStatus(req, res));
 
 router.post(`/api-${sys}/pilat-crons/updatePilatCronByCroDescription`, (req, res) => pilatCronsCtrl.updatePilatCronByCroDescription(req, res));
 
@@ -64,8 +62,6 @@ router.post(`/api-${sys}/pilat-crons/updatePilatCronByCroExpression`, (req, res)
 router.post(`/api-${sys}/pilat-crons/updatePilatCronByCroGroup`, (req, res) => pilatCronsCtrl.updatePilatCronByCroGroup(req, res));
 
 router.post(`/api-${sys}/pilat-crons/updatePilatCronByCroMaiId`, (req, res) => pilatCronsCtrl.updatePilatCronByCroMaiId(req, res));
-
-router.post(`/api-${sys}/pilat-crons/updatePilatCronByCroLeadId`, (req, res) => pilatCronsCtrl.updatePilatCronByCroLeadId(req, res));
 
 router.post(`/api-${sys}/pilat-crons/updatePilatCronByCreatedby`, (req, res) => pilatCronsCtrl.updatePilatCronByCreatedby(req, res));
 

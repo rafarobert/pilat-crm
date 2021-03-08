@@ -4,6 +4,7 @@ const env = process.env.NODE_ENV || 'development';
 const configJson = require('./config');
 const config = configJson[env];
 const userService = require('../core/express/services/users.service');
+const crmUserService = require('../api/src/crm/user/user.service');
 const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const JwtStrategy = require('passport-jwt').Strategy;
@@ -97,17 +98,22 @@ module.exports = function (app) {
 		usernameField: 'user_name',
 		passwordField: 'user_hash',
 		passReqToCallback: true
-	}, (req, username, password, done) => {
+	}, (req, userName, userHash, done) => {
 		process.nextTick(async () => {
 			try {
 				let token, time;
-				const authUser = await userService.findOneByUserName(username);
-				if (!authUser)
+				const respAuthUser = await crmUserService.findOneByUserNameAndUserHash(userName, userHash);
+				if (!respAuthUser) {
 					return done({id: 7, code: 'login_invalid_user', message: "That user doesn't exists"}, false, req.flash('loginMessage', 'No user found'));
-				let compare = await bcrypt.compare(password, authUser.user_hash).then((resp)=>{return resp});
-				if (!compare) {
-					return done({id: 8, code: 'login_invalid_pass', message: 'User has Invalid password'}, authUser, req.flash('loginMessage', error));
 				}
+				let authUser = respAuthUser.dataValues;
+				[token, time] = generateAccessToken({user_name:userName, user_hash: userHash});
+				//let compare = await bcrypt.compare(userHash, authUser.user_hash).then((resp)=>{return resp});
+				//if (!compare) {
+				//return done({id: 8, code: 'login_invalid_pass', message: 'User has Invalid password'}, authUser, req.flash('loginMessage', error));
+				//}
+				authUser.token = token;
+				authUser.time = time;
 				return done(null, authUser);
 			} catch (error) {
 				throw done(error)
