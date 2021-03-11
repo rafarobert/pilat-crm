@@ -33,7 +33,7 @@ export class LeadsComponent implements OnInit {
     // 'date_modified',
     // 'modified_user_id',
     // 'created_by',
-    'description',
+    // 'description',
     // 'deleted',
     // 'assigned_user_id',
     'salutation',

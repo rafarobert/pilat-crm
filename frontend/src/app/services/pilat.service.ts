@@ -114,8 +114,8 @@ export class PilatService {
   parNotApproved: PilatParams;
   parInvoiced: PilatParams;
   parNotInvoiced: PilatParams;
-  parLeadAssignedStatus: PilatParams;
   
+  parLeadAssignedStatus: PilatParams;
   parLeadNewStatus: PilatParams;
   parLeadInProcessStatus: PilatParams;
   parLeadConvertedStatus: PilatParams;

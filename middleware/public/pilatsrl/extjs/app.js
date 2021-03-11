@@ -554,6 +554,9 @@ Ext.application({
 		'pilat_dictionaries.List',
 		'pilat_dictionaries.Add',
 	
+		'pilat_logs.List',
+		'pilat_logs.Add',
+	
 		'pilat_mails.List',
 		'pilat_mails.Add',
 	
@@ -1105,6 +1108,8 @@ Ext.application({
 		
 		'pilat_dictionaries',
 		
+		'pilat_logs',
+		
 		'pilat_mails',
 		
 		'pilat_modules',
@@ -1592,6 +1597,8 @@ Ext.application({
 		'pilat_crons',
 		
 		'pilat_dictionaries',
+		
+		'pilat_logs',
 		
 		'pilat_mails',
 		
@@ -3872,6 +3879,18 @@ function initTable(table){
 			case 'pilat-dictionaries':
 				newTab = {
 					xtype: 'pilatDictionariesList',
+					title: table,
+					html: table,
+					id: table,
+					closable: true,
+				};
+				tab = Ext.getCmp('content-panel').add(newTab);
+				Ext.getCmp('content-panel').setActiveTab(tab);
+				break;
+			
+			case 'pilat-logs':
+				newTab = {
+					xtype: 'pilatLogsList',
 					title: table,
 					html: table,
 					id: table,

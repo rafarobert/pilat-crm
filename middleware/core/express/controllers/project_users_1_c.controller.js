@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:36:51 GMT-0400 (Bolivia Time)
- * Time: 15:36:51
+ * Date: Wed Mar 10 2021 14:57:34 GMT-0400 (Bolivia Time)
+ * Time: 14:57:34
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:36:51 GMT-0400 (Bolivia Time)
- * Last time updated: 15:36:51
+ * Last date updated: Wed Mar 10 2021 14:57:34 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:57:34
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const projectUser1CService = require('../services/project_users_1_c.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ projectUsers1CCtrl.service = projectUser1CService;
 
 projectUsers1CCtrl.getAllProjectUsers1C = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.projectUsers1C.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objProjectUsers1C = await projectUser1CService.getAllProjectUsers1C(req.query);
-        if (objProjectUsers1C.length > 0) {
-            util.setSuccess(200, 'ProjectUsers1C retrieved', objProjectUsers1C);
+        if (objProjectUsers1C && objProjectUsers1C.rows && objProjectUsers1C.count) {
+            util.setSuccess(200, 'ProjectUsers1C retrieved', objProjectUsers1C.rows, objProjectUsers1C.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No projectUser1C found');
         }

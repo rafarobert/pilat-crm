@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:36:06 GMT-0400 (Bolivia Time)
- * Time: 15:36:6
+ * Date: Wed Mar 10 2021 14:56:50 GMT-0400 (Bolivia Time)
+ * Time: 14:56:50
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:36:06 GMT-0400 (Bolivia Time)
- * Last time updated: 15:36:6
+ * Last date updated: Wed Mar 10 2021 14:56:50 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:56:50
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const erpClienteService = require('../services/erp_cliente.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ erpClienteCtrl.service = erpClienteService;
 
 erpClienteCtrl.getAllErpCliente = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.erpCliente.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objErpCliente = await erpClienteService.getAllErpCliente(req.query);
-        if (objErpCliente.length > 0) {
-            util.setSuccess(200, 'ErpCliente retrieved', objErpCliente);
+        if (objErpCliente && objErpCliente.rows && objErpCliente.count) {
+            util.setSuccess(200, 'ErpCliente retrieved', objErpCliente.rows, objErpCliente.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No erpCliente found');
         }

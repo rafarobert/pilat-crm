@@ -896,6 +896,11 @@ let html = `
     <p>Comments</p>
 </div>
 
+<div id="pilat-logs-details">
+    <h2>pilat-logs</h2>
+    <p>Comments</p>
+</div>
+
 <div id="pilat-mails-details">
     <h2>pilat-mails</h2>
     <p>Comments</p>

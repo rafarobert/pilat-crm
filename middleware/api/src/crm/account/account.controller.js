@@ -11,6 +11,7 @@
  */
  
 //<es-section>
+const models = require('../../../../core/express');
 const accountService = require('./account.service');
 //</es-section>
 const Util = require('../../../../utils/Utils');
@@ -24,9 +25,16 @@ accountCtrl.service = accountService;
 
 accountCtrl.getAllAccounts = async (req, res) => {
 	try {
+		const { length } = req.body;
+		const { start } = req.body;
+		const [column, dir] = util.getOrderByColumnDirection(models.sequelize.pilatLogs.rawAttributes,req.body);
+		req.query.limit = length ? length : req.query.limit;
+		req.query.offset = start ? start : req.query.offset;
+		req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
 		const objAccounts = await accountService.getAllAccounts(req.query);
-		if (objAccounts.length > 0) {
-			util.setSuccess(200, 'Accounts retrieved', objAccounts);
+		if (objAccounts && objAccounts.rows && objAccounts.count) {
+			util.setSuccess(200, 'Accounts retrieved', objAccounts.rows, objAccounts.count, req.query.limit, req.query.offset);
 		} else {
 			util.setSuccess(200, 'No accounts found');
 		}

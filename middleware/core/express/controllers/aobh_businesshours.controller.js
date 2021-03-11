@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:35:06 GMT-0400 (Bolivia Time)
- * Time: 15:35:6
+ * Date: Wed Mar 10 2021 14:55:55 GMT-0400 (Bolivia Time)
+ * Time: 14:55:55
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:35:06 GMT-0400 (Bolivia Time)
- * Last time updated: 15:35:6
+ * Last date updated: Wed Mar 10 2021 14:55:55 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:55:55
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const aobhBusinesshourService = require('../services/aobh_businesshours.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ aobhBusinesshoursCtrl.service = aobhBusinesshourService;
 
 aobhBusinesshoursCtrl.getAllAobhBusinesshours = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.aobhBusinesshours.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objAobhBusinesshours = await aobhBusinesshourService.getAllAobhBusinesshours(req.query);
-        if (objAobhBusinesshours.length > 0) {
-            util.setSuccess(200, 'AobhBusinesshours retrieved', objAobhBusinesshours);
+        if (objAobhBusinesshours && objAobhBusinesshours.rows && objAobhBusinesshours.count) {
+            util.setSuccess(200, 'AobhBusinesshours retrieved', objAobhBusinesshours.rows, objAobhBusinesshours.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No aobhBusinesshour found');
         }

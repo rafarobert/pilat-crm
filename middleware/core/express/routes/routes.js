@@ -372,6 +372,8 @@ module.exports = function (app) {
 	
 	app.use("/", require("../routes/pilat_dictionaries.routes"));
 	
+	app.use("/", require("../routes/pilat_logs.routes"));
+	
 	app.use("/", require("../routes/pilat_mails.routes"));
 	
 	app.use("/", require("../routes/pilat_modules.routes"));

@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:37:04 GMT-0400 (Bolivia Time)
- * Time: 15:37:4
+ * Date: Wed Mar 10 2021 14:57:46 GMT-0400 (Bolivia Time)
+ * Time: 14:57:46
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:37:04 GMT-0400 (Bolivia Time)
- * Last time updated: 15:37:4
+ * Last date updated: Wed Mar 10 2021 14:57:46 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:57:46
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const surveyquestionoptionSurveyquestionresponseService = require('../services/surveyquestionoptions_surveyquestionresponses.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ surveyquestionoptionsSurveyquestionresponsesCtrl.service = surveyquestionoptionS
 
 surveyquestionoptionsSurveyquestionresponsesCtrl.getAllSurveyquestionoptionsSurveyquestionresponses = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.surveyquestionoptionsSurveyquestionresponses.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objSurveyquestionoptionsSurveyquestionresponses = await surveyquestionoptionSurveyquestionresponseService.getAllSurveyquestionoptionsSurveyquestionresponses(req.query);
-        if (objSurveyquestionoptionsSurveyquestionresponses.length > 0) {
-            util.setSuccess(200, 'SurveyquestionoptionsSurveyquestionresponses retrieved', objSurveyquestionoptionsSurveyquestionresponses);
+        if (objSurveyquestionoptionsSurveyquestionresponses && objSurveyquestionoptionsSurveyquestionresponses.rows && objSurveyquestionoptionsSurveyquestionresponses.count) {
+            util.setSuccess(200, 'SurveyquestionoptionsSurveyquestionresponses retrieved', objSurveyquestionoptionsSurveyquestionresponses.rows, objSurveyquestionoptionsSurveyquestionresponses.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No surveyquestionoptionSurveyquestionresponse found');
         }

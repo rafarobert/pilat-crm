@@ -31,6 +31,20 @@ export class CrmLeadsComponent implements OnInit {
   
   iFrameLoaded() {
     this.pilatService.fixSuiteCrmInterface();
+    $('body')
+      .find('iframe')
+      .contents()
+      .find('body')
+      .find('hpanel')
+      .find('.panel-body').hide();
+    
+    $('body')
+      .find('iframe')
+      .contents()
+      .find('body')
+      .find('hpanel').html('<app-leads></app-leads>');
+  
+    
     this.buildingService.stop(this.buildingService.buildingRef);
   }
   

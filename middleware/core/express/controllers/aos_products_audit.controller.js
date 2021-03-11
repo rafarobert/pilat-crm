@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:35:27 GMT-0400 (Bolivia Time)
- * Time: 15:35:27
+ * Date: Wed Mar 10 2021 14:56:16 GMT-0400 (Bolivia Time)
+ * Time: 14:56:16
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:35:27 GMT-0400 (Bolivia Time)
- * Last time updated: 15:35:27
+ * Last date updated: Wed Mar 10 2021 14:56:16 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:56:16
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const aoProductAuditService = require('../services/aos_products_audit.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ aosProductsAuditCtrl.service = aoProductAuditService;
 
 aosProductsAuditCtrl.getAllAosProductsAudit = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.aosProductsAudit.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objAosProductsAudit = await aoProductAuditService.getAllAosProductsAudit(req.query);
-        if (objAosProductsAudit.length > 0) {
-            util.setSuccess(200, 'AosProductsAudit retrieved', objAosProductsAudit);
+        if (objAosProductsAudit && objAosProductsAudit.rows && objAosProductsAudit.count) {
+            util.setSuccess(200, 'AosProductsAudit retrieved', objAosProductsAudit.rows, objAosProductsAudit.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No aoProductAudit found');
         }

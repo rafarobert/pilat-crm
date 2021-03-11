@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:34:59 GMT-0400 (Bolivia Time)
- * Time: 15:34:59
+ * Date: Wed Mar 10 2021 14:55:49 GMT-0400 (Bolivia Time)
+ * Time: 14:55:49
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:34:59 GMT-0400 (Bolivia Time)
- * Last time updated: 15:34:59
+ * Last date updated: Wed Mar 10 2021 14:55:49 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:55:49
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const aclRoleService = require('../services/acl_roles.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ aclRolesCtrl.service = aclRoleService;
 
 aclRolesCtrl.getAllAclRoles = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.aclRoles.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objAclRoles = await aclRoleService.getAllAclRoles(req.query);
-        if (objAclRoles.length > 0) {
-            util.setSuccess(200, 'AclRoles retrieved', objAclRoles);
+        if (objAclRoles && objAclRoles.rows && objAclRoles.count) {
+            util.setSuccess(200, 'AclRoles retrieved', objAclRoles.rows, objAclRoles.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No aclRole found');
         }

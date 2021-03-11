@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:35:33 GMT-0400 (Bolivia Time)
- * Time: 15:35:33
+ * Date: Wed Mar 10 2021 14:56:21 GMT-0400 (Bolivia Time)
+ * Time: 14:56:21
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:35:33 GMT-0400 (Bolivia Time)
- * Last time updated: 15:35:33
+ * Last date updated: Wed Mar 10 2021 14:56:21 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:56:21
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const aoQuoteAuditService = require('../services/aos_quotes_audit.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ aosQuotesAuditCtrl.service = aoQuoteAuditService;
 
 aosQuotesAuditCtrl.getAllAosQuotesAudit = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.aosQuotesAudit.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objAosQuotesAudit = await aoQuoteAuditService.getAllAosQuotesAudit(req.query);
-        if (objAosQuotesAudit.length > 0) {
-            util.setSuccess(200, 'AosQuotesAudit retrieved', objAosQuotesAudit);
+        if (objAosQuotesAudit && objAosQuotesAudit.rows && objAosQuotesAudit.count) {
+            util.setSuccess(200, 'AosQuotesAudit retrieved', objAosQuotesAudit.rows, objAosQuotesAudit.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No aoQuoteAudit found');
         }

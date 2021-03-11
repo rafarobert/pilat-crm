@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:36:44 GMT-0400 (Bolivia Time)
- * Time: 15:36:44
+ * Date: Wed Mar 10 2021 14:57:27 GMT-0400 (Bolivia Time)
+ * Time: 14:57:27
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:36:44 GMT-0400 (Bolivia Time)
- * Last time updated: 15:36:44
+ * Last date updated: Wed Mar 10 2021 14:57:27 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:57:27
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const pilatParamService = require('../services/pilat_params.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ pilatParamsCtrl.service = pilatParamService;
 
 pilatParamsCtrl.getAllPilatParams = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.pilatParams.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objPilatParams = await pilatParamService.getAllPilatParams(req.query);
-        if (objPilatParams.length > 0) {
-            util.setSuccess(200, 'PilatParams retrieved', objPilatParams);
+        if (objPilatParams && objPilatParams.rows && objPilatParams.count) {
+            util.setSuccess(200, 'PilatParams retrieved', objPilatParams.rows, objPilatParams.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No pilatParam found');
         }

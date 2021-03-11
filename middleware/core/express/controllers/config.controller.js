@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:35:49 GMT-0400 (Bolivia Time)
- * Time: 15:35:49
+ * Date: Wed Mar 10 2021 14:56:35 GMT-0400 (Bolivia Time)
+ * Time: 14:56:35
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:35:49 GMT-0400 (Bolivia Time)
- * Last time updated: 15:35:49
+ * Last date updated: Wed Mar 10 2021 14:56:35 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:56:35
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const configService = require('../services/config.service');
 //</es-section>
 require('../../../utils/Prototipes');

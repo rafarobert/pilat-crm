@@ -11,6 +11,7 @@
  */
  
 //<es-section>
+const models = require('../../../../core/express');
 const aosQuoteService = require('./aos-quote.service');
 //</es-section>
 const Util = require('../../../../utils/Utils');
@@ -24,9 +25,16 @@ aosQuoteCtrl.service = aosQuoteService;
 
 aosQuoteCtrl.getAllAosQuotes = async (req, res) => {
 	try {
+		const { length } = req.body;
+		const { start } = req.body;
+		const [column, dir] = util.getOrderByColumnDirection(models.sequelize.pilatLogs.rawAttributes,req.body);
+		req.query.limit = length ? length : req.query.limit;
+		req.query.offset = start ? start : req.query.offset;
+		req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
 		const objAosQuotes = await aosQuoteService.getAllAosQuotes(req.query);
-		if (objAosQuotes.length > 0) {
-			util.setSuccess(200, 'AosQuotes retrieved', objAosQuotes);
+		if (objAosQuotes && objAosQuotes.rows && objAosQuotes.count) {
+			util.setSuccess(200, 'AosQuotes retrieved', objAosQuotes.rows, objAosQuotes.count, req.query.limit, req.query.offset);
 		} else {
 			util.setSuccess(200, 'No aosQuotes found');
 		}

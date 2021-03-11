@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:35:00 GMT-0400 (Bolivia Time)
- * Time: 15:35:0
+ * Date: Wed Mar 10 2021 14:55:50 GMT-0400 (Bolivia Time)
+ * Time: 14:55:50
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:35:00 GMT-0400 (Bolivia Time)
- * Last time updated: 15:35:0
+ * Last date updated: Wed Mar 10 2021 14:55:50 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:55:50
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const aclRoleActionService = require('../services/acl_roles_actions.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ aclRolesActionsCtrl.service = aclRoleActionService;
 
 aclRolesActionsCtrl.getAllAclRolesActions = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.aclRolesActions.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objAclRolesActions = await aclRoleActionService.getAllAclRolesActions(req.query);
-        if (objAclRolesActions.length > 0) {
-            util.setSuccess(200, 'AclRolesActions retrieved', objAclRolesActions);
+        if (objAclRolesActions && objAclRolesActions.rows && objAclRolesActions.count) {
+            util.setSuccess(200, 'AclRolesActions retrieved', objAclRolesActions.rows, objAclRolesActions.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No aclRoleAction found');
         }

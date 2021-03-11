@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:36:29 GMT-0400 (Bolivia Time)
- * Time: 15:36:29
+ * Date: Wed Mar 10 2021 14:57:12 GMT-0400 (Bolivia Time)
+ * Time: 14:57:12
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:36:29 GMT-0400 (Bolivia Time)
- * Last time updated: 15:36:29
+ * Last date updated: Wed Mar 10 2021 14:57:12 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:57:12
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const leadCstmService = require('../services/leads_cstm.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ leadsCstmCtrl.service = leadCstmService;
 
 leadsCstmCtrl.getAllLeadsCstm = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.leadsCstm.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objLeadsCstm = await leadCstmService.getAllLeadsCstm(req.query);
-        if (objLeadsCstm.length > 0) {
-            util.setSuccess(200, 'LeadsCstm retrieved', objLeadsCstm);
+        if (objLeadsCstm && objLeadsCstm.rows && objLeadsCstm.count) {
+            util.setSuccess(200, 'LeadsCstm retrieved', objLeadsCstm.rows, objLeadsCstm.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No leadCstm found');
         }

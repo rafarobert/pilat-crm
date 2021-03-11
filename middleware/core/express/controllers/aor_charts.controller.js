@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:35:13 GMT-0400 (Bolivia Time)
- * Time: 15:35:13
+ * Date: Wed Mar 10 2021 14:56:03 GMT-0400 (Bolivia Time)
+ * Time: 14:56:3
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:35:13 GMT-0400 (Bolivia Time)
- * Last time updated: 15:35:13
+ * Last date updated: Wed Mar 10 2021 14:56:03 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:56:3
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const aorChartService = require('../services/aor_charts.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ aorChartsCtrl.service = aorChartService;
 
 aorChartsCtrl.getAllAorCharts = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.aorCharts.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objAorCharts = await aorChartService.getAllAorCharts(req.query);
-        if (objAorCharts.length > 0) {
-            util.setSuccess(200, 'AorCharts retrieved', objAorCharts);
+        if (objAorCharts && objAorCharts.rows && objAorCharts.count) {
+            util.setSuccess(200, 'AorCharts retrieved', objAorCharts.rows, objAorCharts.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No aorChart found');
         }

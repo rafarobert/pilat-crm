@@ -1,11 +1,11 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:37:04 GMT-0400 (Bolivia Time)
- * Time: 15:37:4
+ * Date: Wed Mar 10 2021 14:57:45 GMT-0400 (Bolivia Time)
+ * Time: 14:57:45
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:37:04 GMT-0400 (Bolivia Time)
- * Last time updated: 15:37:4
+ * Last date updated: Wed Mar 10 2021 14:57:45 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:57:45
  *
  * Caution: es-sections will be replaced by script execution
  */
@@ -41,7 +41,7 @@ class SurveyquestionoptionAuditService {
 			    let offset = Object.keys(query).length ? query.offset ? query.offset : query.start ? query.start : query.limit ? 0 : null : null;
             	let where = Object.keys(query).length ? query.where ? JSON.parse(query.where) : null : null;
 
-				return await models.sequelize.surveyquestionoptionsAudit.findAll({
+				return await models.sequelize.surveyquestionoptionsAudit.findAndCountAll({
 				    attributes:query.select ? query.select.split(',') : null,
 				    where: where && !where.where ? where : null,
                     limit: query.limit ? parseInt(query.limit) : null,

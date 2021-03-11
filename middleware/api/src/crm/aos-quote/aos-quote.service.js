@@ -26,7 +26,7 @@ class AosQuoteService {
 			if(sql) {
 				let offset = Object.keys(query).length ? query.offset ? query.offset : query.start ? query.start : query.limit ? 0 : null : null;
 				let where = Object.keys(query).length ? query.where ? JSON.parse(query.where) : null : null;
-				return await models.sequelize.aosQuotes.findAll({
+				return await models.sequelize.aosQuotes.findAndCountAll({
 					attributes:query.select ? query.select.split(',') : null,
 					where: where && !where.where ? where : null,
 					limit: query.limit ? parseInt(query.limit) : null,

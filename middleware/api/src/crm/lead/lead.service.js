@@ -17,6 +17,7 @@ import configJson from '../../../../config/config';
 const sql = configJson.sql;
 const Util = require('../../../../utils/Utils');
 const util = new Util();
+const crmService = require('../services/crm.service');
 
 const { Op } = require("sequelize");
 
@@ -27,7 +28,7 @@ class LeadService {
 			if(sql) {
 				let offset = Object.keys(query).length ? query.offset ? query.offset : query.start ? query.start : query.limit ? 0 : null : null;
 				let where = Object.keys(query).length ? query.where ? JSON.parse(query.where) : null : null;
-				return await models.sequelize.leads.findAll({
+				return await models.sequelize.leads.findAndCountAll({
 					attributes:query.select ? query.select.split(',') : null,
 					where: where && !where.where ? where : null,
 					limit: query.limit ? parseInt(query.limit) : null,
@@ -108,8 +109,11 @@ class LeadService {
 
 	static async addLead(newLead,userLoggedId) {
 		try {
-			let objLead;
-
+			let objLead, pilatLog, user, respUsers;
+			if (userLoggedId) {
+				respUsers = await models.sequelize.users.findOne({where:{id:userLoggedId}})
+				user = respUsers && respUsers.dataValues ? respUsers.dataValues : null;
+			}
 			if(sql) {
 
 				if (newLead) {
@@ -125,7 +129,7 @@ class LeadService {
 						newLead.date_modified = new Date();
 						let respLead = await models.sequelize.leads.create(newLead);
 						objLead = respLead.dataValues;
-
+						pilatLog = await crmService.setPilatLog('create', 'leads',objLead.first_name+' '+objLead.last_name, objLead.id, objLead.id, objLead.assigned_user_id);
 						if (newLead.leadLeadsCstm) {
 							newLead.leadLeadsCstm.id_c = newLead.id;
 							let respLeadsCstm = await models.sequelize.leadsCstm.create(newLead.leadLeadsCstm);
@@ -134,16 +138,16 @@ class LeadService {
 
 						// BEGIN CALLS
 
-						let respCalls, respCallsCstm, respCallsLeads, respCallsUsers;
+						let objCalls, objCallsLeads, objCallsUsers, respCalls, respCallsCstm, respCallsLeads, respCallsUsers;
 
 						if (newLead.leadCallsLeads) {
 							if (newLead.leadCallsLeads.callLeadCalls) {
-
 								newLead.leadCallsLeads.callLeadCalls.id = models.sequelize.objectId().toString();
 								newLead.leadCallsLeads.callLeadCalls.date_entered = new Date();
 								newLead.leadCallsLeads.callLeadCalls.date_modified = new Date();
 								respCalls = await models.sequelize.calls.create(newLead.leadCallsLeads.callLeadCalls);
-
+								objCalls = respCalls && respCalls.dataValues ? respCalls.dataValues : null;
+								pilatLog = await crmService.setPilatLog('create', 'calls',objCalls.name, objCalls.id, objLead.id, objCalls.assigned_user_id);
 								if (newLead.leadCallsLeads.callLeadCalls.callCallsCstm) {
 									newLead.leadCallsLeads.callLeadCalls.callCallsCstm.id_c = respCalls.dataValues.id;
 									respCallsCstm = await models.sequelize.callsCstm.create(newLead.leadCallsLeads.callLeadCalls.callCallsCstm);
@@ -155,13 +159,24 @@ class LeadService {
 									newLead.leadCallsLeads.call_id = respCalls && respLead.dataValues ? respCalls.dataValues.id : null;
 									newLead.leadCallsLeads.date_modified = new Date();
 									respCallsLeads = await models.sequelize.callsLeads.create(newLead.leadCallsLeads);
+									objCallsLeads = respCallsLeads && respCallsLeads.dataValues ? respCallsLeads.dataValues : null;
+									pilatLog = await crmService.setPilatLog('create', 'calls', {description:'calls_leads', from: objCalls.name, to:objLead.first_name+' '+objLead.last_name}, objCallsLeads.id, objLead.id, objCalls.assigned_user_id);
 								}
 
 								if (newLead.leadCallsLeads.callLeadCalls.callCallsUsers) {
-									newLead.leadCallsLeads.callLeadCalls.callCallsUsers.id = models.sequelize.objectId().toString();
-									newLead.leadCallsLeads.callLeadCalls.callCallsUsers.date_modified = new Date();
-									newLead.leadCallsLeads.callLeadCalls.callCallsUsers.call_id = respCalls.dataValues.id;
-									respCallsUsers = await models.sequelize.callsUsers.create(newLead.leadCallsLeads.callLeadCalls.callCallsUsers);
+									if (!user && newLead.leadCallsLeads.callLeadCalls.callCallsUsers.user_id) {
+										respUsers = await models.sequelize.users.findOne({where:{id:newLead.leadCallsLeads.callLeadCalls.callCallsUsers.user_id}});
+										user = respUsers && respUsers.dataValues ? respUsers.dataValues : null;
+									}
+									if (user) {
+										newLead.leadCallsLeads.callLeadCalls.callCallsUsers.id = models.sequelize.objectId().toString();
+										newLead.leadCallsLeads.callLeadCalls.callCallsUsers.date_modified = new Date();
+										newLead.leadCallsLeads.callLeadCalls.callCallsUsers.call_id = respCalls.dataValues.id;
+										newLead.leadCallsLeads.callLeadCalls.callCallsUsers.user_id = user.id;
+										respCallsUsers = await models.sequelize.callsUsers.create(newLead.leadCallsLeads.callLeadCalls.callCallsUsers);
+										objCallsUsers = respCallsUsers && respCallsUsers.dataValues ? respCallsUsers.dataValues : null;
+										pilatLog = await crmService.setPilatLog('create', 'calls', {description:'calls_users', from: objCalls.name, to:user.user_name}, objCallsUsers.id, objLead.id, objCalls.assigned_user_id);
+									}
 								}
 
 								objLead.leadCallsLeads = respCallsLeads && respCallsLeads.dataValues ? respCallsLeads.dataValues : {};
@@ -175,7 +190,7 @@ class LeadService {
 						//
 						// BEGIN EMAIL_ADDRESSES
 
-						let respEmailAddresses, respEmailAddrBeanRel;
+						let objEmailAddress, objEmailAddrBeanRel, respEmailAddresses, respEmailAddrBeanRel;
 
 						if (newLead.leadEmailAddrBeanRel) {
 
@@ -184,6 +199,8 @@ class LeadService {
 								newLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_created = new Date();
 								newLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_modified = new Date();
 								respEmailAddresses = await models.sequelize.emailAddresses.create(newLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses);
+								objEmailAddress = respEmailAddresses && respEmailAddresses.dataValues ? respEmailAddresses.dataValues : null;
+								pilatLog = await crmService.setPilatLog('create', 'emails',objEmailAddress.email_address, objEmailAddress.id, objLead.id, objLead.assigned_user_id);
 							}
 
 							newLead.leadEmailAddrBeanRel.id = models.sequelize.objectId().toString();
@@ -193,6 +210,8 @@ class LeadService {
 							newLead.leadEmailAddrBeanRel.date_created = new Date();
 							newLead.leadEmailAddrBeanRel.date_modified = new Date();
 							respEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.create(newLead.leadEmailAddrBeanRel);
+							objEmailAddrBeanRel = respEmailAddrBeanRel && respEmailAddrBeanRel.dataValues ? respEmailAddrBeanRel.dataValues : null;
+							pilatLog = await crmService.setPilatLog('create', 'emails',{description:'email_addr_bean_rel', from:objEmailAddress.email_address, to:objLead.first_name+' '+objLead.last_name}, objEmailAddress.id, objLead.id, objLead.assigned_user_id);
 
 							objLead.leadEmailAddrBeanRel = respEmailAddrBeanRel && respEmailAddrBeanRel.dataValues ? respEmailAddrBeanRel.dataValues : {};
 							objLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = respEmailAddresses && respEmailAddresses.dataValues ? respEmailAddresses.dataValues : {};
@@ -249,7 +268,7 @@ class LeadService {
 
 	static async updateLead(id, updateLead, userLoggedIn) {
 		try {
-			let objLead;
+			let objLead, pilatLog, user, respUsers;
 
 			if(sql) {
 
@@ -260,6 +279,7 @@ class LeadService {
 						await models.sequelize.leads.update(updateLead, {where:{id:id}});
 						respLeads = await models.sequelize.leads.findOne({where: { id: id }});
 						objLead = respLeads.dataValues;
+						pilatLog = await crmService.setPilatLog('update', 'leads',objLead.first_name+' '+objLead.last_name, objLead.id, objLead.id, objLead.assigned_user_id);
 					} else {
 						let oldLead = await models.sequelize.leads.findOne({where:{id:id}});
 						if (oldLead && oldLead.dataValues){
@@ -268,6 +288,7 @@ class LeadService {
 							await models.sequelize.leads.update(updateLead, {where:{id:oldLead.id}});
 							respLeads = await models.sequelize.leads.findOne({where: { id: oldLead.id }});
 							objLead = respLeads.dataValues;
+							pilatLog = await crmService.setPilatLog('update', 'leads', objLead.first_name+' '+objLead.last_name, objLead.id, objLead.id, objLead.assigned_user_id);
 						}  else {
 							//let newLead = updateLead;
 							updateLead.id = models.sequelize.objectId().toString();
@@ -275,6 +296,7 @@ class LeadService {
 							updateLead.date_modified = new Date();
 							let respLead = await models.sequelize.leads.create(updateLead);
 							objLead = respLead.dataValues;
+							pilatLog = await crmService.setPilatLog('create', 'leads',objLead.first_name+' '+objLead.last_name, objLead.id, objLead.id, objLead.assigned_user_id);
 						}
 					}
 
@@ -303,12 +325,14 @@ class LeadService {
 
 					// BEGIN CALLS
 
-					let respCalls;
+					let respCalls, objCalls;
 					if (updateLead.leadCallsLeads && updateLead.leadCallsLeads.callLeadCalls) {
 						if (updateLead.leadCallsLeads.callLeadCalls.id) {
 							updateLead.leadCallsLeads.callLeadCalls.date_modified = new Date();
 							await models.sequelize.calls.update(updateLead.leadCallsLeads.callLeadCalls, {where:{id:updateLead.leadCallsLeads.callLeadCalls.id}});
 							respCalls = await models.sequelize.calls.findOne({where: { id: updateLead.leadCallsLeads.callLeadCalls.id }});
+							objCalls = respCalls && respCalls.dataValues ? respCalls.dataValues : null;
+							pilatLog = await crmService.setPilatLog('update', 'calls',objCalls.name, objCalls.id, objLead.id, objLead.assigned_user_id);
 						} else {
 							let oldCallLeadCalls = await models.sequelize.callsLeads.findOne({
 								where:{lead_id:id},
@@ -319,12 +343,16 @@ class LeadService {
 								updateLead.leadCallsLeads.callLeadCalls.date_modified = new Date();
 								await models.sequelize.calls.update(updateLead.leadCallsLeads.callLeadCalls, {where:{id:oldCallLeadCalls.call_id}});
 								respCalls = await models.sequelize.calls.findOne({where: { id: oldCallLeadCalls.call_id }});
+								objCalls = respCalls && respCalls.dataValues ? respCalls.dataValues : null;
+								pilatLog = await crmService.setPilatLog('update', 'calls',objCalls.name, objCalls.id, objLead.id, objLead.assigned_user_id);
 							} else {
 								//let newLead = updateLead;
 								updateLead.leadCallsLeads.callLeadCalls.id = models.sequelize.objectId().toString();
 								updateLead.leadCallsLeads.callLeadCalls.date_entered = new Date();
 								updateLead.leadCallsLeads.callLeadCalls.date_modified = new Date();
 								respCalls = await models.sequelize.calls.create(updateLead.leadCallsLeads.callLeadCalls);
+								objCalls = respCalls && respCalls.dataValues ? respCalls.dataValues : null;
+								pilatLog = await crmService.setPilatLog('create', 'calls', objCalls.name, objCalls.id, objLead.id, objLead.assigned_user_id);
 							}
 						}
 
@@ -353,12 +381,14 @@ class LeadService {
 							}
 						}
 
-						let respCallsLeads, respCallsUsers;
+						let respCallsLeads, objCallsUsers, objCallsLeads, respCallsUsers;
 						if (updateLead.leadCallsLeads) {
 							if (updateLead.leadCallsLeads.id) {
 								updateLead.leadCallsLeads.date_modified = new Date();
 								await models.sequelize.callsLeads.update(updateLead.leadCallsLeads, {where:{id:updateLead.leadCallsLeads.id}});
 								respCallsLeads = await models.sequelize.callsLeads.findOne({where: { id: updateLead.leadCallsLeads.id }});
+								objCallsLeads = respCallsLeads && respCallsLeads.dataValues ? respCallsLeads.dataValues : null;
+								pilatLog = await crmService.setPilatLog('update', 'calls',{description:'calls_leads', from:objCalls.name, to:objLead.first_name+' '+objLead.last_name}, objCalls.id, objLead.id, objLead.assigned_user_id);
 							} else {
 								let oldLeadCallsLeads = await models.sequelize.callsLeads.findOne({where:{lead_id:id}});
 								if (oldLeadCallsLeads && oldLeadCallsLeads.dataValues) {
@@ -366,34 +396,50 @@ class LeadService {
 									updateLead.leadCallsLeads.date_modified = new Date();
 									await models.sequelize.callsLeads.update(updateLead.leadCallsLeads, {where:{id:oldLeadCallsLeads.id}});
 									respCallsLeads = await models.sequelize.callsLeads.findOne({where: { id: updateLead.leadCallsLeads.id }});
+									objCallsLeads = respCallsLeads && respCallsLeads.dataValues ? respCallsLeads.dataValues : null;
+									pilatLog = await crmService.setPilatLog('update', 'calls',{description:'calls_leads', from:objCalls.name, to:objLead.first_name+' '+objLead.last_name}, objCalls.id, objLead.id, objLead.assigned_user_id);
 								} else {
 									updateLead.leadCallsLeads.id = models.sequelize.objectId().toString();
 									updateLead.leadCallsLeads.lead_id = respLeads && respLeads.dataValues ? respLeads.dataValues.id : null;
 									updateLead.leadCallsLeads.call_id = respCalls && respCalls.dataValues ? respCalls.dataValues.id : null;
 									updateLead.leadCallsLeads.date_modified = new Date();
 									respCallsLeads = await models.sequelize.callsLeads.create(updateLead.leadCallsLeads);
+									objCallsLeads = respCallsLeads && respCallsLeads.dataValues ? respCallsLeads.dataValues : null;
+									pilatLog = await crmService.setPilatLog('create', 'calls',{description:'calls_leads', from:objCalls.name, to:objLead.first_name+' '+objLead.last_name}, objCalls.id, objLead.id, objLead.assigned_user_id);
 								}
 							}
 
 							if (updateLead.leadCallsLeads.callLeadCalls.callCallsUsers){
-								if (updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.id) {
-									updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.date_modified = new Date();
-									await models.sequelize.callsUsers.update(updateLead.leadCallsLeads.callLeadCalls.callCallsUsers, {where:{id:updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.id}});
-									respCallsUsers = await models.sequelize.callsUsers.findOne({where: { id: updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.id }});
-								} else {
-									let oldLeadCallsUsers = await models.sequelize.callsUsers.findOne({where:{call_id:respCalls.dataValues.id}});
-									if (oldLeadCallsUsers && oldLeadCallsUsers.dataValues) {
-										oldLeadCallsUsers = oldLeadCallsUsers.dataValues;
+								if (!user && updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.user_id) {
+									respUsers = await models.sequelize.users.findOne({where:{id:updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.user_id}});
+									user = respUsers && respUsers.dataValues ? respUsers.dataValues : null;
+								}
+								if (user) {
+									if (updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.id) {
 										updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.date_modified = new Date();
-										await models.sequelize.callsUsers.update(updateLead.leadCallsLeads.callLeadCalls.callCallsUsers, {where:{id:oldLeadCallsUsers.id}});
+										await models.sequelize.callsUsers.update(updateLead.leadCallsLeads.callLeadCalls.callCallsUsers, {where:{id:updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.id}});
 										respCallsUsers = await models.sequelize.callsUsers.findOne({where: { id: updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.id }});
+										objCallsUsers = respCallsUsers && respCallsUsers.dataValues ? respCallsUsers.dataValues : null;
+										pilatLog = await crmService.setPilatLog('update', 'calls',{description:'calls_users', from:objCalls.name, to:user.user_name}, objCallsUsers.id, objLead.id, objLead.assigned_user_id);
 									} else {
-										//let newLead = updateLead;
-										updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.id = models.sequelize.objectId().toString();
-										updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.call_id = respCalls && respCalls.dataValues ? respCalls.dataValues.id : null;
-										updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.user_id = userLoggedIn ? userLoggedIn : updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.user_id;
-										updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.date_modified = new Date();
-										respCallsUsers = await models.sequelize.callsUsers.create(updateLead.leadCallsLeads.callLeadCalls.callCallsUsers);
+										let oldLeadCallsUsers = await models.sequelize.callsUsers.findOne({where:{call_id:respCalls.dataValues.id}});
+										if (oldLeadCallsUsers && oldLeadCallsUsers.dataValues) {
+											oldLeadCallsUsers = oldLeadCallsUsers.dataValues;
+											updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.date_modified = new Date();
+											await models.sequelize.callsUsers.update(updateLead.leadCallsLeads.callLeadCalls.callCallsUsers, {where:{id:oldLeadCallsUsers.id}});
+											respCallsUsers = await models.sequelize.callsUsers.findOne({where: { id: updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.id }});
+											objCallsUsers = respCallsUsers && respCallsUsers.dataValues ? respCallsUsers.dataValues : null;
+											pilatLog = await crmService.setPilatLog('update', 'calls',{description:'calls_users', from:objCalls.name, to:user.user_name}, objCallsUsers.id, objLead.id, objLead.assigned_user_id);
+										} else {
+											//let newLead = updateLead;
+											updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.id = models.sequelize.objectId().toString();
+											updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.call_id = respCalls && respCalls.dataValues ? respCalls.dataValues.id : null;
+											updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.user_id = userLoggedIn ? userLoggedIn : updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.user_id;
+											updateLead.leadCallsLeads.callLeadCalls.callCallsUsers.date_modified = new Date();
+											respCallsUsers = await models.sequelize.callsUsers.create(updateLead.leadCallsLeads.callLeadCalls.callCallsUsers);
+											objCallsUsers = respCallsUsers && respCallsUsers.dataValues ? respCallsUsers.dataValues : null;
+											pilatLog = await crmService.setPilatLog('create', 'calls',{description:'calls_users', from:objCalls.name, to:user.user_name}, objCallsUsers.id, objLead.id, objLead.assigned_user_id);
+										}
 									}
 								}
 							}
@@ -409,12 +455,14 @@ class LeadService {
 					//
 					// BEGIN EMAIL_ADDRESSES
 
-					let respEmailAddresses, respEmailAddrBeanRel;
+					let respEmailAddresses, respEmailAddrBeanRel, objEmailAddrBeanRel, objEmailAddress;
 					if (updateLead.leadEmailAddrBeanRel) {
 						if (updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id) {
 							updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_modified = new Date();
 							await models.sequelize.emailAddresses.update(updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses, {where:{id:updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id}});
 							respEmailAddresses = await models.sequelize.emailAddresses.findOne({where: { id: updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id }});
+							objEmailAddress = respEmailAddresses && respEmailAddresses.dataValues ? respEmailAddresses.dataValues : null;
+							pilatLog = await crmService.setPilatLog('update', 'emails', objEmailAddress.email_address, objEmailAddress.id, objLead.id, objLead.assigned_user_id);
 						} else {
 							let oldEmailAddresses = await models.sequelize.emailAddresses.findOne({
 								include:{
@@ -427,12 +475,16 @@ class LeadService {
 								updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_modified = new Date();
 								await models.sequelize.emailAddresses.update(updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses, {where:{id:oldEmailAddresses.id}});
 								respEmailAddresses = await models.sequelize.emailAddresses.findOne({where: { id: oldEmailAddresses.id }});
+								objEmailAddress = respEmailAddresses && respEmailAddresses.dataValues ? respEmailAddresses.dataValues : null;
+								pilatLog = await crmService.setPilatLog('update', 'emails', objEmailAddress.email_address, objEmailAddress.id, objLead.id, objLead.assigned_user_id);
 							} else {
 								//let newLead = updateLead;
 								updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id = models.sequelize.objectId().toString();
 								updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_created = new Date();
 								updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_modified = new Date();
 								respEmailAddresses = await models.sequelize.emailAddresses.create(updateLead.leadEmailAddrBeanRel.emailAddrBeanRelEmailAddresses);
+								objEmailAddress = respEmailAddresses && respEmailAddresses.dataValues ? respEmailAddresses.dataValues : null;
+								pilatLog = await crmService.setPilatLog('create', 'emails', objEmailAddress.email_address, objEmailAddress.id, objLead.id, objLead.assigned_user_id);
 							}
 						}
 
@@ -443,6 +495,8 @@ class LeadService {
 							updateLead.leadEmailAddrBeanRel.bean_module = updateLead.leadEmailAddrBeanRel.bean_module ? updateLead.leadEmailAddrBeanRel.bean_module : 'Leads';
 							await models.sequelize.emailAddrBeanRel.update(updateLead.leadEmailAddrBeanRel, {where:{id:updateLead.leadEmailAddrBeanRel.id}});
 							respEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.findOne({where: { id: updateLead.leadEmailAddrBeanRel.id }});
+							objEmailAddrBeanRel = respEmailAddrBeanRel && respEmailAddrBeanRel.dataValues ? respEmailAddrBeanRel.dataValues : null;
+							pilatLog = await crmService.setPilatLog('update', 'emails', {description:'email_addr_bean_rel', from:objEmailAddress.email_address, to:objLead.first_name+' '+objLead.last_name}, objEmailAddrBeanRel.id, objLead.id, objLead.assigned_user_id);
 						} else {
 							let oldEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.findOne({where:{bean_id:id}});
 							if (oldEmailAddrBeanRel && oldEmailAddrBeanRel.dataValues) {
@@ -453,6 +507,8 @@ class LeadService {
 								updateLead.leadEmailAddrBeanRel.bean_module = updateLead.leadEmailAddrBeanRel.bean_module ? updateLead.leadEmailAddrBeanRel.bean_module : 'Leads';
 								await models.sequelize.emailAddrBeanRel.update(updateLead.leadEmailAddrBeanRel, {where:{id:oldEmailAddrBeanRel.id}});
 								respEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.findOne({where: { id:oldEmailAddrBeanRel.id }});
+								objEmailAddrBeanRel = respEmailAddrBeanRel && respEmailAddrBeanRel.dataValues ? respEmailAddrBeanRel.dataValues : null;
+								pilatLog = await crmService.setPilatLog('update', 'emails', {description:'email_addr_bean_rel', from:objEmailAddress.email_address, to:objLead.first_name+' '+objLead.last_name}, objEmailAddrBeanRel.id, objLead.id, objLead.assigned_user_id);
 							} else {
 								//let newLead = updateLead;
 								updateLead.leadEmailAddrBeanRel.date_modified = new Date();
@@ -462,6 +518,8 @@ class LeadService {
 								updateLead.leadEmailAddrBeanRel.bean_module = updateLead.leadEmailAddrBeanRel.bean_module ? updateLead.leadEmailAddrBeanRel.bean_module : 'Leads';
 								updateLead.leadEmailAddrBeanRel.id = respEmailAddrBeanRel && respEmailAddrBeanRel.dataValues ? respEmailAddrBeanRel.dataValues.id : null;
 								respEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.create(updateLead.leadEmailAddrBeanRel);
+								objEmailAddrBeanRel = respEmailAddrBeanRel && respEmailAddrBeanRel.dataValues ? respEmailAddrBeanRel.dataValues : null;
+								pilatLog = await crmService.setPilatLog('create', 'emails', {description:'email_addr_bean_rel', from:objEmailAddress.email_address, to:objLead.first_name+' '+objLead.last_name}, objEmailAddrBeanRel.id, objLead.id, objLead.assigned_user_id);
 							}
 						}
 
@@ -596,6 +654,9 @@ class LeadService {
 
 				let leadLeadsCstm = await models.sequelize.leadsCstm.findOne({ where: { id_c: util.Char(id) } });
 				if (leadLeadsCstm) await models.sequelize.leadsCstm.destroy({where: { id_c: util.Char(id) }});
+
+				let leadPilatLogs = await models.sequelize.pilatLogs.findAll({ where: { module_id: util.Char(id) } });
+				if (leadPilatLogs) await models.sequelize.pilatLogs.destroy({where: { module_id: util.Char(id) }});
 
 				let leadLeadsAudit = await models.sequelize.leadsAudit.findOne({ where: { parent_id: util.Char(id) } });
 				if (leadLeadsAudit) await models.sequelize.leadsAudit.destroy({where: { parent_id: util.Char(id) }});

@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:35:03 GMT-0400 (Bolivia Time)
- * Time: 15:35:3
+ * Date: Wed Mar 10 2021 14:55:53 GMT-0400 (Bolivia Time)
+ * Time: 14:55:53
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:35:03 GMT-0400 (Bolivia Time)
- * Last time updated: 15:35:3
+ * Last date updated: Wed Mar 10 2021 14:55:53 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:55:53
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const amProjecttemplateUser1CService = require('../services/am_projecttemplates_users_1_c.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ amProjecttemplatesUsers1CCtrl.service = amProjecttemplateUser1CService;
 
 amProjecttemplatesUsers1CCtrl.getAllAmProjecttemplatesUsers1C = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.amProjecttemplatesUsers1C.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objAmProjecttemplatesUsers1C = await amProjecttemplateUser1CService.getAllAmProjecttemplatesUsers1C(req.query);
-        if (objAmProjecttemplatesUsers1C.length > 0) {
-            util.setSuccess(200, 'AmProjecttemplatesUsers1C retrieved', objAmProjecttemplatesUsers1C);
+        if (objAmProjecttemplatesUsers1C && objAmProjecttemplatesUsers1C.rows && objAmProjecttemplatesUsers1C.count) {
+            util.setSuccess(200, 'AmProjecttemplatesUsers1C retrieved', objAmProjecttemplatesUsers1C.rows, objAmProjecttemplatesUsers1C.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No amProjecttemplateUser1C found');
         }

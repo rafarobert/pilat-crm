@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:35:58 GMT-0400 (Bolivia Time)
- * Time: 15:35:58
+ * Date: Wed Mar 10 2021 14:56:44 GMT-0400 (Bolivia Time)
+ * Time: 14:56:44
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:35:58 GMT-0400 (Bolivia Time)
- * Last time updated: 15:35:58
+ * Last date updated: Wed Mar 10 2021 14:56:44 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:56:44
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const emailmanService = require('../services/emailman.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ emailmanCtrl.service = emailmanService;
 
 emailmanCtrl.getAllEmailman = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.emailman.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objEmailman = await emailmanService.getAllEmailman(req.query);
-        if (objEmailman.length > 0) {
-            util.setSuccess(200, 'Emailman retrieved', objEmailman);
+        if (objEmailman && objEmailman.rows && objEmailman.count) {
+            util.setSuccess(200, 'Emailman retrieved', objEmailman.rows, objEmailman.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No emailman found');
         }

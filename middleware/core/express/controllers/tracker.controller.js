@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:37:10 GMT-0400 (Bolivia Time)
- * Time: 15:37:10
+ * Date: Wed Mar 10 2021 14:57:51 GMT-0400 (Bolivia Time)
+ * Time: 14:57:51
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:37:10 GMT-0400 (Bolivia Time)
- * Last time updated: 15:37:10
+ * Last date updated: Wed Mar 10 2021 14:57:51 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:57:51
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const trackerService = require('../services/tracker.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ trackerCtrl.service = trackerService;
 
 trackerCtrl.getAllTracker = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.tracker.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objTracker = await trackerService.getAllTracker(req.query);
-        if (objTracker.length > 0) {
-            util.setSuccess(200, 'Tracker retrieved', objTracker);
+        if (objTracker && objTracker.rows && objTracker.count) {
+            util.setSuccess(200, 'Tracker retrieved', objTracker.rows, objTracker.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No tracker found');
         }

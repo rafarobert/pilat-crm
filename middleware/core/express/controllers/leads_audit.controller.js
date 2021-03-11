@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:36:28 GMT-0400 (Bolivia Time)
- * Time: 15:36:28
+ * Date: Wed Mar 10 2021 14:57:12 GMT-0400 (Bolivia Time)
+ * Time: 14:57:12
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:36:28 GMT-0400 (Bolivia Time)
- * Last time updated: 15:36:28
+ * Last date updated: Wed Mar 10 2021 14:57:12 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:57:12
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const leadAuditService = require('../services/leads_audit.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ leadsAuditCtrl.service = leadAuditService;
 
 leadsAuditCtrl.getAllLeadsAudit = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.leadsAudit.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objLeadsAudit = await leadAuditService.getAllLeadsAudit(req.query);
-        if (objLeadsAudit.length > 0) {
-            util.setSuccess(200, 'LeadsAudit retrieved', objLeadsAudit);
+        if (objLeadsAudit && objLeadsAudit.rows && objLeadsAudit.count) {
+            util.setSuccess(200, 'LeadsAudit retrieved', objLeadsAudit.rows, objLeadsAudit.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No leadAudit found');
         }

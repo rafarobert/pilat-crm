@@ -109,6 +109,7 @@ import { CrmBillsComponent } from './components/suitecrm/crm-bills/crm-bills.com
 import { CronsComponent } from './components/crud/crons/crons.component';
 import { AddCronComponent } from './components/crud/crons/add-cron/add-cron.component';
 import { DeleteCronComponent } from './components/crud/crons/delete-cron/delete-cron.component';
+import {DataTablesModule} from "angular-datatables";
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -230,7 +231,7 @@ export const MY_DATE_FORMATS = {
     MatTimepickerModule,
     MomentDateModule,
     MatCardModule,
-    
+    DataTablesModule
   ],
   exports: [],
   providers: [

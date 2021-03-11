@@ -38,7 +38,7 @@ class OpportunityService {
 				let offset = Object.keys(query).length ? query.offset ? query.offset : query.start ? query.start : query.limit ? 0 : null : null;
 				let where = Object.keys(query).length ? query.where ? JSON.parse(query.where) : null : null;
 
-				return await models.sequelize.opportunities.findAll({
+				return await models.sequelize.opportunities.findAndCountAll({
 					attributes:query.select ? query.select.split(',') : null,
 					where: where && !where.where ? where : null,
 					limit: query.limit ? parseInt(query.limit) : null,
@@ -156,7 +156,7 @@ class OpportunityService {
 
 	static async addOpportunity(newOpportunity) {		try {
 
-			let objOpportunity, respContacts;
+			let objOpportunity, respContacts, pilatLog;
 
 			if(sql) {
 
@@ -167,12 +167,16 @@ class OpportunityService {
 						newOpportunity.date_modified = new Date();
 						await models.sequelize.opportunities.update(newOpportunity, {where:{id:newOpportunity.id}});
 						respOpportunity = await models.sequelize.opportunities.findOne({where: { id: newOpportunity.id }});
+						objOpportunity = respOpportunity && respOpportunity.dataValues ? respOpportunity.dataValues : null;
+						pilatLog = await crmService.setPilatLog('update', 'opportunities',objOpportunity.name, objOpportunity.id, objOpportunity.id, objOpportunity.assigned_user_id);
 					} else {
 						newOpportunity.id = models.sequelize.objectId().toString();
 						newOpportunity.date_entered = new Date();
 						newOpportunity.date_modified = new Date();
 						newOpportunity.date_closed = new Date();
 						respOpportunity = await models.sequelize.opportunities.create(newOpportunity);
+						objOpportunity = respOpportunity && respOpportunity.dataValues ? respOpportunity.dataValues : null;
+						pilatLog = await crmService.setPilatLog('create', 'opportunities',objOpportunity.name, objOpportunity.id, objOpportunity.id, objOpportunity.assigned_user_id);
 					}
 					if (newOpportunity.opportunityOpportunitiesCstm) {
 						if (newOpportunity.opportunityOpportunitiesCstm.id_c){
@@ -188,17 +192,21 @@ class OpportunityService {
 
 					// BEGIN CONTACTS
 
-					let respContactsCstm, respOpportunitiesContacts;
+					let respContactsCstm, objContacts, respOpportunitiesContacts, objOpportunitiesContacts;
 					if (newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts) {
 						if (newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.id) {
 							newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.date_modified = new Date();
 							await models.sequelize.contacts.update(newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts, {where:{id:newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.id}});
 							respContacts = await models.sequelize.contacts.findOne({where: { id: newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.id }});
+							objContacts = respContacts && respContacts.dataValues ? respContacts.dataValues : null;
+							pilatLog = await crmService.setPilatLog('update', 'contacts',objContacts.first_name+' '+objContacts.last_name, objContacts.id, objOpportunity.id, objOpportunity.assigned_user_id);
 						} else {
 							newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.id = models.sequelize.objectId().toString();
 							newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.date_entered = new Date();
 							newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.date_modified = new Date();
 							respContacts = await models.sequelize.contacts.create(newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts);
+							objContacts = respContacts && respContacts.dataValues ? respContacts.dataValues : null;
+							pilatLog = await crmService.setPilatLog('create', 'contacts',objContacts.first_name+' '+objContacts.last_name, objContacts.id, objOpportunity.id, objOpportunity.assigned_user_id);
 						}
 
 						if (newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm) {
@@ -218,12 +226,16 @@ class OpportunityService {
 								newOpportunity.opportunityOpportunitiesContacts.contact_id = respContacts.dataValues.id;
 								await models.sequelize.opportunitiesContacts.update(newOpportunity.opportunityOpportunitiesContacts, {where:{opportunity_id:newOpportunity.opportunityOpportunitiesContacts.opportunity_id}});
 								respOpportunitiesContacts = await models.sequelize.opportunitiesContacts.findOne({where: { opportunity_id: newOpportunity.opportunityOpportunitiesContacts.opportunity_id }});
+								objOpportunitiesContacts = respOpportunitiesContacts && respOpportunitiesContacts.dataValues ? respOpportunitiesContacts.dataValues : null;
+								pilatLog = await crmService.setPilatLog('update', 'contacts',{description:'opportunities_contacts',from:objOpportunity.name,to:objContacts.first_name+' '+objContacts.last_name}, objOpportunitiesContacts.id, objOpportunity.id, objOpportunity.assigned_user_id);
 							} else {
 								newOpportunity.opportunityOpportunitiesContacts.id = models.sequelize.objectId().toString();
 								newOpportunity.opportunityOpportunitiesContacts.opportunity_id = respOpportunity.dataValues.id;
 								newOpportunity.opportunityOpportunitiesContacts.contact_id = respContacts.dataValues.id;
 								newOpportunity.opportunityOpportunitiesContacts.date_modified = new Date();
 								respOpportunitiesContacts = await models.sequelize.opportunitiesContacts.create(newOpportunity.opportunityOpportunitiesContacts);
+								objOpportunitiesContacts = respOpportunitiesContacts && respOpportunitiesContacts.dataValues ? respOpportunitiesContacts.dataValues : null;
+								pilatLog = await crmService.setPilatLog('create', 'contacts',{description:'opportunities_contacts',from:objOpportunity.name,to:objContacts.first_name+' '+objContacts.last_name}, objOpportunitiesContacts.id, objOpportunity.id, objOpportunity.assigned_user_id);
 							}
 						}
 						objOpportunity.opportunityOpportunitiesContacts = respOpportunitiesContacts.dataValues;
@@ -235,17 +247,21 @@ class OpportunityService {
 					//
 					// BEGIN EMAIL ADDRESSES
 
-					let respEmailAddresses, respEmailAddrBeanRel;
+					let respEmailAddresses, respEmailAddrBeanRel, objEmailAddresses, objEmailAddrBeanRel;
 					if (newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses) {
 						if (newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id) {
 							newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_modified = new Date();
 							await models.sequelize.emailAddresses.update(newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses, {where:{id:newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id}});
 							respEmailAddresses = await models.sequelize.emailAddresses.findOne({where: { id: newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id }});
+							objEmailAddresses = respEmailAddresses && respEmailAddresses.dataValues ? respEmailAddresses.dataValues : null;
+							pilatLog = await crmService.setPilatLog('update', 'emails',objEmailAddresses.email_address, objEmailAddresses.id, objOpportunity.id, objContacts.assigned_user_id);
 						} else {
 							newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id = models.sequelize.objectId().toString();
 							newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_entered = new Date();
 							newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_modified = new Date();
 							respEmailAddresses = await models.sequelize.emailAddresses.create(newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses);
+							objEmailAddresses = respEmailAddresses && respEmailAddresses.dataValues ? respEmailAddresses.dataValues : null;
+							pilatLog = await crmService.setPilatLog('create', 'emails',objEmailAddresses.email_address, objEmailAddresses.id, objOpportunity.id, objContacts.assigned_user_id);
 						}
 
 						if (newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel) {
@@ -255,6 +271,8 @@ class OpportunityService {
 								newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.email_address_id = respEmailAddresses.id;
 								await models.sequelize.emailAddrBeanRel.update(newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel, {where:{bean_id:newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.bean_id}});
 								respEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.findOne({where: { bean_id: newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.bean_id}});
+								objEmailAddrBeanRel = respEmailAddrBeanRel && respEmailAddrBeanRel.dataValues ? respEmailAddrBeanRel.dataValues : null;
+								pilatLog = await crmService.setPilatLog('update', 'emails',{description:'email_addr_bean_rel',from:objEmailAddresses.email_address,to:objContacts.first_name+' '+objContacts.last_name}, objEmailAddrBeanRel.id, objOpportunity.id, objOpportunity.assigned_user_id);
 							} else {
 								newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.id = models.sequelize.objectId().toString();
 								newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.bean_id = respContacts.id;
@@ -262,6 +280,8 @@ class OpportunityService {
 								newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.date_modified = new Date();
 								newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.date_created = new Date();
 								respEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.create(newOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel);
+								objEmailAddrBeanRel = respEmailAddrBeanRel && respEmailAddrBeanRel.dataValues ? respEmailAddrBeanRel.dataValues : null;
+								pilatLog = await crmService.setPilatLog('create', 'emails',{description:'email_addr_bean_rel',from:objEmailAddresses.email_address,to:objContacts.first_name+' '+objContacts.last_name}, objEmailAddrBeanRel.id, objOpportunity.id, objOpportunity.assigned_user_id);
 							}
 						}
 						objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel = respEmailAddrBeanRel.dataValues;
@@ -272,17 +292,21 @@ class OpportunityService {
 					//
 					// BEGIN ACCOUNTS
 
-					let respAccounts, respAccountsCstm, respAccountsOpportunities;
+					let respAccounts, respAccountsCstm, respAccountsOpportunities, objAccounts, objAccountsOpportunities;
 					if (newOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts) {
 						if (newOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.id) {
 							newOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.date_modified = new Date();
 							await models.sequelize.accounts.update(newOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts, {where:{id:newOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.id}});
 							respAccounts = await models.sequelize.accounts.findOne({where: { id: newOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.id }});
+							objAccounts = respAccounts && respAccounts.dataValues ? respAccounts.dataValues : null;
+							pilatLog = await crmService.setPilatLog('update', 'accounts',objAccounts.name, objAccounts.id, objOpportunity.id, objOpportunity.assigned_user_id);
 						} else {
 							newOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.id = models.sequelize.objectId().toString();
 							newOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.date_entered = new Date();
 							newOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.date_modified = new Date();
 							respAccounts = await models.sequelize.accounts.create(newOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts);
+							objAccounts = respAccounts && respAccounts.dataValues ? respAccounts.dataValues : null;
+							pilatLog = await crmService.setPilatLog('create', 'accounts',objAccounts.name, objAccounts.id, objOpportunity.id, objOpportunity.assigned_user_id);
 						}
 
 						if (newOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm) {
@@ -302,12 +326,16 @@ class OpportunityService {
 								newOpportunity.opportunityAccountsOpportunities.account_id = respAccounts.dataValues.id;
 								await models.sequelize.accountsOpportunities.update(newOpportunity.opportunityAccountsOpportunities, {where:{opportunity_id:newOpportunity.opportunityAccountsOpportunities.opportunity_id}});
 								respAccountsOpportunities = await models.sequelize.accountsOpportunities.findOne({where: { opportunity_id: newOpportunity.opportunityAccountsOpportunities.opportunity_id }});
+								objAccountsOpportunities = respAccountsOpportunities && respAccountsOpportunities.dataValues ? respAccountsOpportunities.dataValues : null;
+								pilatLog = await crmService.setPilatLog('update', 'accounts',{description:'accounts_opportunities',from:objAccounts.name,to:objOpportunity.name}, objAccountsOpportunities.id, objOpportunity.id, objOpportunity.assigned_user_id);
 							} else {
 								newOpportunity.opportunityAccountsOpportunities.id = models.sequelize.objectId().toString();
 								newOpportunity.opportunityAccountsOpportunities.opportunity_id = respOpportunity.dataValues.id;
 								newOpportunity.opportunityAccountsOpportunities.account_id = respAccounts.dataValues.id;
 								newOpportunity.opportunityAccountsOpportunities.date_modified = new Date();
 								respAccountsOpportunities = await models.sequelize.accountsOpportunities.create(newOpportunity.opportunityAccountsOpportunities);
+								objAccountsOpportunities = respAccountsOpportunities && respAccountsOpportunities.dataValues ? respAccountsOpportunities.dataValues : null;
+								pilatLog = await crmService.setPilatLog('create', 'accounts',{description:'accounts_opportunities',from:objAccounts.name,to:objOpportunity.name}, objAccountsOpportunities.id, objOpportunity.id, objOpportunity.assigned_user_id);
 							}
 						}
 						objOpportunity.opportunityAccountsOpportunities = respAccountsOpportunities.dataValues;
@@ -320,7 +348,7 @@ class OpportunityService {
 					// BEGIN AOS QUOTES
 
 					let nextNumber = await models.sequelize.aosQuotes.max('number');
-					let respAosQuotes, respAosQuotesCstm;
+					let respAosQuotes, respAosQuotesCstm, objAosQuotes;
 					if (newOpportunity.opportunityAosQuotes) {
 
 						newOpportunity.opportunityAosQuotes.total_amount = crmService.setNumberToSave(newOpportunity.opportunityAosQuotes.total_amount);
@@ -335,6 +363,8 @@ class OpportunityService {
 							newOpportunity.opportunityAosQuotes.number = newOpportunity.opportunityAosQuotes.number ? newOpportunity.opportunityAosQuotes.number : nextNumber+1;
 							await models.sequelize.aosQuotes.update(newOpportunity.opportunityAosQuotes, {where:{id:newOpportunity.opportunityAosQuotes.id}});
 							respAosQuotes = await models.sequelize.aosQuotes.findOne({where: { id: newOpportunity.opportunityAosQuotes.id }});
+							objAosQuotes = respAosQuotes && respAosQuotes.dataValues ? respAosQuotes.dataValues : null;
+							pilatLog = await crmService.setPilatLog('update', 'AOS_Quotes',objAosQuotes.name, objAosQuotes.id, objOpportunity.id, objOpportunity.assigned_user_id);
 						} else {
 							newOpportunity.opportunityAosQuotes.id = models.sequelize.objectId().toString();
 							newOpportunity.opportunityAosQuotes.opportunity_id = respOpportunity.dataValues.id;
@@ -342,6 +372,8 @@ class OpportunityService {
 							newOpportunity.opportunityAosQuotes.date_modified = new Date();
 							newOpportunity.opportunityAosQuotes.number = newOpportunity.opportunityAosQuotes.number ? newOpportunity.opportunityAosQuotes.number : nextNumber+1;
 							respAosQuotes = await models.sequelize.aosQuotes.create(newOpportunity.opportunityAosQuotes);
+							objAosQuotes = respAosQuotes && respAosQuotes.dataValues ? respAosQuotes.dataValues : null;
+							pilatLog = await crmService.setPilatLog('create', 'AOS_Quotes',objAosQuotes.name, objAosQuotes.id, objOpportunity.id, objOpportunity.assigned_user_id);
 						}
 
 						if (newOpportunity.opportunityAosQuotes.aoQuoteAosQuotesCstm) {
@@ -435,7 +467,7 @@ class OpportunityService {
 
 	static async updateOpportunity(id ,updateOpportunity, userLoggedIn) {
 		try {
-			let objOpportunity;
+			let objOpportunity, pilatLog;
 
 			if(sql) {
 				let respOpportunity, respContacts, respOpportunitiesCstm;
@@ -445,6 +477,8 @@ class OpportunityService {
 						updateOpportunity.date_modified = new Date();
 						await models.sequelize.opportunities.update(updateOpportunity, {where:{id:id}});
 						respOpportunity = await models.sequelize.opportunities.findOne({where: { id: id }});
+						objOpportunity = respOpportunity && respOpportunity.dataValues ? respOpportunity.dataValues : null;
+						pilatLog = await crmService.setPilatLog('update', 'opportunities',objOpportunity.name, objOpportunity.id, objOpportunity.id, objOpportunity.assigned_user_id);
 					} else {
 						let oldOpportunity = await models.sequelize.opportunities.findOne({where:{id:id}});
 						if (oldOpportunity && oldOpportunity.dataValues) {
@@ -452,12 +486,16 @@ class OpportunityService {
 							updateOpportunity.date_modified = new Date();
 							await models.sequelize.opportunities.update(updateOpportunity, {where:{id:oldOpportunity.id}});
 							respOpportunity = await models.sequelize.opportunities.findOne({where: { id: oldOpportunity.id }});
+							objOpportunity = respOpportunity && respOpportunity.dataValues ? respOpportunity.dataValues : null;
+							pilatLog = await crmService.setPilatLog('update', 'opportunities', objOpportunity.name, objOpportunity.id, objOpportunity.id, objOpportunity.assigned_user_id);
 						} else {
 							updateOpportunity.id = models.sequelize.objectId().toString();
 							updateOpportunity.date_entered = new Date();
 							updateOpportunity.date_modified = new Date();
 							updateOpportunity.date_closed = new Date();
 							respOpportunity = await models.sequelize.opportunities.create(updateOpportunity);
+							objOpportunity = respOpportunity && respOpportunity.dataValues ? respOpportunity.dataValues : null;
+							pilatLog = await crmService.setPilatLog('create', 'opportunities', objOpportunity.name, objOpportunity.id, objOpportunity.id, objOpportunity.assigned_user_id);
 						}
 					}
 					if (updateOpportunity.opportunityOpportunitiesCstm) {
@@ -481,19 +519,23 @@ class OpportunityService {
 
 					// Begin Contacts
 
-					let respContactsCstm;
+					let respContactsCstm, objContacts;
 					if (updateOpportunity.opportunityOpportunitiesContacts) {
 						if (updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts) {
 							if (updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.id) {
 								updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.date_modified = new Date();
 								await models.sequelize.contacts.update(updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts, {where:{id:updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.id}});
 								respContacts = await models.sequelize.contacts.findOne({where: { id: updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.id }});
+								objContacts = respContacts && respContacts.dataValues ? respContacts.dataValues : null;
+								pilatLog = await crmService.setPilatLog('update', 'contacts', objContacts.first_name+' '+objContacts.last_name, objContacts.id, objOpportunity.id, objOpportunity.assigned_user_id);
 							} else {
 								updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.id = models.sequelize.objectId().toString();
 								updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.date_entered = new Date();
 								updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.date_reviewed = new Date();
 								updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.date_modified = new Date();
 								respContacts = await models.sequelize.contacts.create(updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts);
+								objContacts = respContacts && respContacts.dataValues ? respContacts.dataValues : null;
+								pilatLog = await crmService.setPilatLog('create', 'contacts', objContacts.first_name+' '+objContacts.last_name, objContacts.id, objOpportunity.id, objOpportunity.assigned_user_id);
 							}
 
 							if (updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactContactsCstm) {
@@ -506,7 +548,7 @@ class OpportunityService {
 								}
 							}
 
-							let respOpportunitiesContacts;
+							let respOpportunitiesContacts, objOpportunitiesContacts;
 							if (updateOpportunity.opportunityOpportunitiesContacts) {
 								if (updateOpportunity.opportunityOpportunitiesContacts.id) {
 									updateOpportunity.opportunityOpportunitiesContacts.date_modified = new Date();
@@ -514,6 +556,8 @@ class OpportunityService {
 									updateOpportunity.opportunityOpportunitiesContacts.contact_id = respContacts.dataValues.id;
 									await models.sequelize.opportunitiesContacts.update(updateOpportunity.opportunityOpportunitiesContacts, {where:{opportunity_id:id}});
 									respOpportunitiesContacts = await models.sequelize.opportunitiesContacts.findOne({where: { opportunity_id: id }});
+									objOpportunitiesContacts = respOpportunitiesContacts && respOpportunitiesContacts.dataValues ? respOpportunitiesContacts.dataValues : null;
+									pilatLog = await crmService.setPilatLog('update', 'contacts', {description:'opportunities_contacts',from:objOpportunity.name,to:objContacts.first_name+' '+objContacts.last_name}, objOpportunitiesContacts.id, objOpportunity.id, objOpportunity.assigned_user_id);
 								} else {
 									let oldOpportunityOpportunitiesContacts = await models.sequelize.opportunitiesContacts.findOne({where:{opportunity_id:id}});
 									if (oldOpportunityOpportunitiesContacts && oldOpportunityOpportunitiesContacts.dataValues) {
@@ -523,12 +567,16 @@ class OpportunityService {
 										updateOpportunity.opportunityOpportunitiesContacts.contact_id = respContacts.dataValues.id;
 										await models.sequelize.opportunitiesContacts.update(updateOpportunity.opportunityOpportunitiesContacts, {where:{id:oldOpportunityOpportunitiesContacts.id}});
 										respOpportunitiesContacts = await models.sequelize.opportunitiesContacts.findOne({where: { id: oldOpportunityOpportunitiesContacts.id }});
+										objOpportunitiesContacts = respOpportunitiesContacts && respOpportunitiesContacts.dataValues ? respOpportunitiesContacts.dataValues : null;
+										pilatLog = await crmService.setPilatLog('update', 'contacts', {description:'opportunities_contacts',from:objOpportunity.name,to:objContacts.first_name+' '+objContacts.last_name}, objOpportunitiesContacts.id, objOpportunity.id, objOpportunity.assigned_user_id);
 									} else {
 										updateOpportunity.opportunityOpportunitiesContacts.id = models.sequelize.objectId().toString();
 										updateOpportunity.opportunityOpportunitiesContacts.opportunity_id = respOpportunity.dataValues.id;
 										updateOpportunity.opportunityOpportunitiesContacts.contact_id = respContacts.dataValues.id;
 										updateOpportunity.opportunityOpportunitiesContacts.date_modified = new Date();
 										respOpportunitiesContacts = await models.sequelize.opportunitiesContacts.create(updateOpportunity.opportunityOpportunitiesContacts);
+										objOpportunitiesContacts = respOpportunitiesContacts && respOpportunitiesContacts.dataValues ? respOpportunitiesContacts.dataValues : null;
+										pilatLog = await crmService.setPilatLog('create', 'contacts', {description:'opportunities_contacts',from:objOpportunity.name,to:objContacts.first_name+' '+objContacts.last_name}, objOpportunitiesContacts.id, objOpportunity.id, objOpportunity.assigned_user_id);
 									}
 								}
 							}
@@ -540,18 +588,22 @@ class OpportunityService {
 							//
 							// Begin Email Addresses
 
-							let respEmailAddresses, respEmailAddrBeanRel;
+							let respEmailAddresses, respEmailAddrBeanRel, objEmailAddresses, objEmailAddrBeanRel;
 							if (updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses) {
 								if (updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id) {
 									updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_modified = new Date();
 									await models.sequelize.emailAddresses.update(updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses, {where:{id:updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id}});
 									respEmailAddresses = await models.sequelize.emailAddresses.findOne({where: { id: updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id }});
+									objEmailAddresses = respEmailAddresses && respEmailAddresses.dataValues ? respEmailAddresses.dataValues : null;
+									pilatLog = await crmService.setPilatLog('update', 'emails', objEmailAddresses.email_address, objEmailAddresses.id, objOpportunity.id, objOpportunity.assigned_user_id);
 								} else {
 									updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.id = models.sequelize.objectId().toString();
 									updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_entered = new Date();
 									updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_reviewed = new Date();
 									updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.date_modified = new Date();
 									respEmailAddresses = await models.sequelize.emailAddresses.create(updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses);
+									objEmailAddresses = respEmailAddresses && respEmailAddresses.dataValues ? respEmailAddresses.dataValues : null;
+									pilatLog = await crmService.setPilatLog('create', 'emails', objEmailAddresses.email_address, objEmailAddresses.id, objOpportunity.id, objOpportunity.assigned_user_id);
 								}
 
 								if (updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel) {
@@ -561,6 +613,8 @@ class OpportunityService {
 										updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.email_address_id = respEmailAddresses.dataValues.id;
 										await models.sequelize.emailAddrBeanRel.update(updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel, {where: {bean_id: updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.bean_id}});
 										respEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.findOne({where: {bean_id: updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.bean_id}});
+										objEmailAddrBeanRel = respEmailAddrBeanRel && respEmailAddrBeanRel.dataValues ? respEmailAddrBeanRel.dataValues : null;
+										pilatLog = await crmService.setPilatLog('update', 'emails', {description:'email_addr_bean_rel',from:objEmailAddresses.email_address, to:objContacts.first_name+' '+objContacts.last_name}, objEmailAddresses.id, objOpportunity.id, objOpportunity.assigned_user_id);
 									} else {
 										updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.id = models.sequelize.objectId().toString();
 										updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.bean_id = respContacts.dataValues.id;
@@ -568,6 +622,8 @@ class OpportunityService {
 										updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.date_created = new Date();
 										updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.date_modified = new Date();
 										respEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.create(updateOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel);
+										objEmailAddrBeanRel = respEmailAddrBeanRel && respEmailAddrBeanRel.dataValues ? respEmailAddrBeanRel.dataValues : null;
+										pilatLog = await crmService.setPilatLog('create', 'emails', {description:'email_addr_bean_rel',from:objEmailAddresses.email_address, to:objContacts.first_name+' '+objContacts.last_name}, objEmailAddresses.id, objOpportunity.id, objOpportunity.assigned_user_id);
 									}
 									objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel = respEmailAddrBeanRel && respEmailAddrBeanRel.dataValues ? respEmailAddrBeanRel.dataValues : null;
 									objOpportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses = respEmailAddresses && respEmailAddresses.dataValues ? respEmailAddresses.dataValues : null;
@@ -581,7 +637,7 @@ class OpportunityService {
 					//
 					// Begin Accounts
 
-					let respAccounts, respAccountsCstm, respAccountsOpportunities;
+					let respAccounts, respAccountsCstm, respAccountsOpportunities, objAccounts, objAccountsOpportunities;
 					if (updateOpportunity.opportunityAccountsOpportunities) {
 
 						if (updateOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts) {
@@ -589,12 +645,16 @@ class OpportunityService {
 								updateOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.date_modified = new Date();
 								await models.sequelize.accounts.update(updateOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts, {where:{id:updateOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.id}});
 								respAccounts = await models.sequelize.accounts.findOne({where: { id: updateOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.id }});
+								objAccounts = respAccounts && respAccounts.dataValues ? respAccounts.dataValues : null;
+								pilatLog = await crmService.setPilatLog('update', 'accounts', objAccounts.name, objAccounts.id, objOpportunity.id, objOpportunity.assigned_user_id);
 							} else {
 								updateOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.id = models.sequelize.objectId().toString();
 								updateOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.date_entered = new Date();
 								updateOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.date_reviewed = new Date();
 								updateOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.date_modified = new Date();
 								respAccounts = await models.sequelize.accounts.create(updateOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts);
+								objAccounts = respAccounts && respAccounts.dataValues ? respAccounts.dataValues : null;
+								pilatLog = await crmService.setPilatLog('create', 'accounts', objAccounts.name, objAccounts.id, objOpportunity.id, objOpportunity.assigned_user_id);
 							}
 
 							if (updateOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.accountAccountsCstm) {
@@ -614,12 +674,16 @@ class OpportunityService {
 									updateOpportunity.opportunityAccountsOpportunities.account_id = respAccounts.dataValues.id;
 									await models.sequelize.accountsOpportunities.update(updateOpportunity.opportunityAccountsOpportunities, {where: {opportunity_id: updateOpportunity.opportunityAccountsOpportunities.opportunity_id}});
 									respAccountsOpportunities = await models.sequelize.accountsOpportunities.findOne({where: {opportunity_id: updateOpportunity.opportunityAccountsOpportunities.opportunity_id}});
+									objAccountsOpportunities = respAccountsOpportunities && respAccountsOpportunities.dataValues ? respAccounts.dataValues : null;
+									pilatLog = await crmService.setPilatLog('update', 'accounts', {description:'accounts_opportunities',from:objAccounts.name,to:objOpportunity.name}, objAccountsOpportunities.id, objOpportunity.id, objOpportunity.assigned_user_id);
 								} else {
 									updateOpportunity.opportunityAccountsOpportunities.id = models.sequelize.objectId().toString();
 									updateOpportunity.opportunityAccountsOpportunities.date_modified = new Date();
 									updateOpportunity.opportunityAccountsOpportunities.opportunity_id = respOpportunity.dataValues.id;
 									updateOpportunity.opportunityAccountsOpportunities.account_id = respAccounts.dataValues.id;
 									respAccountsOpportunities = await models.sequelize.accountsOpportunities.create(updateOpportunity.opportunityAccountsOpportunities);
+									objAccountsOpportunities = respAccountsOpportunities && respAccountsOpportunities.dataValues ? respAccounts.dataValues : null;
+									pilatLog = await crmService.setPilatLog('create', 'accounts', {description:'accounts_opportunities',from:objAccounts.name,to:objOpportunity.name}, objAccountsOpportunities.id, objOpportunity.id, objOpportunity.assigned_user_id);
 								}
 								objOpportunity.opportunityAccountsOpportunities = respAccountsOpportunities && respAccountsOpportunities.dataValues ? respAccountsOpportunities.dataValues : null;
 								objOpportunity.opportunityAccountsOpportunities.accountOpportunityAccounts = respAccounts && respAccounts.dataValues ? respAccounts.dataValues : null;

@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:35:36 GMT-0400 (Bolivia Time)
- * Time: 15:35:36
+ * Date: Wed Mar 10 2021 14:56:24 GMT-0400 (Bolivia Time)
+ * Time: 14:56:24
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:35:36 GMT-0400 (Bolivia Time)
- * Last time updated: 15:35:36
+ * Last date updated: Wed Mar 10 2021 14:56:24 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:56:24
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const aowProcessedService = require('../services/aow_processed.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ aowProcessedCtrl.service = aowProcessedService;
 
 aowProcessedCtrl.getAllAowProcessed = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.aowProcessed.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objAowProcessed = await aowProcessedService.getAllAowProcessed(req.query);
-        if (objAowProcessed.length > 0) {
-            util.setSuccess(200, 'AowProcessed retrieved', objAowProcessed);
+        if (objAowProcessed && objAowProcessed.rows && objAowProcessed.count) {
+            util.setSuccess(200, 'AowProcessed retrieved', objAowProcessed.rows, objAowProcessed.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No aowProcessed found');
         }

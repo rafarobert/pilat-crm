@@ -1081,6 +1081,12 @@
         },
         
         {
+            "text":"PilatLogs",
+            "id":"pilat-logs",
+            "leaf":true
+        },
+        
+        {
             "text":"PilatMails",
             "id":"pilat-mails",
             "leaf":true

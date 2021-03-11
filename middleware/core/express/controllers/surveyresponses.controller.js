@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:37:07 GMT-0400 (Bolivia Time)
- * Time: 15:37:7
+ * Date: Wed Mar 10 2021 14:57:48 GMT-0400 (Bolivia Time)
+ * Time: 14:57:48
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:37:07 GMT-0400 (Bolivia Time)
- * Last time updated: 15:37:7
+ * Last date updated: Wed Mar 10 2021 14:57:48 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:57:48
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const surveyresponseService = require('../services/surveyresponses.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ surveyresponsesCtrl.service = surveyresponseService;
 
 surveyresponsesCtrl.getAllSurveyresponses = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.surveyresponses.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objSurveyresponses = await surveyresponseService.getAllSurveyresponses(req.query);
-        if (objSurveyresponses.length > 0) {
-            util.setSuccess(200, 'Surveyresponses retrieved', objSurveyresponses);
+        if (objSurveyresponses && objSurveyresponses.rows && objSurveyresponses.count) {
+            util.setSuccess(200, 'Surveyresponses retrieved', objSurveyresponses.rows, objSurveyresponses.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No surveyresponse found');
         }

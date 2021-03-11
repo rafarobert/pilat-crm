@@ -5,11 +5,17 @@ class Util {
 		this.type = null;
 		this.data = null;
 		this.message = null;
+		this.recordsTotal = null;
+		this.recordsFiltered = null;
+		this.recordsOffset = null;
 	}
 
-	setSuccess(statusCode, message, data) {
+	setSuccess(statusCode, message, data, total = null, filtered = null, offset = null) {
 		this.statusCode = statusCode;
 		this.message = message;
+		this.recordsTotal = parseInt(total);
+		this.recordsFiltered = parseInt(filtered);
+		this.recordsOffset = parseInt(offset);
 		this.data = data;
 		this.type = 'success';
 	}
@@ -27,11 +33,38 @@ class Util {
 	}
 
 	send(res) {
-		const result = {
-			status: this.type,
-			message: this.message,
-			data: this.data,
-		};
+		let result;
+		if (this.recordsTotal && this.recordsFiltered && this.recordsOffset) {
+			result = {
+				status: this.type,
+				message: this.message,
+				recordsTotal: this.recordsTotal,
+				recordsFiltered: this.recordsFiltered,
+				recordsOffset: this.recordsOffset,
+				data: this.data,
+			};
+		} else if (this.recordsTotal && this.recordsFiltered) {
+			result = {
+				status: this.type,
+				message: this.message,
+				recordsTotal: this.recordsTotal,
+				recordsFiltered: this.recordsFiltered,
+				data: this.data,
+			};
+		} else if (this.recordsTotal) {
+			result = {
+				status: this.type,
+				message: this.message,
+				recordsTotal: this.recordsTotal,
+				data: this.data,
+			};
+		} else {
+			result = {
+				status: this.type,
+				message: this.message,
+				data: this.data,
+			};
+		}
 
 		if (this.type === 'success') {
 			return res.status(this.statusCode).json(result);
@@ -221,6 +254,33 @@ class Util {
 		return false;
 	}
 
+	getOrderByColumnDirection(attributes,body) {
+		let column, dir;
+		if (body) {
+			if (attributes) {
+				let fields = Object.keys(attributes);
+				if (fields && fields.length) {
+					let orderIndex, orderName;
+					for(let i = 0 ; i < fields.length ; i++) {
+						let field = fields[i];
+						if (body[`order[${i}][column]`]) {
+							orderIndex = body[`order[${i}][column]`];
+							orderName = body[`columns[${orderIndex}][data]`];
+							if (orderName) {
+								if (body[`order[${i}][dir]`]) {
+									dir = body[`order[${i}][dir]`];
+								}
+								column = orderName;
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return [column, dir];
+	}
 
 }
 

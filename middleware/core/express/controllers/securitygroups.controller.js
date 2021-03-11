@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:37:00 GMT-0400 (Bolivia Time)
- * Time: 15:37:0
+ * Date: Wed Mar 10 2021 14:57:42 GMT-0400 (Bolivia Time)
+ * Time: 14:57:42
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:37:00 GMT-0400 (Bolivia Time)
- * Last time updated: 15:37:0
+ * Last date updated: Wed Mar 10 2021 14:57:42 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:57:42
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const securitygroupService = require('../services/securitygroups.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ securitygroupsCtrl.service = securitygroupService;
 
 securitygroupsCtrl.getAllSecuritygroups = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.securitygroups.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objSecuritygroups = await securitygroupService.getAllSecuritygroups(req.query);
-        if (objSecuritygroups.length > 0) {
-            util.setSuccess(200, 'Securitygroups retrieved', objSecuritygroups);
+        if (objSecuritygroups && objSecuritygroups.rows && objSecuritygroups.count) {
+            util.setSuccess(200, 'Securitygroups retrieved', objSecuritygroups.rows, objSecuritygroups.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No securitygroup found');
         }

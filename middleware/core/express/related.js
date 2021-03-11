@@ -1976,6 +1976,17 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.pilatDict
 
 //<es-section>
 
+models.sequelize.pilatLogs.belongsTo(models.sequelize.lcObjLocalDbRelatedTableName, {foreignKey:'meeting_id', sourceKey:'id'});
+models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.pilatLogs,{foreignKey:'meeting_id', sourceKey:'id'});
+
+//</es-section>
+
+
+
+// projects_opportunities
+
+//<es-section>
+
 models.sequelize.pilatMails.belongsTo(models.sequelize.lcObjLocalDbRelatedTableName, {foreignKey:'meeting_id', sourceKey:'id'});
 models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.pilatMails,{foreignKey:'meeting_id', sourceKey:'id'});
 
@@ -1983,7 +1994,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.pilatMail
 
 
 
-// projects_opportunities
+// projects_products
 
 //<es-section>
 
@@ -1994,7 +2005,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.pilatModu
 
 
 
-// projects_products
+// project_contacts_1_c
 
 //<es-section>
 
@@ -2005,7 +2016,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.pilatPara
 
 
 
-// project_contacts_1_c
+// project_cstm
 
 //<es-section>
 
@@ -2016,7 +2027,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.pilatView
 
 
 
-// project_cstm
+// project_task
 
 //<es-section>
 
@@ -2027,7 +2038,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.project,{
 
 
 
-// project_task
+// project_task_audit
 
 //<es-section>
 
@@ -2038,7 +2049,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.projectsA
 
 
 
-// project_task_audit
+// project_users_1_c
 
 //<es-section>
 
@@ -2049,7 +2060,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.projectsB
 
 
 
-// project_users_1_c
+// prospects
 
 //<es-section>
 
@@ -2060,7 +2071,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.projectsC
 
 
 
-// prospects
+// prospects_cstm
 
 //<es-section>
 
@@ -2071,7 +2082,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.projectsC
 
 
 
-// prospects_cstm
+// prospect_lists
 
 //<es-section>
 
@@ -2082,7 +2093,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.projectsO
 
 
 
-// prospect_lists
+// prospect_lists_prospects
 
 //<es-section>
 
@@ -2093,7 +2104,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.projectsP
 
 
 
-// prospect_lists_prospects
+// prospect_list_campaigns
 
 //<es-section>
 
@@ -2104,7 +2115,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.projectCo
 
 
 
-// prospect_list_campaigns
+// relationships
 
 //<es-section>
 
@@ -2115,7 +2126,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.projectCs
 
 
 
-// relationships
+// releases
 
 //<es-section>
 
@@ -2126,7 +2137,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.projectTa
 
 
 
-// releases
+// reminders
 
 //<es-section>
 
@@ -2137,7 +2148,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.projectTa
 
 
 
-// reminders
+// reminders_invitees
 
 //<es-section>
 
@@ -2148,7 +2159,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.projectUs
 
 
 
-// reminders_invitees
+// roles
 
 //<es-section>
 
@@ -2159,7 +2170,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.prospects
 
 
 
-// roles
+// roles_modules
 
 //<es-section>
 
@@ -2170,7 +2181,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.prospects
 
 
 
-// roles_modules
+// roles_users
 
 //<es-section>
 
@@ -2181,7 +2192,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.prospectL
 
 
 
-// roles_users
+// sai_clientes
 
 //<es-section>
 
@@ -2192,7 +2203,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.prospectL
 
 
 
-// sai_clientes
+// saved_search
 
 //<es-section>
 
@@ -2203,7 +2214,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.prospectL
 
 
 
-// saved_search
+// schedulers
 
 //<es-section>
 
@@ -2214,7 +2225,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.relations
 
 
 
-// schedulers
+// securitygroups
 
 //<es-section>
 
@@ -2225,7 +2236,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.releases,
 
 
 
-// securitygroups
+// securitygroups_acl_roles
 
 //<es-section>
 
@@ -2236,7 +2247,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.reminders
 
 
 
-// securitygroups_acl_roles
+// securitygroups_audit
 
 //<es-section>
 
@@ -2247,7 +2258,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.reminders
 
 
 
-// securitygroups_audit
+// securitygroups_default
 
 //<es-section>
 
@@ -2258,7 +2269,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.roles,{fo
 
 
 
-// securitygroups_default
+// securitygroups_records
 
 //<es-section>
 
@@ -2269,7 +2280,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.rolesModu
 
 
 
-// securitygroups_records
+// securitygroups_users
 
 //<es-section>
 
@@ -2280,7 +2291,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.rolesUser
 
 
 
-// securitygroups_users
+// spots
 
 //<es-section>
 
@@ -2291,7 +2302,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.saiClient
 
 
 
-// spots
+// sugarfeed
 
 //<es-section>
 
@@ -2302,7 +2313,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.savedSear
 
 
 
-// sugarfeed
+// surveyquestionoptions
 
 //<es-section>
 
@@ -2313,7 +2324,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.scheduler
 
 
 
-// surveyquestionoptions
+// surveyquestionoptions_audit
 
 //<es-section>
 
@@ -2324,7 +2335,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.securityg
 
 
 
-// surveyquestionoptions_audit
+// surveyquestionoptions_surveyquestionresponses
 
 //<es-section>
 
@@ -2335,7 +2346,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.securityg
 
 
 
-// surveyquestionoptions_surveyquestionresponses
+// surveyquestionresponses
 
 //<es-section>
 
@@ -2346,7 +2357,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.securityg
 
 
 
-// surveyquestionresponses
+// surveyquestionresponses_audit
 
 //<es-section>
 
@@ -2357,7 +2368,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.securityg
 
 
 
-// surveyquestionresponses_audit
+// surveyquestions
 
 //<es-section>
 
@@ -2368,7 +2379,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.securityg
 
 
 
-// surveyquestions
+// surveyquestions_audit
 
 //<es-section>
 
@@ -2379,7 +2390,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.securityg
 
 
 
-// surveyquestions_audit
+// surveyresponses
 
 //<es-section>
 
@@ -2390,7 +2401,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.spots,{fo
 
 
 
-// surveyresponses
+// surveyresponses_audit
 
 //<es-section>
 
@@ -2401,7 +2412,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.sugarfeed
 
 
 
-// surveyresponses_audit
+// surveys
 
 //<es-section>
 
@@ -2412,7 +2423,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.surveyque
 
 
 
-// surveys
+// surveys_audit
 
 //<es-section>
 
@@ -2423,7 +2434,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.surveyque
 
 
 
-// surveys_audit
+// tasks
 
 //<es-section>
 
@@ -2434,7 +2445,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.surveyque
 
 
 
-// tasks
+// templatesectionline
 
 //<es-section>
 
@@ -2445,7 +2456,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.surveyque
 
 
 
-// templatesectionline
+// tracker
 
 //<es-section>
 
@@ -2456,7 +2467,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.surveyque
 
 
 
-// tracker
+// upgrade_history
 
 //<es-section>
 
@@ -2467,7 +2478,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.surveyque
 
 
 
-// upgrade_history
+// users
 
 //<es-section>
 
@@ -2478,7 +2489,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.surveyque
 
 
 
-// users
+// users_cstm
 
 //<es-section>
 
@@ -2489,7 +2500,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.surveyres
 
 
 
-// users_cstm
+// users_feeds
 
 //<es-section>
 
@@ -2500,7 +2511,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.surveyres
 
 
 
-// users_feeds
+// users_last_import
 
 //<es-section>
 
@@ -2511,7 +2522,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.surveys,{
 
 
 
-// users_last_import
+// users_password_link
 
 //<es-section>
 
@@ -2522,7 +2533,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.surveysAu
 
 
 
-// users_password_link
+// users_signatures
 
 //<es-section>
 
@@ -2533,7 +2544,7 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.tasks,{fo
 
 
 
-// users_signatures
+// user_preferences
 
 //<es-section>
 
@@ -2544,23 +2555,12 @@ models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.templates
 
 
 
-// user_preferences
+// vcals
 
 //<es-section>
 
 models.sequelize.tracker.belongsTo(models.sequelize.lcObjLocalDbRelatedTableName, {foreignKey:'meeting_id', sourceKey:'id'});
 models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.tracker,{foreignKey:'meeting_id', sourceKey:'id'});
-
-//</es-section>
-
-
-
-// vcals
-
-//<es-section>
-
-models.sequelize.upgradeHistory.belongsTo(models.sequelize.lcObjLocalDbRelatedTableName, {foreignKey:'meeting_id', sourceKey:'id'});
-models.sequelize.lcObjLocalDbRelatedTableName.hasMany(models.sequelize.upgradeHistory,{foreignKey:'meeting_id', sourceKey:'id'});
 
 //</es-section>
 

@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:35:12 GMT-0400 (Bolivia Time)
- * Time: 15:35:12
+ * Date: Wed Mar 10 2021 14:56:02 GMT-0400 (Bolivia Time)
+ * Time: 14:56:2
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:35:12 GMT-0400 (Bolivia Time)
- * Last time updated: 15:35:12
+ * Last date updated: Wed Mar 10 2021 14:56:02 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:56:2
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const aopCaseUpdateService = require('../services/aop_case_updates.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ aopCaseUpdatesCtrl.service = aopCaseUpdateService;
 
 aopCaseUpdatesCtrl.getAllAopCaseUpdates = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.aopCaseUpdates.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objAopCaseUpdates = await aopCaseUpdateService.getAllAopCaseUpdates(req.query);
-        if (objAopCaseUpdates.length > 0) {
-            util.setSuccess(200, 'AopCaseUpdates retrieved', objAopCaseUpdates);
+        if (objAopCaseUpdates && objAopCaseUpdates.rows && objAopCaseUpdates.count) {
+            util.setSuccess(200, 'AopCaseUpdates retrieved', objAopCaseUpdates.rows, objAopCaseUpdates.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No aopCaseUpdate found');
         }

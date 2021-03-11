@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:35:57 GMT-0400 (Bolivia Time)
- * Time: 15:35:57
+ * Date: Wed Mar 10 2021 14:56:42 GMT-0400 (Bolivia Time)
+ * Time: 14:56:42
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:35:57 GMT-0400 (Bolivia Time)
- * Last time updated: 15:35:57
+ * Last date updated: Wed Mar 10 2021 14:56:42 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:56:42
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const documentRevisionService = require('../services/document_revisions.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ documentRevisionsCtrl.service = documentRevisionService;
 
 documentRevisionsCtrl.getAllDocumentRevisions = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.documentRevisions.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objDocumentRevisions = await documentRevisionService.getAllDocumentRevisions(req.query);
-        if (objDocumentRevisions.length > 0) {
-            util.setSuccess(200, 'DocumentRevisions retrieved', objDocumentRevisions);
+        if (objDocumentRevisions && objDocumentRevisions.rows && objDocumentRevisions.count) {
+            util.setSuccess(200, 'DocumentRevisions retrieved', objDocumentRevisions.rows, objDocumentRevisions.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No documentRevision found');
         }

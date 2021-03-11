@@ -7,6 +7,9 @@ import {ActivatedRoute} from "@angular/router";
 import {SpinnerService} from "../../services/spinner.service";
 import {BuildingService} from "../../services/building.service";
 import {Location} from "@angular/common";
+import {PilatLogService} from "../../../core/services/pilat-log.service";
+import {PilatLogs} from "../../../core/models/pilatLogs";
+import {environment} from "../../../environments/environment";
 declare var $:any;
 
 @Component({
@@ -17,6 +20,10 @@ declare var $:any;
 export class SuitecrmComponent implements OnInit,AfterViewInit {
   suiteCrmHtml:any;
   urlHome;
+  empData;
+  temp;
+  pilatLogs:PilatLogs[] = [];
+  contentPilatLogs: string = '';
   
   constructor(
     public http:HttpClient,
@@ -26,13 +33,17 @@ export class SuitecrmComponent implements OnInit,AfterViewInit {
     private activatedRoute: ActivatedRoute,
     public spinnerService: SpinnerService,
     private location: Location,
-    public buildingService: BuildingService
+    public buildingService: BuildingService,
+    private pilatLogService: PilatLogService
   ) {
   }
   
   iFrameLoaded() {
     this.location.replaceState('/');
     if (this.pilatService.currentUser) {
+      $('body').find('iframe').contents().find('head').append('<link rel="stylesheet" type="text/css" href="frontend/plugins/suitecrm/css/style.css"/>');
+      $('body').find('iframe').contents().find('head').append('<link rel="stylesheet" type="text/css" href="frontend/plugins/DataTables/DataTables-1.10.24/css/dataTables.bootstrap4.css"/>');
+      $('body').find('iframe').contents().find('head').append('<script type="text/javascript" src="frontend/plugins/DataTables/datatables.js"></script>');
       $('body').find('iframe').contents().find('body').find('#menu').hide();
       $('body').find('iframe').contents().find('body').find('#wrapper').css('margin','0px');
       $('body').find('iframe').contents().find('body').find('#logo').hide();
@@ -45,6 +56,45 @@ export class SuitecrmComponent implements OnInit,AfterViewInit {
       $('body').find('iframe').contents().find('body').find('.navbar-right').find('#logout_link').hide();
       $('body').find('iframe').contents().find('body').find('.navbar-right').find('#admin_link').hide();
       $('body').find('iframe').contents().find('body').find('.navbar-right').find('#utilsLink').hide();
+      
+      $('body').find('iframe').contents().find('body').find('#wrapper').find('.tab-content').prepend(`
+        <div style="width: 100%">
+            <div style="width: 100%" class="panel-pilat-log">
+                <h3><span>Flujo Actividad Pipeline</span></h3>
+                <table id="pilatLog" class="cell-border compact stripe" style="width:100%">
+                  <thead>
+                      <tr>
+                          <th>user</th>
+                          <th>action</th>
+                          <th>description</th>
+                          <th>module</th>
+                          <th>createdAt</th>
+                          <th>updatedAt</th>
+                      </tr>
+                  </thead>
+                </table>
+            </div>
+        </div>
+      `);
+  
+      $('body').find('iframe').contents().find('body').find('#wrapper').find('.tab-content').find('#pilatLog').DataTable({
+        processing: true,
+        serverSide: true,
+        serverMethod: 'post',
+        ajax: {
+          url: `${environment.backend.server.webpath}/api-pilatsrl/pilat-logs/datatable?`,
+          dataSrc: 'data'
+        },
+        columns: [
+          { data: 'user'},
+          { data: 'action' },
+          { data: 'description'},
+          { data: 'module'},
+          { data: 'createdAt'},
+          { data: 'updatedAt'}
+        ]
+      });
+      
       if (this.pilatService.isSmallScreen) {
         $('body .iframe-suitecrm').css('width','100%');
       } else {
@@ -55,9 +105,29 @@ export class SuitecrmComponent implements OnInit,AfterViewInit {
     this.buildingService.stop(this.buildingService.buildingRef);
   }
   
+  setHtmlPilatLogs() {
+    this.contentPilatLogs = '';
+    if (this.pilatLogs.length){
+      for (let i = 0 ; i < this.pilatLogs.length ; i++) {
+        let pilatLog = this.pilatLogs[i];
+        this.contentPilatLogs += pilatLog.description
+      }
+    }
+  }
+  
   ngOnInit(): void {
     this.buildingService.buildingRef= this.buildingService.start();
     this.urlHome = this.sanitizer.bypassSecurityTrustResourceUrl(this.pilatService.httpHome);
+    this.setParams();
+  }
+  
+  async setParams() {
+    if (this.pilatService.currentUser) {
+      let respPilatLogs:any = await this.pilatLogService.getAllPilatLogs([], {createdBy:this.pilatService.currentUser.id}).toPromise();
+      if (respPilatLogs && respPilatLogs.data) {
+        this.pilatLogs = respPilatLogs.data;
+      }
+    }
   }
   
   ngAfterViewInit(): void {

@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:36:03 GMT-0400 (Bolivia Time)
- * Time: 15:36:3
+ * Date: Wed Mar 10 2021 14:56:48 GMT-0400 (Bolivia Time)
+ * Time: 14:56:48
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:36:03 GMT-0400 (Bolivia Time)
- * Last time updated: 15:36:3
+ * Last date updated: Wed Mar 10 2021 14:56:48 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:56:48
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const emailMarketingService = require('../services/email_marketing.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ emailMarketingCtrl.service = emailMarketingService;
 
 emailMarketingCtrl.getAllEmailMarketing = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.emailMarketing.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objEmailMarketing = await emailMarketingService.getAllEmailMarketing(req.query);
-        if (objEmailMarketing.length > 0) {
-            util.setSuccess(200, 'EmailMarketing retrieved', objEmailMarketing);
+        if (objEmailMarketing && objEmailMarketing.rows && objEmailMarketing.count) {
+            util.setSuccess(200, 'EmailMarketing retrieved', objEmailMarketing.rows, objEmailMarketing.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No emailMarketing found');
         }

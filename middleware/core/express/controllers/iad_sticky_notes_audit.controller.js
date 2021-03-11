@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:36:18 GMT-0400 (Bolivia Time)
- * Time: 15:36:18
+ * Date: Wed Mar 10 2021 14:57:02 GMT-0400 (Bolivia Time)
+ * Time: 14:57:2
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:36:18 GMT-0400 (Bolivia Time)
- * Last time updated: 15:36:18
+ * Last date updated: Wed Mar 10 2021 14:57:02 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:57:2
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const iadStickyNoteAuditService = require('../services/iad_sticky_notes_audit.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ iadStickyNotesAuditCtrl.service = iadStickyNoteAuditService;
 
 iadStickyNotesAuditCtrl.getAllIadStickyNotesAudit = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.iadStickyNotesAudit.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objIadStickyNotesAudit = await iadStickyNoteAuditService.getAllIadStickyNotesAudit(req.query);
-        if (objIadStickyNotesAudit.length > 0) {
-            util.setSuccess(200, 'IadStickyNotesAudit retrieved', objIadStickyNotesAudit);
+        if (objIadStickyNotesAudit && objIadStickyNotesAudit.rows && objIadStickyNotesAudit.count) {
+            util.setSuccess(200, 'IadStickyNotesAudit retrieved', objIadStickyNotesAudit.rows, objIadStickyNotesAudit.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No iadStickyNoteAudit found');
         }

@@ -1,16 +1,17 @@
 /**
  * Created by @ES Express Systems
  * User: Rafael Gutierrez Gaspar
- * Date: Sun Mar 07 2021 15:34:58 GMT-0400 (Bolivia Time)
- * Time: 15:34:58
+ * Date: Wed Mar 10 2021 14:55:49 GMT-0400 (Bolivia Time)
+ * Time: 14:55:49
  * Last User updated: Rafael Gutierrez Gaspar
- * Last date updated: Sun Mar 07 2021 15:34:58 GMT-0400 (Bolivia Time)
- * Last time updated: 15:34:58
+ * Last date updated: Wed Mar 10 2021 14:55:49 GMT-0400 (Bolivia Time)
+ * Last time updated: 14:55:49
  *
  * Caution: es-sections will be replaced by script execution
  */
  
 //<es-section>
+const models = require('../../express');
 const accountOpportunityService = require('../services/accounts_opportunities.service');
 //</es-section>
 require('../../../utils/Prototipes');
@@ -31,9 +32,16 @@ accountsOpportunitiesCtrl.service = accountOpportunityService;
 
 accountsOpportunitiesCtrl.getAllAccountsOpportunities = async (req, res) => {
     try {
+        const { length } = req.body;
+        const { start } = req.body;
+        const [column, dir] = util.getOrderByColumnDirection(models.sequelize.accountsOpportunities.rawAttributes,req.body);
+        req.query.limit = length ? length : req.query.limit;
+        req.query.offset = start ? start : req.query.offset;
+        req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
         const objAccountsOpportunities = await accountOpportunityService.getAllAccountsOpportunities(req.query);
-        if (objAccountsOpportunities.length > 0) {
-            util.setSuccess(200, 'AccountsOpportunities retrieved', objAccountsOpportunities);
+        if (objAccountsOpportunities && objAccountsOpportunities.rows && objAccountsOpportunities.count) {
+            util.setSuccess(200, 'AccountsOpportunities retrieved', objAccountsOpportunities.rows, objAccountsOpportunities.count, req.query.limit, req.query.offset);
         } else {
             util.setSuccess(200, 'No accountOpportunity found');
         }

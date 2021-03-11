@@ -11,6 +11,7 @@
  */
  
 //<es-section>
+const models = require('../../../../core/express');
 const userService = require('./user.service');
 //</es-section>
 const Util = require('../../../../utils/Utils');
@@ -25,6 +26,13 @@ userCtrl.service = userService;
 
 userCtrl.getAllUsers = async (req, res) => {
 	try {
+		const { length } = req.body;
+		const { start } = req.body;
+		const [column, dir] = util.getOrderByColumnDirection(models.sequelize.pilatLogs.rawAttributes,req.body);
+		req.query.limit = length ? length : req.query.limit;
+		req.query.offset = start ? start : req.query.offset;
+		req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
 		const objUsers = await userService.getAllUsers(req.query);
 		if (objUsers.length > 0) {
 			util.setSuccess(200, 'Users retrieved', objUsers);

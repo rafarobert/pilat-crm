@@ -107,6 +107,9 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
   private tomorrow: Date;
   private afterTomorrow: Date;
   
+  private userOpportunities:Opportunities[];
+  private userProspects:Leads[];
+  
   spinnerRef;
   
   constructor(
@@ -243,13 +246,18 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
       assigned_user_id:this.pilatService.currentUser.id,
       status:[
         this.pilatService.parLeadNewStatus.par_cod,
-        this.pilatService.parLeadConvertedStatus.par_cod,
+        //this.pilatService.parLeadConvertedStatus.par_cod,
         this.pilatService.parLeadInProcessStatus.par_cod,
         this.pilatService.parLeadAssignedStatus.par_cod,
-        this.pilatService.parLeadAssignedStatus.par_cod
       ]
     }, [['date_modified',order]]).toPromise();
     
+    if (responseStageOpportunities && responseStageOpportunities.data) {
+      this.userOpportunities = responseStageOpportunities.data;
+    }
+    if (responseStageProspects && responseStageProspects.data) {
+      this.userProspects = responseStageProspects.data;
+    }
     let prospectStages:PilatParams[] = responseProspectStages.data;
     let opportunityStages:PilatParams[] = responseOpportunityStages.data;
     //await this.setModules();
@@ -349,7 +357,7 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
           let pipelineColumn = new PipelineColumn();
             if(responseStageProspects.data) {
               prospects = [];
-              let stageProspects:Leads[] = responseStageProspects.data.filter((param:Leads) => param.leadLeadsCstm.etapas_c == prospectStage.par_cod);
+              let stageProspects:Leads[] = responseStageProspects.data.filter((param:Leads) => param.leadLeadsCstm && param.leadLeadsCstm.etapas_c == prospectStage.par_cod);
               let alreadyOpportunities = [], onlyProspects = [], c = [];
               let totals:number[] = [];
               let currencies:string[] = [];
@@ -675,12 +683,17 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
             if (prospectId) {
               this.dialogService.open('El prospecto seleccionado no puede pasar a la etapa: '+this.pilatService.parOpportunityStageCierrePerdido.par_description+', debido a que esta etapa pertenece a una oportunidad, ¿Desea establecer el prospecto al estado: '+this.pilatService.parLeadDeadStatus.par_description,
                 'Validacion en flujo de etapas',async () => {
-                  this.spinnerService.spinnerRef = this.spinnerService.start();
-                  let respLeads:any = await this.crmLeadService.getLead(prospectId).toPromise();
-                  this.lead = respLeads.data;
-                  this.lead.status = this.pilatService.parLeadDeadStatus.par_cod;
-                  let responseLead:any = await this.crmLeadService.updateLead(prospectId,this.lead).toPromise();
-                  this.spinnerService.stop(this.spinnerService.spinnerRef);
+                // let prospectOpportunities = this.userOpportunities.filter((opportunity:Opportunities) => opportunity.)
+                //   this.dialogService.open('Al eliminar el prospecto seleccionado, ',
+                //     'Validacion en flujo de etapas',async () => {
+                    this.spinnerService.spinnerRef = this.spinnerService.start();
+                    let respLeads:any = await this.crmLeadService.getLead(prospectId).toPromise();
+                    this.lead = respLeads.data;
+                    this.lead.status = this.pilatService.parLeadDeadStatus.par_cod;
+                    let responseLead:any = await this.crmLeadService.updateLead(prospectId,this.lead).toPromise();
+                    this.setPipeline();
+                    this.spinnerService.stop(this.spinnerService.spinnerRef);
+                  // });
                 },'Si')
             }
           }
@@ -791,6 +804,10 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
               this.lead.opportunity_id = this.opportunity.id;
               this.lead.opportunity_amount = this.opportunity.amount+'';
               this.lead.opportunity_name = this.opportunity.name;
+              this.lead.contact_id = this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.id;
+              this.lead.account_id = this.opportunity.opportunityAccountsOpportunities.accountOpportunityAccounts.id;
+              this.lead.converted = 1;
+              this.lead.status = this.pilatService.parLeadConvertedStatus.par_cod;
               let responseLead:any = await this.crmLeadService.updateLead(this.lead.id, this.lead).toPromise();
               if (responseOpportunity.data) {
                 this.spinnerService.stop(this.spinnerService.spinnerRef);
@@ -807,6 +824,7 @@ export class PipelineDialogComponent implements OnInit, AfterViewInit {
                 //     this.dialogService.open('Hubo un problema al enviar la cotización al correo del contacto. '+ this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address ? 'Su correo es: ' + this.opportunity.opportunityOpportunitiesContacts.opportunityContactContacts.contactEmailAddrBeanRel.emailAddrBeanRelEmailAddresses.email_address : 'No tiene Correo Electronico','Error al enviar la cotización');
                 //   }
                 // },6000);
+                
                 transferArrayItem(event.previousContainer.data,
                   event.container.data,
                   event.previousIndex,

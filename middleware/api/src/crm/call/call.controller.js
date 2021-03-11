@@ -11,6 +11,7 @@
  */
  
 //<es-section>
+const models = require('../../../../core/express');
 const callService = require('./call.service');
 //</es-section>
 const Util = require('../../../../utils/Utils');
@@ -24,9 +25,16 @@ callCtrl.service = callService;
 
 callCtrl.getAllCalls = async (req, res) => {
 	try {
+		const { length } = req.body;
+		const { start } = req.body;
+		const [column, dir] = util.getOrderByColumnDirection(models.sequelize.pilatLogs.rawAttributes,req.body);
+		req.query.limit = length ? length : req.query.limit;
+		req.query.offset = start ? start : req.query.offset;
+		req.query.order = column && dir ? [[column,dir]] : req.query.order;
+
 		const objCalls = await callService.getAllCalls(req.query);
-		if (objCalls.length > 0) {
-			util.setSuccess(200, 'Calls retrieved', objCalls);
+		if (objCalls && objCalls.rows && objCalls.count) {
+			util.setSuccess(200, 'Calls retrieved', objCalls.rows, objCalls.count, req.query.limit, req.query.offset);
 		} else {
 			util.setSuccess(200, 'No calls found');
 		}
