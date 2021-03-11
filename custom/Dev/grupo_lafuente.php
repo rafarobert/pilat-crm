@@ -245,14 +245,14 @@ class My_Gel_EntryPoint {
             $add_cols  = "DISTINCT x.etapa, COUNT(*) AS cantidad";
             $add_group = "GROUP BY x.etapa";
         }
-        $sql = "SELECT {$add_cols} FROM (SELECT c.id, CASE WHEN d.etapas_c IS NULL OR TRIM(d.etapas_c) = '' OR TRIM(d.etapas_c) = 'NULL' THEN 'No asigando' ELSE d.etapas_c END AS 'etapa', 'PROSPECTO' AS tipo, c.assigned_user_id  FROM leads c INNER JOIN leads_cstm d ON d.id_c = c.id WHERE c.deleted = 0 UNION SELECT e.id, CASE WHEN e.sales_stage IS NULL OR TRIM(e.sales_stage) = '' OR TRIM(e.sales_stage) = 'NULL' THEN 'No asignado' ELSE e.sales_stage END AS 'etapa', 'OPORTUNIDAD' AS tipo, assigned_user_id FROM opportunities e WHERE e.deleted = 0) x WHERE x.id IS NOT NULL {$add_where}  {$add_group}";
+        $sql = "SELECT {$add_cols} FROM (SELECT c.id, CASE WHEN d.etapas_c IS NULL OR TRIM(d.etapas_c) = '' OR TRIM(d.etapas_c) = 'NULL' THEN 'No asigando' ELSE d.etapas_c END AS 'etapa', 'PROSPECTO' AS tipo, c.assigned_user_id, CASE WHEN d.etapas_c = 'CAPTADO' THEN 1 WHEN d.etapas_c = 'CALIFICADO' THEN 2 WHEN d.etapas_c = 'VISITA_FISICA_VIRTUAL' THEN 3 ELSE 0 END AS orden  FROM leads c INNER JOIN leads_cstm d ON d.id_c = c.id WHERE c.deleted = 0 UNION SELECT e.id, CASE WHEN e.sales_stage IS NULL OR TRIM(e.sales_stage) = '' OR TRIM(e.sales_stage) = 'NULL' THEN 'No asignado' ELSE e.sales_stage END AS 'etapa', 'OPORTUNIDAD' AS tipo, assigned_user_id,CASE WHEN e.sales_stage = 'COTIZACION_PROPUESTA' THEN 4 WHEN e.sales_stage = 'NEGOCIACION' THEN 5 WHEN e.sales_stage = 'RESERVA' THEN 6 WHEN e.sales_stage = 'CUOTA_INICIAL_COMPLETA' THEN 7 WHEN e.sales_stage = 'ARMADO_CARPETA' THEN 8 WHEN e.sales_stage = 'CIERRE_GANADO' THEN 9 WHEN e.sales_stage = 'CIERRE_PERDIDO' THEN 10 ELSE 0 END AS orden FROM opportunities e WHERE e.deleted = 0) x WHERE x.id IS NOT NULL {$add_where}  {$add_group} ORDER BY orden";
 
         $query = $GLOBALS['db']->query($sql);
         if ($tcol != "DETAIL") {
             $etapas = array();
             $colors = array();
             foreach ($GLOBALS['app_list_strings'] as $key => $value) {
-                if (is_array($value) && in_array($key, array("etapas_prospecto_list", "sales_stage_dom"))) {
+                if (is_array($value) && in_array($key, array("etapas_prospecto_list", "sales_stage_list"))) {
                     $etapas = array_merge($etapas, $value);
                 }
                 if (is_array($value) && $key == "chart_color_list") {
