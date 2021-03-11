@@ -42,8 +42,8 @@ export class SuitecrmComponent implements OnInit,AfterViewInit {
     this.location.replaceState('/');
     if (this.pilatService.currentUser) {
       $('body').find('iframe').contents().find('head').append('<link rel="stylesheet" type="text/css" href="frontend/plugins/suitecrm/css/style.css"/>');
-      $('body').find('iframe').contents().find('head').append('<link rel="stylesheet" type="text/css" href="frontend/plugins/DataTables/DataTables-1.10.24/css/dataTables.bootstrap4.css"/>');
-      $('body').find('iframe').contents().find('head').append('<script type="text/javascript" src="frontend/plugins/DataTables/datatables.js"></script>');
+      $('body').find('iframe').contents().find('head').append('<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">\n');
+      $('body').find('iframe').contents().find('head').append('<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>');
       $('body').find('iframe').contents().find('body').find('#menu').hide();
       $('body').find('iframe').contents().find('body').find('#wrapper').css('margin','0px');
       $('body').find('iframe').contents().find('body').find('#logo').hide();

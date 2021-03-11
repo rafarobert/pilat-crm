@@ -14,7 +14,7 @@ class Util {
 		this.statusCode = statusCode;
 		this.message = message;
 		this.recordsTotal = parseInt(total);
-		this.recordsFiltered = parseInt(filtered);
+		this.recordsFiltered = parseInt(total);
 		this.recordsOffset = parseInt(offset);
 		this.data = data;
 		this.type = 'success';

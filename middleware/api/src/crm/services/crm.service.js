@@ -512,7 +512,7 @@ class CrmService {
 				}
 				break;
 			case parUpdate.par_cod.toLowerCase():
-				parAction = parCreate;
+				parAction = parUpdate;
 				switch (module.toLowerCase()) {
 					case parLeads.par_cod.toLowerCase():
 						parModule = parLeads;
