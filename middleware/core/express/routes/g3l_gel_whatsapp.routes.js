@@ -90,6 +90,7 @@ router.post(`/api-${sys}/g3l-gel-whatsapp/updateG3lGelWhatsappByParentId`, (req,
 
 
 router.get(`/api-${sys}/g3l-gel-whatsapp/`, (req, res) => g3lGelWhatsappCtrl.getAllG3lGelWhatsapp(req, res));
+router.post(`/api-${sys}/datatable/g3l-gel-whatsapp/`, (req, res) => g3lGelWhatsappCtrl.getAllG3lGelWhatsapp(req, res));
 router.post(`/api-${sys}/g3l-gel-whatsapp/`, (req, res) => g3lGelWhatsappCtrl.addG3lGelWhatsapp(req, res));
 router.get(`/api-${sys}/g3l-gel-whatsapp/:id`, (req, res) => g3lGelWhatsappCtrl.getAG3lGelWhatsapp(req, res));
 router.put(`/api-${sys}/g3l-gel-whatsapp/:id`, (req, res) => g3lGelWhatsappCtrl.updateG3lGelWhatsapp(req, res));

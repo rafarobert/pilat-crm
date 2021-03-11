@@ -58,6 +58,7 @@ router.post(`/api-${sys}/meetings-leads/updateMeetingLeadByDateModified`, (req, 
 
 
 router.get(`/api-${sys}/meetings-leads/`, (req, res) => meetingsLeadsCtrl.getAllMeetingsLeads(req, res));
+router.post(`/api-${sys}/datatable/meetings-leads/`, (req, res) => meetingsLeadsCtrl.getAllMeetingsLeads(req, res));
 router.post(`/api-${sys}/meetings-leads/`, (req, res) => meetingsLeadsCtrl.addMeetingLead(req, res));
 router.get(`/api-${sys}/meetings-leads/:id`, (req, res) => meetingsLeadsCtrl.getAMeetingLead(req, res));
 router.put(`/api-${sys}/meetings-leads/:id`, (req, res) => meetingsLeadsCtrl.updateMeetingLead(req, res));

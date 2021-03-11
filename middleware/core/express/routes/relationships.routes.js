@@ -94,6 +94,7 @@ router.post(`/api-${sys}/relationships/updateRelationshipByRelationshipRoleColum
 
 
 router.get(`/api-${sys}/relationships/`, (req, res) => relationshipsCtrl.getAllRelationships(req, res));
+router.post(`/api-${sys}/datatable/relationships/`, (req, res) => relationshipsCtrl.getAllRelationships(req, res));
 router.post(`/api-${sys}/relationships/`, (req, res) => relationshipsCtrl.addRelationship(req, res));
 router.get(`/api-${sys}/relationships/:id`, (req, res) => relationshipsCtrl.getARelationship(req, res));
 router.put(`/api-${sys}/relationships/:id`, (req, res) => relationshipsCtrl.updateRelationship(req, res));

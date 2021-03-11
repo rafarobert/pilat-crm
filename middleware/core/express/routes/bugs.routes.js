@@ -106,6 +106,7 @@ router.post(`/api-${sys}/bugs/updateBugByAssignedUserId`, (req, res) => bugsCtrl
 
 
 router.get(`/api-${sys}/bugs/`, (req, res) => bugsCtrl.getAllBugs(req, res));
+router.post(`/api-${sys}/datatable/bugs/`, (req, res) => bugsCtrl.getAllBugs(req, res));
 router.post(`/api-${sys}/bugs/`, (req, res) => bugsCtrl.addBug(req, res));
 router.get(`/api-${sys}/bugs/:id`, (req, res) => bugsCtrl.getABug(req, res));
 router.put(`/api-${sys}/bugs/:id`, (req, res) => bugsCtrl.updateBug(req, res));

@@ -226,6 +226,7 @@ router.post(`/api-${sys}/aos-quotes/updateAoQuoteByCurrencyId`, (req, res) => ao
 
 
 router.get(`/api-${sys}/aos-quotes/`, (req, res) => aosQuotesCtrl.getAllAosQuotes(req, res));
+router.post(`/api-${sys}/datatable/aos-quotes/`, (req, res) => aosQuotesCtrl.getAllAosQuotes(req, res));
 router.post(`/api-${sys}/aos-quotes/`, (req, res) => aosQuotesCtrl.addAoQuote(req, res));
 router.get(`/api-${sys}/aos-quotes/:id`, (req, res) => aosQuotesCtrl.getAAoQuote(req, res));
 router.put(`/api-${sys}/aos-quotes/:id`, (req, res) => aosQuotesCtrl.updateAoQuote(req, res));

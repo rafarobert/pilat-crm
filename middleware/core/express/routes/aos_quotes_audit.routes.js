@@ -70,6 +70,7 @@ router.post(`/api-${sys}/aos-quotes-audit/updateAoQuoteAuditByParentId`, (req, r
 
 
 router.get(`/api-${sys}/aos-quotes-audit/`, (req, res) => aosQuotesAuditCtrl.getAllAosQuotesAudit(req, res));
+router.post(`/api-${sys}/datatable/aos-quotes-audit/`, (req, res) => aosQuotesAuditCtrl.getAllAosQuotesAudit(req, res));
 router.post(`/api-${sys}/aos-quotes-audit/`, (req, res) => aosQuotesAuditCtrl.addAoQuoteAudit(req, res));
 router.get(`/api-${sys}/aos-quotes-audit/:id`, (req, res) => aosQuotesAuditCtrl.getAAoQuoteAudit(req, res));
 router.put(`/api-${sys}/aos-quotes-audit/:id`, (req, res) => aosQuotesAuditCtrl.updateAoQuoteAudit(req, res));

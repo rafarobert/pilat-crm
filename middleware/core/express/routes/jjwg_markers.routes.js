@@ -90,6 +90,7 @@ router.post(`/api-${sys}/jjwg-markers/updateJjwgMarkerByAssignedUserId`, (req, r
 
 
 router.get(`/api-${sys}/jjwg-markers/`, (req, res) => jjwgMarkersCtrl.getAllJjwgMarkers(req, res));
+router.post(`/api-${sys}/datatable/jjwg-markers/`, (req, res) => jjwgMarkersCtrl.getAllJjwgMarkers(req, res));
 router.post(`/api-${sys}/jjwg-markers/`, (req, res) => jjwgMarkersCtrl.addJjwgMarker(req, res));
 router.get(`/api-${sys}/jjwg-markers/:id`, (req, res) => jjwgMarkersCtrl.getAJjwgMarker(req, res));
 router.put(`/api-${sys}/jjwg-markers/:id`, (req, res) => jjwgMarkersCtrl.updateJjwgMarker(req, res));

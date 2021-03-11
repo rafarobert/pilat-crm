@@ -70,6 +70,7 @@ router.post(`/api-${sys}/erp-cliente-audit/updateErpClienteAuditByParentId`, (re
 
 
 router.get(`/api-${sys}/erp-cliente-audit/`, (req, res) => erpClienteAuditCtrl.getAllErpClienteAudit(req, res));
+router.post(`/api-${sys}/datatable/erp-cliente-audit/`, (req, res) => erpClienteAuditCtrl.getAllErpClienteAudit(req, res));
 router.post(`/api-${sys}/erp-cliente-audit/`, (req, res) => erpClienteAuditCtrl.addErpClienteAudit(req, res));
 router.get(`/api-${sys}/erp-cliente-audit/:id`, (req, res) => erpClienteAuditCtrl.getAErpClienteAudit(req, res));
 router.put(`/api-${sys}/erp-cliente-audit/:id`, (req, res) => erpClienteAuditCtrl.updateErpClienteAudit(req, res));

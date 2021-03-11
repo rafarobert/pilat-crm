@@ -78,6 +78,7 @@ router.post(`/api-${sys}/am-projecttemplates/updateAmProjecttemplateByAssignedUs
 
 
 router.get(`/api-${sys}/am-projecttemplates/`, (req, res) => amProjecttemplatesCtrl.getAllAmProjecttemplates(req, res));
+router.post(`/api-${sys}/datatable/am-projecttemplates/`, (req, res) => amProjecttemplatesCtrl.getAllAmProjecttemplates(req, res));
 router.post(`/api-${sys}/am-projecttemplates/`, (req, res) => amProjecttemplatesCtrl.addAmProjecttemplate(req, res));
 router.get(`/api-${sys}/am-projecttemplates/:id`, (req, res) => amProjecttemplatesCtrl.getAAmProjecttemplate(req, res));
 router.put(`/api-${sys}/am-projecttemplates/:id`, (req, res) => amProjecttemplatesCtrl.updateAmProjecttemplate(req, res));

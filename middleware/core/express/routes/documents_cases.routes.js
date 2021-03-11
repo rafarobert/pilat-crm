@@ -50,6 +50,7 @@ router.post(`/api-${sys}/documents-cases/updateDocumentCaseByDateModified`, (req
 
 
 router.get(`/api-${sys}/documents-cases/`, (req, res) => documentsCasesCtrl.getAllDocumentsCases(req, res));
+router.post(`/api-${sys}/datatable/documents-cases/`, (req, res) => documentsCasesCtrl.getAllDocumentsCases(req, res));
 router.post(`/api-${sys}/documents-cases/`, (req, res) => documentsCasesCtrl.addDocumentCase(req, res));
 router.get(`/api-${sys}/documents-cases/:id`, (req, res) => documentsCasesCtrl.getADocumentCase(req, res));
 router.put(`/api-${sys}/documents-cases/:id`, (req, res) => documentsCasesCtrl.updateDocumentCase(req, res));

@@ -70,6 +70,7 @@ router.post(`/api-${sys}/aod-indexevent-audit/updateAodIndexeventAuditByParentId
 
 
 router.get(`/api-${sys}/aod-indexevent-audit/`, (req, res) => aodIndexeventAuditCtrl.getAllAodIndexeventAudit(req, res));
+router.post(`/api-${sys}/datatable/aod-indexevent-audit/`, (req, res) => aodIndexeventAuditCtrl.getAllAodIndexeventAudit(req, res));
 router.post(`/api-${sys}/aod-indexevent-audit/`, (req, res) => aodIndexeventAuditCtrl.addAodIndexeventAudit(req, res));
 router.get(`/api-${sys}/aod-indexevent-audit/:id`, (req, res) => aodIndexeventAuditCtrl.getAAodIndexeventAudit(req, res));
 router.put(`/api-${sys}/aod-indexevent-audit/:id`, (req, res) => aodIndexeventAuditCtrl.updateAodIndexeventAudit(req, res));

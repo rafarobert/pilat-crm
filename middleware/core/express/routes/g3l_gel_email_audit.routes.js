@@ -70,6 +70,7 @@ router.post(`/api-${sys}/g3l-gel-email-audit/updateG3lGelEmailAuditByParentId`, 
 
 
 router.get(`/api-${sys}/g3l-gel-email-audit/`, (req, res) => g3lGelEmailAuditCtrl.getAllG3lGelEmailAudit(req, res));
+router.post(`/api-${sys}/datatable/g3l-gel-email-audit/`, (req, res) => g3lGelEmailAuditCtrl.getAllG3lGelEmailAudit(req, res));
 router.post(`/api-${sys}/g3l-gel-email-audit/`, (req, res) => g3lGelEmailAuditCtrl.addG3lGelEmailAudit(req, res));
 router.get(`/api-${sys}/g3l-gel-email-audit/:id`, (req, res) => g3lGelEmailAuditCtrl.getAG3lGelEmailAudit(req, res));
 router.put(`/api-${sys}/g3l-gel-email-audit/:id`, (req, res) => g3lGelEmailAuditCtrl.updateG3lGelEmailAudit(req, res));

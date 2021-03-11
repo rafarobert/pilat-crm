@@ -78,6 +78,7 @@ router.post(`/api-${sys}/upgrade-history/updateUpgradeHistoryByDateEntered`, (re
 
 
 router.get(`/api-${sys}/upgrade-history/`, (req, res) => upgradeHistoryCtrl.getAllUpgradeHistory(req, res));
+router.post(`/api-${sys}/datatable/upgrade-history/`, (req, res) => upgradeHistoryCtrl.getAllUpgradeHistory(req, res));
 router.post(`/api-${sys}/upgrade-history/`, (req, res) => upgradeHistoryCtrl.addUpgradeHistory(req, res));
 router.get(`/api-${sys}/upgrade-history/:id`, (req, res) => upgradeHistoryCtrl.getAUpgradeHistory(req, res));
 router.put(`/api-${sys}/upgrade-history/:id`, (req, res) => upgradeHistoryCtrl.updateUpgradeHistory(req, res));

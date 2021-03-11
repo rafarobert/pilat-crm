@@ -70,6 +70,7 @@ router.post(`/api-${sys}/jjwg-maps-audit/updateJjwgMapAuditByParentId`, (req, re
 
 
 router.get(`/api-${sys}/jjwg-maps-audit/`, (req, res) => jjwgMapsAuditCtrl.getAllJjwgMapsAudit(req, res));
+router.post(`/api-${sys}/datatable/jjwg-maps-audit/`, (req, res) => jjwgMapsAuditCtrl.getAllJjwgMapsAudit(req, res));
 router.post(`/api-${sys}/jjwg-maps-audit/`, (req, res) => jjwgMapsAuditCtrl.addJjwgMapAudit(req, res));
 router.get(`/api-${sys}/jjwg-maps-audit/:id`, (req, res) => jjwgMapsAuditCtrl.getAJjwgMapAudit(req, res));
 router.put(`/api-${sys}/jjwg-maps-audit/:id`, (req, res) => jjwgMapsAuditCtrl.updateJjwgMapAudit(req, res));

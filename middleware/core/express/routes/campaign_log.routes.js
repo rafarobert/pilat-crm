@@ -94,6 +94,7 @@ router.post(`/api-${sys}/campaign-log/updateCampaignLogByMarketingId`, (req, res
 
 
 router.get(`/api-${sys}/campaign-log/`, (req, res) => campaignLogCtrl.getAllCampaignLog(req, res));
+router.post(`/api-${sys}/datatable/campaign-log/`, (req, res) => campaignLogCtrl.getAllCampaignLog(req, res));
 router.post(`/api-${sys}/campaign-log/`, (req, res) => campaignLogCtrl.addCampaignLog(req, res));
 router.get(`/api-${sys}/campaign-log/:id`, (req, res) => campaignLogCtrl.getACampaignLog(req, res));
 router.put(`/api-${sys}/campaign-log/:id`, (req, res) => campaignLogCtrl.updateCampaignLog(req, res));

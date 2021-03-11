@@ -54,6 +54,7 @@ router.post(`/api-${sys}/prospect-lists-prospects/updateProspectListProspectByDa
 
 
 router.get(`/api-${sys}/prospect-lists-prospects/`, (req, res) => prospectListsProspectsCtrl.getAllProspectListsProspects(req, res));
+router.post(`/api-${sys}/datatable/prospect-lists-prospects/`, (req, res) => prospectListsProspectsCtrl.getAllProspectListsProspects(req, res));
 router.post(`/api-${sys}/prospect-lists-prospects/`, (req, res) => prospectListsProspectsCtrl.addProspectListProspect(req, res));
 router.get(`/api-${sys}/prospect-lists-prospects/:id`, (req, res) => prospectListsProspectsCtrl.getAProspectListProspect(req, res));
 router.put(`/api-${sys}/prospect-lists-prospects/:id`, (req, res) => prospectListsProspectsCtrl.updateProspectListProspect(req, res));

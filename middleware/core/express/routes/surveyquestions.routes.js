@@ -82,6 +82,7 @@ router.post(`/api-${sys}/surveyquestions/updateSurveyquestionBySurveyId`, (req, 
 
 
 router.get(`/api-${sys}/surveyquestions/`, (req, res) => surveyquestionsCtrl.getAllSurveyquestions(req, res));
+router.post(`/api-${sys}/datatable/surveyquestions/`, (req, res) => surveyquestionsCtrl.getAllSurveyquestions(req, res));
 router.post(`/api-${sys}/surveyquestions/`, (req, res) => surveyquestionsCtrl.addSurveyquestion(req, res));
 router.get(`/api-${sys}/surveyquestions/:id`, (req, res) => surveyquestionsCtrl.getASurveyquestion(req, res));
 router.put(`/api-${sys}/surveyquestions/:id`, (req, res) => surveyquestionsCtrl.updateSurveyquestion(req, res));

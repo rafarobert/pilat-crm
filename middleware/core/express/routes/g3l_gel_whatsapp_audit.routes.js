@@ -70,6 +70,7 @@ router.post(`/api-${sys}/g3l-gel-whatsapp-audit/updateG3lGelWhatsappAuditByParen
 
 
 router.get(`/api-${sys}/g3l-gel-whatsapp-audit/`, (req, res) => g3lGelWhatsappAuditCtrl.getAllG3lGelWhatsappAudit(req, res));
+router.post(`/api-${sys}/datatable/g3l-gel-whatsapp-audit/`, (req, res) => g3lGelWhatsappAuditCtrl.getAllG3lGelWhatsappAudit(req, res));
 router.post(`/api-${sys}/g3l-gel-whatsapp-audit/`, (req, res) => g3lGelWhatsappAuditCtrl.addG3lGelWhatsappAudit(req, res));
 router.get(`/api-${sys}/g3l-gel-whatsapp-audit/:id`, (req, res) => g3lGelWhatsappAuditCtrl.getAG3lGelWhatsappAudit(req, res));
 router.put(`/api-${sys}/g3l-gel-whatsapp-audit/:id`, (req, res) => g3lGelWhatsappAuditCtrl.updateG3lGelWhatsappAudit(req, res));

@@ -96,6 +96,7 @@ router.get(`/api-${sys}/pilat-modules/findPilatModulesModParentWithModCode`, (re
 
 
 router.get(`/api-${sys}/pilat-modules/`, (req, res) => pilatModulesCtrl.getAllPilatModules(req, res));
+router.post(`/api-${sys}/datatable/pilat-modules/`, (req, res) => pilatModulesCtrl.getAllPilatModules(req, res));
 router.post(`/api-${sys}/pilat-modules/`, (req, res) => pilatModulesCtrl.addPilatModule(req, res));
 router.get(`/api-${sys}/pilat-modules/:Id`, (req, res) => pilatModulesCtrl.getAPilatModule(req, res));
 router.put(`/api-${sys}/pilat-modules/:Id`, (req, res) => pilatModulesCtrl.updatePilatModule(req, res));

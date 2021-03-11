@@ -38,6 +38,7 @@ router.post(`/api-${sys}/inbound-email-cache-ts/updateInboundEmailCacheTByIeTime
 
 
 router.get(`/api-${sys}/inbound-email-cache-ts/`, (req, res) => inboundEmailCacheTsCtrl.getAllInboundEmailCacheTs(req, res));
+router.post(`/api-${sys}/datatable/inbound-email-cache-ts/`, (req, res) => inboundEmailCacheTsCtrl.getAllInboundEmailCacheTs(req, res));
 router.post(`/api-${sys}/inbound-email-cache-ts/`, (req, res) => inboundEmailCacheTsCtrl.addInboundEmailCacheT(req, res));
 router.get(`/api-${sys}/inbound-email-cache-ts/:id`, (req, res) => inboundEmailCacheTsCtrl.getAInboundEmailCacheT(req, res));
 router.put(`/api-${sys}/inbound-email-cache-ts/:id`, (req, res) => inboundEmailCacheTsCtrl.updateInboundEmailCacheT(req, res));

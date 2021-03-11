@@ -50,6 +50,7 @@ router.post(`/api-${sys}/projects-products/updateProjectProductByDateModified`, 
 
 
 router.get(`/api-${sys}/projects-products/`, (req, res) => projectsProductsCtrl.getAllProjectsProducts(req, res));
+router.post(`/api-${sys}/datatable/projects-products/`, (req, res) => projectsProductsCtrl.getAllProjectsProducts(req, res));
 router.post(`/api-${sys}/projects-products/`, (req, res) => projectsProductsCtrl.addProjectProduct(req, res));
 router.get(`/api-${sys}/projects-products/:id`, (req, res) => projectsProductsCtrl.getAProjectProduct(req, res));
 router.put(`/api-${sys}/projects-products/:id`, (req, res) => projectsProductsCtrl.updateProjectProduct(req, res));

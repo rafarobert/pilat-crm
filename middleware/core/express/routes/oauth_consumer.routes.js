@@ -74,6 +74,7 @@ router.post(`/api-${sys}/oauth-consumer/updateOauthConsumerByAssignedUserId`, (r
 
 
 router.get(`/api-${sys}/oauth-consumer/`, (req, res) => oauthConsumerCtrl.getAllOauthConsumer(req, res));
+router.post(`/api-${sys}/datatable/oauth-consumer/`, (req, res) => oauthConsumerCtrl.getAllOauthConsumer(req, res));
 router.post(`/api-${sys}/oauth-consumer/`, (req, res) => oauthConsumerCtrl.addOauthConsumer(req, res));
 router.get(`/api-${sys}/oauth-consumer/:id`, (req, res) => oauthConsumerCtrl.getAOauthConsumer(req, res));
 router.put(`/api-${sys}/oauth-consumer/:id`, (req, res) => oauthConsumerCtrl.updateOauthConsumer(req, res));

@@ -106,6 +106,7 @@ router.post(`/api-${sys}/aos-quotes-cstm/updateAoQuoteCstmByFechaEnvioProgramada
 
 
 router.get(`/api-${sys}/aos-quotes-cstm/`, (req, res) => aosQuotesCstmCtrl.getAllAosQuotesCstm(req, res));
+router.post(`/api-${sys}/datatable/aos-quotes-cstm/`, (req, res) => aosQuotesCstmCtrl.getAllAosQuotesCstm(req, res));
 router.post(`/api-${sys}/aos-quotes-cstm/`, (req, res) => aosQuotesCstmCtrl.addAoQuoteCstm(req, res));
 router.get(`/api-${sys}/aos-quotes-cstm/:idC`, (req, res) => aosQuotesCstmCtrl.getAAoQuoteCstm(req, res));
 router.put(`/api-${sys}/aos-quotes-cstm/:idC`, (req, res) => aosQuotesCstmCtrl.updateAoQuoteCstm(req, res));

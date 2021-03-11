@@ -70,6 +70,7 @@ router.post(`/api-${sys}/am-tasktemplates-audit/updateAmTasktemplateAuditByParen
 
 
 router.get(`/api-${sys}/am-tasktemplates-audit/`, (req, res) => amTasktemplatesAuditCtrl.getAllAmTasktemplatesAudit(req, res));
+router.post(`/api-${sys}/datatable/am-tasktemplates-audit/`, (req, res) => amTasktemplatesAuditCtrl.getAllAmTasktemplatesAudit(req, res));
 router.post(`/api-${sys}/am-tasktemplates-audit/`, (req, res) => amTasktemplatesAuditCtrl.addAmTasktemplateAudit(req, res));
 router.get(`/api-${sys}/am-tasktemplates-audit/:id`, (req, res) => amTasktemplatesAuditCtrl.getAAmTasktemplateAudit(req, res));
 router.put(`/api-${sys}/am-tasktemplates-audit/:id`, (req, res) => amTasktemplatesAuditCtrl.updateAmTasktemplateAudit(req, res));

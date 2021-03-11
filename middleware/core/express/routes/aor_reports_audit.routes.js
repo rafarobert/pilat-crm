@@ -70,6 +70,7 @@ router.post(`/api-${sys}/aor-reports-audit/updateAorReportAuditByParentId`, (req
 
 
 router.get(`/api-${sys}/aor-reports-audit/`, (req, res) => aorReportsAuditCtrl.getAllAorReportsAudit(req, res));
+router.post(`/api-${sys}/datatable/aor-reports-audit/`, (req, res) => aorReportsAuditCtrl.getAllAorReportsAudit(req, res));
 router.post(`/api-${sys}/aor-reports-audit/`, (req, res) => aorReportsAuditCtrl.addAorReportAudit(req, res));
 router.get(`/api-${sys}/aor-reports-audit/:id`, (req, res) => aorReportsAuditCtrl.getAAorReportAudit(req, res));
 router.put(`/api-${sys}/aor-reports-audit/:id`, (req, res) => aorReportsAuditCtrl.updateAorReportAudit(req, res));

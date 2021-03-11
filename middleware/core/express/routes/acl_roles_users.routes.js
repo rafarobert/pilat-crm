@@ -50,6 +50,7 @@ router.post(`/api-${sys}/acl-roles-users/updateAclRoleUserByDateModified`, (req,
 
 
 router.get(`/api-${sys}/acl-roles-users/`, (req, res) => aclRolesUsersCtrl.getAllAclRolesUsers(req, res));
+router.post(`/api-${sys}/datatable/acl-roles-users/`, (req, res) => aclRolesUsersCtrl.getAllAclRolesUsers(req, res));
 router.post(`/api-${sys}/acl-roles-users/`, (req, res) => aclRolesUsersCtrl.addAclRoleUser(req, res));
 router.get(`/api-${sys}/acl-roles-users/:id`, (req, res) => aclRolesUsersCtrl.getAAclRoleUser(req, res));
 router.put(`/api-${sys}/acl-roles-users/:id`, (req, res) => aclRolesUsersCtrl.updateAclRoleUser(req, res));

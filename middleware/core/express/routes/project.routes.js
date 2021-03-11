@@ -86,6 +86,7 @@ router.post(`/api-${sys}/project/updateProjectByCreatedBy`, (req, res) => projec
 
 
 router.get(`/api-${sys}/project/`, (req, res) => projectCtrl.getAllProject(req, res));
+router.post(`/api-${sys}/datatable/project/`, (req, res) => projectCtrl.getAllProject(req, res));
 router.post(`/api-${sys}/project/`, (req, res) => projectCtrl.addProject(req, res));
 router.get(`/api-${sys}/project/:id`, (req, res) => projectCtrl.getAProject(req, res));
 router.put(`/api-${sys}/project/:id`, (req, res) => projectCtrl.updateProject(req, res));

@@ -109,6 +109,7 @@ router.get(`/api-${sys}/pilat-views/findPilatParamsVieParStatusWithParOrder`, (r
 
 
 router.get(`/api-${sys}/pilat-views/`, (req, res) => pilatViewsCtrl.getAllPilatViews(req, res));
+router.post(`/api-${sys}/datatable/pilat-views/`, (req, res) => pilatViewsCtrl.getAllPilatViews(req, res));
 router.post(`/api-${sys}/pilat-views/`, (req, res) => pilatViewsCtrl.addPilatView(req, res));
 router.get(`/api-${sys}/pilat-views/:Id`, (req, res) => pilatViewsCtrl.getAPilatView(req, res));
 router.put(`/api-${sys}/pilat-views/:Id`, (req, res) => pilatViewsCtrl.updatePilatView(req, res));

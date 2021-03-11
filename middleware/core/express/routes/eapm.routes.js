@@ -102,6 +102,7 @@ router.post(`/api-${sys}/eapm/updateEapmByAssignedUserId`, (req, res) => eapmCtr
 
 
 router.get(`/api-${sys}/eapm/`, (req, res) => eapmCtrl.getAllEapm(req, res));
+router.post(`/api-${sys}/datatable/eapm/`, (req, res) => eapmCtrl.getAllEapm(req, res));
 router.post(`/api-${sys}/eapm/`, (req, res) => eapmCtrl.addEapm(req, res));
 router.get(`/api-${sys}/eapm/:id`, (req, res) => eapmCtrl.getAEapm(req, res));
 router.put(`/api-${sys}/eapm/:id`, (req, res) => eapmCtrl.updateEapm(req, res));

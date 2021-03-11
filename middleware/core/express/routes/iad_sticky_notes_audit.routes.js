@@ -70,6 +70,7 @@ router.post(`/api-${sys}/iad-sticky-notes-audit/updateIadStickyNoteAuditByParent
 
 
 router.get(`/api-${sys}/iad-sticky-notes-audit/`, (req, res) => iadStickyNotesAuditCtrl.getAllIadStickyNotesAudit(req, res));
+router.post(`/api-${sys}/datatable/iad-sticky-notes-audit/`, (req, res) => iadStickyNotesAuditCtrl.getAllIadStickyNotesAudit(req, res));
 router.post(`/api-${sys}/iad-sticky-notes-audit/`, (req, res) => iadStickyNotesAuditCtrl.addIadStickyNoteAudit(req, res));
 router.get(`/api-${sys}/iad-sticky-notes-audit/:id`, (req, res) => iadStickyNotesAuditCtrl.getAIadStickyNoteAudit(req, res));
 router.put(`/api-${sys}/iad-sticky-notes-audit/:id`, (req, res) => iadStickyNotesAuditCtrl.updateIadStickyNoteAudit(req, res));

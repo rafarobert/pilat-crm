@@ -58,6 +58,7 @@ router.post(`/api-${sys}/calls-contacts/updateCallContactByDateModified`, (req, 
 
 
 router.get(`/api-${sys}/calls-contacts/`, (req, res) => callsContactsCtrl.getAllCallsContacts(req, res));
+router.post(`/api-${sys}/datatable/calls-contacts/`, (req, res) => callsContactsCtrl.getAllCallsContacts(req, res));
 router.post(`/api-${sys}/calls-contacts/`, (req, res) => callsContactsCtrl.addCallContact(req, res));
 router.get(`/api-${sys}/calls-contacts/:id`, (req, res) => callsContactsCtrl.getACallContact(req, res));
 router.put(`/api-${sys}/calls-contacts/:id`, (req, res) => callsContactsCtrl.updateCallContact(req, res));

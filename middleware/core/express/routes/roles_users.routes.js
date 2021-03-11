@@ -50,6 +50,7 @@ router.post(`/api-${sys}/roles-users/updateRoleUserByDateModified`, (req, res) =
 
 
 router.get(`/api-${sys}/roles-users/`, (req, res) => rolesUsersCtrl.getAllRolesUsers(req, res));
+router.post(`/api-${sys}/datatable/roles-users/`, (req, res) => rolesUsersCtrl.getAllRolesUsers(req, res));
 router.post(`/api-${sys}/roles-users/`, (req, res) => rolesUsersCtrl.addRoleUser(req, res));
 router.get(`/api-${sys}/roles-users/:id`, (req, res) => rolesUsersCtrl.getARoleUser(req, res));
 router.put(`/api-${sys}/roles-users/:id`, (req, res) => rolesUsersCtrl.updateRoleUser(req, res));

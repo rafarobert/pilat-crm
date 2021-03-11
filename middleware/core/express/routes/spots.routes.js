@@ -74,6 +74,7 @@ router.post(`/api-${sys}/spots/updateSpotByAssignedUserId`, (req, res) => spotsC
 
 
 router.get(`/api-${sys}/spots/`, (req, res) => spotsCtrl.getAllSpots(req, res));
+router.post(`/api-${sys}/datatable/spots/`, (req, res) => spotsCtrl.getAllSpots(req, res));
 router.post(`/api-${sys}/spots/`, (req, res) => spotsCtrl.addSpot(req, res));
 router.get(`/api-${sys}/spots/:id`, (req, res) => spotsCtrl.getASpot(req, res));
 router.put(`/api-${sys}/spots/:id`, (req, res) => spotsCtrl.updateSpot(req, res));

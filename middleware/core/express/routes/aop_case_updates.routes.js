@@ -78,6 +78,7 @@ router.post(`/api-${sys}/aop-case-updates/updateAopCaseUpdateByContactId`, (req,
 
 
 router.get(`/api-${sys}/aop-case-updates/`, (req, res) => aopCaseUpdatesCtrl.getAllAopCaseUpdates(req, res));
+router.post(`/api-${sys}/datatable/aop-case-updates/`, (req, res) => aopCaseUpdatesCtrl.getAllAopCaseUpdates(req, res));
 router.post(`/api-${sys}/aop-case-updates/`, (req, res) => aopCaseUpdatesCtrl.addAopCaseUpdate(req, res));
 router.get(`/api-${sys}/aop-case-updates/:id`, (req, res) => aopCaseUpdatesCtrl.getAAopCaseUpdate(req, res));
 router.put(`/api-${sys}/aop-case-updates/:id`, (req, res) => aopCaseUpdatesCtrl.updateAopCaseUpdate(req, res));

@@ -46,6 +46,7 @@ router.post(`/api-${sys}/calls-cstm/updateCallCstmByLlamadaFechaC`, (req, res) =
 
 
 router.get(`/api-${sys}/calls-cstm/`, (req, res) => callsCstmCtrl.getAllCallsCstm(req, res));
+router.post(`/api-${sys}/datatable/calls-cstm/`, (req, res) => callsCstmCtrl.getAllCallsCstm(req, res));
 router.post(`/api-${sys}/calls-cstm/`, (req, res) => callsCstmCtrl.addCallCstm(req, res));
 router.get(`/api-${sys}/calls-cstm/:idC`, (req, res) => callsCstmCtrl.getACallCstm(req, res));
 router.put(`/api-${sys}/calls-cstm/:idC`, (req, res) => callsCstmCtrl.updateCallCstm(req, res));

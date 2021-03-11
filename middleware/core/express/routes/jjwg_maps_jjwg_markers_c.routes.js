@@ -50,6 +50,7 @@ router.post(`/api-${sys}/jjwg-maps-jjwg-markers-c/updateJjwgMapJjwgMarkerCByDate
 
 
 router.get(`/api-${sys}/jjwg-maps-jjwg-markers-c/`, (req, res) => jjwgMapsJjwgMarkersCCtrl.getAllJjwgMapsJjwgMarkersC(req, res));
+router.post(`/api-${sys}/datatable/jjwg-maps-jjwg-markers-c/`, (req, res) => jjwgMapsJjwgMarkersCCtrl.getAllJjwgMapsJjwgMarkersC(req, res));
 router.post(`/api-${sys}/jjwg-maps-jjwg-markers-c/`, (req, res) => jjwgMapsJjwgMarkersCCtrl.addJjwgMapJjwgMarkerC(req, res));
 router.get(`/api-${sys}/jjwg-maps-jjwg-markers-c/:id`, (req, res) => jjwgMapsJjwgMarkersCCtrl.getAJjwgMapJjwgMarkerC(req, res));
 router.put(`/api-${sys}/jjwg-maps-jjwg-markers-c/:id`, (req, res) => jjwgMapsJjwgMarkersCCtrl.updateJjwgMapJjwgMarkerC(req, res));

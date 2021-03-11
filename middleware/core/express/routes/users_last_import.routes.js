@@ -54,6 +54,7 @@ router.post(`/api-${sys}/users-last-import/updateUserLastImportByBeanId`, (req, 
 
 
 router.get(`/api-${sys}/users-last-import/`, (req, res) => usersLastImportCtrl.getAllUsersLastImport(req, res));
+router.post(`/api-${sys}/datatable/users-last-import/`, (req, res) => usersLastImportCtrl.getAllUsersLastImport(req, res));
 router.post(`/api-${sys}/users-last-import/`, (req, res) => usersLastImportCtrl.addUserLastImport(req, res));
 router.get(`/api-${sys}/users-last-import/:id`, (req, res) => usersLastImportCtrl.getAUserLastImport(req, res));
 router.put(`/api-${sys}/users-last-import/:id`, (req, res) => usersLastImportCtrl.updateUserLastImport(req, res));

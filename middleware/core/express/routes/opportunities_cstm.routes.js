@@ -78,6 +78,7 @@ router.post(`/api-${sys}/opportunities-cstm/updateOpportunityCstmByMonedaC`, (re
 
 
 router.get(`/api-${sys}/opportunities-cstm/`, (req, res) => opportunitiesCstmCtrl.getAllOpportunitiesCstm(req, res));
+router.post(`/api-${sys}/datatable/opportunities-cstm/`, (req, res) => opportunitiesCstmCtrl.getAllOpportunitiesCstm(req, res));
 router.post(`/api-${sys}/opportunities-cstm/`, (req, res) => opportunitiesCstmCtrl.addOpportunityCstm(req, res));
 router.get(`/api-${sys}/opportunities-cstm/:idC`, (req, res) => opportunitiesCstmCtrl.getAOpportunityCstm(req, res));
 router.put(`/api-${sys}/opportunities-cstm/:idC`, (req, res) => opportunitiesCstmCtrl.updateOpportunityCstm(req, res));

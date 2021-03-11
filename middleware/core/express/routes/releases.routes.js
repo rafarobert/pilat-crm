@@ -66,6 +66,7 @@ router.post(`/api-${sys}/releases/updateReleaseByCreatedBy`, (req, res) => relea
 
 
 router.get(`/api-${sys}/releases/`, (req, res) => releasesCtrl.getAllReleases(req, res));
+router.post(`/api-${sys}/datatable/releases/`, (req, res) => releasesCtrl.getAllReleases(req, res));
 router.post(`/api-${sys}/releases/`, (req, res) => releasesCtrl.addRelease(req, res));
 router.get(`/api-${sys}/releases/:id`, (req, res) => releasesCtrl.getARelease(req, res));
 router.put(`/api-${sys}/releases/:id`, (req, res) => releasesCtrl.updateRelease(req, res));

@@ -50,6 +50,7 @@ router.post(`/api-${sys}/am-projecttemplates-contacts-1-c/updateAmProjecttemplat
 
 
 router.get(`/api-${sys}/am-projecttemplates-contacts-1-c/`, (req, res) => amProjecttemplatesContacts1CCtrl.getAllAmProjecttemplatesContacts1C(req, res));
+router.post(`/api-${sys}/datatable/am-projecttemplates-contacts-1-c/`, (req, res) => amProjecttemplatesContacts1CCtrl.getAllAmProjecttemplatesContacts1C(req, res));
 router.post(`/api-${sys}/am-projecttemplates-contacts-1-c/`, (req, res) => amProjecttemplatesContacts1CCtrl.addAmProjecttemplateContact1C(req, res));
 router.get(`/api-${sys}/am-projecttemplates-contacts-1-c/:id`, (req, res) => amProjecttemplatesContacts1CCtrl.getAAmProjecttemplateContact1C(req, res));
 router.put(`/api-${sys}/am-projecttemplates-contacts-1-c/:id`, (req, res) => amProjecttemplatesContacts1CCtrl.updateAmProjecttemplateContact1C(req, res));

@@ -70,6 +70,7 @@ router.post(`/api-${sys}/aos-product-categories-audit/updateAoProductCategoryAud
 
 
 router.get(`/api-${sys}/aos-product-categories-audit/`, (req, res) => aosProductCategoriesAuditCtrl.getAllAosProductCategoriesAudit(req, res));
+router.post(`/api-${sys}/datatable/aos-product-categories-audit/`, (req, res) => aosProductCategoriesAuditCtrl.getAllAosProductCategoriesAudit(req, res));
 router.post(`/api-${sys}/aos-product-categories-audit/`, (req, res) => aosProductCategoriesAuditCtrl.addAoProductCategoryAudit(req, res));
 router.get(`/api-${sys}/aos-product-categories-audit/:id`, (req, res) => aosProductCategoriesAuditCtrl.getAAoProductCategoryAudit(req, res));
 router.put(`/api-${sys}/aos-product-categories-audit/:id`, (req, res) => aosProductCategoriesAuditCtrl.updateAoProductCategoryAudit(req, res));

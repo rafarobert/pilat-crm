@@ -62,6 +62,7 @@ router.post(`/api-${sys}/vcals/updateVcalByUserId`, (req, res) => vcalsCtrl.upda
 
 
 router.get(`/api-${sys}/vcals/`, (req, res) => vcalsCtrl.getAllVcals(req, res));
+router.post(`/api-${sys}/datatable/vcals/`, (req, res) => vcalsCtrl.getAllVcals(req, res));
 router.post(`/api-${sys}/vcals/`, (req, res) => vcalsCtrl.addVcal(req, res));
 router.get(`/api-${sys}/vcals/:id`, (req, res) => vcalsCtrl.getAVcal(req, res));
 router.put(`/api-${sys}/vcals/:id`, (req, res) => vcalsCtrl.updateVcal(req, res));

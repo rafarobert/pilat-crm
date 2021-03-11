@@ -54,6 +54,7 @@ router.post(`/api-${sys}/opportunities-contacts/updateOpportunityContactByDateMo
 
 
 router.get(`/api-${sys}/opportunities-contacts/`, (req, res) => opportunitiesContactsCtrl.getAllOpportunitiesContacts(req, res));
+router.post(`/api-${sys}/datatable/opportunities-contacts/`, (req, res) => opportunitiesContactsCtrl.getAllOpportunitiesContacts(req, res));
 router.post(`/api-${sys}/opportunities-contacts/`, (req, res) => opportunitiesContactsCtrl.addOpportunityContact(req, res));
 router.get(`/api-${sys}/opportunities-contacts/:id`, (req, res) => opportunitiesContactsCtrl.getAOpportunityContact(req, res));
 router.put(`/api-${sys}/opportunities-contacts/:id`, (req, res) => opportunitiesContactsCtrl.updateOpportunityContact(req, res));

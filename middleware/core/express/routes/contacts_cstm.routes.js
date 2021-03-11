@@ -50,6 +50,7 @@ router.post(`/api-${sys}/contacts-cstm/updateContactCstmByJjwgMapsAddressC`, (re
 
 
 router.get(`/api-${sys}/contacts-cstm/`, (req, res) => contactsCstmCtrl.getAllContactsCstm(req, res));
+router.post(`/api-${sys}/datatable/contacts-cstm/`, (req, res) => contactsCstmCtrl.getAllContactsCstm(req, res));
 router.post(`/api-${sys}/contacts-cstm/`, (req, res) => contactsCstmCtrl.addContactCstm(req, res));
 router.get(`/api-${sys}/contacts-cstm/:idC`, (req, res) => contactsCstmCtrl.getAContactCstm(req, res));
 router.put(`/api-${sys}/contacts-cstm/:idC`, (req, res) => contactsCstmCtrl.updateContactCstm(req, res));

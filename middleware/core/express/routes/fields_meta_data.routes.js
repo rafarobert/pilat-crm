@@ -110,6 +110,7 @@ router.post(`/api-${sys}/fields-meta-data/updateFieldMetaDataByDateModified`, (r
 
 
 router.get(`/api-${sys}/fields-meta-data/`, (req, res) => fieldsMetaDataCtrl.getAllFieldsMetaData(req, res));
+router.post(`/api-${sys}/datatable/fields-meta-data/`, (req, res) => fieldsMetaDataCtrl.getAllFieldsMetaData(req, res));
 router.post(`/api-${sys}/fields-meta-data/`, (req, res) => fieldsMetaDataCtrl.addFieldMetaData(req, res));
 router.get(`/api-${sys}/fields-meta-data/:id`, (req, res) => fieldsMetaDataCtrl.getAFieldMetaData(req, res));
 router.put(`/api-${sys}/fields-meta-data/:id`, (req, res) => fieldsMetaDataCtrl.updateFieldMetaData(req, res));

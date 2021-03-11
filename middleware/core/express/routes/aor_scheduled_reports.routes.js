@@ -82,6 +82,7 @@ router.post(`/api-${sys}/aor-scheduled-reports/updateAorScheduledReportByAorRepo
 
 
 router.get(`/api-${sys}/aor-scheduled-reports/`, (req, res) => aorScheduledReportsCtrl.getAllAorScheduledReports(req, res));
+router.post(`/api-${sys}/datatable/aor-scheduled-reports/`, (req, res) => aorScheduledReportsCtrl.getAllAorScheduledReports(req, res));
 router.post(`/api-${sys}/aor-scheduled-reports/`, (req, res) => aorScheduledReportsCtrl.addAorScheduledReport(req, res));
 router.get(`/api-${sys}/aor-scheduled-reports/:id`, (req, res) => aorScheduledReportsCtrl.getAAorScheduledReport(req, res));
 router.put(`/api-${sys}/aor-scheduled-reports/:id`, (req, res) => aorScheduledReportsCtrl.updateAorScheduledReport(req, res));

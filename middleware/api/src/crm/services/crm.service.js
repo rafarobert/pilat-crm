@@ -550,8 +550,8 @@ class CrmService {
 
 		if (relate && Object.keys(relate).length) {
 			relation = relate.description;
-			descriptionFrom = relate.from ? relate.from : '';
-			descriptionTo = relate.to ? relate.to : '';
+			descriptionFrom = relate.from ? relate.from : 'Sin Especificar';
+			descriptionTo = relate.to ? relate.to : 'Sin especificar';
 			if (relation) {
 				switch (relation) {
 					case parRelationCallsLeads.par_cod.toLowerCase(): descriptionRelated = parDescriptionRelateCallsLeads.par_description.replaceAll('@descriptionCalls',descriptionFrom).replaceAll('@descriptionLeads',descriptionTo); break;

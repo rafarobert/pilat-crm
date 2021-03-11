@@ -70,6 +70,7 @@ router.post(`/api-${sys}/surveyresponses-audit/updateSurveyresponseAuditByParent
 
 
 router.get(`/api-${sys}/surveyresponses-audit/`, (req, res) => surveyresponsesAuditCtrl.getAllSurveyresponsesAudit(req, res));
+router.post(`/api-${sys}/datatable/surveyresponses-audit/`, (req, res) => surveyresponsesAuditCtrl.getAllSurveyresponsesAudit(req, res));
 router.post(`/api-${sys}/surveyresponses-audit/`, (req, res) => surveyresponsesAuditCtrl.addSurveyresponseAudit(req, res));
 router.get(`/api-${sys}/surveyresponses-audit/:id`, (req, res) => surveyresponsesAuditCtrl.getASurveyresponseAudit(req, res));
 router.put(`/api-${sys}/surveyresponses-audit/:id`, (req, res) => surveyresponsesAuditCtrl.updateSurveyresponseAudit(req, res));

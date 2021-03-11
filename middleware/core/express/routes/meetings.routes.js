@@ -182,6 +182,7 @@ router.post(`/api-${sys}/meetings/updateMeetingByRepeatParentId`, (req, res) => 
 
 
 router.get(`/api-${sys}/meetings/`, (req, res) => meetingsCtrl.getAllMeetings(req, res));
+router.post(`/api-${sys}/datatable/meetings/`, (req, res) => meetingsCtrl.getAllMeetings(req, res));
 router.post(`/api-${sys}/meetings/`, (req, res) => meetingsCtrl.addMeeting(req, res));
 router.get(`/api-${sys}/meetings/:id`, (req, res) => meetingsCtrl.getAMeeting(req, res));
 router.put(`/api-${sys}/meetings/:id`, (req, res) => meetingsCtrl.updateMeeting(req, res));

@@ -102,6 +102,7 @@ router.post(`/api-${sys}/aor-conditions/updateAorConditionByAorReportId`, (req, 
 
 
 router.get(`/api-${sys}/aor-conditions/`, (req, res) => aorConditionsCtrl.getAllAorConditions(req, res));
+router.post(`/api-${sys}/datatable/aor-conditions/`, (req, res) => aorConditionsCtrl.getAllAorConditions(req, res));
 router.post(`/api-${sys}/aor-conditions/`, (req, res) => aorConditionsCtrl.addAorCondition(req, res));
 router.get(`/api-${sys}/aor-conditions/:id`, (req, res) => aorConditionsCtrl.getAAorCondition(req, res));
 router.put(`/api-${sys}/aor-conditions/:id`, (req, res) => aorConditionsCtrl.updateAorCondition(req, res));

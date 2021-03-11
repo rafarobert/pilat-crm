@@ -106,6 +106,7 @@ router.post(`/api-${sys}/fp-events/updateFpEventByCurrencyId`, (req, res) => fpE
 
 
 router.get(`/api-${sys}/fp-events/`, (req, res) => fpEventsCtrl.getAllFpEvents(req, res));
+router.post(`/api-${sys}/datatable/fp-events/`, (req, res) => fpEventsCtrl.getAllFpEvents(req, res));
 router.post(`/api-${sys}/fp-events/`, (req, res) => fpEventsCtrl.addFpEvent(req, res));
 router.get(`/api-${sys}/fp-events/:id`, (req, res) => fpEventsCtrl.getAFpEvent(req, res));
 router.put(`/api-${sys}/fp-events/:id`, (req, res) => fpEventsCtrl.updateFpEvent(req, res));

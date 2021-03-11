@@ -54,6 +54,7 @@ router.post(`/api-${sys}/aos-contracts-documents/updateAoContractDocumentByDateM
 
 
 router.get(`/api-${sys}/aos-contracts-documents/`, (req, res) => aosContractsDocumentsCtrl.getAllAosContractsDocuments(req, res));
+router.post(`/api-${sys}/datatable/aos-contracts-documents/`, (req, res) => aosContractsDocumentsCtrl.getAllAosContractsDocuments(req, res));
 router.post(`/api-${sys}/aos-contracts-documents/`, (req, res) => aosContractsDocumentsCtrl.addAoContractDocument(req, res));
 router.get(`/api-${sys}/aos-contracts-documents/:id`, (req, res) => aosContractsDocumentsCtrl.getAAoContractDocument(req, res));
 router.put(`/api-${sys}/aos-contracts-documents/:id`, (req, res) => aosContractsDocumentsCtrl.updateAoContractDocument(req, res));

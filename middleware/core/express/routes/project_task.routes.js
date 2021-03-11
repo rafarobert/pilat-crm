@@ -154,6 +154,7 @@ router.post(`/api-${sys}/project-task/updateProjectTaskByCreatedBy`, (req, res) 
 
 
 router.get(`/api-${sys}/project-task/`, (req, res) => projectTaskCtrl.getAllProjectTask(req, res));
+router.post(`/api-${sys}/datatable/project-task/`, (req, res) => projectTaskCtrl.getAllProjectTask(req, res));
 router.post(`/api-${sys}/project-task/`, (req, res) => projectTaskCtrl.addProjectTask(req, res));
 router.get(`/api-${sys}/project-task/:id`, (req, res) => projectTaskCtrl.getAProjectTask(req, res));
 router.put(`/api-${sys}/project-task/:id`, (req, res) => projectTaskCtrl.updateProjectTask(req, res));

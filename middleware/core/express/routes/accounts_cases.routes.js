@@ -50,6 +50,7 @@ router.post(`/api-${sys}/accounts-cases/updateAccountCaseByDateModified`, (req, 
 
 
 router.get(`/api-${sys}/accounts-cases/`, (req, res) => accountsCasesCtrl.getAllAccountsCases(req, res));
+router.post(`/api-${sys}/datatable/accounts-cases/`, (req, res) => accountsCasesCtrl.getAllAccountsCases(req, res));
 router.post(`/api-${sys}/accounts-cases/`, (req, res) => accountsCasesCtrl.addAccountCase(req, res));
 router.get(`/api-${sys}/accounts-cases/:id`, (req, res) => accountsCasesCtrl.getAAccountCase(req, res));
 router.put(`/api-${sys}/accounts-cases/:id`, (req, res) => accountsCasesCtrl.updateAccountCase(req, res));

@@ -50,6 +50,7 @@ router.post(`/api-${sys}/securitygroups-acl-roles/updateSecuritygroupAclRoleByRo
 
 
 router.get(`/api-${sys}/securitygroups-acl-roles/`, (req, res) => securitygroupsAclRolesCtrl.getAllSecuritygroupsAclRoles(req, res));
+router.post(`/api-${sys}/datatable/securitygroups-acl-roles/`, (req, res) => securitygroupsAclRolesCtrl.getAllSecuritygroupsAclRoles(req, res));
 router.post(`/api-${sys}/securitygroups-acl-roles/`, (req, res) => securitygroupsAclRolesCtrl.addSecuritygroupAclRole(req, res));
 router.get(`/api-${sys}/securitygroups-acl-roles/:id`, (req, res) => securitygroupsAclRolesCtrl.getASecuritygroupAclRole(req, res));
 router.put(`/api-${sys}/securitygroups-acl-roles/:id`, (req, res) => securitygroupsAclRolesCtrl.updateSecuritygroupAclRole(req, res));

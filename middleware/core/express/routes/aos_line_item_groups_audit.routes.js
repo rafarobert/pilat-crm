@@ -70,6 +70,7 @@ router.post(`/api-${sys}/aos-line-item-groups-audit/updateAoLineItemGroupAuditBy
 
 
 router.get(`/api-${sys}/aos-line-item-groups-audit/`, (req, res) => aosLineItemGroupsAuditCtrl.getAllAosLineItemGroupsAudit(req, res));
+router.post(`/api-${sys}/datatable/aos-line-item-groups-audit/`, (req, res) => aosLineItemGroupsAuditCtrl.getAllAosLineItemGroupsAudit(req, res));
 router.post(`/api-${sys}/aos-line-item-groups-audit/`, (req, res) => aosLineItemGroupsAuditCtrl.addAoLineItemGroupAudit(req, res));
 router.get(`/api-${sys}/aos-line-item-groups-audit/:id`, (req, res) => aosLineItemGroupsAuditCtrl.getAAoLineItemGroupAudit(req, res));
 router.put(`/api-${sys}/aos-line-item-groups-audit/:id`, (req, res) => aosLineItemGroupsAuditCtrl.updateAoLineItemGroupAudit(req, res));

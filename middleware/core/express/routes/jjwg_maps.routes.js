@@ -86,6 +86,7 @@ router.post(`/api-${sys}/jjwg-maps/updateJjwgMapByParentId`, (req, res) => jjwgM
 
 
 router.get(`/api-${sys}/jjwg-maps/`, (req, res) => jjwgMapsCtrl.getAllJjwgMaps(req, res));
+router.post(`/api-${sys}/datatable/jjwg-maps/`, (req, res) => jjwgMapsCtrl.getAllJjwgMaps(req, res));
 router.post(`/api-${sys}/jjwg-maps/`, (req, res) => jjwgMapsCtrl.addJjwgMap(req, res));
 router.get(`/api-${sys}/jjwg-maps/:id`, (req, res) => jjwgMapsCtrl.getAJjwgMap(req, res));
 router.put(`/api-${sys}/jjwg-maps/:id`, (req, res) => jjwgMapsCtrl.updateJjwgMap(req, res));

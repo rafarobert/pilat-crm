@@ -74,6 +74,7 @@ router.post(`/api-${sys}/aod-index/updateAodIndexByAssignedUserId`, (req, res) =
 
 
 router.get(`/api-${sys}/aod-index/`, (req, res) => aodIndexCtrl.getAllAodIndex(req, res));
+router.post(`/api-${sys}/datatable/aod-index/`, (req, res) => aodIndexCtrl.getAllAodIndex(req, res));
 router.post(`/api-${sys}/aod-index/`, (req, res) => aodIndexCtrl.addAodIndex(req, res));
 router.get(`/api-${sys}/aod-index/:id`, (req, res) => aodIndexCtrl.getAAodIndex(req, res));
 router.put(`/api-${sys}/aod-index/:id`, (req, res) => aodIndexCtrl.updateAodIndex(req, res));

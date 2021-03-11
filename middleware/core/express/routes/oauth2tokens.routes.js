@@ -102,6 +102,7 @@ router.post(`/api-${sys}/oauth2tokens/updateOauth2tokenByAssignedUserId`, (req, 
 
 
 router.get(`/api-${sys}/oauth2tokens/`, (req, res) => oauth2tokensCtrl.getAllOauth2tokens(req, res));
+router.post(`/api-${sys}/datatable/oauth2tokens/`, (req, res) => oauth2tokensCtrl.getAllOauth2tokens(req, res));
 router.post(`/api-${sys}/oauth2tokens/`, (req, res) => oauth2tokensCtrl.addOauth2token(req, res));
 router.get(`/api-${sys}/oauth2tokens/:id`, (req, res) => oauth2tokensCtrl.getAOauth2token(req, res));
 router.put(`/api-${sys}/oauth2tokens/:id`, (req, res) => oauth2tokensCtrl.updateOauth2token(req, res));

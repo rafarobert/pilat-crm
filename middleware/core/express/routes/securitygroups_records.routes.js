@@ -62,6 +62,7 @@ router.post(`/api-${sys}/securitygroups-records/updateSecuritygroupRecordByCreat
 
 
 router.get(`/api-${sys}/securitygroups-records/`, (req, res) => securitygroupsRecordsCtrl.getAllSecuritygroupsRecords(req, res));
+router.post(`/api-${sys}/datatable/securitygroups-records/`, (req, res) => securitygroupsRecordsCtrl.getAllSecuritygroupsRecords(req, res));
 router.post(`/api-${sys}/securitygroups-records/`, (req, res) => securitygroupsRecordsCtrl.addSecuritygroupRecord(req, res));
 router.get(`/api-${sys}/securitygroups-records/:id`, (req, res) => securitygroupsRecordsCtrl.getASecuritygroupRecord(req, res));
 router.put(`/api-${sys}/securitygroups-records/:id`, (req, res) => securitygroupsRecordsCtrl.updateSecuritygroupRecord(req, res));

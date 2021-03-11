@@ -194,6 +194,7 @@ router.post(`/api-${sys}/users/updateUserByReportsToId`, (req, res) => usersCtrl
 
 
 router.get(`/api-${sys}/users/`, (req, res) => usersCtrl.getAllUsers(req, res));
+router.post(`/api-${sys}/datatable/users/`, (req, res) => usersCtrl.getAllUsers(req, res));
 router.post(`/api-${sys}/users/`, (req, res) => usersCtrl.addUser(req, res));
 router.get(`/api-${sys}/users/:id`, (req, res) => usersCtrl.getAUser(req, res));
 router.put(`/api-${sys}/users/:id`, (req, res) => usersCtrl.updateUser(req, res));

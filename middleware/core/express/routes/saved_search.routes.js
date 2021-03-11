@@ -66,6 +66,7 @@ router.post(`/api-${sys}/saved-search/updateSavedSearchByAssignedUserId`, (req, 
 
 
 router.get(`/api-${sys}/saved-search/`, (req, res) => savedSearchCtrl.getAllSavedSearch(req, res));
+router.post(`/api-${sys}/datatable/saved-search/`, (req, res) => savedSearchCtrl.getAllSavedSearch(req, res));
 router.post(`/api-${sys}/saved-search/`, (req, res) => savedSearchCtrl.addSavedSearch(req, res));
 router.get(`/api-${sys}/saved-search/:id`, (req, res) => savedSearchCtrl.getASavedSearch(req, res));
 router.put(`/api-${sys}/saved-search/:id`, (req, res) => savedSearchCtrl.updateSavedSearch(req, res));

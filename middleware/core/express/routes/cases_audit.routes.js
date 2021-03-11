@@ -70,6 +70,7 @@ router.post(`/api-${sys}/cases-audit/updateCaseAuditByParentId`, (req, res) => c
 
 
 router.get(`/api-${sys}/cases-audit/`, (req, res) => casesAuditCtrl.getAllCasesAudit(req, res));
+router.post(`/api-${sys}/datatable/cases-audit/`, (req, res) => casesAuditCtrl.getAllCasesAudit(req, res));
 router.post(`/api-${sys}/cases-audit/`, (req, res) => casesAuditCtrl.addCaseAudit(req, res));
 router.get(`/api-${sys}/cases-audit/:id`, (req, res) => casesAuditCtrl.getACaseAudit(req, res));
 router.put(`/api-${sys}/cases-audit/:id`, (req, res) => casesAuditCtrl.updateCaseAudit(req, res));

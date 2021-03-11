@@ -78,6 +78,7 @@ router.post(`/api-${sys}/aow-processed/updateAowProcessedByParentId`, (req, res)
 
 
 router.get(`/api-${sys}/aow-processed/`, (req, res) => aowProcessedCtrl.getAllAowProcessed(req, res));
+router.post(`/api-${sys}/datatable/aow-processed/`, (req, res) => aowProcessedCtrl.getAllAowProcessed(req, res));
 router.post(`/api-${sys}/aow-processed/`, (req, res) => aowProcessedCtrl.addAowProcessed(req, res));
 router.get(`/api-${sys}/aow-processed/:id`, (req, res) => aowProcessedCtrl.getAAowProcessed(req, res));
 router.put(`/api-${sys}/aow-processed/:id`, (req, res) => aowProcessedCtrl.updateAowProcessed(req, res));

@@ -70,6 +70,7 @@ router.post(`/api-${sys}/aow-workflow-audit/updateAowWorkflowAuditByParentId`, (
 
 
 router.get(`/api-${sys}/aow-workflow-audit/`, (req, res) => aowWorkflowAuditCtrl.getAllAowWorkflowAudit(req, res));
+router.post(`/api-${sys}/datatable/aow-workflow-audit/`, (req, res) => aowWorkflowAuditCtrl.getAllAowWorkflowAudit(req, res));
 router.post(`/api-${sys}/aow-workflow-audit/`, (req, res) => aowWorkflowAuditCtrl.addAowWorkflowAudit(req, res));
 router.get(`/api-${sys}/aow-workflow-audit/:id`, (req, res) => aowWorkflowAuditCtrl.getAAowWorkflowAudit(req, res));
 router.put(`/api-${sys}/aow-workflow-audit/:id`, (req, res) => aowWorkflowAuditCtrl.updateAowWorkflowAudit(req, res));

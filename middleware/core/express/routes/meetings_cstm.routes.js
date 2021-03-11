@@ -50,6 +50,7 @@ router.post(`/api-${sys}/meetings-cstm/updateMeetingCstmByJjwgMapsAddressC`, (re
 
 
 router.get(`/api-${sys}/meetings-cstm/`, (req, res) => meetingsCstmCtrl.getAllMeetingsCstm(req, res));
+router.post(`/api-${sys}/datatable/meetings-cstm/`, (req, res) => meetingsCstmCtrl.getAllMeetingsCstm(req, res));
 router.post(`/api-${sys}/meetings-cstm/`, (req, res) => meetingsCstmCtrl.addMeetingCstm(req, res));
 router.get(`/api-${sys}/meetings-cstm/:idC`, (req, res) => meetingsCstmCtrl.getAMeetingCstm(req, res));
 router.put(`/api-${sys}/meetings-cstm/:idC`, (req, res) => meetingsCstmCtrl.updateMeetingCstm(req, res));

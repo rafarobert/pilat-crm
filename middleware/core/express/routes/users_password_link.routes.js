@@ -46,6 +46,7 @@ router.post(`/api-${sys}/users-password-link/updateUserPasswordLinkByDateGenerat
 
 
 router.get(`/api-${sys}/users-password-link/`, (req, res) => usersPasswordLinkCtrl.getAllUsersPasswordLink(req, res));
+router.post(`/api-${sys}/datatable/users-password-link/`, (req, res) => usersPasswordLinkCtrl.getAllUsersPasswordLink(req, res));
 router.post(`/api-${sys}/users-password-link/`, (req, res) => usersPasswordLinkCtrl.addUserPasswordLink(req, res));
 router.get(`/api-${sys}/users-password-link/:id`, (req, res) => usersPasswordLinkCtrl.getAUserPasswordLink(req, res));
 router.put(`/api-${sys}/users-password-link/:id`, (req, res) => usersPasswordLinkCtrl.updateUserPasswordLink(req, res));

@@ -102,6 +102,7 @@ router.post(`/api-${sys}/reminders/updateReminderByRelatedEventModuleId`, (req, 
 
 
 router.get(`/api-${sys}/reminders/`, (req, res) => remindersCtrl.getAllReminders(req, res));
+router.post(`/api-${sys}/datatable/reminders/`, (req, res) => remindersCtrl.getAllReminders(req, res));
 router.post(`/api-${sys}/reminders/`, (req, res) => remindersCtrl.addReminder(req, res));
 router.get(`/api-${sys}/reminders/:id`, (req, res) => remindersCtrl.getAReminder(req, res));
 router.put(`/api-${sys}/reminders/:id`, (req, res) => remindersCtrl.updateReminder(req, res));

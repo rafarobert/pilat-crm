@@ -58,6 +58,7 @@ router.post(`/api-${sys}/user-preferences/updateUserPreferenceByAssignedUserId`,
 
 
 router.get(`/api-${sys}/user-preferences/`, (req, res) => userPreferencesCtrl.getAllUserPreferences(req, res));
+router.post(`/api-${sys}/datatable/user-preferences/`, (req, res) => userPreferencesCtrl.getAllUserPreferences(req, res));
 router.post(`/api-${sys}/user-preferences/`, (req, res) => userPreferencesCtrl.addUserPreference(req, res));
 router.get(`/api-${sys}/user-preferences/:id`, (req, res) => userPreferencesCtrl.getAUserPreference(req, res));
 router.put(`/api-${sys}/user-preferences/:id`, (req, res) => userPreferencesCtrl.updateUserPreference(req, res));

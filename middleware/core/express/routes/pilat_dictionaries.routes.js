@@ -79,6 +79,7 @@ router.get(`/api-${sys}/pilat-dictionaries/findPilatParamsDicParStatusWithParOrd
 
 
 router.get(`/api-${sys}/pilat-dictionaries/`, (req, res) => pilatDictionariesCtrl.getAllPilatDictionaries(req, res));
+router.post(`/api-${sys}/datatable/pilat-dictionaries/`, (req, res) => pilatDictionariesCtrl.getAllPilatDictionaries(req, res));
 router.post(`/api-${sys}/pilat-dictionaries/`, (req, res) => pilatDictionariesCtrl.addPilatDictionary(req, res));
 router.get(`/api-${sys}/pilat-dictionaries/:Id`, (req, res) => pilatDictionariesCtrl.getAPilatDictionary(req, res));
 router.put(`/api-${sys}/pilat-dictionaries/:Id`, (req, res) => pilatDictionariesCtrl.updatePilatDictionary(req, res));

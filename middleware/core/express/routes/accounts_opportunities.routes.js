@@ -50,6 +50,7 @@ router.post(`/api-${sys}/accounts-opportunities/updateAccountOpportunityByDateMo
 
 
 router.get(`/api-${sys}/accounts-opportunities/`, (req, res) => accountsOpportunitiesCtrl.getAllAccountsOpportunities(req, res));
+router.post(`/api-${sys}/datatable/accounts-opportunities/`, (req, res) => accountsOpportunitiesCtrl.getAllAccountsOpportunities(req, res));
 router.post(`/api-${sys}/accounts-opportunities/`, (req, res) => accountsOpportunitiesCtrl.addAccountOpportunity(req, res));
 router.get(`/api-${sys}/accounts-opportunities/:id`, (req, res) => accountsOpportunitiesCtrl.getAAccountOpportunity(req, res));
 router.put(`/api-${sys}/accounts-opportunities/:id`, (req, res) => accountsOpportunitiesCtrl.updateAccountOpportunity(req, res));

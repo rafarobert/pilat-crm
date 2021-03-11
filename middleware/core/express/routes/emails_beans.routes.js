@@ -58,6 +58,7 @@ router.post(`/api-${sys}/emails-beans/updateEmailBeanByBeanId`, (req, res) => em
 
 
 router.get(`/api-${sys}/emails-beans/`, (req, res) => emailsBeansCtrl.getAllEmailsBeans(req, res));
+router.post(`/api-${sys}/datatable/emails-beans/`, (req, res) => emailsBeansCtrl.getAllEmailsBeans(req, res));
 router.post(`/api-${sys}/emails-beans/`, (req, res) => emailsBeansCtrl.addEmailBean(req, res));
 router.get(`/api-${sys}/emails-beans/:id`, (req, res) => emailsBeansCtrl.getAEmailBean(req, res));
 router.put(`/api-${sys}/emails-beans/:id`, (req, res) => emailsBeansCtrl.updateEmailBean(req, res));

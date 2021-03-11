@@ -50,6 +50,7 @@ router.post(`/api-${sys}/projects-opportunities/updateProjectOpportunityByDateMo
 
 
 router.get(`/api-${sys}/projects-opportunities/`, (req, res) => projectsOpportunitiesCtrl.getAllProjectsOpportunities(req, res));
+router.post(`/api-${sys}/datatable/projects-opportunities/`, (req, res) => projectsOpportunitiesCtrl.getAllProjectsOpportunities(req, res));
 router.post(`/api-${sys}/projects-opportunities/`, (req, res) => projectsOpportunitiesCtrl.addProjectOpportunity(req, res));
 router.get(`/api-${sys}/projects-opportunities/:id`, (req, res) => projectsOpportunitiesCtrl.getAProjectOpportunity(req, res));
 router.put(`/api-${sys}/projects-opportunities/:id`, (req, res) => projectsOpportunitiesCtrl.updateProjectOpportunity(req, res));

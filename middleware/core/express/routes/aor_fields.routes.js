@@ -122,6 +122,7 @@ router.post(`/api-${sys}/aor-fields/updateAorFieldByAorReportId`, (req, res) => 
 
 
 router.get(`/api-${sys}/aor-fields/`, (req, res) => aorFieldsCtrl.getAllAorFields(req, res));
+router.post(`/api-${sys}/datatable/aor-fields/`, (req, res) => aorFieldsCtrl.getAllAorFields(req, res));
 router.post(`/api-${sys}/aor-fields/`, (req, res) => aorFieldsCtrl.addAorField(req, res));
 router.get(`/api-${sys}/aor-fields/:id`, (req, res) => aorFieldsCtrl.getAAorField(req, res));
 router.put(`/api-${sys}/aor-fields/:id`, (req, res) => aorFieldsCtrl.updateAorField(req, res));

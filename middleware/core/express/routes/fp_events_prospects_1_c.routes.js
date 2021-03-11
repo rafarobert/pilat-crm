@@ -62,6 +62,7 @@ router.post(`/api-${sys}/fp-events-prospects-1-c/updateFpEventProspect1CByDateMo
 
 
 router.get(`/api-${sys}/fp-events-prospects-1-c/`, (req, res) => fpEventsProspects1CCtrl.getAllFpEventsProspects1C(req, res));
+router.post(`/api-${sys}/datatable/fp-events-prospects-1-c/`, (req, res) => fpEventsProspects1CCtrl.getAllFpEventsProspects1C(req, res));
 router.post(`/api-${sys}/fp-events-prospects-1-c/`, (req, res) => fpEventsProspects1CCtrl.addFpEventProspect1C(req, res));
 router.get(`/api-${sys}/fp-events-prospects-1-c/:id`, (req, res) => fpEventsProspects1CCtrl.getAFpEventProspect1C(req, res));
 router.put(`/api-${sys}/fp-events-prospects-1-c/:id`, (req, res) => fpEventsProspects1CCtrl.updateFpEventProspect1C(req, res));

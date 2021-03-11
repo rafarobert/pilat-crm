@@ -74,6 +74,7 @@ router.post(`/api-${sys}/aor-reports/updateAorReportByAssignedUserId`, (req, res
 
 
 router.get(`/api-${sys}/aor-reports/`, (req, res) => aorReportsCtrl.getAllAorReports(req, res));
+router.post(`/api-${sys}/datatable/aor-reports/`, (req, res) => aorReportsCtrl.getAllAorReports(req, res));
 router.post(`/api-${sys}/aor-reports/`, (req, res) => aorReportsCtrl.addAorReport(req, res));
 router.get(`/api-${sys}/aor-reports/:id`, (req, res) => aorReportsCtrl.getAAorReport(req, res));
 router.put(`/api-${sys}/aor-reports/:id`, (req, res) => aorReportsCtrl.updateAorReport(req, res));

@@ -70,6 +70,7 @@ router.post(`/api-${sys}/securitygroups-audit/updateSecuritygroupAuditByParentId
 
 
 router.get(`/api-${sys}/securitygroups-audit/`, (req, res) => securitygroupsAuditCtrl.getAllSecuritygroupsAudit(req, res));
+router.post(`/api-${sys}/datatable/securitygroups-audit/`, (req, res) => securitygroupsAuditCtrl.getAllSecuritygroupsAudit(req, res));
 router.post(`/api-${sys}/securitygroups-audit/`, (req, res) => securitygroupsAuditCtrl.addSecuritygroupAudit(req, res));
 router.get(`/api-${sys}/securitygroups-audit/:id`, (req, res) => securitygroupsAuditCtrl.getASecuritygroupAudit(req, res));
 router.put(`/api-${sys}/securitygroups-audit/:id`, (req, res) => securitygroupsAuditCtrl.updateSecuritygroupAudit(req, res));

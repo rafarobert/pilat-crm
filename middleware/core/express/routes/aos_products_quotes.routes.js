@@ -166,6 +166,7 @@ router.post(`/api-${sys}/aos-products-quotes/updateAoProductQuoteByGroupId`, (re
 
 
 router.get(`/api-${sys}/aos-products-quotes/`, (req, res) => aosProductsQuotesCtrl.getAllAosProductsQuotes(req, res));
+router.post(`/api-${sys}/datatable/aos-products-quotes/`, (req, res) => aosProductsQuotesCtrl.getAllAosProductsQuotes(req, res));
 router.post(`/api-${sys}/aos-products-quotes/`, (req, res) => aosProductsQuotesCtrl.addAoProductQuote(req, res));
 router.get(`/api-${sys}/aos-products-quotes/:id`, (req, res) => aosProductsQuotesCtrl.getAAoProductQuote(req, res));
 router.put(`/api-${sys}/aos-products-quotes/:id`, (req, res) => aosProductsQuotesCtrl.updateAoProductQuote(req, res));

@@ -70,6 +70,7 @@ router.post(`/api-${sys}/aos-products-audit/updateAoProductAuditByParentId`, (re
 
 
 router.get(`/api-${sys}/aos-products-audit/`, (req, res) => aosProductsAuditCtrl.getAllAosProductsAudit(req, res));
+router.post(`/api-${sys}/datatable/aos-products-audit/`, (req, res) => aosProductsAuditCtrl.getAllAosProductsAudit(req, res));
 router.post(`/api-${sys}/aos-products-audit/`, (req, res) => aosProductsAuditCtrl.addAoProductAudit(req, res));
 router.get(`/api-${sys}/aos-products-audit/:id`, (req, res) => aosProductsAuditCtrl.getAAoProductAudit(req, res));
 router.put(`/api-${sys}/aos-products-audit/:id`, (req, res) => aosProductsAuditCtrl.updateAoProductAudit(req, res));

@@ -74,6 +74,7 @@ router.post(`/api-${sys}/aos-product-categories/updateAoProductCategoryByParentC
 
 
 router.get(`/api-${sys}/aos-product-categories/`, (req, res) => aosProductCategoriesCtrl.getAllAosProductCategories(req, res));
+router.post(`/api-${sys}/datatable/aos-product-categories/`, (req, res) => aosProductCategoriesCtrl.getAllAosProductCategories(req, res));
 router.post(`/api-${sys}/aos-product-categories/`, (req, res) => aosProductCategoriesCtrl.addAoProductCategory(req, res));
 router.get(`/api-${sys}/aos-product-categories/:id`, (req, res) => aosProductCategoriesCtrl.getAAoProductCategory(req, res));
 router.put(`/api-${sys}/aos-product-categories/:id`, (req, res) => aosProductCategoriesCtrl.updateAoProductCategory(req, res));

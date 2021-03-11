@@ -50,6 +50,7 @@ router.post(`/api-${sys}/project-users-1-c/updateProjectUser1CByDateModified`, (
 
 
 router.get(`/api-${sys}/project-users-1-c/`, (req, res) => projectUsers1CCtrl.getAllProjectUsers1C(req, res));
+router.post(`/api-${sys}/datatable/project-users-1-c/`, (req, res) => projectUsers1CCtrl.getAllProjectUsers1C(req, res));
 router.post(`/api-${sys}/project-users-1-c/`, (req, res) => projectUsers1CCtrl.addProjectUser1C(req, res));
 router.get(`/api-${sys}/project-users-1-c/:id`, (req, res) => projectUsers1CCtrl.getAProjectUser1C(req, res));
 router.put(`/api-${sys}/project-users-1-c/:id`, (req, res) => projectUsers1CCtrl.updateProjectUser1C(req, res));

@@ -74,6 +74,7 @@ router.post(`/api-${sys}/campaign-trkrs/updateCampaignTrkrByCreatedBy`, (req, re
 
 
 router.get(`/api-${sys}/campaign-trkrs/`, (req, res) => campaignTrkrsCtrl.getAllCampaignTrkrs(req, res));
+router.post(`/api-${sys}/datatable/campaign-trkrs/`, (req, res) => campaignTrkrsCtrl.getAllCampaignTrkrs(req, res));
 router.post(`/api-${sys}/campaign-trkrs/`, (req, res) => campaignTrkrsCtrl.addCampaignTrkr(req, res));
 router.get(`/api-${sys}/campaign-trkrs/:id`, (req, res) => campaignTrkrsCtrl.getACampaignTrkr(req, res));
 router.put(`/api-${sys}/campaign-trkrs/:id`, (req, res) => campaignTrkrsCtrl.updateCampaignTrkr(req, res));

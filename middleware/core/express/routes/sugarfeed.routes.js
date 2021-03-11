@@ -82,6 +82,7 @@ router.post(`/api-${sys}/sugarfeed/updateSugarfeedByRelatedId`, (req, res) => su
 
 
 router.get(`/api-${sys}/sugarfeed/`, (req, res) => sugarfeedCtrl.getAllSugarfeed(req, res));
+router.post(`/api-${sys}/datatable/sugarfeed/`, (req, res) => sugarfeedCtrl.getAllSugarfeed(req, res));
 router.post(`/api-${sys}/sugarfeed/`, (req, res) => sugarfeedCtrl.addSugarfeed(req, res));
 router.get(`/api-${sys}/sugarfeed/:id`, (req, res) => sugarfeedCtrl.getASugarfeed(req, res));
 router.put(`/api-${sys}/sugarfeed/:id`, (req, res) => sugarfeedCtrl.updateSugarfeed(req, res));

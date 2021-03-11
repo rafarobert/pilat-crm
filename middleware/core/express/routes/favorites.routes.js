@@ -74,6 +74,7 @@ router.post(`/api-${sys}/favorites/updateFavoriteByParentId`, (req, res) => favo
 
 
 router.get(`/api-${sys}/favorites/`, (req, res) => favoritesCtrl.getAllFavorites(req, res));
+router.post(`/api-${sys}/datatable/favorites/`, (req, res) => favoritesCtrl.getAllFavorites(req, res));
 router.post(`/api-${sys}/favorites/`, (req, res) => favoritesCtrl.addFavorite(req, res));
 router.get(`/api-${sys}/favorites/:id`, (req, res) => favoritesCtrl.getAFavorite(req, res));
 router.put(`/api-${sys}/favorites/:id`, (req, res) => favoritesCtrl.updateFavorite(req, res));

@@ -118,6 +118,7 @@ router.post(`/api-${sys}/documents/updateDocumentByRelatedDocRevId`, (req, res) 
 
 
 router.get(`/api-${sys}/documents/`, (req, res) => documentsCtrl.getAllDocuments(req, res));
+router.post(`/api-${sys}/datatable/documents/`, (req, res) => documentsCtrl.getAllDocuments(req, res));
 router.post(`/api-${sys}/documents/`, (req, res) => documentsCtrl.addDocument(req, res));
 router.get(`/api-${sys}/documents/:id`, (req, res) => documentsCtrl.getADocument(req, res));
 router.put(`/api-${sys}/documents/:id`, (req, res) => documentsCtrl.updateDocument(req, res));

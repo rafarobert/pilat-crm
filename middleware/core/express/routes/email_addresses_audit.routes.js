@@ -70,6 +70,7 @@ router.post(`/api-${sys}/email-addresses-audit/updateEmailAddresseAuditByParentI
 
 
 router.get(`/api-${sys}/email-addresses-audit/`, (req, res) => emailAddressesAuditCtrl.getAllEmailAddressesAudit(req, res));
+router.post(`/api-${sys}/datatable/email-addresses-audit/`, (req, res) => emailAddressesAuditCtrl.getAllEmailAddressesAudit(req, res));
 router.post(`/api-${sys}/email-addresses-audit/`, (req, res) => emailAddressesAuditCtrl.addEmailAddresseAudit(req, res));
 router.get(`/api-${sys}/email-addresses-audit/:id`, (req, res) => emailAddressesAuditCtrl.getAEmailAddresseAudit(req, res));
 router.put(`/api-${sys}/email-addresses-audit/:id`, (req, res) => emailAddressesAuditCtrl.updateEmailAddresseAudit(req, res));

@@ -50,6 +50,7 @@ router.post(`/api-${sys}/accounts-bugs/updateAccountBugByDateModified`, (req, re
 
 
 router.get(`/api-${sys}/accounts-bugs/`, (req, res) => accountsBugsCtrl.getAllAccountsBugs(req, res));
+router.post(`/api-${sys}/datatable/accounts-bugs/`, (req, res) => accountsBugsCtrl.getAllAccountsBugs(req, res));
 router.post(`/api-${sys}/accounts-bugs/`, (req, res) => accountsBugsCtrl.addAccountBug(req, res));
 router.get(`/api-${sys}/accounts-bugs/:id`, (req, res) => accountsBugsCtrl.getAAccountBug(req, res));
 router.put(`/api-${sys}/accounts-bugs/:id`, (req, res) => accountsBugsCtrl.updateAccountBug(req, res));

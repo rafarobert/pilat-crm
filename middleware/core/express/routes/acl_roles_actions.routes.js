@@ -54,6 +54,7 @@ router.post(`/api-${sys}/acl-roles-actions/updateAclRoleActionByDateModified`, (
 
 
 router.get(`/api-${sys}/acl-roles-actions/`, (req, res) => aclRolesActionsCtrl.getAllAclRolesActions(req, res));
+router.post(`/api-${sys}/datatable/acl-roles-actions/`, (req, res) => aclRolesActionsCtrl.getAllAclRolesActions(req, res));
 router.post(`/api-${sys}/acl-roles-actions/`, (req, res) => aclRolesActionsCtrl.addAclRoleAction(req, res));
 router.get(`/api-${sys}/acl-roles-actions/:id`, (req, res) => aclRolesActionsCtrl.getAAclRoleAction(req, res));
 router.put(`/api-${sys}/acl-roles-actions/:id`, (req, res) => aclRolesActionsCtrl.updateAclRoleAction(req, res));

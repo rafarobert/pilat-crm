@@ -110,6 +110,7 @@ router.post(`/api-${sys}/am-tasktemplates/updateAmTasktemplateByAssignedUserId`,
 
 
 router.get(`/api-${sys}/am-tasktemplates/`, (req, res) => amTasktemplatesCtrl.getAllAmTasktemplates(req, res));
+router.post(`/api-${sys}/datatable/am-tasktemplates/`, (req, res) => amTasktemplatesCtrl.getAllAmTasktemplates(req, res));
 router.post(`/api-${sys}/am-tasktemplates/`, (req, res) => amTasktemplatesCtrl.addAmTasktemplate(req, res));
 router.get(`/api-${sys}/am-tasktemplates/:id`, (req, res) => amTasktemplatesCtrl.getAAmTasktemplate(req, res));
 router.put(`/api-${sys}/am-tasktemplates/:id`, (req, res) => amTasktemplatesCtrl.updateAmTasktemplate(req, res));

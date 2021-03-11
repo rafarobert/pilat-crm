@@ -186,6 +186,7 @@ router.post(`/api-${sys}/aos-contracts/updateAoContractByCallId`, (req, res) => 
 
 
 router.get(`/api-${sys}/aos-contracts/`, (req, res) => aosContractsCtrl.getAllAosContracts(req, res));
+router.post(`/api-${sys}/datatable/aos-contracts/`, (req, res) => aosContractsCtrl.getAllAosContracts(req, res));
 router.post(`/api-${sys}/aos-contracts/`, (req, res) => aosContractsCtrl.addAoContract(req, res));
 router.get(`/api-${sys}/aos-contracts/:id`, (req, res) => aosContractsCtrl.getAAoContract(req, res));
 router.put(`/api-${sys}/aos-contracts/:id`, (req, res) => aosContractsCtrl.updateAoContract(req, res));

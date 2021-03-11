@@ -102,6 +102,7 @@ router.post(`/api-${sys}/email-marketing/updateEmailMarketingByOutboundEmailId`,
 
 
 router.get(`/api-${sys}/email-marketing/`, (req, res) => emailMarketingCtrl.getAllEmailMarketing(req, res));
+router.post(`/api-${sys}/datatable/email-marketing/`, (req, res) => emailMarketingCtrl.getAllEmailMarketing(req, res));
 router.post(`/api-${sys}/email-marketing/`, (req, res) => emailMarketingCtrl.addEmailMarketing(req, res));
 router.get(`/api-${sys}/email-marketing/:id`, (req, res) => emailMarketingCtrl.getAEmailMarketing(req, res));
 router.put(`/api-${sys}/email-marketing/:id`, (req, res) => emailMarketingCtrl.updateEmailMarketing(req, res));

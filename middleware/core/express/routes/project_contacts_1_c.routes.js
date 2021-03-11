@@ -50,6 +50,7 @@ router.post(`/api-${sys}/project-contacts-1-c/updateProjectContact1CByDateModifi
 
 
 router.get(`/api-${sys}/project-contacts-1-c/`, (req, res) => projectContacts1CCtrl.getAllProjectContacts1C(req, res));
+router.post(`/api-${sys}/datatable/project-contacts-1-c/`, (req, res) => projectContacts1CCtrl.getAllProjectContacts1C(req, res));
 router.post(`/api-${sys}/project-contacts-1-c/`, (req, res) => projectContacts1CCtrl.addProjectContact1C(req, res));
 router.get(`/api-${sys}/project-contacts-1-c/:id`, (req, res) => projectContacts1CCtrl.getAProjectContact1C(req, res));
 router.put(`/api-${sys}/project-contacts-1-c/:id`, (req, res) => projectContacts1CCtrl.updateProjectContact1C(req, res));

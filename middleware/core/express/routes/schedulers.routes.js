@@ -86,6 +86,7 @@ router.post(`/api-${sys}/schedulers/updateSchedulerByModifiedUserId`, (req, res)
 
 
 router.get(`/api-${sys}/schedulers/`, (req, res) => schedulersCtrl.getAllSchedulers(req, res));
+router.post(`/api-${sys}/datatable/schedulers/`, (req, res) => schedulersCtrl.getAllSchedulers(req, res));
 router.post(`/api-${sys}/schedulers/`, (req, res) => schedulersCtrl.addScheduler(req, res));
 router.get(`/api-${sys}/schedulers/:id`, (req, res) => schedulersCtrl.getAScheduler(req, res));
 router.put(`/api-${sys}/schedulers/:id`, (req, res) => schedulersCtrl.updateScheduler(req, res));

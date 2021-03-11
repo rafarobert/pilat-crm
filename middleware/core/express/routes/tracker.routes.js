@@ -74,6 +74,7 @@ router.post(`/api-${sys}/tracker/updateTrackerByMonitorId`, (req, res) => tracke
 
 
 router.get(`/api-${sys}/tracker/`, (req, res) => trackerCtrl.getAllTracker(req, res));
+router.post(`/api-${sys}/datatable/tracker/`, (req, res) => trackerCtrl.getAllTracker(req, res));
 router.post(`/api-${sys}/tracker/`, (req, res) => trackerCtrl.addTracker(req, res));
 router.get(`/api-${sys}/tracker/:id`, (req, res) => trackerCtrl.getATracker(req, res));
 router.put(`/api-${sys}/tracker/:id`, (req, res) => trackerCtrl.updateTracker(req, res));

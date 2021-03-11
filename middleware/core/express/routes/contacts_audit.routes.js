@@ -70,6 +70,7 @@ router.post(`/api-${sys}/contacts-audit/updateContactAuditByParentId`, (req, res
 
 
 router.get(`/api-${sys}/contacts-audit/`, (req, res) => contactsAuditCtrl.getAllContactsAudit(req, res));
+router.post(`/api-${sys}/datatable/contacts-audit/`, (req, res) => contactsAuditCtrl.getAllContactsAudit(req, res));
 router.post(`/api-${sys}/contacts-audit/`, (req, res) => contactsAuditCtrl.addContactAudit(req, res));
 router.get(`/api-${sys}/contacts-audit/:id`, (req, res) => contactsAuditCtrl.getAContactAudit(req, res));
 router.put(`/api-${sys}/contacts-audit/:id`, (req, res) => contactsAuditCtrl.updateContactAudit(req, res));

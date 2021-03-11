@@ -86,6 +86,7 @@ router.post(`/api-${sys}/aok-knowledgebase/updateAokKnowledgebaseByUserId1C`, (r
 
 
 router.get(`/api-${sys}/aok-knowledgebase/`, (req, res) => aokKnowledgebaseCtrl.getAllAokKnowledgebase(req, res));
+router.post(`/api-${sys}/datatable/aok-knowledgebase/`, (req, res) => aokKnowledgebaseCtrl.getAllAokKnowledgebase(req, res));
 router.post(`/api-${sys}/aok-knowledgebase/`, (req, res) => aokKnowledgebaseCtrl.addAokKnowledgebase(req, res));
 router.get(`/api-${sys}/aok-knowledgebase/:id`, (req, res) => aokKnowledgebaseCtrl.getAAokKnowledgebase(req, res));
 router.put(`/api-${sys}/aok-knowledgebase/:id`, (req, res) => aokKnowledgebaseCtrl.updateAokKnowledgebase(req, res));

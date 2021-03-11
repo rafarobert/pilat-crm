@@ -50,6 +50,7 @@ router.post(`/api-${sys}/jjwg-maps-jjwg-areas-c/updateJjwgMapJjwgAreaCByDateModi
 
 
 router.get(`/api-${sys}/jjwg-maps-jjwg-areas-c/`, (req, res) => jjwgMapsJjwgAreasCCtrl.getAllJjwgMapsJjwgAreasC(req, res));
+router.post(`/api-${sys}/datatable/jjwg-maps-jjwg-areas-c/`, (req, res) => jjwgMapsJjwgAreasCCtrl.getAllJjwgMapsJjwgAreasC(req, res));
 router.post(`/api-${sys}/jjwg-maps-jjwg-areas-c/`, (req, res) => jjwgMapsJjwgAreasCCtrl.addJjwgMapJjwgAreaC(req, res));
 router.get(`/api-${sys}/jjwg-maps-jjwg-areas-c/:id`, (req, res) => jjwgMapsJjwgAreasCCtrl.getAJjwgMapJjwgAreaC(req, res));
 router.put(`/api-${sys}/jjwg-maps-jjwg-areas-c/:id`, (req, res) => jjwgMapsJjwgAreasCCtrl.updateJjwgMapJjwgAreaC(req, res));

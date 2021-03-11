@@ -62,6 +62,7 @@ router.post(`/api-${sys}/users-signatures/updateUserSignatureByDateModified`, (r
 
 
 router.get(`/api-${sys}/users-signatures/`, (req, res) => usersSignaturesCtrl.getAllUsersSignatures(req, res));
+router.post(`/api-${sys}/datatable/users-signatures/`, (req, res) => usersSignaturesCtrl.getAllUsersSignatures(req, res));
 router.post(`/api-${sys}/users-signatures/`, (req, res) => usersSignaturesCtrl.addUserSignature(req, res));
 router.get(`/api-${sys}/users-signatures/:id`, (req, res) => usersSignaturesCtrl.getAUserSignature(req, res));
 router.put(`/api-${sys}/users-signatures/:id`, (req, res) => usersSignaturesCtrl.updateUserSignature(req, res));

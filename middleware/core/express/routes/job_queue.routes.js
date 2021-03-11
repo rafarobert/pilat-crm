@@ -106,6 +106,7 @@ router.post(`/api-${sys}/job-queue/updateJobQueueBySchedulerId`, (req, res) => j
 
 
 router.get(`/api-${sys}/job-queue/`, (req, res) => jobQueueCtrl.getAllJobQueue(req, res));
+router.post(`/api-${sys}/datatable/job-queue/`, (req, res) => jobQueueCtrl.getAllJobQueue(req, res));
 router.post(`/api-${sys}/job-queue/`, (req, res) => jobQueueCtrl.addJobQueue(req, res));
 router.get(`/api-${sys}/job-queue/:id`, (req, res) => jobQueueCtrl.getAJobQueue(req, res));
 router.put(`/api-${sys}/job-queue/:id`, (req, res) => jobQueueCtrl.updateJobQueue(req, res));

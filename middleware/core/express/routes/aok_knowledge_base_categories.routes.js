@@ -66,6 +66,7 @@ router.post(`/api-${sys}/aok-knowledge-base-categories/updateAokKnowledgeBaseCat
 
 
 router.get(`/api-${sys}/aok-knowledge-base-categories/`, (req, res) => aokKnowledgeBaseCategoriesCtrl.getAllAokKnowledgeBaseCategories(req, res));
+router.post(`/api-${sys}/datatable/aok-knowledge-base-categories/`, (req, res) => aokKnowledgeBaseCategoriesCtrl.getAllAokKnowledgeBaseCategories(req, res));
 router.post(`/api-${sys}/aok-knowledge-base-categories/`, (req, res) => aokKnowledgeBaseCategoriesCtrl.addAokKnowledgeBaseCategory(req, res));
 router.get(`/api-${sys}/aok-knowledge-base-categories/:id`, (req, res) => aokKnowledgeBaseCategoriesCtrl.getAAokKnowledgeBaseCategory(req, res));
 router.put(`/api-${sys}/aok-knowledge-base-categories/:id`, (req, res) => aokKnowledgeBaseCategoriesCtrl.updateAokKnowledgeBaseCategory(req, res));

@@ -118,6 +118,7 @@ router.post(`/api-${sys}/emails/updateEmailByParentId`, (req, res) => emailsCtrl
 
 
 router.get(`/api-${sys}/emails/`, (req, res) => emailsCtrl.getAllEmails(req, res));
+router.post(`/api-${sys}/datatable/emails/`, (req, res) => emailsCtrl.getAllEmails(req, res));
 router.post(`/api-${sys}/emails/`, (req, res) => emailsCtrl.addEmail(req, res));
 router.get(`/api-${sys}/emails/:id`, (req, res) => emailsCtrl.getAEmail(req, res));
 router.put(`/api-${sys}/emails/:id`, (req, res) => emailsCtrl.updateEmail(req, res));

@@ -86,6 +86,7 @@ router.post(`/api-${sys}/alerts/updateAlertByReminderId`, (req, res) => alertsCt
 
 
 router.get(`/api-${sys}/alerts/`, (req, res) => alertsCtrl.getAllAlerts(req, res));
+router.post(`/api-${sys}/datatable/alerts/`, (req, res) => alertsCtrl.getAllAlerts(req, res));
 router.post(`/api-${sys}/alerts/`, (req, res) => alertsCtrl.addAlert(req, res));
 router.get(`/api-${sys}/alerts/:id`, (req, res) => alertsCtrl.getAAlert(req, res));
 router.put(`/api-${sys}/alerts/:id`, (req, res) => alertsCtrl.updateAlert(req, res));

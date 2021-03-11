@@ -102,6 +102,7 @@ router.post(`/api-${sys}/tasks/updateTaskByContactId`, (req, res) => tasksCtrl.u
 
 
 router.get(`/api-${sys}/tasks/`, (req, res) => tasksCtrl.getAllTasks(req, res));
+router.post(`/api-${sys}/datatable/tasks/`, (req, res) => tasksCtrl.getAllTasks(req, res));
 router.post(`/api-${sys}/tasks/`, (req, res) => tasksCtrl.addTask(req, res));
 router.get(`/api-${sys}/tasks/:id`, (req, res) => tasksCtrl.getATask(req, res));
 router.put(`/api-${sys}/tasks/:id`, (req, res) => tasksCtrl.updateTask(req, res));

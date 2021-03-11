@@ -70,6 +70,7 @@ router.post(`/api-${sys}/securitygroups/updateSecuritygroupByAssignedUserId`, (r
 
 
 router.get(`/api-${sys}/securitygroups/`, (req, res) => securitygroupsCtrl.getAllSecuritygroups(req, res));
+router.post(`/api-${sys}/datatable/securitygroups/`, (req, res) => securitygroupsCtrl.getAllSecuritygroups(req, res));
 router.post(`/api-${sys}/securitygroups/`, (req, res) => securitygroupsCtrl.addSecuritygroup(req, res));
 router.get(`/api-${sys}/securitygroups/:id`, (req, res) => securitygroupsCtrl.getASecuritygroup(req, res));
 router.put(`/api-${sys}/securitygroups/:id`, (req, res) => securitygroupsCtrl.updateSecuritygroup(req, res));

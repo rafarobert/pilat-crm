@@ -174,6 +174,7 @@ router.post(`/api-${sys}/leads-cstm/updateLeadCstmByFechaValidexC`, (req, res) =
 
 
 router.get(`/api-${sys}/leads-cstm/`, (req, res) => leadsCstmCtrl.getAllLeadsCstm(req, res));
+router.post(`/api-${sys}/datatable/leads-cstm/`, (req, res) => leadsCstmCtrl.getAllLeadsCstm(req, res));
 router.post(`/api-${sys}/leads-cstm/`, (req, res) => leadsCstmCtrl.addLeadCstm(req, res));
 router.get(`/api-${sys}/leads-cstm/:idC`, (req, res) => leadsCstmCtrl.getALeadCstm(req, res));
 router.put(`/api-${sys}/leads-cstm/:idC`, (req, res) => leadsCstmCtrl.updateLeadCstm(req, res));

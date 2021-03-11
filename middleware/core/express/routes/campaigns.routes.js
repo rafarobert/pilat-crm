@@ -134,6 +134,7 @@ router.post(`/api-${sys}/campaigns/updateCampaignBySurveyId`, (req, res) => camp
 
 
 router.get(`/api-${sys}/campaigns/`, (req, res) => campaignsCtrl.getAllCampaigns(req, res));
+router.post(`/api-${sys}/datatable/campaigns/`, (req, res) => campaignsCtrl.getAllCampaigns(req, res));
 router.post(`/api-${sys}/campaigns/`, (req, res) => campaignsCtrl.addCampaign(req, res));
 router.get(`/api-${sys}/campaigns/:id`, (req, res) => campaignsCtrl.getACampaign(req, res));
 router.put(`/api-${sys}/campaigns/:id`, (req, res) => campaignsCtrl.updateCampaign(req, res));

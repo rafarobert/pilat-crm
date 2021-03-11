@@ -50,6 +50,7 @@ router.post(`/api-${sys}/documents-contacts/updateDocumentContactByDateModified`
 
 
 router.get(`/api-${sys}/documents-contacts/`, (req, res) => documentsContactsCtrl.getAllDocumentsContacts(req, res));
+router.post(`/api-${sys}/datatable/documents-contacts/`, (req, res) => documentsContactsCtrl.getAllDocumentsContacts(req, res));
 router.post(`/api-${sys}/documents-contacts/`, (req, res) => documentsContactsCtrl.addDocumentContact(req, res));
 router.get(`/api-${sys}/documents-contacts/:id`, (req, res) => documentsContactsCtrl.getADocumentContact(req, res));
 router.put(`/api-${sys}/documents-contacts/:id`, (req, res) => documentsContactsCtrl.updateDocumentContact(req, res));

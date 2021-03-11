@@ -50,6 +50,7 @@ router.post(`/api-${sys}/fp-events-fp-event-locations-1-c/updateFpEventFpEventLo
 
 
 router.get(`/api-${sys}/fp-events-fp-event-locations-1-c/`, (req, res) => fpEventsFpEventLocations1CCtrl.getAllFpEventsFpEventLocations1C(req, res));
+router.post(`/api-${sys}/datatable/fp-events-fp-event-locations-1-c/`, (req, res) => fpEventsFpEventLocations1CCtrl.getAllFpEventsFpEventLocations1C(req, res));
 router.post(`/api-${sys}/fp-events-fp-event-locations-1-c/`, (req, res) => fpEventsFpEventLocations1CCtrl.addFpEventFpEventLocation1C(req, res));
 router.get(`/api-${sys}/fp-events-fp-event-locations-1-c/:id`, (req, res) => fpEventsFpEventLocations1CCtrl.getAFpEventFpEventLocation1C(req, res));
 router.put(`/api-${sys}/fp-events-fp-event-locations-1-c/:id`, (req, res) => fpEventsFpEventLocations1CCtrl.updateFpEventFpEventLocation1C(req, res));

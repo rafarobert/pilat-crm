@@ -58,6 +58,7 @@ router.post(`/api-${sys}/linked-documents/updateLinkedDocumentByDateModified`, (
 
 
 router.get(`/api-${sys}/linked-documents/`, (req, res) => linkedDocumentsCtrl.getAllLinkedDocuments(req, res));
+router.post(`/api-${sys}/datatable/linked-documents/`, (req, res) => linkedDocumentsCtrl.getAllLinkedDocuments(req, res));
 router.post(`/api-${sys}/linked-documents/`, (req, res) => linkedDocumentsCtrl.addLinkedDocument(req, res));
 router.get(`/api-${sys}/linked-documents/:id`, (req, res) => linkedDocumentsCtrl.getALinkedDocument(req, res));
 router.put(`/api-${sys}/linked-documents/:id`, (req, res) => linkedDocumentsCtrl.updateLinkedDocument(req, res));

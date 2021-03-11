@@ -50,6 +50,7 @@ router.post(`/api-${sys}/aos-quotes-os-contracts-c/updateAoQuoteOContractCByDate
 
 
 router.get(`/api-${sys}/aos-quotes-os-contracts-c/`, (req, res) => aosQuotesOsContractsCCtrl.getAllAosQuotesOsContractsC(req, res));
+router.post(`/api-${sys}/datatable/aos-quotes-os-contracts-c/`, (req, res) => aosQuotesOsContractsCCtrl.getAllAosQuotesOsContractsC(req, res));
 router.post(`/api-${sys}/aos-quotes-os-contracts-c/`, (req, res) => aosQuotesOsContractsCCtrl.addAoQuoteOContractC(req, res));
 router.get(`/api-${sys}/aos-quotes-os-contracts-c/:id`, (req, res) => aosQuotesOsContractsCCtrl.getAAoQuoteOContractC(req, res));
 router.put(`/api-${sys}/aos-quotes-os-contracts-c/:id`, (req, res) => aosQuotesOsContractsCCtrl.updateAoQuoteOContractC(req, res));

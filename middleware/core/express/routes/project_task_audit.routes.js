@@ -70,6 +70,7 @@ router.post(`/api-${sys}/project-task-audit/updateProjectTaskAuditByParentId`, (
 
 
 router.get(`/api-${sys}/project-task-audit/`, (req, res) => projectTaskAuditCtrl.getAllProjectTaskAudit(req, res));
+router.post(`/api-${sys}/datatable/project-task-audit/`, (req, res) => projectTaskAuditCtrl.getAllProjectTaskAudit(req, res));
 router.post(`/api-${sys}/project-task-audit/`, (req, res) => projectTaskAuditCtrl.addProjectTaskAudit(req, res));
 router.get(`/api-${sys}/project-task-audit/:id`, (req, res) => projectTaskAuditCtrl.getAProjectTaskAudit(req, res));
 router.put(`/api-${sys}/project-task-audit/:id`, (req, res) => projectTaskAuditCtrl.updateProjectTaskAudit(req, res));

@@ -70,6 +70,7 @@ router.post(`/api-${sys}/acl-actions/updateAclActionByCreatedBy`, (req, res) => 
 
 
 router.get(`/api-${sys}/acl-actions/`, (req, res) => aclActionsCtrl.getAllAclActions(req, res));
+router.post(`/api-${sys}/datatable/acl-actions/`, (req, res) => aclActionsCtrl.getAllAclActions(req, res));
 router.post(`/api-${sys}/acl-actions/`, (req, res) => aclActionsCtrl.addAclAction(req, res));
 router.get(`/api-${sys}/acl-actions/:id`, (req, res) => aclActionsCtrl.getAAclAction(req, res));
 router.put(`/api-${sys}/acl-actions/:id`, (req, res) => aclActionsCtrl.updateAclAction(req, res));

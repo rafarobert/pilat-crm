@@ -70,6 +70,7 @@ router.post(`/api-${sys}/bugs-audit/updateBugAuditByParentId`, (req, res) => bug
 
 
 router.get(`/api-${sys}/bugs-audit/`, (req, res) => bugsAuditCtrl.getAllBugsAudit(req, res));
+router.post(`/api-${sys}/datatable/bugs-audit/`, (req, res) => bugsAuditCtrl.getAllBugsAudit(req, res));
 router.post(`/api-${sys}/bugs-audit/`, (req, res) => bugsAuditCtrl.addBugAudit(req, res));
 router.get(`/api-${sys}/bugs-audit/:id`, (req, res) => bugsAuditCtrl.getABugAudit(req, res));
 router.put(`/api-${sys}/bugs-audit/:id`, (req, res) => bugsAuditCtrl.updateBugAudit(req, res));

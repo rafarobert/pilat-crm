@@ -46,6 +46,7 @@ router.post(`/api-${sys}/users-cstm/updateUserCstmByExtensionDocumentoC`, (req, 
 
 
 router.get(`/api-${sys}/users-cstm/`, (req, res) => usersCstmCtrl.getAllUsersCstm(req, res));
+router.post(`/api-${sys}/datatable/users-cstm/`, (req, res) => usersCstmCtrl.getAllUsersCstm(req, res));
 router.post(`/api-${sys}/users-cstm/`, (req, res) => usersCstmCtrl.addUserCstm(req, res));
 router.get(`/api-${sys}/users-cstm/:idC`, (req, res) => usersCstmCtrl.getAUserCstm(req, res));
 router.put(`/api-${sys}/users-cstm/:idC`, (req, res) => usersCstmCtrl.updateUserCstm(req, res));

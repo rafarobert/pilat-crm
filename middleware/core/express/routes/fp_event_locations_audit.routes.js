@@ -70,6 +70,7 @@ router.post(`/api-${sys}/fp-event-locations-audit/updateFpEventLocationAuditByPa
 
 
 router.get(`/api-${sys}/fp-event-locations-audit/`, (req, res) => fpEventLocationsAuditCtrl.getAllFpEventLocationsAudit(req, res));
+router.post(`/api-${sys}/datatable/fp-event-locations-audit/`, (req, res) => fpEventLocationsAuditCtrl.getAllFpEventLocationsAudit(req, res));
 router.post(`/api-${sys}/fp-event-locations-audit/`, (req, res) => fpEventLocationsAuditCtrl.addFpEventLocationAudit(req, res));
 router.get(`/api-${sys}/fp-event-locations-audit/:id`, (req, res) => fpEventLocationsAuditCtrl.getAFpEventLocationAudit(req, res));
 router.put(`/api-${sys}/fp-event-locations-audit/:id`, (req, res) => fpEventLocationsAuditCtrl.updateFpEventLocationAudit(req, res));

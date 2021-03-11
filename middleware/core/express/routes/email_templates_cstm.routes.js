@@ -38,6 +38,7 @@ router.post(`/api-${sys}/email-templates-cstm/updateEmailTemplateCstmBySmsModule
 
 
 router.get(`/api-${sys}/email-templates-cstm/`, (req, res) => emailTemplatesCstmCtrl.getAllEmailTemplatesCstm(req, res));
+router.post(`/api-${sys}/datatable/email-templates-cstm/`, (req, res) => emailTemplatesCstmCtrl.getAllEmailTemplatesCstm(req, res));
 router.post(`/api-${sys}/email-templates-cstm/`, (req, res) => emailTemplatesCstmCtrl.addEmailTemplateCstm(req, res));
 router.get(`/api-${sys}/email-templates-cstm/:idC`, (req, res) => emailTemplatesCstmCtrl.getAEmailTemplateCstm(req, res));
 router.put(`/api-${sys}/email-templates-cstm/:idC`, (req, res) => emailTemplatesCstmCtrl.updateEmailTemplateCstm(req, res));

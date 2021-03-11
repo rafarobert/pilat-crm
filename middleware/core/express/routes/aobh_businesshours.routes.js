@@ -82,6 +82,7 @@ router.post(`/api-${sys}/aobh-businesshours/updateAobhBusinesshourByCreatedBy`, 
 
 
 router.get(`/api-${sys}/aobh-businesshours/`, (req, res) => aobhBusinesshoursCtrl.getAllAobhBusinesshours(req, res));
+router.post(`/api-${sys}/datatable/aobh-businesshours/`, (req, res) => aobhBusinesshoursCtrl.getAllAobhBusinesshours(req, res));
 router.post(`/api-${sys}/aobh-businesshours/`, (req, res) => aobhBusinesshoursCtrl.addAobhBusinesshour(req, res));
 router.get(`/api-${sys}/aobh-businesshours/:id`, (req, res) => aobhBusinesshoursCtrl.getAAobhBusinesshour(req, res));
 router.put(`/api-${sys}/aobh-businesshours/:id`, (req, res) => aobhBusinesshoursCtrl.updateAobhBusinesshour(req, res));

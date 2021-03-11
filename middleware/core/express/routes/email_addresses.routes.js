@@ -82,6 +82,7 @@ router.post(`/api-${sys}/email-addresses/updateEmailAddresseByDateModified`, (re
 
 
 router.get(`/api-${sys}/email-addresses/`, (req, res) => emailAddressesCtrl.getAllEmailAddresses(req, res));
+router.post(`/api-${sys}/datatable/email-addresses/`, (req, res) => emailAddressesCtrl.getAllEmailAddresses(req, res));
 router.post(`/api-${sys}/email-addresses/`, (req, res) => emailAddressesCtrl.addEmailAddresse(req, res));
 router.get(`/api-${sys}/email-addresses/:id`, (req, res) => emailAddressesCtrl.getAEmailAddresse(req, res));
 router.put(`/api-${sys}/email-addresses/:id`, (req, res) => emailAddressesCtrl.updateEmailAddresse(req, res));

@@ -70,6 +70,7 @@ router.post(`/api-${sys}/calls-reschedule-audit/updateCallRescheduleAuditByParen
 
 
 router.get(`/api-${sys}/calls-reschedule-audit/`, (req, res) => callsRescheduleAuditCtrl.getAllCallsRescheduleAudit(req, res));
+router.post(`/api-${sys}/datatable/calls-reschedule-audit/`, (req, res) => callsRescheduleAuditCtrl.getAllCallsRescheduleAudit(req, res));
 router.post(`/api-${sys}/calls-reschedule-audit/`, (req, res) => callsRescheduleAuditCtrl.addCallRescheduleAudit(req, res));
 router.get(`/api-${sys}/calls-reschedule-audit/:id`, (req, res) => callsRescheduleAuditCtrl.getACallRescheduleAudit(req, res));
 router.put(`/api-${sys}/calls-reschedule-audit/:id`, (req, res) => callsRescheduleAuditCtrl.updateCallRescheduleAudit(req, res));

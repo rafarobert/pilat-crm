@@ -105,6 +105,7 @@ router.get(`/api-${sys}/pilat-params/findPilatParamsParParentWithParOrder`, (req
 
 
 router.get(`/api-${sys}/pilat-params/`, (req, res) => pilatParamsCtrl.getAllPilatParams(req, res));
+router.post(`/api-${sys}/datatable/pilat-params/`, (req, res) => pilatParamsCtrl.getAllPilatParams(req, res));
 router.post(`/api-${sys}/pilat-params/`, (req, res) => pilatParamsCtrl.addPilatParam(req, res));
 router.get(`/api-${sys}/pilat-params/:Id`, (req, res) => pilatParamsCtrl.getAPilatParam(req, res));
 router.put(`/api-${sys}/pilat-params/:Id`, (req, res) => pilatParamsCtrl.updatePilatParam(req, res));

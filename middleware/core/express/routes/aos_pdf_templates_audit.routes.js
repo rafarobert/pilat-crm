@@ -70,6 +70,7 @@ router.post(`/api-${sys}/aos-pdf-templates-audit/updateAoPdfTemplateAuditByParen
 
 
 router.get(`/api-${sys}/aos-pdf-templates-audit/`, (req, res) => aosPdfTemplatesAuditCtrl.getAllAosPdfTemplatesAudit(req, res));
+router.post(`/api-${sys}/datatable/aos-pdf-templates-audit/`, (req, res) => aosPdfTemplatesAuditCtrl.getAllAosPdfTemplatesAudit(req, res));
 router.post(`/api-${sys}/aos-pdf-templates-audit/`, (req, res) => aosPdfTemplatesAuditCtrl.addAoPdfTemplateAudit(req, res));
 router.get(`/api-${sys}/aos-pdf-templates-audit/:id`, (req, res) => aosPdfTemplatesAuditCtrl.getAAoPdfTemplateAudit(req, res));
 router.put(`/api-${sys}/aos-pdf-templates-audit/:id`, (req, res) => aosPdfTemplatesAuditCtrl.updateAoPdfTemplateAudit(req, res));

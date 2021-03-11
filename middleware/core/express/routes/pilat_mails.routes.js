@@ -123,6 +123,7 @@ router.get(`/api-${sys}/pilat-mails/findPilatParamsMaiParStatusWithParOrder`, (r
 
 
 router.get(`/api-${sys}/pilat-mails/`, (req, res) => pilatMailsCtrl.getAllPilatMails(req, res));
+router.post(`/api-${sys}/datatable/pilat-mails/`, (req, res) => pilatMailsCtrl.getAllPilatMails(req, res));
 router.post(`/api-${sys}/pilat-mails/`, (req, res) => pilatMailsCtrl.addPilatMail(req, res));
 router.get(`/api-${sys}/pilat-mails/:Id`, (req, res) => pilatMailsCtrl.getAPilatMail(req, res));
 router.put(`/api-${sys}/pilat-mails/:Id`, (req, res) => pilatMailsCtrl.updatePilatMail(req, res));

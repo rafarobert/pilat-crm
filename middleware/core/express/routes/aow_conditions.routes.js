@@ -90,6 +90,7 @@ router.post(`/api-${sys}/aow-conditions/updateAowConditionByAowWorkflowId`, (req
 
 
 router.get(`/api-${sys}/aow-conditions/`, (req, res) => aowConditionsCtrl.getAllAowConditions(req, res));
+router.post(`/api-${sys}/datatable/aow-conditions/`, (req, res) => aowConditionsCtrl.getAllAowConditions(req, res));
 router.post(`/api-${sys}/aow-conditions/`, (req, res) => aowConditionsCtrl.addAowCondition(req, res));
 router.get(`/api-${sys}/aow-conditions/:id`, (req, res) => aowConditionsCtrl.getAAowCondition(req, res));
 router.put(`/api-${sys}/aow-conditions/:id`, (req, res) => aowConditionsCtrl.updateAowCondition(req, res));

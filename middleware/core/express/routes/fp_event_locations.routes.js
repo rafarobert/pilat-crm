@@ -90,6 +90,7 @@ router.post(`/api-${sys}/fp-event-locations/updateFpEventLocationByAssignedUserI
 
 
 router.get(`/api-${sys}/fp-event-locations/`, (req, res) => fpEventLocationsCtrl.getAllFpEventLocations(req, res));
+router.post(`/api-${sys}/datatable/fp-event-locations/`, (req, res) => fpEventLocationsCtrl.getAllFpEventLocations(req, res));
 router.post(`/api-${sys}/fp-event-locations/`, (req, res) => fpEventLocationsCtrl.addFpEventLocation(req, res));
 router.get(`/api-${sys}/fp-event-locations/:id`, (req, res) => fpEventLocationsCtrl.getAFpEventLocation(req, res));
 router.put(`/api-${sys}/fp-event-locations/:id`, (req, res) => fpEventLocationsCtrl.updateFpEventLocation(req, res));

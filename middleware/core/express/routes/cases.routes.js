@@ -102,6 +102,7 @@ router.post(`/api-${sys}/cases/updateCaseByContactCreatedById`, (req, res) => ca
 
 
 router.get(`/api-${sys}/cases/`, (req, res) => casesCtrl.getAllCases(req, res));
+router.post(`/api-${sys}/datatable/cases/`, (req, res) => casesCtrl.getAllCases(req, res));
 router.post(`/api-${sys}/cases/`, (req, res) => casesCtrl.addCase(req, res));
 router.get(`/api-${sys}/cases/:id`, (req, res) => casesCtrl.getACase(req, res));
 router.put(`/api-${sys}/cases/:id`, (req, res) => casesCtrl.updateCase(req, res));

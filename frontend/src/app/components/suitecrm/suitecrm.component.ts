@@ -64,12 +64,12 @@ export class SuitecrmComponent implements OnInit,AfterViewInit {
                 <table id="pilatLog" class="cell-border compact stripe" style="width:100%">
                   <thead>
                       <tr>
-                          <th>user</th>
-                          <th>action</th>
-                          <th>description</th>
-                          <th>module</th>
-                          <th>createdAt</th>
-                          <th>updatedAt</th>
+                          <th>Usuario</th>
+                          <th>Acción</th>
+                          <th>Descripcion</th>
+                          <th>Modulo</th>
+                          <th>Creado</th>
+                          <th>Actualizado</th>
                       </tr>
                   </thead>
                 </table>
@@ -82,7 +82,7 @@ export class SuitecrmComponent implements OnInit,AfterViewInit {
         serverSide: true,
         serverMethod: 'post',
         ajax: {
-          url: `${environment.backend.server.webpath}/api-pilatsrl/pilat-logs/datatable?`,
+          url: `${environment.backend.server.webpath}/api-pilatsrl/datatable/pilat-logs`,
           dataSrc: 'data'
         },
         columns: [

@@ -66,6 +66,7 @@ router.post(`/api-${sys}/roles/updateRoleByCreatedBy`, (req, res) => rolesCtrl.u
 
 
 router.get(`/api-${sys}/roles/`, (req, res) => rolesCtrl.getAllRoles(req, res));
+router.post(`/api-${sys}/datatable/roles/`, (req, res) => rolesCtrl.getAllRoles(req, res));
 router.post(`/api-${sys}/roles/`, (req, res) => rolesCtrl.addRole(req, res));
 router.get(`/api-${sys}/roles/:id`, (req, res) => rolesCtrl.getARole(req, res));
 router.put(`/api-${sys}/roles/:id`, (req, res) => rolesCtrl.updateRole(req, res));

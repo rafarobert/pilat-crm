@@ -70,6 +70,7 @@ router.post(`/api-${sys}/aok-knowledgebase-audit/updateAokKnowledgebaseAuditByPa
 
 
 router.get(`/api-${sys}/aok-knowledgebase-audit/`, (req, res) => aokKnowledgebaseAuditCtrl.getAllAokKnowledgebaseAudit(req, res));
+router.post(`/api-${sys}/datatable/aok-knowledgebase-audit/`, (req, res) => aokKnowledgebaseAuditCtrl.getAllAokKnowledgebaseAudit(req, res));
 router.post(`/api-${sys}/aok-knowledgebase-audit/`, (req, res) => aokKnowledgebaseAuditCtrl.addAokKnowledgebaseAudit(req, res));
 router.get(`/api-${sys}/aok-knowledgebase-audit/:id`, (req, res) => aokKnowledgebaseAuditCtrl.getAAokKnowledgebaseAudit(req, res));
 router.put(`/api-${sys}/aok-knowledgebase-audit/:id`, (req, res) => aokKnowledgebaseAuditCtrl.updateAokKnowledgebaseAudit(req, res));

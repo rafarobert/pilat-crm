@@ -78,6 +78,7 @@ router.post(`/api-${sys}/aor-charts/updateAorChartByAorReportId`, (req, res) => 
 
 
 router.get(`/api-${sys}/aor-charts/`, (req, res) => aorChartsCtrl.getAllAorCharts(req, res));
+router.post(`/api-${sys}/datatable/aor-charts/`, (req, res) => aorChartsCtrl.getAllAorCharts(req, res));
 router.post(`/api-${sys}/aor-charts/`, (req, res) => aorChartsCtrl.addAorChart(req, res));
 router.get(`/api-${sys}/aor-charts/:id`, (req, res) => aorChartsCtrl.getAAorChart(req, res));
 router.put(`/api-${sys}/aor-charts/:id`, (req, res) => aorChartsCtrl.updateAorChart(req, res));

@@ -78,6 +78,7 @@ router.post(`/api-${sys}/pilat-crons/updatePilatCronByUpdatedat`, (req, res) => 
 
 
 router.get(`/api-${sys}/pilat-crons/`, (req, res) => pilatCronsCtrl.getAllPilatCrons(req, res));
+router.post(`/api-${sys}/datatable/pilat-crons/`, (req, res) => pilatCronsCtrl.getAllPilatCrons(req, res));
 router.post(`/api-${sys}/pilat-crons/`, (req, res) => pilatCronsCtrl.addPilatCron(req, res));
 router.get(`/api-${sys}/pilat-crons/:Id`, (req, res) => pilatCronsCtrl.getAPilatCron(req, res));
 router.put(`/api-${sys}/pilat-crons/:Id`, (req, res) => pilatCronsCtrl.updatePilatCron(req, res));

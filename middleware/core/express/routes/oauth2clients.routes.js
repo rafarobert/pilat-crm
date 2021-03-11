@@ -94,6 +94,7 @@ router.post(`/api-${sys}/oauth2clients/updateOauth2clientByAssignedUserId`, (req
 
 
 router.get(`/api-${sys}/oauth2clients/`, (req, res) => oauth2clientsCtrl.getAllOauth2clients(req, res));
+router.post(`/api-${sys}/datatable/oauth2clients/`, (req, res) => oauth2clientsCtrl.getAllOauth2clients(req, res));
 router.post(`/api-${sys}/oauth2clients/`, (req, res) => oauth2clientsCtrl.addOauth2client(req, res));
 router.get(`/api-${sys}/oauth2clients/:id`, (req, res) => oauth2clientsCtrl.getAOauth2client(req, res));
 router.put(`/api-${sys}/oauth2clients/:id`, (req, res) => oauth2clientsCtrl.updateOauth2client(req, res));

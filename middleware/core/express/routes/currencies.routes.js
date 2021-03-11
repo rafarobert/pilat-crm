@@ -70,6 +70,7 @@ router.post(`/api-${sys}/currencies/updateCurrencyByCreatedBy`, (req, res) => cu
 
 
 router.get(`/api-${sys}/currencies/`, (req, res) => currenciesCtrl.getAllCurrencies(req, res));
+router.post(`/api-${sys}/datatable/currencies/`, (req, res) => currenciesCtrl.getAllCurrencies(req, res));
 router.post(`/api-${sys}/currencies/`, (req, res) => currenciesCtrl.addCurrency(req, res));
 router.get(`/api-${sys}/currencies/:id`, (req, res) => currenciesCtrl.getACurrency(req, res));
 router.put(`/api-${sys}/currencies/:id`, (req, res) => currenciesCtrl.updateCurrency(req, res));

@@ -50,6 +50,7 @@ router.post(`/api-${sys}/cases-cstm/updateCaseCstmByJjwgMapsAddressC`, (req, res
 
 
 router.get(`/api-${sys}/cases-cstm/`, (req, res) => casesCstmCtrl.getAllCasesCstm(req, res));
+router.post(`/api-${sys}/datatable/cases-cstm/`, (req, res) => casesCstmCtrl.getAllCasesCstm(req, res));
 router.post(`/api-${sys}/cases-cstm/`, (req, res) => casesCstmCtrl.addCaseCstm(req, res));
 router.get(`/api-${sys}/cases-cstm/:idC`, (req, res) => casesCstmCtrl.getACaseCstm(req, res));
 router.put(`/api-${sys}/cases-cstm/:idC`, (req, res) => casesCstmCtrl.updateCaseCstm(req, res));

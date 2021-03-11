@@ -50,6 +50,7 @@ router.post(`/api-${sys}/emails-email-addr-rel/updateEmailEmailAddrRelByEmailAdd
 
 
 router.get(`/api-${sys}/emails-email-addr-rel/`, (req, res) => emailsEmailAddrRelCtrl.getAllEmailsEmailAddrRel(req, res));
+router.post(`/api-${sys}/datatable/emails-email-addr-rel/`, (req, res) => emailsEmailAddrRelCtrl.getAllEmailsEmailAddrRel(req, res));
 router.post(`/api-${sys}/emails-email-addr-rel/`, (req, res) => emailsEmailAddrRelCtrl.addEmailEmailAddrRel(req, res));
 router.get(`/api-${sys}/emails-email-addr-rel/:id`, (req, res) => emailsEmailAddrRelCtrl.getAEmailEmailAddrRel(req, res));
 router.put(`/api-${sys}/emails-email-addr-rel/:id`, (req, res) => emailsEmailAddrRelCtrl.updateEmailEmailAddrRel(req, res));

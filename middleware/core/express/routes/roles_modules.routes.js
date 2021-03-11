@@ -54,6 +54,7 @@ router.post(`/api-${sys}/roles-modules/updateRoleModuleByDateModified`, (req, re
 
 
 router.get(`/api-${sys}/roles-modules/`, (req, res) => rolesModulesCtrl.getAllRolesModules(req, res));
+router.post(`/api-${sys}/datatable/roles-modules/`, (req, res) => rolesModulesCtrl.getAllRolesModules(req, res));
 router.post(`/api-${sys}/roles-modules/`, (req, res) => rolesModulesCtrl.addRoleModule(req, res));
 router.get(`/api-${sys}/roles-modules/:id`, (req, res) => rolesModulesCtrl.getARoleModule(req, res));
 router.put(`/api-${sys}/roles-modules/:id`, (req, res) => rolesModulesCtrl.updateRoleModule(req, res));

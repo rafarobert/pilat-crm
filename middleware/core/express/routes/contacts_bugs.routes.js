@@ -54,6 +54,7 @@ router.post(`/api-${sys}/contacts-bugs/updateContactBugByDateModified`, (req, re
 
 
 router.get(`/api-${sys}/contacts-bugs/`, (req, res) => contactsBugsCtrl.getAllContactsBugs(req, res));
+router.post(`/api-${sys}/datatable/contacts-bugs/`, (req, res) => contactsBugsCtrl.getAllContactsBugs(req, res));
 router.post(`/api-${sys}/contacts-bugs/`, (req, res) => contactsBugsCtrl.addContactBug(req, res));
 router.get(`/api-${sys}/contacts-bugs/:id`, (req, res) => contactsBugsCtrl.getAContactBug(req, res));
 router.put(`/api-${sys}/contacts-bugs/:id`, (req, res) => contactsBugsCtrl.updateContactBug(req, res));

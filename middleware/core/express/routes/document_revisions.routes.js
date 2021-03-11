@@ -86,6 +86,7 @@ router.post(`/api-${sys}/document-revisions/updateDocumentRevisionByCreatedBy`, 
 
 
 router.get(`/api-${sys}/document-revisions/`, (req, res) => documentRevisionsCtrl.getAllDocumentRevisions(req, res));
+router.post(`/api-${sys}/datatable/document-revisions/`, (req, res) => documentRevisionsCtrl.getAllDocumentRevisions(req, res));
 router.post(`/api-${sys}/document-revisions/`, (req, res) => documentRevisionsCtrl.addDocumentRevision(req, res));
 router.get(`/api-${sys}/document-revisions/:id`, (req, res) => documentRevisionsCtrl.getADocumentRevision(req, res));
 router.put(`/api-${sys}/document-revisions/:id`, (req, res) => documentRevisionsCtrl.updateDocumentRevision(req, res));

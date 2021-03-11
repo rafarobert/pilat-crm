@@ -50,6 +50,7 @@ router.post(`/api-${sys}/prospects-cstm/updateProspectCstmByJjwgMapsAddressC`, (
 
 
 router.get(`/api-${sys}/prospects-cstm/`, (req, res) => prospectsCstmCtrl.getAllProspectsCstm(req, res));
+router.post(`/api-${sys}/datatable/prospects-cstm/`, (req, res) => prospectsCstmCtrl.getAllProspectsCstm(req, res));
 router.post(`/api-${sys}/prospects-cstm/`, (req, res) => prospectsCstmCtrl.addProspectCstm(req, res));
 router.get(`/api-${sys}/prospects-cstm/:idC`, (req, res) => prospectsCstmCtrl.getAProspectCstm(req, res));
 router.put(`/api-${sys}/prospects-cstm/:idC`, (req, res) => prospectsCstmCtrl.updateProspectCstm(req, res));

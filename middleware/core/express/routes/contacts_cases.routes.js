@@ -54,6 +54,7 @@ router.post(`/api-${sys}/contacts-cases/updateContactCaseByDateModified`, (req, 
 
 
 router.get(`/api-${sys}/contacts-cases/`, (req, res) => contactsCasesCtrl.getAllContactsCases(req, res));
+router.post(`/api-${sys}/datatable/contacts-cases/`, (req, res) => contactsCasesCtrl.getAllContactsCases(req, res));
 router.post(`/api-${sys}/contacts-cases/`, (req, res) => contactsCasesCtrl.addContactCase(req, res));
 router.get(`/api-${sys}/contacts-cases/:id`, (req, res) => contactsCasesCtrl.getAContactCase(req, res));
 router.put(`/api-${sys}/contacts-cases/:id`, (req, res) => contactsCasesCtrl.updateContactCase(req, res));

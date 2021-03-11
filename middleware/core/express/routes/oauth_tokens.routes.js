@@ -66,6 +66,7 @@ router.post(`/api-${sys}/oauth-tokens/updateOauthTokenByAssignedUserId`, (req, r
 
 
 router.get(`/api-${sys}/oauth-tokens/`, (req, res) => oauthTokensCtrl.getAllOauthTokens(req, res));
+router.post(`/api-${sys}/datatable/oauth-tokens/`, (req, res) => oauthTokensCtrl.getAllOauthTokens(req, res));
 router.post(`/api-${sys}/oauth-tokens/`, (req, res) => oauthTokensCtrl.addOauthToken(req, res));
 router.get(`/api-${sys}/oauth-tokens/:id`, (req, res) => oauthTokensCtrl.getAOauthToken(req, res));
 router.put(`/api-${sys}/oauth-tokens/:id`, (req, res) => oauthTokensCtrl.updateOauthToken(req, res));

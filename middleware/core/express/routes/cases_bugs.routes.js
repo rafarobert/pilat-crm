@@ -50,6 +50,7 @@ router.post(`/api-${sys}/cases-bugs/updateCaseBugByDateModified`, (req, res) => 
 
 
 router.get(`/api-${sys}/cases-bugs/`, (req, res) => casesBugsCtrl.getAllCasesBugs(req, res));
+router.post(`/api-${sys}/datatable/cases-bugs/`, (req, res) => casesBugsCtrl.getAllCasesBugs(req, res));
 router.post(`/api-${sys}/cases-bugs/`, (req, res) => casesBugsCtrl.addCaseBug(req, res));
 router.get(`/api-${sys}/cases-bugs/:id`, (req, res) => casesBugsCtrl.getACaseBug(req, res));
 router.put(`/api-${sys}/cases-bugs/:id`, (req, res) => casesBugsCtrl.updateCaseBug(req, res));

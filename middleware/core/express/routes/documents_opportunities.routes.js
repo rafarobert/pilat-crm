@@ -50,6 +50,7 @@ router.post(`/api-${sys}/documents-opportunities/updateDocumentOpportunityByDate
 
 
 router.get(`/api-${sys}/documents-opportunities/`, (req, res) => documentsOpportunitiesCtrl.getAllDocumentsOpportunities(req, res));
+router.post(`/api-${sys}/datatable/documents-opportunities/`, (req, res) => documentsOpportunitiesCtrl.getAllDocumentsOpportunities(req, res));
 router.post(`/api-${sys}/documents-opportunities/`, (req, res) => documentsOpportunitiesCtrl.addDocumentOpportunity(req, res));
 router.get(`/api-${sys}/documents-opportunities/:id`, (req, res) => documentsOpportunitiesCtrl.getADocumentOpportunity(req, res));
 router.put(`/api-${sys}/documents-opportunities/:id`, (req, res) => documentsOpportunitiesCtrl.updateDocumentOpportunity(req, res));

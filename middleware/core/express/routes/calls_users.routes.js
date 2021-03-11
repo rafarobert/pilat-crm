@@ -58,6 +58,7 @@ router.post(`/api-${sys}/calls-users/updateCallUserByDateModified`, (req, res) =
 
 
 router.get(`/api-${sys}/calls-users/`, (req, res) => callsUsersCtrl.getAllCallsUsers(req, res));
+router.post(`/api-${sys}/datatable/calls-users/`, (req, res) => callsUsersCtrl.getAllCallsUsers(req, res));
 router.post(`/api-${sys}/calls-users/`, (req, res) => callsUsersCtrl.addCallUser(req, res));
 router.get(`/api-${sys}/calls-users/:id`, (req, res) => callsUsersCtrl.getACallUser(req, res));
 router.put(`/api-${sys}/calls-users/:id`, (req, res) => callsUsersCtrl.updateCallUser(req, res));

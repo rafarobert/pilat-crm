@@ -74,6 +74,7 @@ router.post(`/api-${sys}/calls-reschedule/updateCallRescheduleByCallId`, (req, r
 
 
 router.get(`/api-${sys}/calls-reschedule/`, (req, res) => callsRescheduleCtrl.getAllCallsReschedule(req, res));
+router.post(`/api-${sys}/datatable/calls-reschedule/`, (req, res) => callsRescheduleCtrl.getAllCallsReschedule(req, res));
 router.post(`/api-${sys}/calls-reschedule/`, (req, res) => callsRescheduleCtrl.addCallReschedule(req, res));
 router.get(`/api-${sys}/calls-reschedule/:id`, (req, res) => callsRescheduleCtrl.getACallReschedule(req, res));
 router.put(`/api-${sys}/calls-reschedule/:id`, (req, res) => callsRescheduleCtrl.updateCallReschedule(req, res));

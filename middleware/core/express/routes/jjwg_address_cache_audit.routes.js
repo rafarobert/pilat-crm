@@ -70,6 +70,7 @@ router.post(`/api-${sys}/jjwg-address-cache-audit/updateJjwgAddresCacheAuditByPa
 
 
 router.get(`/api-${sys}/jjwg-address-cache-audit/`, (req, res) => jjwgAddressCacheAuditCtrl.getAllJjwgAddressCacheAudit(req, res));
+router.post(`/api-${sys}/datatable/jjwg-address-cache-audit/`, (req, res) => jjwgAddressCacheAuditCtrl.getAllJjwgAddressCacheAudit(req, res));
 router.post(`/api-${sys}/jjwg-address-cache-audit/`, (req, res) => jjwgAddressCacheAuditCtrl.addJjwgAddresCacheAudit(req, res));
 router.get(`/api-${sys}/jjwg-address-cache-audit/:id`, (req, res) => jjwgAddressCacheAuditCtrl.getAJjwgAddresCacheAudit(req, res));
 router.put(`/api-${sys}/jjwg-address-cache-audit/:id`, (req, res) => jjwgAddressCacheAuditCtrl.updateJjwgAddresCacheAudit(req, res));

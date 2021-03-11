@@ -54,6 +54,7 @@ router.post(`/api-${sys}/aow-processed-aow-actions/updateAowProcessedAowActionBy
 
 
 router.get(`/api-${sys}/aow-processed-aow-actions/`, (req, res) => aowProcessedAowActionsCtrl.getAllAowProcessedAowActions(req, res));
+router.post(`/api-${sys}/datatable/aow-processed-aow-actions/`, (req, res) => aowProcessedAowActionsCtrl.getAllAowProcessedAowActions(req, res));
 router.post(`/api-${sys}/aow-processed-aow-actions/`, (req, res) => aowProcessedAowActionsCtrl.addAowProcessedAowAction(req, res));
 router.get(`/api-${sys}/aow-processed-aow-actions/:id`, (req, res) => aowProcessedAowActionsCtrl.getAAowProcessedAowAction(req, res));
 router.put(`/api-${sys}/aow-processed-aow-actions/:id`, (req, res) => aowProcessedAowActionsCtrl.updateAowProcessedAowAction(req, res));

@@ -134,6 +134,7 @@ router.post(`/api-${sys}/sai-clientes/updateSaiClienteByGbagefreg`, (req, res) =
 
 
 router.get(`/api-${sys}/sai-clientes/`, (req, res) => saiClientesCtrl.getAllSaiClientes(req, res));
+router.post(`/api-${sys}/datatable/sai-clientes/`, (req, res) => saiClientesCtrl.getAllSaiClientes(req, res));
 router.post(`/api-${sys}/sai-clientes/`, (req, res) => saiClientesCtrl.addSaiCliente(req, res));
 router.get(`/api-${sys}/sai-clientes/:gbagecage`, (req, res) => saiClientesCtrl.getASaiCliente(req, res));
 router.put(`/api-${sys}/sai-clientes/:gbagecage`, (req, res) => saiClientesCtrl.updateSaiCliente(req, res));

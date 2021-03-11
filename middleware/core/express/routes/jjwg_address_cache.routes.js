@@ -74,6 +74,7 @@ router.post(`/api-${sys}/jjwg-address-cache/updateJjwgAddresCacheByAssignedUserI
 
 
 router.get(`/api-${sys}/jjwg-address-cache/`, (req, res) => jjwgAddressCacheCtrl.getAllJjwgAddressCache(req, res));
+router.post(`/api-${sys}/datatable/jjwg-address-cache/`, (req, res) => jjwgAddressCacheCtrl.getAllJjwgAddressCache(req, res));
 router.post(`/api-${sys}/jjwg-address-cache/`, (req, res) => jjwgAddressCacheCtrl.addJjwgAddresCache(req, res));
 router.get(`/api-${sys}/jjwg-address-cache/:id`, (req, res) => jjwgAddressCacheCtrl.getAJjwgAddresCache(req, res));
 router.put(`/api-${sys}/jjwg-address-cache/:id`, (req, res) => jjwgAddressCacheCtrl.updateJjwgAddresCache(req, res));

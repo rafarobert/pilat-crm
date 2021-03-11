@@ -58,6 +58,7 @@ router.post(`/api-${sys}/accounts-cstm/updateAccountCstmByExtensionDocumentoC`, 
 
 
 router.get(`/api-${sys}/accounts-cstm/`, (req, res) => accountsCstmCtrl.getAllAccountsCstm(req, res));
+router.post(`/api-${sys}/datatable/accounts-cstm/`, (req, res) => accountsCstmCtrl.getAllAccountsCstm(req, res));
 router.post(`/api-${sys}/accounts-cstm/`, (req, res) => accountsCstmCtrl.addAccountCstm(req, res));
 router.get(`/api-${sys}/accounts-cstm/:idC`, (req, res) => accountsCstmCtrl.getAAccountCstm(req, res));
 router.put(`/api-${sys}/accounts-cstm/:idC`, (req, res) => accountsCstmCtrl.updateAccountCstm(req, res));

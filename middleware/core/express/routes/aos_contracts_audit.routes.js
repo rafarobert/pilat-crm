@@ -70,6 +70,7 @@ router.post(`/api-${sys}/aos-contracts-audit/updateAoContractAuditByParentId`, (
 
 
 router.get(`/api-${sys}/aos-contracts-audit/`, (req, res) => aosContractsAuditCtrl.getAllAosContractsAudit(req, res));
+router.post(`/api-${sys}/datatable/aos-contracts-audit/`, (req, res) => aosContractsAuditCtrl.getAllAosContractsAudit(req, res));
 router.post(`/api-${sys}/aos-contracts-audit/`, (req, res) => aosContractsAuditCtrl.addAoContractAudit(req, res));
 router.get(`/api-${sys}/aos-contracts-audit/:id`, (req, res) => aosContractsAuditCtrl.getAAoContractAudit(req, res));
 router.put(`/api-${sys}/aos-contracts-audit/:id`, (req, res) => aosContractsAuditCtrl.updateAoContractAudit(req, res));

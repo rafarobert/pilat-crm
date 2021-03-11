@@ -50,6 +50,7 @@ router.post(`/api-${sys}/folders-rel/updateFolderRelByPolymorphicId`, (req, res)
 
 
 router.get(`/api-${sys}/folders-rel/`, (req, res) => foldersRelCtrl.getAllFoldersRel(req, res));
+router.post(`/api-${sys}/datatable/folders-rel/`, (req, res) => foldersRelCtrl.getAllFoldersRel(req, res));
 router.post(`/api-${sys}/folders-rel/`, (req, res) => foldersRelCtrl.addFolderRel(req, res));
 router.get(`/api-${sys}/folders-rel/:id`, (req, res) => foldersRelCtrl.getAFolderRel(req, res));
 router.put(`/api-${sys}/folders-rel/:id`, (req, res) => foldersRelCtrl.updateFolderRel(req, res));

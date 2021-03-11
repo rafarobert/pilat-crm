@@ -50,6 +50,7 @@ router.post(`/api-${sys}/accounts-contacts/updateAccountContactByDateModified`, 
 
 
 router.get(`/api-${sys}/accounts-contacts/`, (req, res) => accountsContactsCtrl.getAllAccountsContacts(req, res));
+router.post(`/api-${sys}/datatable/accounts-contacts/`, (req, res) => accountsContactsCtrl.getAllAccountsContacts(req, res));
 router.post(`/api-${sys}/accounts-contacts/`, (req, res) => accountsContactsCtrl.addAccountContact(req, res));
 router.get(`/api-${sys}/accounts-contacts/:id`, (req, res) => accountsContactsCtrl.getAAccountContact(req, res));
 router.put(`/api-${sys}/accounts-contacts/:id`, (req, res) => accountsContactsCtrl.updateAccountContact(req, res));

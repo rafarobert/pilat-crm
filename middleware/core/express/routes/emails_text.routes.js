@@ -70,6 +70,7 @@ router.post(`/api-${sys}/emails-text/updateEmailTextByRawSource`, (req, res) => 
 
 
 router.get(`/api-${sys}/emails-text/`, (req, res) => emailsTextCtrl.getAllEmailsText(req, res));
+router.post(`/api-${sys}/datatable/emails-text/`, (req, res) => emailsTextCtrl.getAllEmailsText(req, res));
 router.post(`/api-${sys}/emails-text/`, (req, res) => emailsTextCtrl.addEmailText(req, res));
 router.get(`/api-${sys}/emails-text/:emailId`, (req, res) => emailsTextCtrl.getAEmailText(req, res));
 router.put(`/api-${sys}/emails-text/:emailId`, (req, res) => emailsTextCtrl.updateEmailText(req, res));

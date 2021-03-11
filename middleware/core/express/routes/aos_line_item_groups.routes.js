@@ -130,6 +130,7 @@ router.post(`/api-${sys}/aos-line-item-groups/updateAoLineItemGroupByCurrencyId`
 
 
 router.get(`/api-${sys}/aos-line-item-groups/`, (req, res) => aosLineItemGroupsCtrl.getAllAosLineItemGroups(req, res));
+router.post(`/api-${sys}/datatable/aos-line-item-groups/`, (req, res) => aosLineItemGroupsCtrl.getAllAosLineItemGroups(req, res));
 router.post(`/api-${sys}/aos-line-item-groups/`, (req, res) => aosLineItemGroupsCtrl.addAoLineItemGroup(req, res));
 router.get(`/api-${sys}/aos-line-item-groups/:id`, (req, res) => aosLineItemGroupsCtrl.getAAoLineItemGroup(req, res));
 router.put(`/api-${sys}/aos-line-item-groups/:id`, (req, res) => aosLineItemGroupsCtrl.updateAoLineItemGroup(req, res));

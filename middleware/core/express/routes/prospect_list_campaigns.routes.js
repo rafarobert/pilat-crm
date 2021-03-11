@@ -50,6 +50,7 @@ router.post(`/api-${sys}/prospect-list-campaigns/updateProspectListCampaignByDat
 
 
 router.get(`/api-${sys}/prospect-list-campaigns/`, (req, res) => prospectListCampaignsCtrl.getAllProspectListCampaigns(req, res));
+router.post(`/api-${sys}/datatable/prospect-list-campaigns/`, (req, res) => prospectListCampaignsCtrl.getAllProspectListCampaigns(req, res));
 router.post(`/api-${sys}/prospect-list-campaigns/`, (req, res) => prospectListCampaignsCtrl.addProspectListCampaign(req, res));
 router.get(`/api-${sys}/prospect-list-campaigns/:id`, (req, res) => prospectListCampaignsCtrl.getAProspectListCampaign(req, res));
 router.put(`/api-${sys}/prospect-list-campaigns/:id`, (req, res) => prospectListCampaignsCtrl.updateProspectListCampaign(req, res));

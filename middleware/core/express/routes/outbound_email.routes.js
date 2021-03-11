@@ -110,6 +110,7 @@ router.post(`/api-${sys}/outbound-email/updateOutboundEmailByAssignedUserId`, (r
 
 
 router.get(`/api-${sys}/outbound-email/`, (req, res) => outboundEmailCtrl.getAllOutboundEmail(req, res));
+router.post(`/api-${sys}/datatable/outbound-email/`, (req, res) => outboundEmailCtrl.getAllOutboundEmail(req, res));
 router.post(`/api-${sys}/outbound-email/`, (req, res) => outboundEmailCtrl.addOutboundEmail(req, res));
 router.get(`/api-${sys}/outbound-email/:id`, (req, res) => outboundEmailCtrl.getAOutboundEmail(req, res));
 router.put(`/api-${sys}/outbound-email/:id`, (req, res) => outboundEmailCtrl.updateOutboundEmail(req, res));

@@ -114,6 +114,7 @@ router.post(`/api-${sys}/inbound-email/updateInboundEmailByGroupfolderId`, (req,
 
 
 router.get(`/api-${sys}/inbound-email/`, (req, res) => inboundEmailCtrl.getAllInboundEmail(req, res));
+router.post(`/api-${sys}/datatable/inbound-email/`, (req, res) => inboundEmailCtrl.getAllInboundEmail(req, res));
 router.post(`/api-${sys}/inbound-email/`, (req, res) => inboundEmailCtrl.addInboundEmail(req, res));
 router.get(`/api-${sys}/inbound-email/:id`, (req, res) => inboundEmailCtrl.getAInboundEmail(req, res));
 router.put(`/api-${sys}/inbound-email/:id`, (req, res) => inboundEmailCtrl.updateInboundEmail(req, res));

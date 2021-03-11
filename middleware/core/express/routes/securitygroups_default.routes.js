@@ -50,6 +50,7 @@ router.post(`/api-${sys}/securitygroups-default/updateSecuritygroupDefaultBySecu
 
 
 router.get(`/api-${sys}/securitygroups-default/`, (req, res) => securitygroupsDefaultCtrl.getAllSecuritygroupsDefault(req, res));
+router.post(`/api-${sys}/datatable/securitygroups-default/`, (req, res) => securitygroupsDefaultCtrl.getAllSecuritygroupsDefault(req, res));
 router.post(`/api-${sys}/securitygroups-default/`, (req, res) => securitygroupsDefaultCtrl.addSecuritygroupDefault(req, res));
 router.get(`/api-${sys}/securitygroups-default/:id`, (req, res) => securitygroupsDefaultCtrl.getASecuritygroupDefault(req, res));
 router.put(`/api-${sys}/securitygroups-default/:id`, (req, res) => securitygroupsDefaultCtrl.updateSecuritygroupDefault(req, res));

@@ -94,6 +94,7 @@ router.post(`/api-${sys}/emailman/updateEmailmanByRelatedId`, (req, res) => emai
 
 
 router.get(`/api-${sys}/emailman/`, (req, res) => emailmanCtrl.getAllEmailman(req, res));
+router.post(`/api-${sys}/datatable/emailman/`, (req, res) => emailmanCtrl.getAllEmailman(req, res));
 router.post(`/api-${sys}/emailman/`, (req, res) => emailmanCtrl.addEmailman(req, res));
 router.get(`/api-${sys}/emailman/:id`, (req, res) => emailmanCtrl.getAEmailman(req, res));
 router.put(`/api-${sys}/emailman/:id`, (req, res) => emailmanCtrl.updateEmailman(req, res));

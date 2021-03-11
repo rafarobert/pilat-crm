@@ -42,6 +42,7 @@ router.post(`/api-${sys}/oauth-nonce/updateOauthNonceByNonceTs`, (req, res) => o
 
 
 router.get(`/api-${sys}/oauth-nonce/`, (req, res) => oauthNonceCtrl.getAllOauthNonce(req, res));
+router.post(`/api-${sys}/datatable/oauth-nonce/`, (req, res) => oauthNonceCtrl.getAllOauthNonce(req, res));
 router.post(`/api-${sys}/oauth-nonce/`, (req, res) => oauthNonceCtrl.addOauthNonce(req, res));
 router.get(`/api-${sys}/oauth-nonce/:nonce`, (req, res) => oauthNonceCtrl.getAOauthNonce(req, res));
 router.put(`/api-${sys}/oauth-nonce/:nonce`, (req, res) => oauthNonceCtrl.updateOauthNonce(req, res));

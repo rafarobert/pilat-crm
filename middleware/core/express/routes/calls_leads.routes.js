@@ -58,6 +58,7 @@ router.post(`/api-${sys}/calls-leads/updateCallLeadByDateModified`, (req, res) =
 
 
 router.get(`/api-${sys}/calls-leads/`, (req, res) => callsLeadsCtrl.getAllCallsLeads(req, res));
+router.post(`/api-${sys}/datatable/calls-leads/`, (req, res) => callsLeadsCtrl.getAllCallsLeads(req, res));
 router.post(`/api-${sys}/calls-leads/`, (req, res) => callsLeadsCtrl.addCallLead(req, res));
 router.get(`/api-${sys}/calls-leads/:id`, (req, res) => callsLeadsCtrl.getACallLead(req, res));
 router.put(`/api-${sys}/calls-leads/:id`, (req, res) => callsLeadsCtrl.updateCallLead(req, res));

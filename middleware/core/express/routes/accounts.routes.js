@@ -162,6 +162,7 @@ router.post(`/api-${sys}/accounts/updateAccountByCampaignId`, (req, res) => acco
 
 
 router.get(`/api-${sys}/accounts/`, (req, res) => accountsCtrl.getAllAccounts(req, res));
+router.post(`/api-${sys}/datatable/accounts/`, (req, res) => accountsCtrl.getAllAccounts(req, res));
 router.post(`/api-${sys}/accounts/`, (req, res) => accountsCtrl.addAccount(req, res));
 router.get(`/api-${sys}/accounts/:id`, (req, res) => accountsCtrl.getAAccount(req, res));
 router.put(`/api-${sys}/accounts/:id`, (req, res) => accountsCtrl.updateAccount(req, res));

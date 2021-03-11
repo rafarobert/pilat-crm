@@ -62,6 +62,7 @@ router.post(`/api-${sys}/fp-events-leads-1-c/updateFpEventLead1CByDateModified`,
 
 
 router.get(`/api-${sys}/fp-events-leads-1-c/`, (req, res) => fpEventsLeads1CCtrl.getAllFpEventsLeads1C(req, res));
+router.post(`/api-${sys}/datatable/fp-events-leads-1-c/`, (req, res) => fpEventsLeads1CCtrl.getAllFpEventsLeads1C(req, res));
 router.post(`/api-${sys}/fp-events-leads-1-c/`, (req, res) => fpEventsLeads1CCtrl.addFpEventLead1C(req, res));
 router.get(`/api-${sys}/fp-events-leads-1-c/:id`, (req, res) => fpEventsLeads1CCtrl.getAFpEventLead1C(req, res));
 router.put(`/api-${sys}/fp-events-leads-1-c/:id`, (req, res) => fpEventsLeads1CCtrl.updateFpEventLead1C(req, res));

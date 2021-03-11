@@ -118,6 +118,7 @@ router.post(`/api-${sys}/aos-products/updateAoProductByAosProductCategoryId`, (r
 
 
 router.get(`/api-${sys}/aos-products/`, (req, res) => aosProductsCtrl.getAllAosProducts(req, res));
+router.post(`/api-${sys}/datatable/aos-products/`, (req, res) => aosProductsCtrl.getAllAosProducts(req, res));
 router.post(`/api-${sys}/aos-products/`, (req, res) => aosProductsCtrl.addAoProduct(req, res));
 router.get(`/api-${sys}/aos-products/:id`, (req, res) => aosProductsCtrl.getAAoProduct(req, res));
 router.put(`/api-${sys}/aos-products/:id`, (req, res) => aosProductsCtrl.updateAoProduct(req, res));

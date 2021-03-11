@@ -190,6 +190,7 @@ router.post(`/api-${sys}/prospects/updateProspectByCampaignId`, (req, res) => pr
 
 
 router.get(`/api-${sys}/prospects/`, (req, res) => prospectsCtrl.getAllProspects(req, res));
+router.post(`/api-${sys}/datatable/prospects/`, (req, res) => prospectsCtrl.getAllProspects(req, res));
 router.post(`/api-${sys}/prospects/`, (req, res) => prospectsCtrl.addProspect(req, res));
 router.get(`/api-${sys}/prospects/:id`, (req, res) => prospectsCtrl.getAProspect(req, res));
 router.put(`/api-${sys}/prospects/:id`, (req, res) => prospectsCtrl.updateProspect(req, res));

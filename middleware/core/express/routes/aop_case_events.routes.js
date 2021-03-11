@@ -70,6 +70,7 @@ router.post(`/api-${sys}/aop-case-events/updateAopCaseEventByCaseId`, (req, res)
 
 
 router.get(`/api-${sys}/aop-case-events/`, (req, res) => aopCaseEventsCtrl.getAllAopCaseEvents(req, res));
+router.post(`/api-${sys}/datatable/aop-case-events/`, (req, res) => aopCaseEventsCtrl.getAllAopCaseEvents(req, res));
 router.post(`/api-${sys}/aop-case-events/`, (req, res) => aopCaseEventsCtrl.addAopCaseEvent(req, res));
 router.get(`/api-${sys}/aop-case-events/:id`, (req, res) => aopCaseEventsCtrl.getAAopCaseEvent(req, res));
 router.put(`/api-${sys}/aop-case-events/:id`, (req, res) => aopCaseEventsCtrl.updateAopCaseEvent(req, res));

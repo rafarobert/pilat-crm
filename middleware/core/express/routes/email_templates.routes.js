@@ -90,6 +90,7 @@ router.post(`/api-${sys}/email-templates/updateEmailTemplateByAssignedUserId`, (
 
 
 router.get(`/api-${sys}/email-templates/`, (req, res) => emailTemplatesCtrl.getAllEmailTemplates(req, res));
+router.post(`/api-${sys}/datatable/email-templates/`, (req, res) => emailTemplatesCtrl.getAllEmailTemplates(req, res));
 router.post(`/api-${sys}/email-templates/`, (req, res) => emailTemplatesCtrl.addEmailTemplate(req, res));
 router.get(`/api-${sys}/email-templates/:id`, (req, res) => emailTemplatesCtrl.getAEmailTemplate(req, res));
 router.put(`/api-${sys}/email-templates/:id`, (req, res) => emailTemplatesCtrl.updateEmailTemplate(req, res));

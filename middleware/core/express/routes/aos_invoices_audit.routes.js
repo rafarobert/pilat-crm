@@ -70,6 +70,7 @@ router.post(`/api-${sys}/aos-invoices-audit/updateAoInvoiceAuditByParentId`, (re
 
 
 router.get(`/api-${sys}/aos-invoices-audit/`, (req, res) => aosInvoicesAuditCtrl.getAllAosInvoicesAudit(req, res));
+router.post(`/api-${sys}/datatable/aos-invoices-audit/`, (req, res) => aosInvoicesAuditCtrl.getAllAosInvoicesAudit(req, res));
 router.post(`/api-${sys}/aos-invoices-audit/`, (req, res) => aosInvoicesAuditCtrl.addAoInvoiceAudit(req, res));
 router.get(`/api-${sys}/aos-invoices-audit/:id`, (req, res) => aosInvoicesAuditCtrl.getAAoInvoiceAudit(req, res));
 router.put(`/api-${sys}/aos-invoices-audit/:id`, (req, res) => aosInvoicesAuditCtrl.updateAoInvoiceAudit(req, res));

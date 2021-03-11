@@ -198,6 +198,7 @@ router.post(`/api-${sys}/contacts/updateContactByCampaignId`, (req, res) => cont
 
 
 router.get(`/api-${sys}/contacts/`, (req, res) => contactsCtrl.getAllContacts(req, res));
+router.post(`/api-${sys}/datatable/contacts/`, (req, res) => contactsCtrl.getAllContacts(req, res));
 router.post(`/api-${sys}/contacts/`, (req, res) => contactsCtrl.addContact(req, res));
 router.get(`/api-${sys}/contacts/:id`, (req, res) => contactsCtrl.getAContact(req, res));
 router.put(`/api-${sys}/contacts/:id`, (req, res) => contactsCtrl.updateContact(req, res));

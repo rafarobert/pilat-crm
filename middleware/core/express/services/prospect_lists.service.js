@@ -46,7 +46,7 @@ class ProspectListService {
 				    where: where && !where.where ? where : null,
                     limit: query.limit ? parseInt(query.limit) : null,
                     offset: offset ? parseInt(offset) : 0,
-                    order: query.order ? JSON.parse(query.order) : [['id','ASC']],
+                    order: query.order ? Array.isArray(query.order) ? query.order : JSON.parse(query.order) : [['_id','ASC']],
                 });
 			} else {
 				return await models.mongoose.prospectLists.find().select(query.select).limit(parseInt(query.limit)).skip(parseInt(offset));

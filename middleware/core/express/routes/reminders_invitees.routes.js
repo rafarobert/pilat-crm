@@ -78,6 +78,7 @@ router.post(`/api-${sys}/reminders-invitees/updateReminderInviteeByRelatedInvite
 
 
 router.get(`/api-${sys}/reminders-invitees/`, (req, res) => remindersInviteesCtrl.getAllRemindersInvitees(req, res));
+router.post(`/api-${sys}/datatable/reminders-invitees/`, (req, res) => remindersInviteesCtrl.getAllRemindersInvitees(req, res));
 router.post(`/api-${sys}/reminders-invitees/`, (req, res) => remindersInviteesCtrl.addReminderInvitee(req, res));
 router.get(`/api-${sys}/reminders-invitees/:id`, (req, res) => remindersInviteesCtrl.getAReminderInvitee(req, res));
 router.put(`/api-${sys}/reminders-invitees/:id`, (req, res) => remindersInviteesCtrl.updateReminderInvitee(req, res));

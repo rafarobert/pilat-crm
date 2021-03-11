@@ -50,6 +50,7 @@ router.post(`/api-${sys}/projects-contacts/updateProjectContactByDateModified`, 
 
 
 router.get(`/api-${sys}/projects-contacts/`, (req, res) => projectsContactsCtrl.getAllProjectsContacts(req, res));
+router.post(`/api-${sys}/datatable/projects-contacts/`, (req, res) => projectsContactsCtrl.getAllProjectsContacts(req, res));
 router.post(`/api-${sys}/projects-contacts/`, (req, res) => projectsContactsCtrl.addProjectContact(req, res));
 router.get(`/api-${sys}/projects-contacts/:id`, (req, res) => projectsContactsCtrl.getAProjectContact(req, res));
 router.put(`/api-${sys}/projects-contacts/:id`, (req, res) => projectsContactsCtrl.updateProjectContact(req, res));

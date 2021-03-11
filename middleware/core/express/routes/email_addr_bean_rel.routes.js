@@ -66,6 +66,7 @@ router.post(`/api-${sys}/email-addr-bean-rel/updateEmailAddrBeanRelByBeanId`, (r
 
 
 router.get(`/api-${sys}/email-addr-bean-rel/`, (req, res) => emailAddrBeanRelCtrl.getAllEmailAddrBeanRel(req, res));
+router.post(`/api-${sys}/datatable/email-addr-bean-rel/`, (req, res) => emailAddrBeanRelCtrl.getAllEmailAddrBeanRel(req, res));
 router.post(`/api-${sys}/email-addr-bean-rel/`, (req, res) => emailAddrBeanRelCtrl.addEmailAddrBeanRel(req, res));
 router.get(`/api-${sys}/email-addr-bean-rel/:id`, (req, res) => emailAddrBeanRelCtrl.getAEmailAddrBeanRel(req, res));
 router.put(`/api-${sys}/email-addr-bean-rel/:id`, (req, res) => emailAddrBeanRelCtrl.updateEmailAddrBeanRel(req, res));

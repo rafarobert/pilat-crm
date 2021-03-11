@@ -50,6 +50,7 @@ router.post(`/api-${sys}/aos-quotes-project-c/updateAoQuoteProjectCByDateModifie
 
 
 router.get(`/api-${sys}/aos-quotes-project-c/`, (req, res) => aosQuotesProjectCCtrl.getAllAosQuotesProjectC(req, res));
+router.post(`/api-${sys}/datatable/aos-quotes-project-c/`, (req, res) => aosQuotesProjectCCtrl.getAllAosQuotesProjectC(req, res));
 router.post(`/api-${sys}/aos-quotes-project-c/`, (req, res) => aosQuotesProjectCCtrl.addAoQuoteProjectC(req, res));
 router.get(`/api-${sys}/aos-quotes-project-c/:id`, (req, res) => aosQuotesProjectCCtrl.getAAoQuoteProjectC(req, res));
 router.put(`/api-${sys}/aos-quotes-project-c/:id`, (req, res) => aosQuotesProjectCCtrl.updateAoQuoteProjectC(req, res));

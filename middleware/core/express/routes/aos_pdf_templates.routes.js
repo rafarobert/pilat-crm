@@ -114,6 +114,7 @@ router.post(`/api-${sys}/aos-pdf-templates/updateAoPdfTemplateByAssignedUserId`,
 
 
 router.get(`/api-${sys}/aos-pdf-templates/`, (req, res) => aosPdfTemplatesCtrl.getAllAosPdfTemplates(req, res));
+router.post(`/api-${sys}/datatable/aos-pdf-templates/`, (req, res) => aosPdfTemplatesCtrl.getAllAosPdfTemplates(req, res));
 router.post(`/api-${sys}/aos-pdf-templates/`, (req, res) => aosPdfTemplatesCtrl.addAoPdfTemplate(req, res));
 router.get(`/api-${sys}/aos-pdf-templates/:id`, (req, res) => aosPdfTemplatesCtrl.getAAoPdfTemplate(req, res));
 router.put(`/api-${sys}/aos-pdf-templates/:id`, (req, res) => aosPdfTemplatesCtrl.updateAoPdfTemplate(req, res));

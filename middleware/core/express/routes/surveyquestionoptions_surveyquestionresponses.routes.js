@@ -50,6 +50,7 @@ router.post(`/api-${sys}/surveyquestionoptions-surveyquestionresponses/updateSur
 
 
 router.get(`/api-${sys}/surveyquestionoptions-surveyquestionresponses/`, (req, res) => surveyquestionoptionsSurveyquestionresponsesCtrl.getAllSurveyquestionoptionsSurveyquestionresponses(req, res));
+router.post(`/api-${sys}/datatable/surveyquestionoptions-surveyquestionresponses/`, (req, res) => surveyquestionoptionsSurveyquestionresponsesCtrl.getAllSurveyquestionoptionsSurveyquestionresponses(req, res));
 router.post(`/api-${sys}/surveyquestionoptions-surveyquestionresponses/`, (req, res) => surveyquestionoptionsSurveyquestionresponsesCtrl.addSurveyquestionoptionSurveyquestionresponse(req, res));
 router.get(`/api-${sys}/surveyquestionoptions-surveyquestionresponses/:id`, (req, res) => surveyquestionoptionsSurveyquestionresponsesCtrl.getASurveyquestionoptionSurveyquestionresponse(req, res));
 router.put(`/api-${sys}/surveyquestionoptions-surveyquestionresponses/:id`, (req, res) => surveyquestionoptionsSurveyquestionresponsesCtrl.updateSurveyquestionoptionSurveyquestionresponse(req, res));

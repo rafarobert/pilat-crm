@@ -50,6 +50,7 @@ router.post(`/api-${sys}/projects-bugs/updateProjectBugByDateModified`, (req, re
 
 
 router.get(`/api-${sys}/projects-bugs/`, (req, res) => projectsBugsCtrl.getAllProjectsBugs(req, res));
+router.post(`/api-${sys}/datatable/projects-bugs/`, (req, res) => projectsBugsCtrl.getAllProjectsBugs(req, res));
 router.post(`/api-${sys}/projects-bugs/`, (req, res) => projectsBugsCtrl.addProjectBug(req, res));
 router.get(`/api-${sys}/projects-bugs/:id`, (req, res) => projectsBugsCtrl.getAProjectBug(req, res));
 router.put(`/api-${sys}/projects-bugs/:id`, (req, res) => projectsBugsCtrl.updateProjectBug(req, res));

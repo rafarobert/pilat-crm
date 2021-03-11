@@ -50,6 +50,7 @@ router.post(`/api-${sys}/documents-accounts/updateDocumentAccountByDateModified`
 
 
 router.get(`/api-${sys}/documents-accounts/`, (req, res) => documentsAccountsCtrl.getAllDocumentsAccounts(req, res));
+router.post(`/api-${sys}/datatable/documents-accounts/`, (req, res) => documentsAccountsCtrl.getAllDocumentsAccounts(req, res));
 router.post(`/api-${sys}/documents-accounts/`, (req, res) => documentsAccountsCtrl.addDocumentAccount(req, res));
 router.get(`/api-${sys}/documents-accounts/:id`, (req, res) => documentsAccountsCtrl.getADocumentAccount(req, res));
 router.put(`/api-${sys}/documents-accounts/:id`, (req, res) => documentsAccountsCtrl.updateDocumentAccount(req, res));

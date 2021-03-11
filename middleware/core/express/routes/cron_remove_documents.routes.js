@@ -46,6 +46,7 @@ router.post(`/api-${sys}/cron-remove-documents/updateCronRemoveDocumentByDateMod
 
 
 router.get(`/api-${sys}/cron-remove-documents/`, (req, res) => cronRemoveDocumentsCtrl.getAllCronRemoveDocuments(req, res));
+router.post(`/api-${sys}/datatable/cron-remove-documents/`, (req, res) => cronRemoveDocumentsCtrl.getAllCronRemoveDocuments(req, res));
 router.post(`/api-${sys}/cron-remove-documents/`, (req, res) => cronRemoveDocumentsCtrl.addCronRemoveDocument(req, res));
 router.get(`/api-${sys}/cron-remove-documents/:id`, (req, res) => cronRemoveDocumentsCtrl.getACronRemoveDocument(req, res));
 router.put(`/api-${sys}/cron-remove-documents/:id`, (req, res) => cronRemoveDocumentsCtrl.updateCronRemoveDocument(req, res));

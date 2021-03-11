@@ -50,6 +50,7 @@ router.post(`/api-${sys}/documents-bugs/updateDocumentBugByDateModified`, (req, 
 
 
 router.get(`/api-${sys}/documents-bugs/`, (req, res) => documentsBugsCtrl.getAllDocumentsBugs(req, res));
+router.post(`/api-${sys}/datatable/documents-bugs/`, (req, res) => documentsBugsCtrl.getAllDocumentsBugs(req, res));
 router.post(`/api-${sys}/documents-bugs/`, (req, res) => documentsBugsCtrl.addDocumentBug(req, res));
 router.get(`/api-${sys}/documents-bugs/:id`, (req, res) => documentsBugsCtrl.getADocumentBug(req, res));
 router.put(`/api-${sys}/documents-bugs/:id`, (req, res) => documentsBugsCtrl.updateDocumentBug(req, res));

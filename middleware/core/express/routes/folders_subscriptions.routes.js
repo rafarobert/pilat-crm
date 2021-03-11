@@ -42,6 +42,7 @@ router.post(`/api-${sys}/folders-subscriptions/updateFolderSubscriptionByAssigne
 
 
 router.get(`/api-${sys}/folders-subscriptions/`, (req, res) => foldersSubscriptionsCtrl.getAllFoldersSubscriptions(req, res));
+router.post(`/api-${sys}/datatable/folders-subscriptions/`, (req, res) => foldersSubscriptionsCtrl.getAllFoldersSubscriptions(req, res));
 router.post(`/api-${sys}/folders-subscriptions/`, (req, res) => foldersSubscriptionsCtrl.addFolderSubscription(req, res));
 router.get(`/api-${sys}/folders-subscriptions/:id`, (req, res) => foldersSubscriptionsCtrl.getAFolderSubscription(req, res));
 router.put(`/api-${sys}/folders-subscriptions/:id`, (req, res) => foldersSubscriptionsCtrl.updateFolderSubscription(req, res));

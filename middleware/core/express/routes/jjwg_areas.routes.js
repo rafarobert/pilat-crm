@@ -82,6 +82,7 @@ router.post(`/api-${sys}/jjwg-areas/updateJjwgAreaByAssignedUserId`, (req, res) 
 
 
 router.get(`/api-${sys}/jjwg-areas/`, (req, res) => jjwgAreasCtrl.getAllJjwgAreas(req, res));
+router.post(`/api-${sys}/datatable/jjwg-areas/`, (req, res) => jjwgAreasCtrl.getAllJjwgAreas(req, res));
 router.post(`/api-${sys}/jjwg-areas/`, (req, res) => jjwgAreasCtrl.addJjwgArea(req, res));
 router.get(`/api-${sys}/jjwg-areas/:id`, (req, res) => jjwgAreasCtrl.getAJjwgArea(req, res));
 router.put(`/api-${sys}/jjwg-areas/:id`, (req, res) => jjwgAreasCtrl.updateJjwgArea(req, res));

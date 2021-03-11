@@ -82,6 +82,7 @@ router.post(`/api-${sys}/pilat-logs/updatePilatLogByUpdatedat`, (req, res) => pi
 
 
 router.get(`/api-${sys}/pilat-logs/`, (req, res) => pilatLogsCtrl.getAllPilatLogs(req, res));
+router.post(`/api-${sys}/datatable/pilat-logs/`, (req, res) => pilatLogsCtrl.getAllPilatLogs(req, res));
 router.post(`/api-${sys}/pilat-logs/`, (req, res) => pilatLogsCtrl.addPilatLog(req, res));
 router.get(`/api-${sys}/pilat-logs/:Id`, (req, res) => pilatLogsCtrl.getAPilatLog(req, res));
 router.put(`/api-${sys}/pilat-logs/:Id`, (req, res) => pilatLogsCtrl.updatePilatLog(req, res));

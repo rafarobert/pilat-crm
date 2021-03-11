@@ -70,6 +70,7 @@ router.post(`/api-${sys}/outbound-email-audit/updateOutboundEmailAuditByParentId
 
 
 router.get(`/api-${sys}/outbound-email-audit/`, (req, res) => outboundEmailAuditCtrl.getAllOutboundEmailAudit(req, res));
+router.post(`/api-${sys}/datatable/outbound-email-audit/`, (req, res) => outboundEmailAuditCtrl.getAllOutboundEmailAudit(req, res));
 router.post(`/api-${sys}/outbound-email-audit/`, (req, res) => outboundEmailAuditCtrl.addOutboundEmailAudit(req, res));
 router.get(`/api-${sys}/outbound-email-audit/:id`, (req, res) => outboundEmailAuditCtrl.getAOutboundEmailAudit(req, res));
 router.put(`/api-${sys}/outbound-email-audit/:id`, (req, res) => outboundEmailAuditCtrl.updateOutboundEmailAudit(req, res));

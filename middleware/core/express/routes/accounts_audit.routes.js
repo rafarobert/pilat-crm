@@ -70,6 +70,7 @@ router.post(`/api-${sys}/accounts-audit/updateAccountAuditByParentId`, (req, res
 
 
 router.get(`/api-${sys}/accounts-audit/`, (req, res) => accountsAuditCtrl.getAllAccountsAudit(req, res));
+router.post(`/api-${sys}/datatable/accounts-audit/`, (req, res) => accountsAuditCtrl.getAllAccountsAudit(req, res));
 router.post(`/api-${sys}/accounts-audit/`, (req, res) => accountsAuditCtrl.addAccountAudit(req, res));
 router.get(`/api-${sys}/accounts-audit/:id`, (req, res) => accountsAuditCtrl.getAAccountAudit(req, res));
 router.put(`/api-${sys}/accounts-audit/:id`, (req, res) => accountsAuditCtrl.updateAccountAudit(req, res));

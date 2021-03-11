@@ -142,6 +142,7 @@ router.post(`/api-${sys}/calls/updateCallByRepeatParentId`, (req, res) => callsC
 
 
 router.get(`/api-${sys}/calls/`, (req, res) => callsCtrl.getAllCalls(req, res));
+router.post(`/api-${sys}/datatable/calls/`, (req, res) => callsCtrl.getAllCalls(req, res));
 router.post(`/api-${sys}/calls/`, (req, res) => callsCtrl.addCall(req, res));
 router.get(`/api-${sys}/calls/:id`, (req, res) => callsCtrl.getACall(req, res));
 router.put(`/api-${sys}/calls/:id`, (req, res) => callsCtrl.updateCall(req, res));

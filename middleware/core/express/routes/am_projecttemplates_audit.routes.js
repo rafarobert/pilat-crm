@@ -70,6 +70,7 @@ router.post(`/api-${sys}/am-projecttemplates-audit/updateAmProjecttemplateAuditB
 
 
 router.get(`/api-${sys}/am-projecttemplates-audit/`, (req, res) => amProjecttemplatesAuditCtrl.getAllAmProjecttemplatesAudit(req, res));
+router.post(`/api-${sys}/datatable/am-projecttemplates-audit/`, (req, res) => amProjecttemplatesAuditCtrl.getAllAmProjecttemplatesAudit(req, res));
 router.post(`/api-${sys}/am-projecttemplates-audit/`, (req, res) => amProjecttemplatesAuditCtrl.addAmProjecttemplateAudit(req, res));
 router.get(`/api-${sys}/am-projecttemplates-audit/:id`, (req, res) => amProjecttemplatesAuditCtrl.getAAmProjecttemplateAudit(req, res));
 router.put(`/api-${sys}/am-projecttemplates-audit/:id`, (req, res) => amProjecttemplatesAuditCtrl.updateAmProjecttemplateAudit(req, res));

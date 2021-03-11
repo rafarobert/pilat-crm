@@ -50,6 +50,7 @@ router.post(`/api-${sys}/email-marketing-prospect-lists/updateEmailMarketingPros
 
 
 router.get(`/api-${sys}/email-marketing-prospect-lists/`, (req, res) => emailMarketingProspectListsCtrl.getAllEmailMarketingProspectLists(req, res));
+router.post(`/api-${sys}/datatable/email-marketing-prospect-lists/`, (req, res) => emailMarketingProspectListsCtrl.getAllEmailMarketingProspectLists(req, res));
 router.post(`/api-${sys}/email-marketing-prospect-lists/`, (req, res) => emailMarketingProspectListsCtrl.addEmailMarketingProspectList(req, res));
 router.get(`/api-${sys}/email-marketing-prospect-lists/:id`, (req, res) => emailMarketingProspectListsCtrl.getAEmailMarketingProspectList(req, res));
 router.put(`/api-${sys}/email-marketing-prospect-lists/:id`, (req, res) => emailMarketingProspectListsCtrl.updateEmailMarketingProspectList(req, res));

@@ -66,6 +66,7 @@ router.post(`/api-${sys}/analytic-reporting/updateAnalyticReportingByAssignedUse
 
 
 router.get(`/api-${sys}/analytic-reporting/`, (req, res) => analyticReportingCtrl.getAllAnalyticReporting(req, res));
+router.post(`/api-${sys}/datatable/analytic-reporting/`, (req, res) => analyticReportingCtrl.getAllAnalyticReporting(req, res));
 router.post(`/api-${sys}/analytic-reporting/`, (req, res) => analyticReportingCtrl.addAnalyticReporting(req, res));
 router.get(`/api-${sys}/analytic-reporting/:id`, (req, res) => analyticReportingCtrl.getAAnalyticReporting(req, res));
 router.put(`/api-${sys}/analytic-reporting/:id`, (req, res) => analyticReportingCtrl.updateAnalyticReporting(req, res));

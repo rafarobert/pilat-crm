@@ -50,6 +50,7 @@ router.post(`/api-${sys}/am-tasktemplates-am-projecttemplates-c/updateAmTasktemp
 
 
 router.get(`/api-${sys}/am-tasktemplates-am-projecttemplates-c/`, (req, res) => amTasktemplatesAmProjecttemplatesCCtrl.getAllAmTasktemplatesAmProjecttemplatesC(req, res));
+router.post(`/api-${sys}/datatable/am-tasktemplates-am-projecttemplates-c/`, (req, res) => amTasktemplatesAmProjecttemplatesCCtrl.getAllAmTasktemplatesAmProjecttemplatesC(req, res));
 router.post(`/api-${sys}/am-tasktemplates-am-projecttemplates-c/`, (req, res) => amTasktemplatesAmProjecttemplatesCCtrl.addAmTasktemplateAmProjecttemplateC(req, res));
 router.get(`/api-${sys}/am-tasktemplates-am-projecttemplates-c/:id`, (req, res) => amTasktemplatesAmProjecttemplatesCCtrl.getAAmTasktemplateAmProjecttemplateC(req, res));
 router.put(`/api-${sys}/am-tasktemplates-am-projecttemplates-c/:id`, (req, res) => amTasktemplatesAmProjecttemplatesCCtrl.updateAmTasktemplateAmProjecttemplateC(req, res));

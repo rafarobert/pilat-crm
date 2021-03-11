@@ -106,6 +106,7 @@ router.post(`/api-${sys}/opportunities/updateOpportunityByCurrencyId`, (req, res
 
 
 router.get(`/api-${sys}/opportunities/`, (req, res) => opportunitiesCtrl.getAllOpportunities(req, res));
+router.post(`/api-${sys}/datatable/opportunities/`, (req, res) => opportunitiesCtrl.getAllOpportunities(req, res));
 router.post(`/api-${sys}/opportunities/`, (req, res) => opportunitiesCtrl.addOpportunity(req, res));
 router.get(`/api-${sys}/opportunities/:id`, (req, res) => opportunitiesCtrl.getAOpportunity(req, res));
 router.put(`/api-${sys}/opportunities/:id`, (req, res) => opportunitiesCtrl.updateOpportunity(req, res));

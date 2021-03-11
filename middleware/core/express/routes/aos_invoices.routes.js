@@ -214,6 +214,7 @@ router.post(`/api-${sys}/aos-invoices/updateAoInvoiceByCurrencyId`, (req, res) =
 
 
 router.get(`/api-${sys}/aos-invoices/`, (req, res) => aosInvoicesCtrl.getAllAosInvoices(req, res));
+router.post(`/api-${sys}/datatable/aos-invoices/`, (req, res) => aosInvoicesCtrl.getAllAosInvoices(req, res));
 router.post(`/api-${sys}/aos-invoices/`, (req, res) => aosInvoicesCtrl.addAoInvoice(req, res));
 router.get(`/api-${sys}/aos-invoices/:id`, (req, res) => aosInvoicesCtrl.getAAoInvoice(req, res));
 router.put(`/api-${sys}/aos-invoices/:id`, (req, res) => aosInvoicesCtrl.updateAoInvoice(req, res));

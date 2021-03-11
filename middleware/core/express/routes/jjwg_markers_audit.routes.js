@@ -70,6 +70,7 @@ router.post(`/api-${sys}/jjwg-markers-audit/updateJjwgMarkerAuditByParentId`, (r
 
 
 router.get(`/api-${sys}/jjwg-markers-audit/`, (req, res) => jjwgMarkersAuditCtrl.getAllJjwgMarkersAudit(req, res));
+router.post(`/api-${sys}/datatable/jjwg-markers-audit/`, (req, res) => jjwgMarkersAuditCtrl.getAllJjwgMarkersAudit(req, res));
 router.post(`/api-${sys}/jjwg-markers-audit/`, (req, res) => jjwgMarkersAuditCtrl.addJjwgMarkerAudit(req, res));
 router.get(`/api-${sys}/jjwg-markers-audit/:id`, (req, res) => jjwgMarkersAuditCtrl.getAJjwgMarkerAudit(req, res));
 router.put(`/api-${sys}/jjwg-markers-audit/:id`, (req, res) => jjwgMarkersAuditCtrl.updateJjwgMarkerAudit(req, res));

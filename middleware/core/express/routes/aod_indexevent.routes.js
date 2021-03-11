@@ -82,6 +82,7 @@ router.post(`/api-${sys}/aod-indexevent/updateAodIndexeventByRecordId`, (req, re
 
 
 router.get(`/api-${sys}/aod-indexevent/`, (req, res) => aodIndexeventCtrl.getAllAodIndexevent(req, res));
+router.post(`/api-${sys}/datatable/aod-indexevent/`, (req, res) => aodIndexeventCtrl.getAllAodIndexevent(req, res));
 router.post(`/api-${sys}/aod-indexevent/`, (req, res) => aodIndexeventCtrl.addAodIndexevent(req, res));
 router.get(`/api-${sys}/aod-indexevent/:id`, (req, res) => aodIndexeventCtrl.getAAodIndexevent(req, res));
 router.put(`/api-${sys}/aod-indexevent/:id`, (req, res) => aodIndexeventCtrl.updateAodIndexevent(req, res));

@@ -78,6 +78,7 @@ router.post(`/api-${sys}/folders/updateFolderByModifiedBy`, (req, res) => folder
 
 
 router.get(`/api-${sys}/folders/`, (req, res) => foldersCtrl.getAllFolders(req, res));
+router.post(`/api-${sys}/datatable/folders/`, (req, res) => foldersCtrl.getAllFolders(req, res));
 router.post(`/api-${sys}/folders/`, (req, res) => foldersCtrl.addFolder(req, res));
 router.get(`/api-${sys}/folders/:id`, (req, res) => foldersCtrl.getAFolder(req, res));
 router.put(`/api-${sys}/folders/:id`, (req, res) => foldersCtrl.updateFolder(req, res));

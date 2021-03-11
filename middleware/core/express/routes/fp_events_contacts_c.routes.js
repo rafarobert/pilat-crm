@@ -62,6 +62,7 @@ router.post(`/api-${sys}/fp-events-contacts-c/updateFpEventContactCByDateModifie
 
 
 router.get(`/api-${sys}/fp-events-contacts-c/`, (req, res) => fpEventsContactsCCtrl.getAllFpEventsContactsC(req, res));
+router.post(`/api-${sys}/datatable/fp-events-contacts-c/`, (req, res) => fpEventsContactsCCtrl.getAllFpEventsContactsC(req, res));
 router.post(`/api-${sys}/fp-events-contacts-c/`, (req, res) => fpEventsContactsCCtrl.addFpEventContactC(req, res));
 router.get(`/api-${sys}/fp-events-contacts-c/:id`, (req, res) => fpEventsContactsCCtrl.getAFpEventContactC(req, res));
 router.put(`/api-${sys}/fp-events-contacts-c/:id`, (req, res) => fpEventsContactsCCtrl.updateFpEventContactC(req, res));

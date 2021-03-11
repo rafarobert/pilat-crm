@@ -516,7 +516,7 @@ class LeadService {
 								updateLead.leadEmailAddrBeanRel.email_address_id = respEmailAddresses && respEmailAddresses.dataValues ? respEmailAddresses.dataValues.id : null;
 								updateLead.leadEmailAddrBeanRel.bean_id = respLeads && respLeads.dataValues ? respLeads.dataValues.id : null;
 								updateLead.leadEmailAddrBeanRel.bean_module = updateLead.leadEmailAddrBeanRel.bean_module ? updateLead.leadEmailAddrBeanRel.bean_module : 'Leads';
-								updateLead.leadEmailAddrBeanRel.id = respEmailAddrBeanRel && respEmailAddrBeanRel.dataValues ? respEmailAddrBeanRel.dataValues.id : null;
+								updateLead.leadEmailAddrBeanRel.id = models.sequelize.objectId().toString();
 								respEmailAddrBeanRel = await models.sequelize.emailAddrBeanRel.create(updateLead.leadEmailAddrBeanRel);
 								objEmailAddrBeanRel = respEmailAddrBeanRel && respEmailAddrBeanRel.dataValues ? respEmailAddrBeanRel.dataValues : null;
 								pilatLog = await crmService.setPilatLog('create', 'emails', {description:'email_addr_bean_rel', from:objEmailAddress.email_address, to:objLead.first_name+' '+objLead.last_name}, objEmailAddrBeanRel.id, objLead.id, objLead.assigned_user_id);

@@ -62,6 +62,7 @@ router.post(`/api-${sys}/acl-roles/updateAclRoleByCreatedBy`, (req, res) => aclR
 
 
 router.get(`/api-${sys}/acl-roles/`, (req, res) => aclRolesCtrl.getAllAclRoles(req, res));
+router.post(`/api-${sys}/datatable/acl-roles/`, (req, res) => aclRolesCtrl.getAllAclRoles(req, res));
 router.post(`/api-${sys}/acl-roles/`, (req, res) => aclRolesCtrl.addAclRole(req, res));
 router.get(`/api-${sys}/acl-roles/:id`, (req, res) => aclRolesCtrl.getAAclRole(req, res));
 router.put(`/api-${sys}/acl-roles/:id`, (req, res) => aclRolesCtrl.updateAclRole(req, res));

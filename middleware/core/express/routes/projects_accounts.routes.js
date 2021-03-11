@@ -50,6 +50,7 @@ router.post(`/api-${sys}/projects-accounts/updateProjectAccountByDateModified`, 
 
 
 router.get(`/api-${sys}/projects-accounts/`, (req, res) => projectsAccountsCtrl.getAllProjectsAccounts(req, res));
+router.post(`/api-${sys}/datatable/projects-accounts/`, (req, res) => projectsAccountsCtrl.getAllProjectsAccounts(req, res));
 router.post(`/api-${sys}/projects-accounts/`, (req, res) => projectsAccountsCtrl.addProjectAccount(req, res));
 router.get(`/api-${sys}/projects-accounts/:id`, (req, res) => projectsAccountsCtrl.getAProjectAccount(req, res));
 router.put(`/api-${sys}/projects-accounts/:id`, (req, res) => projectsAccountsCtrl.updateProjectAccount(req, res));

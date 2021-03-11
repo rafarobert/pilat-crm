@@ -66,6 +66,7 @@ router.post(`/api-${sys}/erp-cliente/updateErpClienteByAssignedUserId`, (req, re
 
 
 router.get(`/api-${sys}/erp-cliente/`, (req, res) => erpClienteCtrl.getAllErpCliente(req, res));
+router.post(`/api-${sys}/datatable/erp-cliente/`, (req, res) => erpClienteCtrl.getAllErpCliente(req, res));
 router.post(`/api-${sys}/erp-cliente/`, (req, res) => erpClienteCtrl.addErpCliente(req, res));
 router.get(`/api-${sys}/erp-cliente/:id`, (req, res) => erpClienteCtrl.getAErpCliente(req, res));
 router.put(`/api-${sys}/erp-cliente/:id`, (req, res) => erpClienteCtrl.updateErpCliente(req, res));

@@ -74,6 +74,7 @@ router.post(`/api-${sys}/templatesectionline/updateTemplatesectionlineByCreatedB
 
 
 router.get(`/api-${sys}/templatesectionline/`, (req, res) => templatesectionlineCtrl.getAllTemplatesectionline(req, res));
+router.post(`/api-${sys}/datatable/templatesectionline/`, (req, res) => templatesectionlineCtrl.getAllTemplatesectionline(req, res));
 router.post(`/api-${sys}/templatesectionline/`, (req, res) => templatesectionlineCtrl.addTemplatesectionline(req, res));
 router.get(`/api-${sys}/templatesectionline/:id`, (req, res) => templatesectionlineCtrl.getATemplatesectionline(req, res));
 router.put(`/api-${sys}/templatesectionline/:id`, (req, res) => templatesectionlineCtrl.updateTemplatesectionline(req, res));

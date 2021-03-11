@@ -78,6 +78,7 @@ router.post(`/api-${sys}/aow-actions/updateAowActionByAowWorkflowId`, (req, res)
 
 
 router.get(`/api-${sys}/aow-actions/`, (req, res) => aowActionsCtrl.getAllAowActions(req, res));
+router.post(`/api-${sys}/datatable/aow-actions/`, (req, res) => aowActionsCtrl.getAllAowActions(req, res));
 router.post(`/api-${sys}/aow-actions/`, (req, res) => aowActionsCtrl.addAowAction(req, res));
 router.get(`/api-${sys}/aow-actions/:id`, (req, res) => aowActionsCtrl.getAAowAction(req, res));
 router.put(`/api-${sys}/aow-actions/:id`, (req, res) => aowActionsCtrl.updateAowAction(req, res));

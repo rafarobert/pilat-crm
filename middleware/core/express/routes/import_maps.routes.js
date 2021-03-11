@@ -86,6 +86,7 @@ router.post(`/api-${sys}/import-maps/updateImportMapByAssignedUserId`, (req, res
 
 
 router.get(`/api-${sys}/import-maps/`, (req, res) => importMapsCtrl.getAllImportMaps(req, res));
+router.post(`/api-${sys}/datatable/import-maps/`, (req, res) => importMapsCtrl.getAllImportMaps(req, res));
 router.post(`/api-${sys}/import-maps/`, (req, res) => importMapsCtrl.addImportMap(req, res));
 router.get(`/api-${sys}/import-maps/:id`, (req, res) => importMapsCtrl.getAImportMap(req, res));
 router.put(`/api-${sys}/import-maps/:id`, (req, res) => importMapsCtrl.updateImportMap(req, res));

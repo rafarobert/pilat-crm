@@ -54,6 +54,7 @@ router.post(`/api-${sys}/inbound-email-autoreply/updateInboundEmailAutoreplyByIe
 
 
 router.get(`/api-${sys}/inbound-email-autoreply/`, (req, res) => inboundEmailAutoreplyCtrl.getAllInboundEmailAutoreply(req, res));
+router.post(`/api-${sys}/datatable/inbound-email-autoreply/`, (req, res) => inboundEmailAutoreplyCtrl.getAllInboundEmailAutoreply(req, res));
 router.post(`/api-${sys}/inbound-email-autoreply/`, (req, res) => inboundEmailAutoreplyCtrl.addInboundEmailAutoreply(req, res));
 router.get(`/api-${sys}/inbound-email-autoreply/:id`, (req, res) => inboundEmailAutoreplyCtrl.getAInboundEmailAutoreply(req, res));
 router.put(`/api-${sys}/inbound-email-autoreply/:id`, (req, res) => inboundEmailAutoreplyCtrl.updateInboundEmailAutoreply(req, res));

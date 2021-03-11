@@ -74,6 +74,7 @@ router.post(`/api-${sys}/prospect-lists/updateProspectListByCreatedBy`, (req, re
 
 
 router.get(`/api-${sys}/prospect-lists/`, (req, res) => prospectListsCtrl.getAllProspectLists(req, res));
+router.post(`/api-${sys}/datatable/prospect-lists/`, (req, res) => prospectListsCtrl.getAllProspectLists(req, res));
 router.post(`/api-${sys}/prospect-lists/`, (req, res) => prospectListsCtrl.addProspectList(req, res));
 router.get(`/api-${sys}/prospect-lists/:id`, (req, res) => prospectListsCtrl.getAProspectList(req, res));
 router.put(`/api-${sys}/prospect-lists/:id`, (req, res) => prospectListsCtrl.updateProspectList(req, res));

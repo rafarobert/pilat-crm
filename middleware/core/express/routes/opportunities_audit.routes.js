@@ -70,6 +70,7 @@ router.post(`/api-${sys}/opportunities-audit/updateOpportunityAuditByParentId`, 
 
 
 router.get(`/api-${sys}/opportunities-audit/`, (req, res) => opportunitiesAuditCtrl.getAllOpportunitiesAudit(req, res));
+router.post(`/api-${sys}/datatable/opportunities-audit/`, (req, res) => opportunitiesAuditCtrl.getAllOpportunitiesAudit(req, res));
 router.post(`/api-${sys}/opportunities-audit/`, (req, res) => opportunitiesAuditCtrl.addOpportunityAudit(req, res));
 router.get(`/api-${sys}/opportunities-audit/:id`, (req, res) => opportunitiesAuditCtrl.getAOpportunityAudit(req, res));
 router.put(`/api-${sys}/opportunities-audit/:id`, (req, res) => opportunitiesAuditCtrl.updateOpportunityAudit(req, res));

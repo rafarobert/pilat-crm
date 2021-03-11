@@ -98,6 +98,7 @@ router.post(`/api-${sys}/iad-sticky-notes/updateIadStickyNoteByAssignedUserId`, 
 
 
 router.get(`/api-${sys}/iad-sticky-notes/`, (req, res) => iadStickyNotesCtrl.getAllIadStickyNotes(req, res));
+router.post(`/api-${sys}/datatable/iad-sticky-notes/`, (req, res) => iadStickyNotesCtrl.getAllIadStickyNotes(req, res));
 router.post(`/api-${sys}/iad-sticky-notes/`, (req, res) => iadStickyNotesCtrl.addIadStickyNote(req, res));
 router.get(`/api-${sys}/iad-sticky-notes/:id`, (req, res) => iadStickyNotesCtrl.getAIadStickyNote(req, res));
 router.put(`/api-${sys}/iad-sticky-notes/:id`, (req, res) => iadStickyNotesCtrl.updateIadStickyNote(req, res));

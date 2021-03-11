@@ -86,6 +86,7 @@ router.post(`/api-${sys}/surveys/updateSurveyByAssignedUserId`, (req, res) => su
 
 
 router.get(`/api-${sys}/surveys/`, (req, res) => surveysCtrl.getAllSurveys(req, res));
+router.post(`/api-${sys}/datatable/surveys/`, (req, res) => surveysCtrl.getAllSurveys(req, res));
 router.post(`/api-${sys}/surveys/`, (req, res) => surveysCtrl.addSurvey(req, res));
 router.get(`/api-${sys}/surveys/:id`, (req, res) => surveysCtrl.getASurvey(req, res));
 router.put(`/api-${sys}/surveys/:id`, (req, res) => surveysCtrl.updateSurvey(req, res));

@@ -50,6 +50,7 @@ router.post(`/api-${sys}/aos-quotes-aos-invoices-c/updateAoQuoteAoInvoiceCByDate
 
 
 router.get(`/api-${sys}/aos-quotes-aos-invoices-c/`, (req, res) => aosQuotesAosInvoicesCCtrl.getAllAosQuotesAosInvoicesC(req, res));
+router.post(`/api-${sys}/datatable/aos-quotes-aos-invoices-c/`, (req, res) => aosQuotesAosInvoicesCCtrl.getAllAosQuotesAosInvoicesC(req, res));
 router.post(`/api-${sys}/aos-quotes-aos-invoices-c/`, (req, res) => aosQuotesAosInvoicesCCtrl.addAoQuoteAoInvoiceC(req, res));
 router.get(`/api-${sys}/aos-quotes-aos-invoices-c/:id`, (req, res) => aosQuotesAosInvoicesCCtrl.getAAoQuoteAoInvoiceC(req, res));
 router.put(`/api-${sys}/aos-quotes-aos-invoices-c/:id`, (req, res) => aosQuotesAosInvoicesCCtrl.updateAoQuoteAoInvoiceC(req, res));

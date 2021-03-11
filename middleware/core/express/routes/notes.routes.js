@@ -94,6 +94,7 @@ router.post(`/api-${sys}/notes/updateNoteByContactId`, (req, res) => notesCtrl.u
 
 
 router.get(`/api-${sys}/notes/`, (req, res) => notesCtrl.getAllNotes(req, res));
+router.post(`/api-${sys}/datatable/notes/`, (req, res) => notesCtrl.getAllNotes(req, res));
 router.post(`/api-${sys}/notes/`, (req, res) => notesCtrl.addNote(req, res));
 router.get(`/api-${sys}/notes/:id`, (req, res) => notesCtrl.getANote(req, res));
 router.put(`/api-${sys}/notes/:id`, (req, res) => notesCtrl.updateNote(req, res));

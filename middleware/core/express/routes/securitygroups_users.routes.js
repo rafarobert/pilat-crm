@@ -58,6 +58,7 @@ router.post(`/api-${sys}/securitygroups-users/updateSecuritygroupUserByDateModif
 
 
 router.get(`/api-${sys}/securitygroups-users/`, (req, res) => securitygroupsUsersCtrl.getAllSecuritygroupsUsers(req, res));
+router.post(`/api-${sys}/datatable/securitygroups-users/`, (req, res) => securitygroupsUsersCtrl.getAllSecuritygroupsUsers(req, res));
 router.post(`/api-${sys}/securitygroups-users/`, (req, res) => securitygroupsUsersCtrl.addSecuritygroupUser(req, res));
 router.get(`/api-${sys}/securitygroups-users/:id`, (req, res) => securitygroupsUsersCtrl.getASecuritygroupUser(req, res));
 router.put(`/api-${sys}/securitygroups-users/:id`, (req, res) => securitygroupsUsersCtrl.updateSecuritygroupUser(req, res));

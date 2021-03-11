@@ -246,6 +246,7 @@ router.post(`/api-${sys}/leads/updateLeadByCampaignId`, (req, res) => leadsCtrl.
 
 
 router.get(`/api-${sys}/leads/`, (req, res) => leadsCtrl.getAllLeads(req, res));
+router.post(`/api-${sys}/datatable/leads/`, (req, res) => leadsCtrl.getAllLeads(req, res));
 router.post(`/api-${sys}/leads/`, (req, res) => leadsCtrl.addLead(req, res));
 router.get(`/api-${sys}/leads/:id`, (req, res) => leadsCtrl.getALead(req, res));
 router.put(`/api-${sys}/leads/:id`, (req, res) => leadsCtrl.updateLead(req, res));
