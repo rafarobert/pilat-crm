@@ -114,6 +114,20 @@ if (!function_exists("number_formating")) {
     }
 }
 
+if (!function_exists("explode_string")) {
+    function explode_string($arr = array()) {
+        $str = "";
+        $com = "";
+        foreach ($arr as $index => $item) {
+            if ($index === 1) {
+                $com = ",";
+            }
+            $str .= $com . compile_binds("?", $item);
+        }
+        return $str;
+    }
+}
+
 class My_Gel_EntryPoint {
     private $data     = NULL;
     private $last_log = NULL;
@@ -145,16 +159,16 @@ class My_Gel_EntryPoint {
             return;
         }
         $phone_mobile = $this->data->{"phone_mobile"};
-        if(!$phone_mobile) {
+        if (!$phone_mobile) {
             $this->error = TRUE;
             $this->log("Parametro 'phone_mobile' es requerido");
             return;
         }
 
-        $re = "/^\+(?:[0-9] ?){6,22}[0-9]$/";    
+        $re = "/^\+(?:[0-9] ?){6,22}[0-9]$/";
         preg_match_all($re, $phone_mobile, $is_phone);
 
-        if(count($is_phone[0]) <= 0){
+        if (count($is_phone[0]) <= 0) {
             $this->error = TRUE;
             $this->log("Formato o Código de pais incorrecto.");
             return;
@@ -162,18 +176,18 @@ class My_Gel_EntryPoint {
 
         $count_part = explode(" ", $phone_mobile);
 
-        if(count($count_part) <> 2){
+        if (count($count_part) != 2) {
             $this->error = TRUE;
             $this->log("Código de pais requerido.");
             return;
         }
 
-        $phone_no = str_replace(array('(', ')', ' ', '-', '+'), '', $phone_mobile);
+        $phone_no      = str_replace(array('(', ')', ' ', '-', '+'), '', $phone_mobile);
         $format_number = number_formating($phone_no);
 
         $add_sql = "";
         $binds   = array();
-        if($id != NULL){
+        if ($id != NULL) {
             $add_sql = @compile_binds("AND c.id NOT IN (?)", $id);
         }
         $binds[] = "%" . $format_number . "%";
@@ -194,6 +208,186 @@ class My_Gel_EntryPoint {
         $res = (float) $row["crow"];
         return $res > 0 ? "INVALID" : "VALID";
     }
+
+    private function ventas_por_etapas($id = NULL, $tcol = "DETAIL") {
+        $add_where = "";
+        $add_cols  = "COUNT(*) AS cantidad";
+        $add_group = "";
+        $user      = NULL;
+        if ($id != NULL) {
+            $usr_sql = compile_binds("SELECT c.id, c.user_name, TRIM(GROUP_CONCAT(UPPER(e.name))) AS roles FROM users c LEFT JOIN acl_roles_users d ON d.user_id = c.id AND d.deleted = 0 LEFT JOIN acl_roles e ON e.id = d.role_id AND e.deleted = 0 WHERE c.deleted = 0 AND c.id = ? GROUP BY c.id", $id);
+            $query   = $GLOBALS['db']->query($usr_sql);
+            if (!$query) {
+                return;
+            }
+            $user = $GLOBALS['db']->fetchByAssoc($query);
+            if (!$user) {
+                return;
+            }
+            $arr_roles = array();
+            if ($user["roles"] && strlen($user["roles"])) {
+                $arr_roles = explode(",", $user["roles"]);
+            } else {
+                $arr_roles = NULL;
+            }
+
+            if (in_array("GERENTE", $arr_roles)) {
+                $add_where .= " AND x.assigned_user_id IN ( SELECT DISTINCT xx.user_id FROM acl_roles_users xx INNER JOIN acl_roles yy ON yy.id = xx.role_id AND yy.deleted = 0 WHERE xx.deleted = 0 ) ";
+            } elseif (in_array("SUBGERENTE", $arr_roles)) {
+                $add_where .= " AND x.assigned_user_id IN ( SELECT DISTINCT xx.user_id FROM acl_roles_users xx INNER JOIN acl_roles yy ON yy.id = xx.role_id AND yy.deleted = 0 AND UPPER(yy.name) NOT IN ('GERENTE') WHERE xx.deleted = 0 ) ";
+            } elseif (in_array("SUPERVISOR DE VENTAS", $arr_roles)) {
+                $add_where .= " AND x.assigned_user_id IN ( SELECT DISTINCT xx.user_id FROM acl_roles_users xx INNER JOIN acl_roles yy ON yy.id = xx.role_id AND yy.deleted = 0 AND UPPER(yy.name) NOT IN ('GERENTE','SUBGERENTE') WHERE xx.deleted = 0 ) ";
+            } else {
+                $add_where .= compile_binds(" AND x.assigned_user_id = ?", $id);
+            }
+        }
+        if ($tcol !== "DETAIL") {
+            $add_cols  = "DISTINCT x.etapa, COUNT(*) AS cantidad";
+            $add_group = "GROUP BY x.etapa";
+        }
+        $sql = "SELECT {$add_cols} FROM (SELECT c.id, CASE WHEN d.etapas_c IS NULL OR TRIM(d.etapas_c) = '' OR TRIM(d.etapas_c) = 'NULL' THEN 'No asigando' ELSE d.etapas_c END AS 'etapa', 'PROSPECTO' AS tipo, c.assigned_user_id  FROM leads c INNER JOIN leads_cstm d ON d.id_c = c.id WHERE c.deleted = 0 UNION SELECT e.id, CASE WHEN e.sales_stage IS NULL OR TRIM(e.sales_stage) = '' OR TRIM(e.sales_stage) = 'NULL' THEN 'No asignado' ELSE e.sales_stage END AS 'etapa', 'OPORTUNIDAD' AS tipo, assigned_user_id FROM opportunities e WHERE e.deleted = 0) x WHERE x.id IS NOT NULL {$add_where}  {$add_group}";
+
+        $query = $GLOBALS['db']->query($sql);
+        if ($tcol != "DETAIL") {
+            $etapas = array();
+            $colors = array();
+            foreach ($GLOBALS['app_list_strings'] as $key => $value) {
+                if (is_array($value) && in_array($key, array("etapas_prospecto_list", "sales_stage_dom"))) {
+                    $etapas = array_merge($etapas, $value);
+                }
+                if (is_array($value) && $key == "chart_color_list") {
+                    $colors = $value;
+                }
+            }
+            $array = array();
+            while ($row = $GLOBALS['db']->fetchByAssoc($query)) {
+                settype($row["cantidad"], "float");
+                if ($row["cantidad"] > 0) {
+                    $row["tipo"]       = isset($etapas[$row["etapa"]]) ? $etapas[$row["etapa"]] : $row["etapa"];
+                    $row["color"]      = isset($colors[$row["etapa"]]) ? $colors[$row["etapa"]] : "#5C68B4";
+                    $row["roles"]      = isset($user["roles"]) ? $user["roles"] : NULL;
+                    $row["porcentaje"] = 0;
+                    $array[]           = $row;
+                }
+            }
+            return $array;
+        }
+        return $GLOBALS['db']->fetchByAssoc($query);
+    }
+
+    public function app_dash_ventas_por_etapas_get($id = NULL) {
+        $result = array(
+            "total"  => 0,
+            "result" => array(),
+        );
+        $row = $this->ventas_por_etapas($id);
+        if (!$row) {
+            $this->error = TRUE;
+            $this->log("Resultado no encontrado");
+            return $result;
+        }
+        settype($row["cantidad"], "float");
+
+        $data = $this->ventas_por_etapas($id, "NO_DETAIL");
+
+        foreach ($data as $index => $item) {
+            $data[$index]["porcentaje"] = ($item["cantidad"] * 100) / $row["cantidad"];
+        }
+
+        $result["total"]  = $row["cantidad"];
+        $result["result"] = $data;
+        return $result;
+    }
+
+    private function ventas_por_origen($id = NULL, $tcol = "DETAIL") {
+        $add_where = "";
+        $add_cols  = "COUNT(*) AS cantidad";
+        $add_group = "";
+        $user      = NULL;
+        if ($id != NULL) {
+            $usr_sql = compile_binds("SELECT c.id, c.user_name, TRIM(GROUP_CONCAT(UPPER(e.name))) AS roles FROM users c LEFT JOIN acl_roles_users d ON d.user_id = c.id AND d.deleted = 0 LEFT JOIN acl_roles e ON e.id = d.role_id AND e.deleted = 0 WHERE c.deleted = 0 AND c.id = ? GROUP BY c.id", $id);
+            $query   = $GLOBALS['db']->query($usr_sql);
+            if (!$query) {
+                return;
+            }
+            $user = $GLOBALS['db']->fetchByAssoc($query);
+            if (!$user) {
+                return;
+            }
+            $arr_roles = array();
+            if ($user["roles"] && strlen($user["roles"])) {
+                $arr_roles = explode(",", $user["roles"]);
+            } else {
+                $arr_roles = NULL;
+            }
+
+            if (in_array("GERENTE", $arr_roles)) {
+                $add_where .= " AND x.assigned_user_id IN ( SELECT DISTINCT xx.user_id FROM acl_roles_users xx INNER JOIN acl_roles yy ON yy.id = xx.role_id AND yy.deleted = 0 WHERE xx.deleted = 0 ) ";
+            } elseif (in_array("SUBGERENTE", $arr_roles)) {
+                $add_where .= " AND x.assigned_user_id IN ( SELECT DISTINCT xx.user_id FROM acl_roles_users xx INNER JOIN acl_roles yy ON yy.id = xx.role_id AND yy.deleted = 0 AND UPPER(yy.name) NOT IN ('GERENTE') WHERE xx.deleted = 0 ) ";
+            } elseif (in_array("SUPERVISOR DE VENTAS", $arr_roles)) {
+                $add_where .= " AND x.assigned_user_id IN ( SELECT DISTINCT xx.user_id FROM acl_roles_users xx INNER JOIN acl_roles yy ON yy.id = xx.role_id AND yy.deleted = 0 AND UPPER(yy.name) NOT IN ('GERENTE','SUBGERENTE') WHERE xx.deleted = 0 ) ";
+            } else {
+                $add_where .= compile_binds(" AND x.assigned_user_id = ?", $id);
+            }
+        }
+        if ($tcol !== "DETAIL") {
+            $add_cols  = "DISTINCT x.origen, COUNT(*) AS cantidad";
+            $add_group = "GROUP BY x.origen";
+        }
+        $sql = "SELECT {$add_cols} FROM (SELECT c.id, CASE WHEN c.lead_source IS NULL OR TRIM(c.lead_source) = '' OR TRIM(c.lead_source) = 'NULL' THEN 'Sin asignar' ELSE UPPER(TRIM(c.lead_source)) END AS 'origen', 'PROSPECTO' AS tipo, c.assigned_user_id  FROM leads c INNER JOIN leads_cstm d ON d.id_c = c.id WHERE c.deleted = 0) x WHERE x.id IS NOT NULL {$add_where}  {$add_group}";
+
+        $query = $GLOBALS['db']->query($sql);
+        if ($tcol != "DETAIL") {
+            $origenes = array();
+            $colors   = array();
+            foreach ($GLOBALS['app_list_strings'] as $key => $value) {
+                if (is_array($value) && $key == "lead_source_list") {
+                    $origenes = $value;
+                }
+                if (is_array($value) && $key == "chart_color_list") {
+                    $colors = $value;
+                }
+            }
+            $array = array();
+            while ($row = $GLOBALS['db']->fetchByAssoc($query)) {
+                settype($row["cantidad"], "float");
+                if ($row["cantidad"] > 0) {
+                    $row["tipo"]       = isset($origenes[$row["origen"]]) ? ucfirst(strtolower($origenes[$row["origen"]])) : $row["origen"];
+                    $row["color"]      = isset($colors[$row["origen"]]) ? $colors[$row["origen"]] : "#5C68B4";
+                    $row["roles"]      = isset($user["roles"]) ? $user["roles"] : NULL;
+                    $row["porcentaje"] = 0;
+                    $array[]           = $row;
+                }
+            }
+            return $array;
+        }
+        return $GLOBALS['db']->fetchByAssoc($query);
+    }
+
+    public function app_dash_ventas_por_origen_get($id = NULL) {
+        $result = array(
+            "total"  => 0,
+            "result" => array(),
+        );
+        $row = $this->ventas_por_origen($id);
+        if (!$row) {
+            $this->error = TRUE;
+            $this->log("Resultado no encontrado");
+            return $result;
+        }
+        settype($row["cantidad"], "float");
+
+        $data = $this->ventas_por_origen($id, "NO_DETAIL");
+
+        foreach ($data as $index => $item) {
+            $data[$index]["porcentaje"] = ($item["cantidad"] * 100) / $row["cantidad"];
+        }
+
+        $result["total"]  = $row["cantidad"];
+        $result["result"] = $data;
+        return $result;
+    }
 }
 
 $class = new My_Gel_EntryPoint();
@@ -204,6 +398,8 @@ if (method_exists($class, $action)) {
         $class->set_data(json_decode(file_get_contents("php://input")));
         $response = $class->$action($id);
     } elseif (in_array($method, array("get", "delete"))) {
+        $class->log("Accediendo a metodo " . $action);
+        $class->set_data((Object) $_GET);
         $response = $class->$action($id);
     }
     if ($class->is_error()) {
@@ -216,10 +412,10 @@ if (method_exists($class, $action)) {
             "data"   => $response,
         );
     }
-    $json = getJSONobj();
+
     $class->log("Response action " . $action);
     header('Content-Type: application/json');
-    echo $json->encode($response);
+    echo json_encode($response, JSON_PRETTY_PRINT);
 } else {
     header('HTTP/1.1 400 Bad Request');
     $response = "method is required.";
