@@ -31,5 +31,6 @@ $entry_point_registry['jsgrid'] = array('file' => 'custom/modules/jsgrid_epr.php
         'file' => 'custom/Dev/grupo_lafuente.php', 
         'auth' => false
     );
+    //
 
 ?>
