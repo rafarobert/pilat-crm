@@ -132,7 +132,7 @@ $dictionary['Lead']['fields']['primary_address_street']['merge_filter']='disable
 
  
 
- // created: 2021-02-24 03:57:52
+ // created: 2021-03-12 01:17:20
 $dictionary['Lead']['fields']['rubro_c']['inline_edit']='1';
 $dictionary['Lead']['fields']['rubro_c']['labelValue']='Rubro';
 
@@ -164,7 +164,7 @@ $dictionary['Lead']['fields']['tipo_cliente_c']['labelValue']='Tipo de Cliente';
 
  
 
- // created: 2021-02-24 03:41:58
+ // created: 2021-03-12 01:18:23
 $dictionary['Lead']['fields']['tipo_lead_c']['inline_edit']='1';
 $dictionary['Lead']['fields']['tipo_lead_c']['labelValue']='Tipo Prospecto';
 
