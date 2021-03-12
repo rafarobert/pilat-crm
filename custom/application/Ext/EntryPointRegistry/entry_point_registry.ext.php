@@ -26,9 +26,6 @@ $entry_point_registry['jsgrid'] = array('file' => 'custom/modules/jsgrid_epr.php
         'file' => 'widget.php',
         'auth' => true
     );
-<<<<<<< HEAD
-
-=======
     
     $entry_point_registry['Endpoint_GrupoLafuente'] = array(
         'file' => 'custom/Dev/grupo_lafuente.php', 
@@ -36,5 +33,4 @@ $entry_point_registry['jsgrid'] = array('file' => 'custom/modules/jsgrid_epr.php
     );
     //
 
->>>>>>> 29c4ce34abfe0160d748f7ae53ab6457fc6d3423
 ?>
