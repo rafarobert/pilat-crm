@@ -34,7 +34,7 @@ userCtrl.getAllUsers = async (req, res) => {
 		req.query.order = column && dir ? [[column,dir]] : req.query.order;
 
 		const objUsers = await userService.getAllUsers(req.query);
-		if (objUsers.length > 0) {
+		if (objUsers && objUsers.rows && objUsers.count) {
 			util.setSuccess(200, 'Users retrieved', objUsers);
 		} else {
 			util.setSuccess(200, 'No users found');

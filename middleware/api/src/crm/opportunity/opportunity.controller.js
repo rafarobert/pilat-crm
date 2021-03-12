@@ -33,7 +33,7 @@ opportunitiesCtrl.getAllOpportunities = async (req, res) => {
 		req.query.order = column && dir ? [[column,dir]] : req.query.order;
 
 		const objOpportunities = await opportunityService.getAllOpportunities(req.query);
-		if (objOpportunities && objOpportunities.rows && objOpportunities.limit) {
+		if (objOpportunities && objOpportunities.rows && objOpportunities.count) {
 			util.setSuccess(200, 'Opportunities retrieved', objOpportunities.rows, objOpportunities.count, req.query.limit, req.query.offset);
 		} else {
 			util.setSuccess(200, 'No opportunities found');
