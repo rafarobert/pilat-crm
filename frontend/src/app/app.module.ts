@@ -110,6 +110,7 @@ import { CronsComponent } from './components/crud/crons/crons.component';
 import { AddCronComponent } from './components/crud/crons/add-cron/add-cron.component';
 import { DeleteCronComponent } from './components/crud/crons/delete-cron/delete-cron.component';
 import {DataTablesModule} from "angular-datatables";
+import { CrmAddLeadsComponent } from './components/suitecrm/crm-leads/crm-add-leads/crm-add-leads.component';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -191,7 +192,8 @@ export const MY_DATE_FORMATS = {
     CrmBillsComponent,
     CronsComponent,
     AddCronComponent,
-    DeleteCronComponent
+    DeleteCronComponent,
+    CrmAddLeadsComponent
   ],
   imports: [
     BrowserModule,

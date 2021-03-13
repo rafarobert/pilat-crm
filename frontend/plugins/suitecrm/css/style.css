@@ -5,3 +5,7 @@
     margin-top: 15px;
     border-top: 2px #ca3315 solid;
 }
+.close-button {
+    position: absolute;
+    right: 20px;
+}

@@ -70,7 +70,7 @@ export class AddLeadComponent implements OnInit {
       let month = (date.getMonth()).pad(2);
       let year = date.getFullYear();
       let todayStr = `${day}/${month}/${year}`;
-      let afteYearSixMonthStr = addMeses(todayStr, 1);
+      let afteYearSixMonthStr = addMeses(todayStr, 3);
       let [dayAfter, monthAfter, yearAfter] = afteYearSixMonthStr.split('/');
       this.data.date_entered = new Date();
       this.data.date_modified = new Date();

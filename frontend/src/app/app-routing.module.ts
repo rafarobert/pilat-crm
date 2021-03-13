@@ -26,6 +26,7 @@ import {CrmCampaignsComponent} from "./components/suitecrm/crm-campaigns/crm-cam
 import {CrmBillsComponent} from "./components/suitecrm/crm-bills/crm-bills.component";
 import {CrmQuotesComponent} from "./components/suitecrm/crm-quotes/crm-quotes.component";
 import {CronsComponent} from "./components/crud/crons/crons.component";
+import {CrmAddLeadsComponent} from "./components/suitecrm/crm-leads/crm-add-leads/crm-add-leads.component";
 
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'contacts', component: CrmContactsComponent, pathMatch: 'full' },
   { path: 'opportunities', component: CrmOpportunitiesComponent, pathMatch: 'full' },
   { path: 'leads', component: CrmLeadsComponent, pathMatch: 'full' },
+  { path: 'leads/add', component: CrmAddLeadsComponent, pathMatch: 'full' },
   { path: 'calendar', component: CrmCalendarComponent, pathMatch: 'full' },
   { path: 'calls', component: CrmCallsComponent, pathMatch: 'full' },
   { path: 'meetings', component: CrmMeetingsComponent, pathMatch: 'full' },

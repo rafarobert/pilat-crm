@@ -3,10 +3,11 @@ import {HttpClient} from "@angular/common/http";
 import {PilatService} from "../../../services/pilat.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {CookieService} from "ngx-cookie-service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {SpinnerService} from "../../../services/spinner.service";
 import {BuildingService} from "../../../services/building.service";
 import {Location} from "@angular/common";
+import {Leads} from "../../../../core/models/leads";
 
 @Component({
   selector: 'app-crm-leads',
@@ -22,29 +23,19 @@ export class CrmLeadsComponent implements OnInit {
     public pilatService:PilatService,
     public sanitizer:DomSanitizer,
     public cookieService:CookieService,
-    private activatedRoute: ActivatedRoute,
     public spinnerService: SpinnerService,
     private location: Location,
-    public buildingService: BuildingService
+    public buildingService: BuildingService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
   }
   
+  
+  
   iFrameLoaded() {
     this.pilatService.fixSuiteCrmInterface();
-    $('body')
-      .find('iframe')
-      .contents()
-      .find('body')
-      .find('hpanel')
-      .find('.panel-body').hide();
-    
-    $('body')
-      .find('iframe')
-      .contents()
-      .find('body')
-      .find('hpanel').html('<app-leads></app-leads>');
-  
-    
+      $('body').find('iframe').contents().find('body').find('.navbar-right').find('.navbar-nav').append(`<li class="dropdown" style="position: absolute; right: 30px;"><a onclick="window.location.replace('` + this.pilatService.httpHome + `?module=Leads&action=index&parentTab=Ventas');" href="#" class="dropdown-toggle label-menu-corner close-button"><i class="pe-7s-close"></i></a></li>`);
     this.buildingService.stop(this.buildingService.buildingRef);
   }
   
@@ -57,6 +48,15 @@ export class CrmLeadsComponent implements OnInit {
   ngAfterViewInit(): void {
     this.pilatService.fixiFrameSuitecrmInterface()
     //this.fixSuiteCrmInterface();
+  }
+  
+  goToLead(lead: Leads) {
+    let leadId = lead ? lead.id : null;
+    this.router.navigate(['/leads', { id: leadId }]);
+  }
+  
+  goToLeadId(id:string) {
+    this.router.navigate(['/leads', { id: id }]);
   }
   
 }

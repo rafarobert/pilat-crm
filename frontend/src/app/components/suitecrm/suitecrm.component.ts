@@ -56,6 +56,7 @@ export class SuitecrmComponent implements OnInit,AfterViewInit {
       $('body').find('iframe').contents().find('body').find('.navbar-right').find('#logout_link').hide();
       $('body').find('iframe').contents().find('body').find('.navbar-right').find('#admin_link').hide();
       $('body').find('iframe').contents().find('body').find('.navbar-right').find('#utilsLink').hide();
+      $('body').find('iframe').contents().find('body').find('.navbar-right').find('.navbar-nav').append(`<li class="dropdown"><a href="#" class="dropdown-toggle label-menu-corner"><i class="pe-7s-close"></i></a></li>`);
       
       $('body').find('iframe').contents().find('body').find('#wrapper').find('.tab-content').prepend(`
         <div style="width: 100%">
